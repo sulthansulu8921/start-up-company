@@ -3,35 +3,55 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus, Zap } from "lucide-react";
+import Script from "next/script";
 
 const faqs = [
     {
-        q: "How long does a digital transformation project take?",
-        a: "Standard project cycles range from 2–4 weeks. High-complexity enterprise systems with custom features may take 6+ weeks of strategic development.",
+        q: "How much does a professional website cost in India?",
+        a: "Our website packages start from ₹5,000 for basic business sites and go up to ₹25,000+ for premium, custom-designed platforms with SEO and E-commerce. Every project includes mobile responsiveness, SEO setup, and 30 days of free support.",
     },
     {
-        q: "Do you provide repository access?",
-        a: "Yes. Upon project completion and final audit, we provide full access to the project assets, including all documentation and launch protocols.",
+        q: "How long does it take to build a website?",
+        a: "Standard business websites are delivered in 2–4 weeks. High-complexity platforms with custom features may take 6+ weeks. We provide you with a clear timeline during our free consultation.",
     },
     {
-        q: "What standards do you apply to business platforms?",
-        a: "We utilize high-performance frameworks and advanced motion engines to ensure professional speed, global scalability, and brand prestige.",
+        q: "Do you provide SEO services in Kerala?",
+        a: "Yes! We specialize in local SEO for businesses in Kerala and across India. Our packages include keyword research, technical SEO, Google Business Profile optimization, and monthly rank tracking reports.",
     },
     {
-        q: "How is search visibility handled in your builds?",
-        a: "Every project includes foundational visibility architecture, including professional site structures, unified metadata, and global search engine optimization.",
+        q: "Can you help my business rank #1 on Google?",
+        a: "Absolutely. We've helped multiple businesses in India secure first-page Google rankings. Our approach combines technical SEO, high-quality content strategy, and authoritative backlink building tailored to your industry.",
     },
     {
-        q: "Do you offer post-launch support?",
-        a: "We provide monthly 'Business Excellence' support packages that include security monitoring, performance tuning, and 24/7 priority support.",
+        q: "Do you offer post-launch support and maintenance?",
+        a: "Yes. We provide monthly 'Business Excellence' support packages covering security monitoring, performance tuning, content updates, and 24/7 priority technical support.",
     },
 ];
+
+const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map((faq) => ({
+        "@type": "Question",
+        "name": faq.q,
+        "acceptedAnswer": {
+            "@type": "Answer",
+            "text": faq.a,
+        },
+    })),
+};
+
 
 export default function FAQSection() {
     const [open, setOpen] = useState<number | null>(0);
 
     return (
         <section id="faq" className="py-32 relative bg-transparent overflow-hidden">
+            <Script
+                id="faq-schema"
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+            />
             <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
 
             <div className="max-w-4xl mx-auto px-6 relative z-10">
