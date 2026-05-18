@@ -112,7 +112,7 @@ export function ContactSection() {
                             {/* FormSubmit Configuration */}
                             <input type="hidden" name="_subject" value="New Contact Inquiry | NanoRays" />
                             <input type="hidden" name="_template" value="table" />
-                            <input type="hidden" name="_next" value="https://nanorays.in" />
+                            <input type="hidden" name="_next" value="https://nanorayssolution.com" />
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="space-y-2">

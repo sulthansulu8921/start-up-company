@@ -256,7 +256,7 @@ export default function PricingSection() {
                                     <form action="https://formsubmit.co/nanorayssolution@gmail.com" method="POST" className="space-y-4">
                                         <input type="hidden" name="_subject" value={`New Quote Request: ${selectedPlan} | NanoRays`} />
                                         <input type="hidden" name="_template" value="table" />
-                                        <input type="hidden" name="_next" value="https://nanorays.in" />
+                                        <input type="hidden" name="_next" value="https://nanorayssolution.com" />
                                         <input type="hidden" name="_captcha" value="true" />
                                         <input type="hidden" name="Plan_Requested" value={selectedPlan || "Custom"} />
 
