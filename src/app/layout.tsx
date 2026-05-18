@@ -95,6 +95,8 @@ import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/sections/WhatsAppButton";
 import AIChatbot from "@/components/AIChatbot";
 
+import GoogleAnalytics from "@/components/GoogleAnalytics";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -145,6 +147,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
+        <GoogleAnalytics GA_MEASUREMENT_ID="G-N9VHRK5ZRH" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
