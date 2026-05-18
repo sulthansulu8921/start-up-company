@@ -18,11 +18,22 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "NanoRays Solution | Website Design, SEO & Digital Marketing in India",
+    default: "NanoRays Solution | Best Digital Agency for Startups in India & Kerala",
     template: "%s | NanoRays Solution",
   },
-  description: "NanoRays Solution is a professional digital agency in India offering website design, SEO optimization, digital marketing, logo design, poster design, and website maintenance. Get your business found on Google. Call: +91 89216 24007.",
+  description: "NanoRays Solution — Best Digital Agency for Startups in India. Affordable SEO services in Kerala, modern UI/UX design, high-performance website development & digital marketing. Rank #1 on Google. Call: +91 89216 24007.",
   keywords: [
+    // Phase 2 High-Intent Keywords
+    "best digital agency for startups in India",
+    "affordable SEO services in Kerala",
+    "modern UI/UX design for tech companies",
+    "startup website design India",
+    "digital agency Kerala",
+    "SEO agency Kerala",
+    "web design Kerala",
+    "affordable website design Kerala",
+    "Google ranking services Kerala",
+    "best web development company Kerala",
     // Core services
     "website design India", "website development India", "affordable website design",
     "SEO optimization India", "Google ranking India", "local SEO India",
@@ -38,7 +49,7 @@ export const metadata: Metadata = {
     // Problem-solving keywords
     "get website for business", "rank on first page Google", "increase website traffic",
     "get more customers online", "online business presence", "business website India",
-    "e-commerce website India", "restaurant website India", "startup website India",
+    "e-commerce website India", "restaurant website India",
     "professional website design", "SEO services India", "website redesign India",
   ],
   authors: [{ name: "NanoRays Solution", url: "https://nanorayssolution.com" }],
