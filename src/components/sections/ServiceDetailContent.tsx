@@ -4,11 +4,20 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Zap, CheckCircle2, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
+import { services } from "@/data/serviceData";
+import { notFound } from "next/navigation";
+
 interface ServiceDetailContentProps {
-    service: any;
+    slug: string;
 }
 
-export default function ServiceDetailContent({ service }: ServiceDetailContentProps) {
+export default function ServiceDetailContent({ slug }: ServiceDetailContentProps) {
+    const service = services.find(s => s.slug === slug);
+
+    if (!service) {
+        notFound();
+    }
+
     const { scrollY } = useScroll();
 
     // Background parallax & opacity management
