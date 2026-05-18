@@ -2,7 +2,7 @@
 
 import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { Code2, BarChart3, Megaphone, Palette } from "lucide-react";
+import { Code2, BarChart3, Megaphone, Palette, ChevronDown } from "lucide-react";
 
 const FRAME_COUNT = 192;
 
@@ -207,26 +207,50 @@ export default function Hero() {
                     })}
                 </div>
 
-                {/* Scroll Indicator */}
+                {/* High-Impact Scroll Indicator */}
                 <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 1, duration: 1 }}
                     style={{ opacity: useTransform(scrollYProgress, [0, 0.05], [1, 0]) }}
-                    className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-3"
+                    className="absolute bottom-10 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-4 group cursor-pointer"
+                    onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
                 >
-                    <div className="w-6 h-10 border-2 border-neon/30 rounded-full flex justify-center p-1 relative shadow-[0_0_15px_rgba(204,255,0,0.1)]">
-                        <motion.div
-                            animate={{
-                                y: [0, 16, 0],
-                                opacity: [1, 0.5, 1]
-                            }}
-                            transition={{
-                                duration: 1.5,
-                                repeat: Infinity,
-                                ease: "easeInOut"
-                            }}
-                            className="w-1.5 h-2 bg-neon rounded-full"
-                        />
+                    <div className="relative">
+                        {/* Glowing Background Halo */}
+                        <div className="absolute inset-0 bg-neon/20 blur-2xl rounded-full scale-150 animate-pulse" />
+
+                        <div className="relative flex flex-col items-center gap-1">
+                            {/* Larger Mouse Icon */}
+                            <div className="w-8 h-12 border-2 border-neon/50 rounded-full flex justify-center p-1.5 relative bg-black/20 backdrop-blur-sm shadow-[0_0_20px_rgba(204,255,0,0.2)]">
+                                <motion.div
+                                    animate={{
+                                        y: [0, 20, 0],
+                                        opacity: [1, 0.5, 1]
+                                    }}
+                                    transition={{
+                                        duration: 2,
+                                        repeat: Infinity,
+                                        ease: "easeInOut"
+                                    }}
+                                    className="w-1.5 h-2.5 bg-neon rounded-full"
+                                />
+                            </div>
+
+                            {/* Bouncing Triple Chevron */}
+                            <motion.div
+                                animate={{ y: [0, 8, 0] }}
+                                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                                className="flex flex-col items-center -mt-1"
+                            >
+                                <ChevronDown size={24} className="text-neon animate-pulse" strokeWidth={3} />
+                            </motion.div>
+                        </div>
                     </div>
-                    <span className="text-[10px] font-black text-neon uppercase tracking-widest">Scroll Down</span>
+
+                    <span className="text-[11px] font-black text-neon uppercase tracking-[0.4em] drop-shadow-[0_0_10px_rgba(204,255,0,0.5)] bg-black/40 px-4 py-1.5 rounded-full border border-neon/30 backdrop-blur-md">
+                        Explore Platform
+                    </span>
                 </motion.div>
 
             </div>
