@@ -41,17 +41,17 @@ export const metadata: Metadata = {
     "e-commerce website India", "restaurant website India", "startup website India",
     "professional website design", "SEO services India", "website redesign India",
   ],
-  authors: [{ name: "NanoRays Solution", url: "https://nanorays.in" }],
+  authors: [{ name: "NanoRays Solution", url: "https://nanorayssolution.com" }],
   creator: "NanoRays Solution",
   publisher: "NanoRays Solution",
-  metadataBase: new URL("https://nanorays.in"),
+  metadataBase: new URL("https://nanorayssolution.com"),
   alternates: {
-    canonical: "https://nanorays.in",
+    canonical: "https://nanorayssolution.com",
   },
   openGraph: {
     type: "website",
     locale: "en_IN",
-    url: "https://nanorays.in",
+    url: "https://nanorayssolution.com",
     title: "NanoRays Solution | Website Design, SEO & Digital Marketing in India",
     description: "Professional website design, SEO, digital marketing, branding & poster design for businesses in India. Get a free consultation today! Call: +91 89216 24007.",
     siteName: "NanoRays Solution",
@@ -103,17 +103,43 @@ export default function RootLayout({
   // ... (jsonLd remains the same)
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "ProfessionalService",
     "name": "NanoRays Solution",
-    "description": "Premium software agency providing web development, digital marketing, and branding services.",
-    "url": "https://nanorays.com",
-    "applicationCategory": "BusinessApplication",
-    "operatingSystem": "All",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    }
+    "image": "https://nanorayssolution.com/logo-main.jpg",
+    "description": "Premium digital agency in India providing website development, SEO, digital marketing, branding, and poster design services.",
+    "url": "https://nanorayssolution.com",
+    "telephone": "+918921624007",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "India Wide Services",
+      "addressLocality": "India",
+      "addressRegion": "Kerala",
+      "postalCode": "682001",
+      "addressCountry": "IN"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 10.8505,
+      "longitude": 76.2711
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "opens": "09:00",
+      "closes": "21:00"
+    },
+    "sameAs": [
+      "https://facebook.com/nanorayssolution",
+      "https://instagram.com/nanorayssolution"
+    ],
+    "priceRange": "₹₹"
   };
 
   return (

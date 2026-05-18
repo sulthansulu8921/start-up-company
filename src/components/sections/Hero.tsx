@@ -184,9 +184,15 @@ export default function Hero() {
                                         </div>
                                     </div>
 
-                                    <h1 className="text-4xl md:text-5xl lg:text-7xl font-black font-sora text-white leading-[1.1] tracking-tighter uppercase mb-4 drop-shadow-2xl max-w-4xl">
-                                        {feat.title}
-                                    </h1>
+                                    {i === 0 ? (
+                                        <h1 className="text-4xl md:text-5xl lg:text-7xl font-black font-sora text-white leading-[1.1] tracking-tighter uppercase mb-4 drop-shadow-2xl max-w-4xl">
+                                            {feat.title}
+                                        </h1>
+                                    ) : (
+                                        <h2 className="text-4xl md:text-5xl lg:text-7xl font-black font-sora text-white leading-[1.1] tracking-tighter uppercase mb-4 drop-shadow-2xl max-w-4xl">
+                                            {feat.title}
+                                        </h2>
+                                    )}
 
                                     <h3 className="text-xl md:text-2xl font-bold text-white mb-4 drop-shadow-lg">
                                         {feat.subtitle}
