@@ -3,7 +3,7 @@ import { MetadataRoute } from "next";
 export const dynamic = 'force-static';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = "https://nanorays.in";
+    const baseUrl = "https://nanorayssolution.com";
     const now = new Date();
 
     const servicePages = [

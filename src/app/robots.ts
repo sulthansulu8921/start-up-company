@@ -11,7 +11,7 @@ export default function robots(): MetadataRoute.Robots {
                 disallow: ["/private/", "/_next/", "/api/"],
             },
         ],
-        sitemap: "https://nanorays.in/sitemap.xml",
-        host: "https://nanorays.in",
+        sitemap: "https://nanorayssolution.com/sitemap.xml",
+        host: "https://nanorayssolution.com",
     };
 }
