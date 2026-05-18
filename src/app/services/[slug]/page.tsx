@@ -11,6 +11,12 @@ interface PageProps {
     params: Promise<{ slug: string }>;
 }
 
+export async function generateStaticParams() {
+    return services.map((service) => ({
+        slug: service.slug,
+    }));
+}
+
 export default function ServiceDetailPage({ params }: PageProps) {
     const { slug } = use(params);
     const service = services.find(s => s.slug === slug);
