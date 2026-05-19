@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Star, Send, Heart } from "lucide-react";
+import { db } from "@/lib/firebase";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 interface ReviewModalProps {
     isOpen: boolean;
@@ -17,9 +19,23 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsSubmitting(true);
-        const formData = new FormData(e.currentTarget);
+        const form = e.currentTarget;
+        const formData = new FormData(form);
+
+        const reviewData = {
+            name: formData.get("Client Name"),
+            role: formData.get("Company/Role"),
+            content: formData.get("Review Message"),
+            rating: rating,
+            status: "pending", // Default to pending for manual approval
+            createdAt: serverTimestamp()
+        };
 
         try {
+            // 1. Save to Firestore (The Real working model)
+            await addDoc(collection(db, "reviews"), reviewData);
+
+            // 2. Also send to FormSubmit (Instant backup/alert)
             // Use 'no-cors' to bypass browser blocks on localhost.
             await fetch("https://formsubmit.co/nanorayssolution@gmail.com", {
                 method: "POST",

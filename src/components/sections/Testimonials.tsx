@@ -1,47 +1,48 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Quote, Star, Zap, MessageSquarePlus } from "lucide-react";
-import { useState } from "react";
+import { Quote, Star, Zap, MessageSquarePlus, Loader2 } from "lucide-react";
+import { useState, useEffect } from "react";
 import ReviewModal from "../ReviewModal";
+import { db } from "@/lib/firebase";
+import { collection, query, where, orderBy, onSnapshot } from "firebase/firestore";
 
-const testimonials = [
-    {
-        name: "Rahul Verma",
-        role: "Director, Innovate Retail",
-        content: "NanoRays delivered an exceptional e-commerce platform that increased our online sales by 200% in just 3 months. Their attention to detail and modern UI design is unmatched.",
-        color: "text-neon",
-        bg: "bg-neon/5",
-        border: "border-neon/10",
-    },
-    {
-        name: "Samantha Lee",
-        role: "Founder, Skyline Logistics (Dubai)",
-        content: "We hired NanoRays to redesign our corporate website and build a custom tracking portal. The performance is incredibly fast, and our clients love the sleek dashboard interface.",
-        color: "text-sky-400",
-        bg: "bg-sky-400/5",
-        border: "border-sky-400/10",
-    },
-    {
-        name: "Ananya Sharma",
-        role: "Marketing Head, Elite Estates",
-        content: "Their SEO strategies and Google Ads management brought us 3x more qualified leads. The NanoRays team is highly professional and truly understands data-driven digital growth.",
-        color: "text-purple-400",
-        bg: "bg-purple-400/5",
-        border: "border-purple-400/10",
-    },
-    {
-        name: "James Carter",
-        role: "CTO, FinTech Nexus (UK)",
-        content: "Outstanding web application development. They integrated complex payment gateways flawlessly while maintaining a stunning, user-friendly design. Highly recommended partner.",
-        color: "text-neon",
-        bg: "bg-neon/5",
-        border: "border-neon/10",
-    },
-];
+interface Testimonial {
+    id: string;
+    name: string;
+    role: string;
+    content: string;
+    rating: number;
+    createdAt: any;
+}
 
 export default function Testimonials() {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        // Fetch real testimonials from Firestore
+        const q = query(
+            collection(db, "reviews"),
+            where("status", "==", "approved"),
+            orderBy("createdAt", "desc")
+        );
+
+        const unsubscribe = onSnapshot(q, (snapshot) => {
+            const reviewsData = snapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data()
+            })) as Testimonial[];
+            setTestimonials(reviewsData);
+            setLoading(false);
+        }, (error) => {
+            console.error("Error fetching testimonials:", error);
+            setLoading(false);
+        });
+
+        return () => unsubscribe();
+    }, []);
 
     return (
         <section id="testimonials" className="py-32 relative bg-transparent overflow-hidden">
@@ -81,68 +82,83 @@ export default function Testimonials() {
                     </motion.p>
                 </div>
 
-                {/* Masonry-style Grid */}
-                <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
-                    {testimonials.map((t, i) => (
-                        <motion.div
-                            key={i}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: i * 0.1 }}
-                            className="break-inside-avoid p-8 rounded-[32px] glass-dark border border-white/20 hover:border-white/40 transition-all duration-500 group"
-                        >
-                            {/* Rating */}
-                            <div className="flex gap-1 mb-6">
-                                {[...Array(5)].map((_, i) => (
-                                    <Star key={i} size={14} fill="#CCFF00" className="text-neon" />
-                                ))}
-                            </div>
-
-                            {/* Quote */}
-                            <p className="text-white/90 text-base leading-relaxed font-bold mb-8 italic">
-                                &quot;{t.content}&quot;
-                            </p>
-
-                            {/* Author */}
-                            <div className="flex items-center gap-4 pt-6 border-t border-white/10">
-                                <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center overflow-hidden">
-                                    <div className="w-full h-full bg-neon/10 flex items-center justify-center text-neon font-black text-xs">
-                                        {t.name.charAt(0)}
+                {/* Testimonials Display */}
+                {loading ? (
+                    <div className="flex flex-col items-center justify-center py-24">
+                        <Loader2 className="text-neon animate-spin mb-4" size={40} />
+                        <p className="text-white/40 font-bold text-xs uppercase tracking-widest">Architecting Live Feed...</p>
+                    </div>
+                ) : testimonials.length > 0 ? (
+                    <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+                        {testimonials.map((t, i) => (
+                            <motion.div
+                                key={t.id}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.1 }}
+                                className="break-inside-avoid p-8 rounded-[32px] glass-dark border border-white/20 hover:border-white/40 transition-all duration-500 group"
+                            >
+                                <div className="flex gap-1 mb-6">
+                                    {[...Array(5)].map((_, starI) => (
+                                        <Star key={starI} size={14} fill={starI < t.rating ? "#CCFF00" : "transparent"} className={starI < t.rating ? "text-neon" : "text-white/20"} />
+                                    ))}
+                                </div>
+                                <p className="text-white/90 text-base leading-relaxed font-bold mb-8 italic">
+                                    &quot;{t.content}&quot;
+                                </p>
+                                <div className="flex items-center gap-4 pt-6 border-t border-white/10">
+                                    <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center overflow-hidden">
+                                        <div className="w-full h-full bg-neon/10 flex items-center justify-center text-neon font-black text-xs">
+                                            {t.name.charAt(0)}
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h4 className="text-sm font-black text-white font-sora group-hover:text-neon transition-colors">
+                                            {t.name}
+                                        </h4>
+                                        <p className="text-[10px] text-white/70 font-black uppercase tracking-widest">
+                                            {t.role}
+                                        </p>
                                     </div>
                                 </div>
-                                <div>
-                                    <h4 className="text-sm font-black text-white font-sora group-hover:text-neon transition-colors">
-                                        {t.name}
-                                    </h4>
-                                    <p className="text-[10px] text-white/70 font-black uppercase tracking-widest">
-                                        {t.role}
-                                    </p>
-                                </div>
-                            </div>
-                        </motion.div>
-                    ))}
-                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+                ) : (
+                    <div className="text-center py-24 bg-white/5 rounded-[40px] border border-dashed border-white/10">
+                        <MessageSquarePlus className="text-neon/20 mx-auto mb-6" size={48} />
+                        <h3 className="text-2xl font-black text-white mb-3">Your Success Story Starts Here</h3>
+                        <p className="text-white/40 font-bold max-w-sm mx-auto mb-10">
+                            Be the first to architect our global legacy with your unique insight.
+                        </p>
+                        <button
+                            onClick={() => setIsModalOpen(true)}
+                            className="group relative inline-flex items-center gap-4 px-10 py-5 bg-neon text-black rounded-2xl font-black text-xs uppercase tracking-[0.3em] hover:shadow-[0_0_40px_rgba(204,255,0,0.3)] transition-all duration-500"
+                        >
+                            <span>Launch Your Review</span>
+                        </button>
+                    </div>
+                )}
 
-                {/* Submit Review CTA */}
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    className="mt-20 flex flex-col items-center"
-                >
-                    <button
-                        onClick={() => setIsModalOpen(true)}
-                        className="group relative flex items-center gap-4 px-10 py-5 bg-white/5 border border-white/20 rounded-2xl font-black text-xs uppercase tracking-[0.3em] text-white hover:text-neon hover:border-neon/40 hover:bg-neon/5 transition-all duration-500 overflow-hidden"
+                {/* Submit Review CTA - Only show if we have reviews (since it's inside the empty state too) */}
+                {testimonials.length > 0 && (
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        className="mt-20 flex flex-col items-center"
                     >
-                        <div className="absolute inset-0 bg-neon/5 -translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
-                        <MessageSquarePlus size={18} className="relative z-10" />
-                        <span className="relative z-10">Submit a Review</span>
-                    </button>
-                    <p className="mt-6 text-white/40 text-[10px] font-black uppercase tracking-widest text-center">
-                        Every Architect of progress deserves to be heard.
-                    </p>
-                </motion.div>
+                        <button
+                            onClick={() => setIsModalOpen(true)}
+                            className="group relative flex items-center gap-4 px-10 py-5 bg-white/5 border border-white/20 rounded-2xl font-black text-xs uppercase tracking-[0.3em] text-white hover:text-neon hover:border-neon/40 hover:bg-neon/5 transition-all duration-500 overflow-hidden"
+                        >
+                            <div className="absolute inset-0 bg-neon/5 -translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
+                            <MessageSquarePlus size={18} className="relative z-10" />
+                            <span className="relative z-10">Submit a Review</span>
+                        </button>
+                    </motion.div>
+                )}
 
                 {/* Trusted By */}
                 <div className="mt-24 pt-12 border-t border-white/5 flex flex-wrap justify-center gap-10 md:gap-20 opacity-30">
