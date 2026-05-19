@@ -84,9 +84,25 @@ export default function Testimonials() {
 
                 {/* Testimonials Display */}
                 {loading ? (
-                    <div className="flex flex-col items-center justify-center py-24">
-                        <Loader2 className="text-neon animate-spin mb-4" size={40} />
-                        <p className="text-white/40 font-bold text-xs uppercase tracking-widest">Architecting Live Feed...</p>
+                    <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+                        {[...Array(3)].map((_, i) => (
+                            <div key={i} className="break-inside-avoid p-8 rounded-[32px] bg-white/5 border border-white/10 animate-pulse">
+                                <div className="flex gap-1 mb-6">
+                                    {[...Array(5)].map((_, s) => (
+                                        <div key={s} className="w-3 h-3 rounded-full bg-white/10" />
+                                    ))}
+                                </div>
+                                <div className="h-4 bg-white/10 rounded-full w-full mb-3" />
+                                <div className="h-4 bg-white/10 rounded-full w-4/5 mb-8" />
+                                <div className="flex items-center gap-4 pt-6 border-t border-white/5">
+                                    <div className="w-12 h-12 rounded-full bg-white/10" />
+                                    <div className="space-y-2">
+                                        <div className="h-3 bg-white/10 rounded-full w-24" />
+                                        <div className="h-2 bg-white/10 rounded-full w-16" />
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 ) : testimonials.length > 0 ? (
                     <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
