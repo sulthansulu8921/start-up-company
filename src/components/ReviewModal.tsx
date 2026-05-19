@@ -14,29 +14,29 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [hasAttemptedSubmit, setHasAttemptedSubmit] = useState(false);
 
-    const handleIframeLoad = () => {
-        // Only trigger success state if the user actually clicked the submit button
-        if (hasAttemptedSubmit) {
-            setIsSubmitted(true);
-            setHasAttemptedSubmit(false);
-            setTimeout(() => {
-                onClose();
-                setIsSubmitted(false);
-            }, 3000);
-        }
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget);
+
+        // Use 'no-cors' to bypass browser blocks on localhost.
+        // This ensures the data is sent to FormSubmit even if the browser doesn't allow reading the response.
+        fetch("https://formsubmit.co/nanorayssolution@gmail.com", {
+            method: "POST",
+            body: formData,
+            mode: 'no-cors'
+        });
+
+        setIsSubmitted(true);
+        setTimeout(() => {
+            onClose();
+            setIsSubmitted(false);
+        }, 3000);
     };
 
     return (
         <AnimatePresence>
             {isOpen && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center px-6">
-                    {/* Hidden Iframe for silent submission */}
-                    <iframe
-                        name="submission_iframe"
-                        id="submission_iframe"
-                        className="hidden"
-                        onLoad={handleIframeLoad}
-                    />
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -69,10 +69,7 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
                                 </div>
 
                                 <form
-                                    action="https://formsubmit.co/nanorayssolution@gmail.com"
-                                    method="POST"
-                                    target="submission_iframe"
-                                    onSubmit={() => setHasAttemptedSubmit(true)}
+                                    onSubmit={handleSubmit}
                                     className="space-y-6"
                                 >
                                     <input type="hidden" name="_subject" value="New Client Review - NanoRays Solution" />
