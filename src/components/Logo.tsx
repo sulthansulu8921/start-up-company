@@ -12,7 +12,7 @@ export default function Logo({ className = "", width = 180, height = 50 }: LogoP
     return (
         <div className={`flex items-center justify-center bg-white px-6 py-3 rounded-[2rem] shadow-[0_10px_40px_rgba(0,0,0,0.08)] border border-gray-100/50 ${className}`}>
             <Image
-                src="/nanorays-logo.jpeg"
+                src="/nanorays-logo.png"
                 alt="NanoRays Solutions"
                 width={width}
                 height={height}
