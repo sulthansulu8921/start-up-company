@@ -12,7 +12,7 @@ export default function Logo({ className = "", width = 200, height = 55 }: LogoP
     return (
         <div className={`flex items-center logo-container ${className}`}>
             <Image
-                src="/nanorays-logo.png"
+                src="/nanorays-logo.jpeg"
                 alt="NanoRays Solutions"
                 width={width}
                 height={height}
