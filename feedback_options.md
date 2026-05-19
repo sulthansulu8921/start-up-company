@@ -5,7 +5,7 @@ To allow your clients to submit reviews without any cost for a database or hosti
 ## Option 1: The "Auto-Dashboard" (Google Forms)
 **Cost: ₹0 | Setup: 2 Mins**
 This is the most reliable way. You create a form, and every review is automatically saved in an Excel-like Google Sheet.
-1. Create a form at [forms.google.com](https://forms.google.com).
+1. Create a form at [forms.google.com](https://forms.google.com).[Error] Failed to load resource: the server responded with a status of 404 () (noise.svg, line 0)
 2. Add fields: **Name**, **Role/Company**, **Rating (1-5)**, and **Your Review**.
 3. We will add a "Submit Feedback" button on your site that links to this form.
 
