@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Phone, Mail, MessageCircle, Send, CheckCircle, Clock, ArrowRight } from "lucide-react";
+import { db } from "@/lib/firebase";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 const services = [
     "Website Design & Development",
@@ -67,17 +69,30 @@ export default function ContactSection() {
         e.preventDefault();
         setLoading(true);
 
-        // Build WhatsApp message from form
         const msg = `Hello NanoRays! 👋\n\n*Name:* ${formData.name}\n*Phone:* ${formData.phone}\n*Email:* ${formData.email}\n*Service Needed:* ${formData.service || "Not specified"}\n*Message:* ${formData.message}`;
         const encoded = encodeURIComponent(msg);
 
-        // Small delay for UX
-        await new Promise(r => setTimeout(r, 800));
-        setLoading(false);
-        setSubmitted(true);
+        try {
+            // 1. Save to Database (Instant Persistence)
+            await addDoc(collection(db, "leads"), {
+                ...formData,
+                type: "Contact Form",
+                status: "new",
+                createdAt: serverTimestamp()
+            });
 
-        // Open WhatsApp with pre-filled message
-        window.open(`https://wa.me/918921624007?text=${encoded}`, "_blank");
+            // 2. Launch WhatsApp (Automated Delivery)
+            window.open(`https://wa.me/918921624007?text=${encoded}`, "_blank");
+
+            setSubmitted(true);
+        } catch (error) {
+            console.error("Submission failed:", error);
+            // Fallback: still attempt WhatsApp even if DB fails
+            window.open(`https://wa.me/918921624007?text=${encoded}`, "_blank");
+            setSubmitted(true);
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -201,7 +216,7 @@ export default function ContactSection() {
                                                 type="text"
                                                 name="name"
                                                 required
-                                                placeholder="Ex: Rahul Kumar"
+                                                placeholder="Ex: Nanorays solution"
                                                 value={formData.name}
                                                 onChange={handleChange}
                                                 className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder:text-white/20 font-bold text-sm focus:outline-none focus:border-neon/50 transition-all"
@@ -213,7 +228,7 @@ export default function ContactSection() {
                                                 type="tel"
                                                 name="phone"
                                                 required
-                                                placeholder="Ex: +91 98765 43210"
+                                                placeholder="Ex: +91 8921624007"
                                                 value={formData.phone}
                                                 onChange={handleChange}
                                                 className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder:text-white/20 font-bold text-sm focus:outline-none focus:border-neon/50 transition-all"
@@ -227,7 +242,7 @@ export default function ContactSection() {
                                         <input
                                             type="email"
                                             name="email"
-                                            placeholder="Ex: rahul@business.com"
+                                            placeholder="Ex: nanorayssolution@gmail.com"
                                             value={formData.email}
                                             onChange={handleChange}
                                             className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder:text-white/20 font-bold text-sm focus:outline-none focus:border-neon/50 transition-all"
