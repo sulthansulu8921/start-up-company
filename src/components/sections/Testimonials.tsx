@@ -1,7 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Quote, Star, Zap } from "lucide-react";
+import { Quote, Star, Zap, MessageSquarePlus } from "lucide-react";
+import { useState } from "react";
+import ReviewModal from "../ReviewModal";
 
 const testimonials = [
     {
@@ -39,8 +41,11 @@ const testimonials = [
 ];
 
 export default function Testimonials() {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
     return (
         <section id="testimonials" className="py-32 relative bg-transparent overflow-hidden">
+            <ReviewModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
             <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
             <div className="absolute w-[600px] h-[600px] bg-neon/5 blur-[150px] rounded-full -bottom-48 -left-48 pointer-events-none" />
 
@@ -118,6 +123,26 @@ export default function Testimonials() {
                         </motion.div>
                     ))}
                 </div>
+
+                {/* Submit Review CTA */}
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    className="mt-20 flex flex-col items-center"
+                >
+                    <button
+                        onClick={() => setIsModalOpen(true)}
+                        className="group relative flex items-center gap-4 px-10 py-5 bg-white/5 border border-white/20 rounded-2xl font-black text-xs uppercase tracking-[0.3em] text-white hover:text-neon hover:border-neon/40 hover:bg-neon/5 transition-all duration-500 overflow-hidden"
+                    >
+                        <div className="absolute inset-0 bg-neon/5 -translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
+                        <MessageSquarePlus size={18} className="relative z-10" />
+                        <span className="relative z-10">Submit a Review</span>
+                    </button>
+                    <p className="mt-6 text-white/40 text-[10px] font-black uppercase tracking-widest text-center">
+                        Every Architect of progress deserves to be heard.
+                    </p>
+                </motion.div>
 
                 {/* Trusted By */}
                 <div className="mt-24 pt-12 border-t border-white/5 flex flex-wrap justify-center gap-10 md:gap-20 opacity-30">
