@@ -59,13 +59,13 @@ export default function Navbar() {
             className={cn(
                 "fixed top-0 left-0 right-0 z-50 transition-all duration-500 will-change-transform",
                 isScrolled
-                    ? "py-3 bg-white border-b border-gray-100 px-8 shadow-md"
-                    : "py-6 bg-white border-b border-gray-50 px-6"
+                    ? "py-2 bg-white border-b border-gray-100 px-8 shadow-md"
+                    : "py-3 bg-white border-b border-gray-50 px-6"
             )}
         >
             <div className="max-w-7xl mx-auto flex items-center justify-between font-sora">
                 <Link href="/" className="group flex items-center gap-2">
-                    <Logo width={200} height={56} />
+                    <Logo width={140} height={40} />
                 </Link>
 
                 {/* Desktop Navigation */}

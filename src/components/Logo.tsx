@@ -8,9 +8,9 @@ interface LogoProps {
     height?: number;
 }
 
-export default function Logo({ className = "", width = 180, height = 50 }: LogoProps) {
+export default function Logo({ className = "", width = 140, height = 40 }: LogoProps) {
     return (
-        <div className={`flex items-center justify-center bg-white px-6 py-3 rounded-[2rem] shadow-[0_10px_40px_rgba(0,0,0,0.08)] border border-gray-100/50 ${className}`}>
+        <div className={`flex items-center justify-center bg-white px-4 py-2 rounded-2xl shadow-xl border border-gray-100/50 ${className}`}>
             <Image
                 src="/nanorays-logo.png"
                 alt="NanoRays Solutions"
