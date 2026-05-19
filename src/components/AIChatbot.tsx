@@ -3,6 +3,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Bot, X, Send, MessageCircle } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
+import { db } from "@/lib/firebase";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 interface Message {
     id: string;
@@ -33,6 +35,20 @@ export default function AIChatbot() {
         }
     }, [messages, isTyping]);
 
+    const saveLead = async (interest: string, message?: string) => {
+        try {
+            await addDoc(collection(db, "chatbot_leads"), {
+                interest,
+                message: message || "Clicked quick option",
+                status: "new",
+                createdAt: serverTimestamp(),
+                source: "AIChatbot"
+            });
+        } catch (error) {
+            console.error("Lead capture failed:", error);
+        }
+    };
+
     const addAIMessage = (text: string, options?: string[]) => {
         setIsTyping(true);
         setTimeout(() => {
@@ -57,11 +73,13 @@ export default function AIChatbot() {
         setMessages(prev => [...prev, userMsg]);
 
         if (option.includes("Services")) {
+            saveLead("General Interest: Services");
             addAIMessage(
                 "We offer a full range of digital services! Which one interests you?",
                 ["Website Design", "SEO & Google Ranking", "Digital Marketing", "Logo & Branding", "Poster Design", "Website Maintenance"]
             );
         } else if (option.includes("Quote") || option.includes("Free")) {
+            saveLead("High Interest: Free Quote");
             addAIMessage(
                 "Great! To give you the best quote, could you tell us what service you need?",
                 ["Website", "SEO", "Marketing", "Branding / Logo", "Poster Design", "Other"]
@@ -129,6 +147,9 @@ export default function AIChatbot() {
         };
         setMessages(prev => [...prev, userMsg]);
         setInputValue("");
+
+        saveLead("Custom Question", inputValue);
+
         addAIMessage(
             "Thanks for your message! The best way to get a quick answer is to chat with our team directly on WhatsApp.",
             ["Open WhatsApp", "Back to Menu"]

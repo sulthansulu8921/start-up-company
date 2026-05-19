@@ -10,6 +10,7 @@ import ProcessTimeline from "@/components/sections/ProcessTimeline";
 import Testimonials from "@/components/sections/Testimonials";
 import FAQSection from "@/components/sections/FAQSection";
 import ContactSection from "@/components/sections/ContactSection";
+import RoadmapModal from "@/components/RoadmapModal";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { Zap } from "lucide-react";
 
@@ -75,6 +76,9 @@ export default function Home() {
         <FAQSection />
         <ContactSection />
       </div>
+
+      {/* Global Modals & Lead Gen */}
+      <RoadmapModal />
     </main>
   );
 }
