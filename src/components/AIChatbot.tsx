@@ -60,7 +60,7 @@ export default function AIChatbot() {
                 timestamp: new Date(),
                 options
             }]);
-        }, 1200);
+        }, 400); // Reduced from 1200ms for "Extreme Speed"
     };
 
     const handleOptionClick = (option: string) => {

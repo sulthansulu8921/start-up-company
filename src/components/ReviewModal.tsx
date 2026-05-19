@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, Star, Send, Heart } from "lucide-react";
 import { db } from "@/lib/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { sendInstantNotification } from "@/lib/notifications";
 
 interface ReviewModalProps {
     isOpen: boolean;
@@ -31,8 +32,14 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
             createdAt: serverTimestamp()
         };
 
+        // INSTANT TRANSITION (Optimistic UI)
+        setTimeout(() => {
+            setIsSubmitting(false);
+            setIsSubmitted(true);
+        }, 150);
+
+        // Background persistence (Non-blocking)
         try {
-            // Fire both Firestore and FormSubmit in parallel for maximum speed
             const firestorePromise = addDoc(collection(db, "reviews"), reviewData);
             const emailPromise = fetch("https://formsubmit.co/nanorayssolution@gmail.com", {
                 method: "POST",
@@ -40,17 +47,12 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
                 mode: 'no-cors'
             });
 
-            // Wait for both to finish (or just one if we want to be super fast)
-            await Promise.allSettled([firestorePromise, emailPromise]);
+            Promise.allSettled([firestorePromise, emailPromise])
+                .catch(err => console.error("BG review save failed:", err));
 
-            // Show success instantly
-            setIsSubmitted(true);
+            sendInstantNotification(`New Review Submission from: ${reviewData.name}`);
         } catch (error) {
-            console.error("Submission failed", error);
-            // Fallback success state (still show success if it might have gone through)
-            setIsSubmitted(true);
-        } finally {
-            setIsSubmitting(false);
+            console.error("Submission trigger error:", error);
         }
     };
 

@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Phone, Mail, MessageCircle, Send, CheckCircle, Clock, ArrowRight } from "lucide-react";
 import { db } from "@/lib/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { sendInstantNotification } from "@/lib/notifications";
 
 const services = [
     "Website Design & Development",
@@ -72,27 +73,23 @@ export default function ContactSection() {
         const msg = `Hello NanoRays! 👋\n\n*Name:* ${formData.name}\n*Phone:* ${formData.phone}\n*Email:* ${formData.email}\n*Service Needed:* ${formData.service || "Not specified"}\n*Message:* ${formData.message}`;
         const encoded = encodeURIComponent(msg);
 
-        try {
-            // 1. Save to Database (Instant Persistence)
-            await addDoc(collection(db, "leads"), {
-                ...formData,
-                type: "Contact Form",
-                status: "new",
-                createdAt: serverTimestamp()
-            });
-
-            // 2. Launch WhatsApp (Automated Delivery)
-            window.open(`https://wa.me/918921624007?text=${encoded}`, "_blank");
-
-            setSubmitted(true);
-        } catch (error) {
-            console.error("Submission failed:", error);
-            // Fallback: still attempt WhatsApp even if DB fails
-            window.open(`https://wa.me/918921624007?text=${encoded}`, "_blank");
-            setSubmitted(true);
-        } finally {
+        // INSTANT TRANSITION (Optimistic UI)
+        // Transition to success and WhatsApp within 100ms
+        setTimeout(() => {
             setLoading(false);
-        }
+            setSubmitted(true);
+            window.open(`https://wa.me/918921624007?text=${encoded}`, "_blank");
+        }, 100);
+
+        // Background persistence & Instant Alert (Non-blocking)
+        addDoc(collection(db, "leads"), {
+            ...formData,
+            type: "Contact Form",
+            status: "new",
+            createdAt: serverTimestamp()
+        }).catch(err => console.error("BG lead save failed:", err));
+
+        sendInstantNotification(`Contact Form Lead: ${formData.name} (${formData.phone}) interested in ${formData.service}`);
     };
 
     return (

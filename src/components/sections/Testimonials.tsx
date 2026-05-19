@@ -22,6 +22,13 @@ export default function Testimonials() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        setLoading(true);
+
+        // Fail-fast fallback: If Firestore takes > 2s, stop loading to show empty state/CTA
+        const timeoutId = setTimeout(() => {
+            setLoading(false);
+        }, 2000);
+
         // Fetch real testimonials from Firestore
         const q = query(
             collection(db, "reviews"),
@@ -30,6 +37,7 @@ export default function Testimonials() {
         );
 
         const unsubscribe = onSnapshot(q, (snapshot) => {
+            clearTimeout(timeoutId);
             const reviewsData = snapshot.docs.map(doc => ({
                 id: doc.id,
                 ...doc.data()
@@ -38,10 +46,14 @@ export default function Testimonials() {
             setLoading(false);
         }, (error) => {
             console.error("Error fetching testimonials:", error);
+            clearTimeout(timeoutId);
             setLoading(false);
         });
 
-        return () => unsubscribe();
+        return () => {
+            unsubscribe();
+            clearTimeout(timeoutId);
+        };
     }, []);
 
     return (
