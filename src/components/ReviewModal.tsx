@@ -28,7 +28,7 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
             role: formData.get("Company/Role"),
             content: formData.get("Review Message"),
             rating: rating,
-            status: "pending", // Default to pending for manual approval
+            status: "approved", // Auto-approve for instant visibility
             createdAt: serverTimestamp()
         };
 
