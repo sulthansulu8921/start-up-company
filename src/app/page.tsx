@@ -14,16 +14,19 @@ import RoadmapModal from "@/components/RoadmapModal";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { Zap } from "lucide-react";
 
+import { sendInstantNotification } from "@/lib/notifications";
+
 export default function Home() {
   const { scrollY, scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 40, restDelta: 0.001 });
 
-  // Reset scroll on refresh to ensure Hero is visible
+  // Reset scroll on refresh and fire automated visitor alert
   useEffect(() => {
-    const timer = setTimeout(() => {
-      window.scrollTo(0, 0);
-    }, 0);
-    return () => clearTimeout(timer);
+    // 1. Reset scroll
+    window.scrollTo(0, 0);
+
+    // 2. Automated Flash Notification for Owner
+    sendInstantNotification("A new user just entered your website! 👀", "visit");
   }, []);
 
   return (

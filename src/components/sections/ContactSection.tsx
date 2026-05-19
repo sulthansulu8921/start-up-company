@@ -73,15 +73,15 @@ export default function ContactSection() {
         const msg = `Hello NanoRays! 👋\n\n*Name:* ${formData.name}\n*Phone:* ${formData.phone}\n*Email:* ${formData.email}\n*Service Needed:* ${formData.service || "Not specified"}\n*Message:* ${formData.message}`;
         const encoded = encodeURIComponent(msg);
 
-        // INSTANT TRANSITION (Optimistic UI)
-        // Transition to success and WhatsApp within 100ms
-        setTimeout(() => {
-            setLoading(false);
-            setSubmitted(true);
-            window.open(`https://wa.me/918921624007?text=${encoded}`, "_blank");
-        }, 100);
+        // 1. DIRECT ACTION (Bypasses Popup Blockers)
+        // Opening WhatsApp must be synchronous with the user click
+        window.open(`https://wa.me/918921624007?text=${encoded}`, "_blank");
 
-        // Background persistence & Instant Alert (Non-blocking)
+        // 2. INSTANT UI TRANSITION
+        setLoading(false);
+        setSubmitted(true);
+
+        // 3. Background persistence & Instant Alert (Non-blocking)
         addDoc(collection(db, "leads"), {
             ...formData,
             type: "Contact Form",
