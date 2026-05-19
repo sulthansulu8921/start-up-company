@@ -12,25 +12,26 @@ interface ReviewModalProps {
 export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
     const [rating, setRating] = useState(5);
     const [isSubmitted, setIsSubmitted] = useState(false);
-    const [hasAttemptedSubmit, setHasAttemptedSubmit] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setIsSubmitting(true);
         const formData = new FormData(e.currentTarget);
 
-        // Use 'no-cors' to bypass browser blocks on localhost.
-        // This ensures the data is sent to FormSubmit even if the browser doesn't allow reading the response.
-        fetch("https://formsubmit.co/nanorayssolution@gmail.com", {
-            method: "POST",
-            body: formData,
-            mode: 'no-cors'
-        });
-
-        setIsSubmitted(true);
-        setTimeout(() => {
-            onClose();
-            setIsSubmitted(false);
-        }, 3000);
+        try {
+            // Use 'no-cors' to bypass browser blocks on localhost.
+            await fetch("https://formsubmit.co/nanorayssolution@gmail.com", {
+                method: "POST",
+                body: formData,
+                mode: 'no-cors'
+            });
+            setIsSubmitted(true);
+        } catch (error) {
+            console.error("Submission failed", error);
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -118,9 +119,10 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
 
                                     <button
                                         type="submit"
-                                        className="w-full py-5 bg-neon text-black rounded-2xl font-black text-xs uppercase tracking-[0.2em] flex items-center justify-center gap-3 hover:shadow-[0_0_30px_rgba(204,255,0,0.3)] transition-all active:scale-95"
+                                        disabled={isSubmitting}
+                                        className="w-full py-5 bg-neon text-black rounded-2xl font-black text-xs uppercase tracking-[0.2em] flex items-center justify-center gap-3 hover:shadow-[0_0_30px_rgba(204,255,0,0.3)] transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
-                                        Submit Review <Send size={16} />
+                                        {isSubmitting ? "Sending..." : "Submit Review"} <Send size={16} className={isSubmitting ? "animate-pulse" : ""} />
                                     </button>
                                 </form>
                             </>
