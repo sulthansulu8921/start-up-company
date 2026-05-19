@@ -54,6 +54,24 @@ export default function Navbar() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    const scrollToSection = (e: React.MouseEvent, href: string) => {
+        if (href.startsWith("/#")) {
+            e.preventDefault();
+            const id = href.split("#")[1];
+            const element = document.getElementById(id);
+            if (element) {
+                const offset = 80;
+                const elementPosition = element.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - offset;
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth"
+                });
+            }
+            if (isMobileMenuOpen) setIsMobileMenuOpen(false);
+        }
+    };
+
     return (
         <nav
             className={cn(
@@ -80,7 +98,10 @@ export default function Navbar() {
                             <Link
                                 href={link.href}
                                 className="relative group py-2"
-                                onClick={() => setActiveLink(link.name)}
+                                onClick={(e) => {
+                                    scrollToSection(e, link.href);
+                                    setActiveLink(link.name);
+                                }}
                             >
                                 <span className={cn(
                                     "text-sm font-bold tracking-tight transition-all duration-300",
@@ -104,7 +125,11 @@ export default function Navbar() {
                 </div>
 
                 <div className="flex items-center gap-3 md:gap-6">
-                    <Link href="/#contact" className="hidden md:block">
+                    <Link
+                        href="/#contact"
+                        className="hidden md:block"
+                        onClick={(e) => scrollToSection(e, "/#contact")}
+                    >
                         <motion.div
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
@@ -146,16 +171,20 @@ export default function Navbar() {
                                         "text-xl font-bold transition-colors flex flex-row items-center justify-between group",
                                         activeLink === link.name ? "text-royal" : "text-gray-900 hover:text-royal"
                                     )}
-                                    onClick={() => {
+                                    onClick={(e) => {
+                                        scrollToSection(e, link.href);
                                         setActiveLink(link.name);
-                                        setIsMobileMenuOpen(false);
                                     }}
                                 >
                                     {link.name}
                                     <ArrowRight size={18} className="opacity-0 group-hover:opacity-100 transition-all -translate-x-4 group-hover:translate-x-0 text-neon" />
                                 </Link>
                             ))}
-                            <Link href="/#contact" className="w-full" onClick={() => setIsMobileMenuOpen(false)}>
+                            <Link
+                                href="/#contact"
+                                className="w-full"
+                                onClick={(e) => scrollToSection(e, "/#contact")}
+                            >
                                 <button className="w-full py-4 bg-neon text-black rounded-2xl font-black uppercase tracking-widest flex items-center justify-center gap-2 shadow-lg hover:shadow-neon/30 transition-all font-sora">
                                     Launch Project <Zap size={18} fill="black" />
                                 </button>
