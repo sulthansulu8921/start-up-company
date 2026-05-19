@@ -96,6 +96,15 @@ export const metadata: Metadata = {
   verification: {
     google: "add-your-google-search-console-verification-code-here",
   },
+  icons: {
+    icon: [
+      { url: "/icon.png", sizes: "512x512", type: "image/png" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    apple: [
+      { url: "/icon.png", sizes: "512x512", type: "image/png" },
+    ],
+  },
   category: "Digital Agency",
 };
 
