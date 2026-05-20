@@ -8,6 +8,7 @@ import PricingSection from "@/components/sections/PricingSection";
 import WhyChooseUs from "@/components/sections/WhyChooseUs";
 import ProcessTimeline from "@/components/sections/ProcessTimeline";
 import Testimonials from "@/components/sections/Testimonials";
+import BlogPreview from "@/components/sections/BlogPreview";
 import FAQSection from "@/components/sections/FAQSection";
 import ContactSection from "@/components/sections/ContactSection";
 import RoadmapModal from "@/components/RoadmapModal";
@@ -76,6 +77,7 @@ export default function Home() {
         <WhyChooseUs />
         <ProcessTimeline />
         <Testimonials />
+        <BlogPreview />
         <FAQSection />
         <ContactSection />
       </div>
