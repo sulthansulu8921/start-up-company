@@ -18,10 +18,25 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "NanoRays Solution | Best Digital Agency for Startups in India & Kerala",
+    default: "Nanorays Solution – Professional Website Development & Digital Marketing Company in Kerala",
     template: "%s | NanoRays Solution",
   },
-  description: "NanoRays Solution — Best Digital Agency for Startups in India. Affordable SEO services in Kerala, modern UI/UX design, high-performance website development & digital marketing. Rank #1 on Google. Call: +91 89216 24007.",
+  description: "Nanorays Solution provides professional website development, digital marketing, branding, SEO, poster designing, and business growth services in Kerala, Dubai, and across India.",
+  keywords: [
+    "Website Development Company Kerala", "Web Design Company Kerala", "Best Website Development Company in Kerala",
+    "Digital Marketing Company Kerala", "Professional Website Design Services", "Ecommerce Website Development Kerala",
+    "Responsive Website Design Company", "Business Website Development India", "Website Development Company Dubai",
+    "SEO Services Kerala", "Google Business Profile Setup", "Affordable Website Packages Kerala",
+    "Small Business Website Development", "Website and Digital Marketing Services", "Branding and Poster Design Services",
+    "Website Development Company Kochi", "Web Designer in Kerala", "Best Web Agency Calicut", "Kerala Digital Marketing Service",
+    "Affordable Website Design Kochi", "Google SEO Services Kerala", "Web Design Services UAE", "Digital Marketing Agency Dubai",
+    "Business Website Design Dubai", "SEO Company UAE", "Professional Web Development Services", "Modern Business Website Design",
+    "Startup Website Development", "International Web Design Agency", "Global Digital Marketing Services",
+    "Affordable Website Design Kerala", "Small Business Website Kerala", "Startup Website Package India", "WhatsApp Integrated Website",
+    "Mobile Responsive Website Kerala", "Website with SEO Setup Kerala", "Local Business Website Dubai", "Website Maintenance Service Kerala",
+    "Online Store Development India", "Shopify Alternative Website Kerala", "Social Media Poster Design Kerala",
+    "Festival Poster Design Service", "Branding Design Company Kerala", "Instagram Promotion Design"
+  ],
   authors: [{ name: "NanoRays Solution", url: "https://nanorayssolution.com" }],
   creator: "NanoRays Solution",
   publisher: "NanoRays Solution",

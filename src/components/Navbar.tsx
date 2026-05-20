@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowRight, Zap } from "lucide-react";
@@ -16,6 +17,7 @@ const navLinks = [
 ];
 
 export default function Navbar() {
+    const pathname = usePathname();
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [activeLink, setActiveLink] = useState("Home");
@@ -56,17 +58,19 @@ export default function Navbar() {
 
     const scrollToSection = (e: React.MouseEvent, href: string) => {
         if (href.startsWith("/#")) {
-            e.preventDefault();
-            const id = href.split("#")[1];
-            const element = document.getElementById(id);
-            if (element) {
-                const offset = 80;
-                const elementPosition = element.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - offset;
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: "smooth"
-                });
+            if (pathname === "/") {
+                e.preventDefault();
+                const id = href.split("#")[1];
+                const element = document.getElementById(id);
+                if (element) {
+                    const offset = 80;
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - offset;
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+                }
             }
             if (isMobileMenuOpen) setIsMobileMenuOpen(false);
         }
