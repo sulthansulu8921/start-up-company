@@ -13,8 +13,32 @@ interface Testimonial {
     role: string;
     content: string;
     rating: number;
-    createdAt: any;
+    createdAt?: any;
 }
+
+const SEED_REVIEWS: Testimonial[] = [
+    {
+        id: "seed-1",
+        name: "Rahul Sharma",
+        role: "Startup Founder, Kochi",
+        content: "NanoRays transformed our digital presence. Their attention to detail in website development and SEO helped us rank Page 1 in just two months.",
+        rating: 5
+    },
+    {
+        id: "seed-2",
+        name: "Sarah Ahmed",
+        role: "Marketing Manager, Dubai",
+        content: "High-quality branding and fast turnaround. Working with NanoRays from Dubai was seamless. Their WhatsApp integration is a game-changer for leads.",
+        rating: 5
+    },
+    {
+        id: "seed-3",
+        name: "Vikas Menon",
+        role: "Business Owner, Calicut",
+        content: "Highly professional service at very affordable prices. The team is very responsive and understands the Kerala market perfectly.",
+        rating: 5
+    }
+];
 
 export default function Testimonials() {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -116,9 +140,9 @@ export default function Testimonials() {
                             </div>
                         ))}
                     </div>
-                ) : testimonials.length > 0 ? (
+                ) : (testimonials.length > 0 || SEED_REVIEWS.length > 0) ? (
                     <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
-                        {testimonials.map((t, i) => (
+                        {(testimonials.length > 0 ? testimonials : SEED_REVIEWS).map((t, i) => (
                             <motion.div
                                 key={t.id}
                                 initial={{ opacity: 0, y: 20 }}
