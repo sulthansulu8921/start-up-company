@@ -167,7 +167,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
-        <GoogleAnalytics GA_MEASUREMENT_ID="G-N9VHRK5ZRH" />
+        <GoogleAnalytics GA_MEASUREMENT_ID="G-TBFYS7QYSM" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
