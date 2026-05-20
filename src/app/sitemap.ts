@@ -1,34 +1,38 @@
-import { MetadataRoute } from "next";
+import { MetadataRoute } from 'next'
 
 export const dynamic = 'force-static';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = "https://nanorayssolution.com";
-    const now = new Date();
-
-    const servicePages = [
-        "website-services",
-        "seo-optimization",
-        "digital-marketing",
-        "branding-logo-design",
-        "ui-ux-design",
-        "poster-design",
-        "website-maintenance",
-        "google-ads",
-        "social-media-management",
-    ].map((slug) => ({
-        url: `${baseUrl}/services/${slug}`,
-        lastModified: now,
-        changeFrequency: "monthly" as const,
-        priority: 0.8,
-    }));
-
     return [
-        { url: baseUrl, lastModified: now, changeFrequency: "weekly", priority: 1 },
-        { url: `${baseUrl}/legal/privacy`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
-        { url: `${baseUrl}/legal/terms`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
-        { url: `${baseUrl}/legal/cookies`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
-        { url: `${baseUrl}/legal/refund`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
-        ...servicePages,
-    ];
+        {
+            url: 'https://nanorayssolution.com',
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 1,
+        },
+        {
+            url: 'https://nanorayssolution.com/services/website-development',
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.8,
+        },
+        {
+            url: 'https://nanorayssolution.com/services/digital-marketing',
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.8,
+        },
+        {
+            url: 'https://nanorayssolution.com/services/graphic-design-posters',
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.8,
+        },
+        {
+            url: 'https://nanorayssolution.com/pricing',
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.8,
+        },
+    ]
 }
