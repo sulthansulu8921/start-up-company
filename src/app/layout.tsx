@@ -98,11 +98,18 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/icon.png", sizes: "512x512", type: "image/png" },
       { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/png", sizes: "512x512" },
     ],
+    shortcut: ["/icon.png"],
     apple: [
       { url: "/icon.png", sizes: "512x512", type: "image/png" },
+    ],
+    other: [
+      {
+        rel: "apple-touch-icon-precomposed",
+        url: "/icon.png",
+      },
     ],
   },
   category: "Digital Agency",
