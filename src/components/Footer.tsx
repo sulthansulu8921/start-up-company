@@ -7,16 +7,16 @@ import Logo from "./Logo";
 
 const nav = {
     Services: [
-        { name: "Website Services", href: "/coming-soon" },
-        { name: "SEO Optimization", href: "/coming-soon" },
-        { name: "Digital Marketing", href: "/coming-soon" },
-        { name: "Branding & Logo", href: "/coming-soon" },
-        { name: "Poster Design", href: "/coming-soon" },
-        { name: "Website Maintenance", href: "/coming-soon" },
+        { name: "Website Services", href: "/services/website-development" },
+        { name: "SEO Optimization", href: "/services/digital-marketing" },
+        { name: "Digital Marketing", href: "/services/digital-marketing" },
+        { name: "Branding & Logo", href: "/services/graphic-design-posters" },
+        { name: "Poster Design", href: "/services/graphic-design-posters" },
+        { name: "Website Maintenance", href: "/pricing" },
     ],
     Company: [
         { name: "About Us", href: "/#about" },
-        { name: "Pricing", href: "/#pricing" },
+        { name: "Pricing", href: "/pricing" },
         { name: "Our Process", href: "/#process" },
         { name: "Testimonials", href: "/#testimonials" },
         { name: "FAQ", href: "/#faq" },
