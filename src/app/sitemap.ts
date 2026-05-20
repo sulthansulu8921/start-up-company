@@ -65,6 +65,30 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 0.9,
         },
         {
+            url: 'https://nanorayssolution.com/locations/kerala',
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 1.0,
+        },
+        {
+            url: 'https://nanorayssolution.com/locations/thiruvananthapuram',
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.9,
+        },
+        {
+            url: 'https://nanorayssolution.com/locations/thrissur',
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.9,
+        },
+        {
+            url: 'https://nanorayssolution.com/locations/kannur',
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.9,
+        },
+        {
             url: 'https://nanorayssolution.com/blog',
             lastModified: new Date(),
             changeFrequency: 'weekly',
