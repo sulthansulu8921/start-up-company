@@ -75,29 +75,36 @@ export default function ContactSection() {
         const encoded = encodeURIComponent(msg);
 
         // 1. DIRECT ACTION (Bypasses Popup Blockers)
-        // Opening WhatsApp must be synchronous with the user click
         window.open(`https://wa.me/918921624007?text=${encoded}`, "_blank");
 
         // 2. INSTANT UI TRANSITION
         setLoading(false);
         setSubmitted(true);
 
-        // 3. Background persistence, Email & Instant Alert (Non-blocking)
-        addDoc(collection(db, "leads"), {
-            ...formData,
-            type: "Contact Form",
-            status: "new",
-            createdAt: serverTimestamp()
-        }).catch(err => console.error("BG lead save failed:", err));
+        // 3. Background Persistence & Lead Delivery (Non-blocking)
+        (async () => {
+            try {
+                // Save to Firestore
+                await addDoc(collection(db, "leads"), {
+                    ...formData,
+                    type: "Contact Form",
+                    status: "new",
+                    createdAt: serverTimestamp()
+                });
 
-        sendLeadEmail({
-            from_name: formData.name,
-            from_email: formData.email,
-            from_phone: formData.phone,
-            message: formData.message,
-            plan: formData.service || "Direct Enquiry",
-            subject: `🚀 New Lead: ${formData.name} — NanoRays Contact Form`,
-        });
+                // Send Email via Lead Engine
+                await sendLeadEmail({
+                    from_name: formData.name,
+                    from_email: formData.email,
+                    from_phone: formData.phone,
+                    message: formData.message,
+                    plan: formData.service || "Direct Enquiry",
+                    subject: `🚀 New Lead: ${formData.name} — NanoRays Contact Form`,
+                });
+            } catch (err) {
+                console.error("🚨 Lead Engine Error (Background):", err);
+            }
+        })();
 
         sendInstantNotification(`Contact Form Lead: ${formData.name} (${formData.phone}) interested in ${formData.service}`);
     };

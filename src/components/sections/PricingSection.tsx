@@ -299,39 +299,43 @@ export default function PricingSection() {
                                         </div>
 
                                         <button
-                                            onClick={async () => {
+                                            onClick={() => {
                                                 if (!formData.name || !formData.email || !formData.phone) return;
                                                 setIsGenerating(true);
                                                 setStep(2);
 
-                                                // 1. Save to Firebase
-                                                try {
-                                                    const { db } = await import("@/lib/firebase");
-                                                    const { collection, addDoc, serverTimestamp } = await import("firebase/firestore");
-                                                    await addDoc(collection(db, "leads"), {
-                                                        ...formData,
-                                                        plan: selectedPlan,
-                                                        type: "Pricing Quote",
-                                                        createdAt: serverTimestamp()
-                                                    });
-                                                } catch (e) { console.error(e); }
-
-                                                // 2. Send Email
-                                                const { sendLeadEmail } = await import("@/lib/lead-engine");
-                                                sendLeadEmail({
-                                                    from_name: formData.name,
-                                                    from_email: formData.email,
-                                                    from_phone: formData.phone,
-                                                    message: formData.requirements || "No specific requirements mentioned.",
-                                                    plan: selectedPlan || "Custom",
-                                                    subject: `🚀 New Quote Request: ${selectedPlan} — ${formData.name}`,
-                                                });
-
-                                                // 3. Open WhatsApp
                                                 const msg = `🚀 *NEW QUOTE REQUEST* 🚀\n\n*Plan:* ${selectedPlan}\n*Name:* ${formData.name}\n*Email:* ${formData.email}\n*Phone:* ${formData.phone}\n*Requirements:* ${formData.requirements || "N/A"}`;
                                                 const waUrl = `https://wa.me/918921624007?text=${encodeURIComponent(msg)}`;
 
-                                                // Simulate "Generation" for 0.1 seconds (Instant)
+                                                // Background Process (Non-blocking)
+                                                (async () => {
+                                                    try {
+                                                        // 1. Save to Firebase
+                                                        const { db } = await import("@/lib/firebase");
+                                                        const { collection, addDoc, serverTimestamp } = await import("firebase/firestore");
+                                                        await addDoc(collection(db, "leads"), {
+                                                            ...formData,
+                                                            plan: selectedPlan,
+                                                            type: "Pricing Quote",
+                                                            createdAt: serverTimestamp()
+                                                        });
+
+                                                        // 2. Send Email
+                                                        const { sendLeadEmail } = await import("@/lib/lead-engine");
+                                                        await sendLeadEmail({
+                                                            from_name: formData.name,
+                                                            from_email: formData.email,
+                                                            from_phone: formData.phone,
+                                                            message: formData.requirements || "No specific requirements mentioned.",
+                                                            plan: selectedPlan || "Custom",
+                                                            subject: `🚀 New Quote Request: ${selectedPlan} — ${formData.name}`,
+                                                        });
+                                                    } catch (e) {
+                                                        console.error("📦 Lead Engine Error (Background):", e);
+                                                    }
+                                                })();
+
+                                                // Instant UI Response
                                                 setTimeout(() => {
                                                     setIsGenerating(false);
                                                     setQuoteFinished(true);
