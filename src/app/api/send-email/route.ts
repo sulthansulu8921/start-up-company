@@ -22,7 +22,7 @@ export async function POST(req: Request) {
 
         const mailOptions = {
             from: `NanoRays Lead <${process.env.GMAIL_USER}>`,
-            to: 'nanorayssolution@gmail.com',
+            to: process.env.GMAIL_USER,
             subject: subject || `🚀 New Lead: ${from_name}`,
             text: `
                 New lead from NanoRays website:
