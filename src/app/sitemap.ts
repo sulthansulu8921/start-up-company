@@ -11,6 +11,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 1,
         },
         {
+            url: 'https://nanorayssolution.com/locations',
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 1,
+        },
+        {
             url: 'https://nanorayssolution.com/services/website-development',
             lastModified: new Date(),
             changeFrequency: 'monthly',

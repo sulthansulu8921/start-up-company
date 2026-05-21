@@ -7,12 +7,20 @@ import Logo from "./Logo";
 
 const nav = {
     Services: [
-        { name: "Web Development", href: "/services/website-development" },
+        { name: "Website Development", href: "/services/website-development" },
         { name: "Ecommerce Stores", href: "/services/ecommerce-development" },
         { name: "SEO Expert Services", href: "/services/seo-services" },
-        { name: "Google Business Setup", href: "/services/google-business-setup" },
+        { name: "Google Business", href: "/services/google-business-setup" },
         { name: "Digital Marketing", href: "/services/digital-marketing" },
-        { name: "Branding & Poster Design", href: "/services/graphic-design-posters" },
+        { name: "Branding & Posters", href: "/services/graphic-design-posters" },
+    ],
+    Locations: [
+        { name: "All Kerala (Master)", href: "/locations/kerala" },
+        { name: "Dubai (Global Hub)", href: "/locations/dubai" },
+        { name: "Kochi (Ernakulam)", href: "/locations/kochi" },
+        { name: "Calicut (Kozhikode)", href: "/locations/calicut" },
+        { name: "Trivandrum (Capital)", href: "/locations/thiruvananthapuram" },
+        { name: "Thrissur & Palakkad", href: "/locations/thrissur" },
     ],
     Company: [
         { name: "About Us", href: "/#about" },
