@@ -29,6 +29,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 0.8,
         },
         {
+            url: 'https://nanorayssolution.com/services/seo-services',
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.8,
+        },
+        {
+            url: 'https://nanorayssolution.com/services/ecommerce-development',
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.8,
+        },
+        {
+            url: 'https://nanorayssolution.com/services/google-business-setup',
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.8,
+        },
+        {
             url: 'https://nanorayssolution.com/pricing',
             lastModified: new Date(),
             changeFrequency: 'monthly',
