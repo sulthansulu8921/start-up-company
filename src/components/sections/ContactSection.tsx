@@ -6,6 +6,7 @@ import { Phone, Mail, MessageCircle, Send, CheckCircle, Clock, ArrowRight } from
 import { db } from "@/lib/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { sendInstantNotification } from "@/lib/notifications";
+import { sendLeadEmail } from "@/lib/emailjs";
 
 const services = [
     "Website Design & Development",
@@ -81,13 +82,22 @@ export default function ContactSection() {
         setLoading(false);
         setSubmitted(true);
 
-        // 3. Background persistence & Instant Alert (Non-blocking)
+        // 3. Background persistence, Email & Instant Alert (Non-blocking)
         addDoc(collection(db, "leads"), {
             ...formData,
             type: "Contact Form",
             status: "new",
             createdAt: serverTimestamp()
         }).catch(err => console.error("BG lead save failed:", err));
+
+        sendLeadEmail({
+            from_name: formData.name,
+            from_email: formData.email,
+            from_phone: formData.phone,
+            message: formData.message,
+            plan: formData.service || "Direct Enquiry",
+            subject: `🚀 New Lead: ${formData.name} — NanoRays Contact Form`,
+        });
 
         sendInstantNotification(`Contact Form Lead: ${formData.name} (${formData.phone}) interested in ${formData.service}`);
     };

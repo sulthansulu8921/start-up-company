@@ -316,7 +316,18 @@ export default function PricingSection() {
                                                     });
                                                 } catch (e) { console.error(e); }
 
-                                                // 2. Prep WhatsApp
+                                                // 2. Send Email to nanorayssolution@gmail.com
+                                                const { sendLeadEmail } = await import("@/lib/emailjs");
+                                                sendLeadEmail({
+                                                    from_name: formData.name,
+                                                    from_email: formData.email,
+                                                    from_phone: formData.phone,
+                                                    message: formData.requirements || "No specific requirements mentioned.",
+                                                    plan: selectedPlan || "Custom",
+                                                    subject: `🚀 New Quote Request: ${selectedPlan} — ${formData.name}`,
+                                                });
+
+                                                // 3. Open WhatsApp
                                                 const msg = `🚀 *NEW QUOTE REQUEST* 🚀\n\n*Plan:* ${selectedPlan}\n*Name:* ${formData.name}\n*Email:* ${formData.email}\n*Phone:* ${formData.phone}\n*Requirements:* ${formData.requirements || "N/A"}`;
                                                 const waUrl = `https://wa.me/918921624007?text=${encodeURIComponent(msg)}`;
 
