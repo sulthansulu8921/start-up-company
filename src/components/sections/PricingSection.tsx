@@ -253,19 +253,15 @@ export default function PricingSection() {
                                         </div>
                                     </div>
 
-                                    <form action="https://formsubmit.co/nanorayssolution@gmail.com" method="POST" className="space-y-4">
-                                        <input type="hidden" name="_subject" value={`New Quote Request: ${selectedPlan} | NanoRays`} />
-                                        <input type="hidden" name="_template" value="table" />
-                                        <input type="hidden" name="_next" value="https://nanorayssolution.com" />
-                                        <input type="hidden" name="_captcha" value="true" />
-                                        <input type="hidden" name="Plan_Requested" value={selectedPlan || "Custom"} />
-
+                                    <div className="space-y-4">
                                         <div>
                                             <input
                                                 required
                                                 type="text"
-                                                name="Client_Name"
+                                                name="name"
                                                 placeholder="Your Name"
+                                                value={formData.name}
+                                                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                                 className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/30 text-sm font-bold focus:outline-none focus:border-neon/50 transition-colors"
                                             />
                                         </div>
@@ -273,8 +269,10 @@ export default function PricingSection() {
                                             <input
                                                 required
                                                 type="email"
-                                                name="Email_Address"
-                                                placeholder="Email Address (To receive quote PDF)"
+                                                name="email"
+                                                placeholder="Email Address"
+                                                value={formData.email}
+                                                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                                                 className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/30 text-sm font-bold focus:outline-none focus:border-neon/50 transition-colors"
                                             />
                                         </div>
@@ -282,25 +280,59 @@ export default function PricingSection() {
                                             <input
                                                 required
                                                 type="tel"
-                                                name="Phone_Number"
+                                                name="phone"
                                                 placeholder="Phone Number"
+                                                value={formData.phone}
+                                                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                                                 className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/30 text-sm font-bold focus:outline-none focus:border-neon/50 transition-colors"
                                             />
                                         </div>
                                         <div>
                                             <textarea
-                                                name="Requirements"
+                                                name="requirements"
                                                 rows={3}
                                                 placeholder="Any specific features you need? (Optional)"
+                                                value={formData.requirements}
+                                                onChange={(e) => setFormData({ ...formData, requirements: e.target.value })}
                                                 className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/30 text-sm font-bold focus:outline-none focus:border-neon/50 transition-colors resize-none"
                                             />
                                         </div>
 
-                                        <button type="submit" className="w-full btn-neon py-4 mt-2 flex items-center justify-center gap-2">
-                                            Run Automatic Quote <Send size={16} />
+                                        <button
+                                            onClick={async () => {
+                                                if (!formData.name || !formData.email || !formData.phone) return;
+                                                setIsGenerating(true);
+                                                setStep(2);
+
+                                                // 1. Save to Firebase
+                                                try {
+                                                    const { db } = await import("@/lib/firebase");
+                                                    const { collection, addDoc, serverTimestamp } = await import("firebase/firestore");
+                                                    await addDoc(collection(db, "leads"), {
+                                                        ...formData,
+                                                        plan: selectedPlan,
+                                                        type: "Pricing Quote",
+                                                        createdAt: serverTimestamp()
+                                                    });
+                                                } catch (e) { console.error(e); }
+
+                                                // 2. Prep WhatsApp
+                                                const msg = `🚀 *NEW QUOTE REQUEST* 🚀\n\n*Plan:* ${selectedPlan}\n*Name:* ${formData.name}\n*Email:* ${formData.email}\n*Phone:* ${formData.phone}\n*Requirements:* ${formData.requirements || "N/A"}`;
+                                                const waUrl = `https://wa.me/918921624007?text=${encodeURIComponent(msg)}`;
+
+                                                // Simulate "Generation" for 2 seconds
+                                                setTimeout(() => {
+                                                    setIsGenerating(false);
+                                                    setQuoteFinished(true);
+                                                    window.open(waUrl, "_blank");
+                                                }, 2000);
+                                            }}
+                                            className="w-full btn-neon py-4 mt-2 flex items-center justify-center gap-2"
+                                        >
+                                            Generate Strategic Quote <Send size={16} />
                                         </button>
-                                        <p className="text-center text-white/30 text-xs font-bold pt-2">100% Secure & Automatic. No credit card required.</p>
-                                    </form>
+                                        <p className="text-center text-white/30 text-[10px] font-black uppercase tracking-widest pt-2">Zero Friction Lead Capture Initialized</p>
+                                    </div>
                                 </div>
                             )}
 

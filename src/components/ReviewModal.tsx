@@ -41,13 +41,8 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
         // Background persistence (Non-blocking)
         try {
             const firestorePromise = addDoc(collection(db, "reviews"), reviewData);
-            const emailPromise = fetch("https://formsubmit.co/nanorayssolution@gmail.com", {
-                method: "POST",
-                body: formData,
-                mode: 'no-cors'
-            });
 
-            Promise.allSettled([firestorePromise, emailPromise])
+            firestorePromise
                 .catch(err => console.error("BG review save failed:", err));
 
             sendInstantNotification(`New Review Submission from: ${reviewData.name}`);
