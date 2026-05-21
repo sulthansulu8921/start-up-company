@@ -39,7 +39,7 @@ export default function RoadmapModal() {
             });
             setIsSubmitted(true);
             localStorage.setItem("roadmap_modal_seen", "true");
-            setTimeout(() => setIsOpen(false), 1500);
+            setTimeout(() => setIsOpen(false), 300);
         } catch (error) {
             console.error("Lead capture failed:", error);
         } finally {
