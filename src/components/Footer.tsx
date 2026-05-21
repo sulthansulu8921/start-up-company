@@ -31,10 +31,10 @@ const nav = {
         { name: "FAQ", href: "/#faq" },
     ],
     Legal: [
-        { name: "Privacy Policy", href: "/coming-soon" },
-        { name: "Terms of Service", href: "/coming-soon" },
-        { name: "Cookie Policy", href: "/coming-soon" },
-        { name: "Refund Policy", href: "/coming-soon" },
+        { name: "Privacy Policy", href: "/privacy-policy" },
+        { name: "Terms of Service", href: "/terms-of-service" },
+        { name: "Cookie Policy", href: "/cookie-policy" },
+        { name: "Refund Policy", href: "/refund-policy" },
     ],
 };
 

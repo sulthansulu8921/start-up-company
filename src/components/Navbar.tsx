@@ -22,7 +22,6 @@ const navLinks = [
             { name: "Branding & Design", href: "/services/graphic-design-posters" },
         ]
     },
-    { name: "Locations", href: "/locations" },
     { name: "Pricing", href: "/pricing" },
     { name: "Blog", href: "/blog" },
     { name: "Contact", href: "/#contact" },
