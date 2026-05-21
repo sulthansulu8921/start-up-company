@@ -18,6 +18,7 @@ const navLinks = [
             { name: "Ecommerce Stores", href: "/services/ecommerce-development" },
             { name: "SEO Expert", href: "/services/seo-services" },
             { name: "Google Business", href: "/services/google-business-setup" },
+            { name: "Website Maintenance", href: "/services/website-maintenance" },
             { name: "Branding & Design", href: "/services/graphic-design-posters" },
         ]
     },

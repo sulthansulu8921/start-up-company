@@ -53,6 +53,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 0.8,
         },
         {
+            url: 'https://nanorayssolution.com/services/website-maintenance',
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.8,
+        },
+        {
             url: 'https://nanorayssolution.com/pricing',
             lastModified: new Date(),
             changeFrequency: 'monthly',

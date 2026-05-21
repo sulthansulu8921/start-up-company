@@ -11,6 +11,7 @@ const nav = {
         { name: "Ecommerce Stores", href: "/services/ecommerce-development" },
         { name: "SEO Expert Services", href: "/services/seo-services" },
         { name: "Google Business", href: "/services/google-business-setup" },
+        { name: "Website Maintenance", href: "/services/website-maintenance" },
         { name: "Digital Marketing", href: "/services/digital-marketing" },
         { name: "Branding & Posters", href: "/services/graphic-design-posters" },
     ],
