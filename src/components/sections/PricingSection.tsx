@@ -316,8 +316,8 @@ export default function PricingSection() {
                                                     });
                                                 } catch (e) { console.error(e); }
 
-                                                // 2. Send Email to nanorayssolution@gmail.com
-                                                const { sendLeadEmail } = await import("@/lib/emailjs");
+                                                // 2. Send Email
+                                                const { sendLeadEmail } = await import("@/lib/lead-engine");
                                                 sendLeadEmail({
                                                     from_name: formData.name,
                                                     from_email: formData.email,

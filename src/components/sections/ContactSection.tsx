@@ -6,7 +6,7 @@ import { Phone, Mail, MessageCircle, Send, CheckCircle, Clock, ArrowRight } from
 import { db } from "@/lib/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { sendInstantNotification } from "@/lib/notifications";
-import { sendLeadEmail } from "@/lib/emailjs";
+import { sendLeadEmail } from "@/lib/lead-engine";
 
 const services = [
     "Website Design & Development",
