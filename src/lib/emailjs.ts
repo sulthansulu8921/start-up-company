@@ -1,11 +1,5 @@
-// EmailJS Integration — sends email directly to nanorayssolution@gmail.com
-// Setup: https://www.emailjs.com/ → Add your Service ID, Template ID & Public Key below
-
-export const EMAILJS_CONFIG = {
-    SERVICE_ID: "YOUR_SERVICE_ID",       // Replace after EmailJS setup
-    TEMPLATE_ID: "YOUR_TEMPLATE_ID",     // Replace after EmailJS setup
-    PUBLIC_KEY: "YOUR_PUBLIC_KEY",       // Replace after EmailJS setup
-};
+// Formspree Integration — The final solution for static Firebase hosting
+// Endpoint: https://formspree.io/f/xzdweqpd
 
 export async function sendLeadEmail(params: {
     from_name: string;
@@ -16,22 +10,28 @@ export async function sendLeadEmail(params: {
     subject: string;
 }) {
     try {
-        const response = await fetch('/api/send-email', {
+        const response = await fetch('https://formspree.io/f/xzdweqpd', {
             method: 'POST',
             headers: {
+                'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(params),
+            body: JSON.stringify({
+                subject: params.subject,
+                name: params.from_name,
+                email: params.from_email,
+                phone: params.from_phone,
+                service_requested: params.plan || "Direct Contact",
+                message: params.message,
+            }),
         });
 
-        const data = await response.json();
-
-        if (data.success) {
-            console.log("📧 Lead email sent successfully via internal API!");
+        if (response.ok) {
+            console.log("📧 Lead email sent successfully via Formspree!");
         } else {
-            console.warn("⚠️ API reported failure:", data.error);
+            console.warn("⚠️ Formspree reported an error:", response.statusText);
         }
     } catch (error) {
-        console.error("Internal Email API call failed:", error);
+        console.error("Formspree submission failed:", error);
     }
 }
