@@ -34,6 +34,13 @@ const navLinks = [
             { name: "Thrissur", href: "/locations/thrissur" },
             { name: "Palakkad", href: "/locations/palakkad" },
             { name: "Kannur", href: "/locations/kannur" },
+            { name: "Kollam", href: "/locations/kollam" },
+            { name: "Alappuzha", href: "/locations/alappuzha" },
+            { name: "Kottayam", href: "/locations/kottayam" },
+            { name: "Pathanamthitta", href: "/locations/pathanamthitta" },
+            { name: "Idukki", href: "/locations/idukki" },
+            { name: "Wayanad", href: "/locations/wayanad" },
+            { name: "Kasaragod", href: "/locations/kasaragod" },
             { name: "Dubai (Global)", href: "/locations/dubai" },
         ]
     },

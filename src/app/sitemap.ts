@@ -3,150 +3,51 @@ import { MetadataRoute } from 'next'
 export const dynamic = 'force-static';
 
 export default function sitemap(): MetadataRoute.Sitemap {
+    const baseUrl = 'https://nanorayssolution.com';
+    const districts = [
+        'kochi', 'calicut', 'thiruvananthapuram', 'malappuram', 'thrissur', 'palakkad', 'kannur',
+        'kollam', 'alappuzha', 'kottayam', 'pathanamthitta', 'idukki', 'wayanad', 'kasaragod', 'dubai', 'kerala'
+    ];
+    const servicesList = [
+        'website-development', 'digital-marketing', 'graphic-design-posters', 'seo-services',
+        'ecommerce-development', 'google-business-setup', 'website-maintenance'
+    ];
+    const blogs = [
+        'website-development-kerala', 'local-seo-kerala', 'digital-marketing-india', 'affordable-website-packages'
+    ];
+
+    const staticRoutes = [
+        { url: baseUrl, lastModified: new Date(), changeFrequency: 'weekly', priority: 1 },
+        { url: `${baseUrl}/locations`, lastModified: new Date(), changeFrequency: 'weekly', priority: 1 },
+        { url: `${baseUrl}/pricing`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
+        { url: `${baseUrl}/blog`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.8 },
+    ];
+
+    const serviceRoutes = servicesList.map(s => ({
+        url: `${baseUrl}/services/${s}`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.8
+    }));
+
+    const locationRoutes = districts.map(d => ({
+        url: `${baseUrl}/locations/${d}`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.9
+    }));
+
+    const blogRoutes = blogs.map(b => ({
+        url: `${baseUrl}/blog/${b}`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.7
+    }));
+
     return [
-        {
-            url: 'https://nanorayssolution.com',
-            lastModified: new Date(),
-            changeFrequency: 'weekly',
-            priority: 1,
-        },
-        {
-            url: 'https://nanorayssolution.com/locations',
-            lastModified: new Date(),
-            changeFrequency: 'weekly',
-            priority: 1,
-        },
-        {
-            url: 'https://nanorayssolution.com/services/website-development',
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.8,
-        },
-        {
-            url: 'https://nanorayssolution.com/services/digital-marketing',
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.8,
-        },
-        {
-            url: 'https://nanorayssolution.com/services/graphic-design-posters',
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.8,
-        },
-        {
-            url: 'https://nanorayssolution.com/services/seo-services',
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.8,
-        },
-        {
-            url: 'https://nanorayssolution.com/services/ecommerce-development',
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.8,
-        },
-        {
-            url: 'https://nanorayssolution.com/services/google-business-setup',
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.8,
-        },
-        {
-            url: 'https://nanorayssolution.com/services/website-maintenance',
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.8,
-        },
-        {
-            url: 'https://nanorayssolution.com/pricing',
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.8,
-        },
-        {
-            url: 'https://nanorayssolution.com/locations/kochi',
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.9,
-        },
-        {
-            url: 'https://nanorayssolution.com/locations/calicut',
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.9,
-        },
-        {
-            url: 'https://nanorayssolution.com/locations/dubai',
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.9,
-        },
-        {
-            url: 'https://nanorayssolution.com/locations/malappuram',
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.9,
-        },
-        {
-            url: 'https://nanorayssolution.com/locations/palakkad',
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.9,
-        },
-        {
-            url: 'https://nanorayssolution.com/locations/kerala',
-            lastModified: new Date(),
-            changeFrequency: 'weekly',
-            priority: 1.0,
-        },
-        {
-            url: 'https://nanorayssolution.com/locations/thiruvananthapuram',
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.9,
-        },
-        {
-            url: 'https://nanorayssolution.com/locations/thrissur',
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.9,
-        },
-        {
-            url: 'https://nanorayssolution.com/locations/kannur',
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.9,
-        },
-        {
-            url: 'https://nanorayssolution.com/blog',
-            lastModified: new Date(),
-            changeFrequency: 'weekly',
-            priority: 0.8,
-        },
-        {
-            url: 'https://nanorayssolution.com/blog/website-development-kerala',
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.7,
-        },
-        {
-            url: 'https://nanorayssolution.com/blog/local-seo-kerala',
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.7,
-        },
-        {
-            url: 'https://nanorayssolution.com/blog/digital-marketing-india',
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.7,
-        },
-        {
-            url: 'https://nanorayssolution.com/blog/affordable-website-packages',
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.7,
-        },
-    ]
+        ...staticRoutes,
+        ...serviceRoutes,
+        ...locationRoutes,
+        ...blogRoutes
+    ] as MetadataRoute.Sitemap;
 }
