@@ -7,12 +7,12 @@ import Logo from "./Logo";
 
 const nav = {
     Services: [
-        { name: "Website Services", href: "/services/website-development" },
-        { name: "SEO Optimization", href: "/services/digital-marketing" },
+        { name: "Web Development", href: "/services/website-development" },
+        { name: "Ecommerce Stores", href: "/services/ecommerce-development" },
+        { name: "SEO Expert Services", href: "/services/seo-services" },
+        { name: "Google Business Setup", href: "/services/google-business-setup" },
         { name: "Digital Marketing", href: "/services/digital-marketing" },
-        { name: "Branding & Logo", href: "/services/graphic-design-posters" },
-        { name: "Poster Design", href: "/services/graphic-design-posters" },
-        { name: "Website Maintenance", href: "/pricing" },
+        { name: "Branding & Poster Design", href: "/services/graphic-design-posters" },
     ],
     Company: [
         { name: "About Us", href: "/#about" },

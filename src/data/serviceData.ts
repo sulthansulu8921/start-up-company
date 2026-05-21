@@ -20,9 +20,9 @@ export interface Service {
 
 export const services: Service[] = [
     {
-        slug: "website-services",
-        title: "Enterprise Web Services",
-        desc: "Custom business platforms, high-conversion E-commerce, and premium portfolios.",
+        slug: "ecommerce-development",
+        title: "Ecommerce Development",
+        desc: "Custom business platforms, high-conversion online stores, and digital shops.",
         icon: Globe,
         accent: "text-neon",
         bg: "rgba(204, 255, 0, 0.05)",
@@ -41,8 +41,8 @@ export const services: Service[] = [
         ]
     },
     {
-        slug: "seo-optimization",
-        title: "SEO Strategy",
+        slug: "seo-services",
+        title: "SEO Strategy & Ranking",
         desc: "Enhance your search visibility and drive qualified organic traffic.",
         icon: Target,
         accent: "text-sky-400",
@@ -209,8 +209,8 @@ export const services: Service[] = [
         ]
     },
     {
-        slug: "google-business",
-        title: "Local Authority Setup",
+        slug: "google-business-setup",
+        title: "Google Business Setup",
         desc: "Dominating local search through Google Business excellence.",
         icon: MapPin,
         accent: "text-neon",
