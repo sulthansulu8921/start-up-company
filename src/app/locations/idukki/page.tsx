@@ -20,7 +20,7 @@ export default function IdukkiPage() {
                     <Link href="/#contact"><button className="px-10 py-5 bg-neon text-black rounded-2xl font-black uppercase tracking-widest text-sm hover:scale-105 active:scale-95 transition-all shadow-xl shadow-neon/20">Start Your Project</button></Link>
                 </div>
             </section>
-            <Footer />
+            
         </main>
     );
 }
