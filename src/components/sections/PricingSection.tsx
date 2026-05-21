@@ -339,7 +339,6 @@ export default function PricingSection() {
                                                 setTimeout(() => {
                                                     setIsGenerating(false);
                                                     setQuoteFinished(true);
-                                                    window.open(waUrl, "_blank");
                                                 }, 100);
                                             }}
                                             className="w-full btn-neon py-4 mt-2 flex items-center justify-center gap-2"

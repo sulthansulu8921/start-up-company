@@ -72,16 +72,11 @@ export default function ContactSection() {
         setLoading(true);
 
         const msg = `Hello NanoRays! 👋\n\n*Name:* ${formData.name}\n*Phone:* ${formData.phone}\n*Email:* ${formData.email}\n*Service Needed:* ${formData.service || "Not specified"}\n*Message:* ${formData.message}`;
-        const encoded = encodeURIComponent(msg);
-
-        // 1. DIRECT ACTION (Bypasses Popup Blockers)
-        window.open(`https://wa.me/918921624007?text=${encoded}`, "_blank");
-
-        // 2. INSTANT UI TRANSITION
+        // 1. INSTANT UI TRANSITION
         setLoading(false);
         setSubmitted(true);
 
-        // 3. Background Persistence & Lead Delivery (Non-blocking)
+        // 2. Background Persistence & Lead Delivery (Non-blocking)
         (async () => {
             try {
                 // Save to Firestore
