@@ -331,12 +331,12 @@ export default function PricingSection() {
                                                 const msg = `🚀 *NEW QUOTE REQUEST* 🚀\n\n*Plan:* ${selectedPlan}\n*Name:* ${formData.name}\n*Email:* ${formData.email}\n*Phone:* ${formData.phone}\n*Requirements:* ${formData.requirements || "N/A"}`;
                                                 const waUrl = `https://wa.me/918921624007?text=${encodeURIComponent(msg)}`;
 
-                                                // Simulate "Generation" for 0.4 seconds (Super Fast)
+                                                // Simulate "Generation" for 0.1 seconds (Instant)
                                                 setTimeout(() => {
                                                     setIsGenerating(false);
                                                     setQuoteFinished(true);
                                                     window.open(waUrl, "_blank");
-                                                }, 400);
+                                                }, 100);
                                             }}
                                             className="w-full btn-neon py-4 mt-2 flex items-center justify-center gap-2"
                                         >
