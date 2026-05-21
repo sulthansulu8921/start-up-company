@@ -46,7 +46,7 @@ export default function BackgroundAnimation() {
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-neon/5 to-transparent h-[1000px] w-full animate-[scan_15s_linear_infinite] opacity-5" />
 
             {/* Static Noise Over Black Base */}
-            <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+            <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay pointer-events-none bg-[url(/noise.svg)]" />
         </div>
     );
 }
