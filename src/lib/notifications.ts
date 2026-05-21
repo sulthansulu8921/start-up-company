@@ -7,22 +7,20 @@ export async function sendInstantNotification(message: string, type: "lead" | "v
             sessionStorage.setItem("visit_notified", "true");
         }
 
-        // FormSubmit AJAX (Email)
-        await fetch("https://formsubmit.co/ajax/nanorayssolution@gmail.com", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-                _subject: type === "visit" ? "👀 SITE VISITOR: NanoRays" : "🚀 NEW LEAD: NanoRays",
-                message: message,
-                type: type,
-                timestamp: new Date().toISOString()
-            })
-        });
+        // 1. Save Alert to Firestore for Owner
+        try {
+            const { db } = await import("@/lib/firebase");
+            const { collection, addDoc, serverTimestamp } = await import("firebase/firestore");
+            await addDoc(collection(db, "system_alerts"), {
+                message,
+                type,
+                timestamp: serverTimestamp()
+            });
+        } catch (e) {
+            console.error("Alert persistence failed:", e);
+        }
 
-        console.log(`Instant ${type} notification dispatched.`);
+        console.log(`Instant ${type} notification dispatched to Firestore.`);
     } catch (error) {
         console.error("Notification failed:", error);
     }

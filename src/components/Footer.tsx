@@ -1,8 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Mail, Phone, MessageCircle, ArrowRight, Heart, MapPin } from "lucide-react";
+import { Mail, Phone, MessageCircle, ArrowRight, Heart, MapPin, Zap } from "lucide-react";
 import Logo from "./Logo";
 
 const nav = {
@@ -62,6 +63,27 @@ const socials = [
 ];
 
 export default function Footer() {
+    const [email, setEmail] = useState("");
+    const [subscribed, setSubscribed] = useState(false);
+
+    const handleSubscribe = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!email) return;
+
+        try {
+            const { db } = await import("@/lib/firebase");
+            const { collection, addDoc, serverTimestamp } = await import("firebase/firestore");
+            await addDoc(collection(db, "newsletter"), {
+                email,
+                createdAt: serverTimestamp()
+            });
+            setSubscribed(true);
+            setEmail("");
+        } catch (error) {
+            console.error("Newsletter failed:", error);
+        }
+    };
+
     return (
         <footer className="relative overflow-hidden bg-transparent pt-24 pb-10">
             {/* Background elements */}
@@ -154,16 +176,26 @@ export default function Footer() {
                         <h3 className="text-white font-black font-sora text-xl mb-1 group-hover:text-neon transition-colors">Stay Updated</h3>
                         <p className="text-white/40 text-sm font-bold">Get monthly tips on websites, SEO, and business growth — no spam.</p>
                     </div>
-                    <form className="flex gap-3 w-full md:w-auto flex-shrink-0">
-                        <input
-                            type="email"
-                            placeholder="your@email.com"
-                            className="bg-white/5 border border-white/10 text-white placeholder:text-white/20 rounded-2xl px-5 py-3.5 text-sm font-bold focus:outline-none focus:border-neon/40 transition-all w-full md:w-64"
-                        />
-                        <button className="flex items-center gap-2 px-6 py-3.5 bg-neon text-black rounded-2xl font-black text-xs uppercase tracking-widest hover:shadow-[0_0_20px_rgba(204,255,0,0.4)] transition-all whitespace-nowrap">
-                            Subscribe <ArrowRight size={14} />
-                        </button>
-                    </form>
+                    {subscribed ? (
+                        <div className="flex items-center gap-3 text-neon font-black text-sm bg-neon/10 px-6 py-4 rounded-2xl border border-neon/30 w-full md:w-auto">
+                            <Zap size={14} className="animate-pulse" />
+                            Elite Subscription Initalized
+                        </div>
+                    ) : (
+                        <form onSubmit={handleSubscribe} className="flex gap-3 w-full md:w-auto flex-shrink-0">
+                            <input
+                                required
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder="your@email.com"
+                                className="bg-white/5 border border-white/10 text-white placeholder:text-white/20 rounded-2xl px-5 py-3.5 text-sm font-bold focus:outline-none focus:border-neon/40 transition-all w-full md:w-64"
+                            />
+                            <button className="flex items-center gap-2 px-6 py-3.5 bg-neon text-black rounded-2xl font-black text-xs uppercase tracking-widest hover:shadow-[0_0_20px_rgba(204,255,0,0.4)] transition-all whitespace-nowrap">
+                                Subscribe <ArrowRight size={14} />
+                            </button>
+                        </form>
+                    )}
                 </motion.div>
 
                 {/* Bottom bar */}
