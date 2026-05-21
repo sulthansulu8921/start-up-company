@@ -1,5 +1,5 @@
 // Formspree Integration — The final solution for static Firebase hosting
-// Endpoint: https://formspree.io/f/xzdweqpd
+// Endpoint: https://formspree.io/f/xaqkeznr
 
 export async function sendLeadEmail(params: {
     from_name: string;
@@ -10,7 +10,7 @@ export async function sendLeadEmail(params: {
     subject: string;
 }) {
     try {
-        const response = await fetch('https://formspree.io/f/xzdweqpd', {
+        const response = await fetch('https://formspree.io/f/xaqkeznr', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
