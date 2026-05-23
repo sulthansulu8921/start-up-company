@@ -18,37 +18,15 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "Nanorays Solution – Professional Website Development & Digital Marketing Company in Kerala",
+    default: "NanoRays Solution | Professional Website Development & Digital Marketing Agency",
     template: "%s | NanoRays Solution",
   },
-  description: "Nanorays Solution provides professional website development, digital marketing, branding, SEO, poster designing, and business growth services in Kerala, Dubai, and across India.",
+  description: "NanoRays Solution is a premier digital agency specializing in premium website development, SEO, and strategic digital marketing. We help businesses in Kerala, Dubai, and across India achieve high-performance growth through innovative digital solutions.",
   keywords: [
-    "nanorays", "Nanorays", "Solution", "Solutions", "Nanorays Solution", "Nanorays Solutions", "Nanorays solution", "Nanorays solutions",
-    "Nanorays web design", "web designer", "Website developer", "Website designer", "Nanorays digital marketing", "Nanorays website development", "Nanorays SEO services",
-    "website development company Kerala", "web design company Kochi", "affordable website design India", "business website development", "responsive website design",
-    "ecommerce website development", "WordPress website developer", "custom website design services", "professional web development company", "startup website design",
-    "SEO services Kerala", "digital marketing agency Kochi", "Google ranking services", "local SEO expert", "social media marketing services", "Instagram marketing agency",
-    "Google Business Profile optimization", "online marketing company Kerala", "search engine optimization services", "branding and marketing solutions",
-    "best web design company in Kochi", "website developers near me", "Kerala web development agency", "web designer Calicut", "digital marketing company Kerala",
-    "website design services in Kerala", "web development company Malappuram", "affordable SEO services Kochi",
-    "affordable business website package", "mobile responsive website design", "SEO optimized website development", "website with free domain and hosting",
-    "website design with WhatsApp integration", "professional company website creation", "ecommerce website with admin panel", "small business website solutions",
-    "hire website developer Kerala", "create business website online", "best website package for startup", "professional website for business",
-    "improve Google ranking for business", "website and SEO package Kerala",
-    "#NanoraysSolution", "#WebDesignKerala", "#DigitalMarketingKerala", "#WebsiteDevelopment", "#SEOKerala", "#BusinessWebsite", "#KeralaBusiness", "#WebsiteDesigner", "#OnlineBusiness", "#StartupKerala",
-    "Website Development Company Kerala", "Web Design Company Kerala", "Best Website Development Company in Kerala",
-    "Digital Marketing Company Kerala", "Professional Website Design Services", "Ecommerce Website Development Kerala",
-    "Responsive Website Design Company", "Business Website Development India", "Website Development Company Dubai",
-    "SEO Services Kerala", "Google Business Profile Setup", "Affordable Website Packages Kerala",
-    "Small Business Website Development", "Website and Digital Marketing Services", "Branding and Poster Design Services",
-    "Website Development Company Kochi", "Web Designer in Kerala", "Best Web Agency Calicut", "Kerala Digital Marketing Service",
-    "Affordable Website Design Kochi", "Google SEO Services Kerala", "Web Design Services UAE", "Digital Marketing Agency Dubai",
-    "Business Website Design Dubai", "SEO Company UAE", "Professional Web Development Services", "Modern Business Website Design",
-    "Startup Website Development", "International Web Design Agency", "Global Digital Marketing Services",
-    "Affordable Website Design Kerala", "Small Business Website Kerala", "Startup Website Package India", "WhatsApp Integrated Website",
-    "Mobile Responsive Website Kerala", "Website with SEO Setup Kerala", "Local Business Website Dubai", "Website Maintenance Service Kerala",
-    "Online Store Development India", "Shopify Alternative Website Kerala", "Social Media Poster Design Kerala",
-    "Festival Poster Design Service", "Branding Design Company Kerala", "Instagram Promotion Design"
+    "NanoRays Solution", "Nanorays Solution", "Nanorays", "NanoRays", "Nanorays Solutions",
+    "Digital Marketing Agency Kerala", "Website Development Company Kochi", "SEO Experts India",
+    "Professional Web Design Kerala", "Ecommerce Development Kochi", "Branding Agency Dubai",
+    "Google Ranking Services Kerala", "Business Growth Solutions India"
   ],
   authors: [{ name: "NanoRays Solution", url: "https://nanorayssolution.com" }],
   creator: "NanoRays Solution",
@@ -61,22 +39,22 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_IN",
     url: "https://nanorayssolution.com",
-    title: "NanoRays Solution | Website Design, SEO & Digital Marketing in India",
-    description: "Professional website design, SEO, digital marketing, branding & poster design for businesses in India. Get a free consultation today! Call: +91 89216 24007.",
+    title: "NanoRays Solution | Performance-Driven Digital Agency",
+    description: "Expert website development, SEO, and digital marketing services to scale your business. Trusted by companies in India and UAE. Get a free audit today!",
     siteName: "NanoRays Solution",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "NanoRays Solution - Professional Digital Agency in India",
+        alt: "NanoRays Solution - Premium Digital Agency",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "NanoRays Solution | Website Design & SEO India",
-    description: "Professional website design, SEO, and digital marketing for businesses in India. Free consultation: +91 89216 24007.",
+    title: "NanoRays Solution | High-Performance Digital Solutions",
+    description: "Scale your business with Kerala's leading digital agency. Website Design, SEO, & Marketing.",
     creator: "@nanorays_",
     images: ["/og-image.png"],
   },
@@ -103,14 +81,7 @@ export const metadata: Metadata = {
     apple: [
       { url: "/icon.png", sizes: "512x512", type: "image/png" },
     ],
-    other: [
-      {
-        rel: "apple-touch-icon-precomposed",
-        url: "/icon.png",
-      },
-    ],
   },
-  category: "Digital Agency",
 };
 
 import SmoothScroll from "@/components/SmoothScroll";
@@ -127,47 +98,38 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // ... (jsonLd remains the same)
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "NanoRays Solution",
-    "image": "https://nanorayssolution.com/logo-main.jpg",
-    "description": "Premium digital agency in India providing website development, SEO, digital marketing, branding, and poster design services.",
-    "url": "https://nanorayssolution.com",
-    "telephone": "+918921624007",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "India Wide Services",
-      "addressLocality": "India",
-      "addressRegion": "Kerala",
-      "postalCode": "682001",
-      "addressCountry": "IN"
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "NanoRays Solution",
+      "alternateName": "Nano Rays",
+      "url": "https://nanorayssolution.com",
+      "logo": "https://nanorayssolution.com/logo-main.jpg",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+91-89216-24007",
+        "contactType": "customer service",
+        "areaServed": ["IN", "AE"],
+        "availableLanguage": ["en", "ml"]
+      },
+      "sameAs": [
+        "https://facebook.com/nanorayssolution",
+        "https://instagram.com/nanorayssolution"
+      ]
     },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": 10.8505,
-      "longitude": 76.2711
-    },
-    "openingHoursSpecification": {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday"
-      ],
-      "opens": "09:00",
-      "closes": "21:00"
-    },
-    "sameAs": [
-      "https://facebook.com/nanorayssolution",
-      "https://instagram.com/nanorayssolution"
-    ],
-    "priceRange": "₹₹"
-  };
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "NanoRays Solution",
+      "url": "https://nanorayssolution.com",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://nanorayssolution.com/blog?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+  ];
 
   return (
     <html lang="en" className="scroll-smooth">
