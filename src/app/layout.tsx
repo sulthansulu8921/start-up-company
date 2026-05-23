@@ -73,14 +73,9 @@ export const metadata: Metadata = {
     google: "add-your-google-search-console-verification-code-here",
   },
   icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/icon.png", type: "image/png", sizes: "512x512" },
-    ],
-    shortcut: ["/icon.png"],
-    apple: [
-      { url: "/icon.png", sizes: "512x512", type: "image/png" },
-    ],
+    icon: "/favicon.ico",
+    shortcut: "/icon.png",
+    apple: "/icon.png",
   },
 };
 
