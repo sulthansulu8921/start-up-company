@@ -73,10 +73,10 @@ export const metadata: Metadata = {
     google: "add-your-google-search-console-verification-code-here",
   },
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/icon.png",
-    apple: "/icon.png",
-  },
+  icon: "/favicon.ico",
+  shortcut: "/favicon.ico",
+  apple: "/icon.png",
+},
 };
 
 import SmoothScroll from "@/components/SmoothScroll";
@@ -110,7 +110,7 @@ export default function RootLayout({
       },
       "sameAs": [
         "https://facebook.com/nanorayssolution",
-        "https://instagram.com/nanorayssolution"
+        "https://instagram.com/nanorays_"
       ]
     },
     {
