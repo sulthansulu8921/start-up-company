@@ -73,10 +73,10 @@ export const metadata: Metadata = {
     google: "add-your-google-search-console-verification-code-here",
   },
   icons: {
-  icon: "/favicon.ico",
-  shortcut: "/favicon.ico",
-  apple: "/icon.png",
-},
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/icon.png",
+  },
 };
 
 import SmoothScroll from "@/components/SmoothScroll";
@@ -93,38 +93,39 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const jsonLd = [
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "NanoRays Solution",
-      "alternateName": "Nano Rays",
-      "url": "https://nanorayssolution.com",
-      "logo": "https://nanorayssolution.com/logo-main.jpg",
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "+91-89216-24007",
-        "contactType": "customer service",
-        "areaServed": ["IN", "AE"],
-        "availableLanguage": ["en", "ml"]
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "name": "NanoRays Solution",
+        "alternateName": "Nano Rays",
+        "url": "https://nanorayssolution.com",
+        "logo": "https://nanorayssolution.com/logo-main.jpg",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+91-89216-24007",
+          "contactType": "customer service",
+          "areaServed": ["IN", "AE"],
+          "availableLanguage": ["en", "ml"]
+        },
+        "sameAs": [
+          "https://facebook.com/nanorayssolution",
+          "https://instagram.com/nanorays_"
+        ]
       },
-      "sameAs": [
-        "https://facebook.com/nanorayssolution",
-        "https://instagram.com/nanorays_"
-      ]
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "NanoRays Solution",
-      "url": "https://nanorayssolution.com",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://nanorayssolution.com/blog?s={search_term_string}",
-        "query-input": "required name=search_term_string"
+      {
+        "@type": "WebSite",
+        "name": "NanoRays Solution",
+        "url": "https://nanorayssolution.com",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://nanorayssolution.com/blog?s={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
       }
-    }
-  ];
+    ]
+  };
 
   return (
     <html lang="en" className="scroll-smooth">
