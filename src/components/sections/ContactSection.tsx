@@ -71,61 +71,66 @@ export default function ContactSection() {
         e.preventDefault();
         setLoading(true);
 
-        try {
-            // Save to Firestore (Backup)
-            await addDoc(collection(db, "leads"), {
-                ...formData,
-                type: "Contact Form",
-                status: "new",
-                createdAt: serverTimestamp()
-            });
-
-            // Send Email via EmailJS CDN
-            if (typeof window !== "undefined" && (window as any).emailjs) {
-                await (window as any).emailjs.send(
-                    "service_lvzyr9e",
-                    "template_tf3oc6h",
-                    {
-                        name: formData.name,
-                        phone: formData.phone,
-                        email: formData.email,
-                        service: formData.service,
-                        message: formData.message,
-                    }
-                );
-            } else {
-                console.warn("EmailJS is not loaded!");
-            }
-
-            // WhatsApp Redirect
-            const waMessage = `Hi NanoRays,
+        // 1. WhatsApp Redirect Prep
+        const waMessage = \`Hi NanoRays,
 I submitted an enquiry from your website.
 
 Name: ${formData.name}
 Phone: ${formData.phone}
-Service: ${formData.service}`;
-            const encodedMessage = encodeURIComponent(waMessage);
-            const waUrl = `https://wa.me/918921624007?text=${encodedMessage}`;
-            
-            // UI Transition
-            setLoading(false);
-            setSubmitted(true);
-            window.open(waUrl, "_blank");
+Service: ${formData.service}\`;
+        const encodedMessage = encodeURIComponent(waMessage);
+        const waUrl = \`https://wa.me/918921624007?text=\${encodedMessage}\`;
+        
+        // 2. INSTANT UI Transition
+        setLoading(false);
+        setSubmitted(true);
+        window.open(waUrl, "_blank");
 
-            // Reset Form Data
-            setFormData({
-                name: "",
-                phone: "",
-                email: "",
-                service: "",
-                message: "",
-            });
+        // Cache form data before resetting for the background tasks
+        const currentData = { ...formData };
 
-            sendInstantNotification(`Contact Form Lead: ${formData.name} (${formData.phone}) interested in ${formData.service}`);
-        } catch (err) {
-            console.error("🚨 Form Submission Error:", err);
-            setLoading(false);
-        }
+        // 3. Reset Form Data instantly
+        setFormData({
+            name: "",
+            phone: "",
+            email: "",
+            service: "",
+            message: "",
+        });
+
+        // 4. Background Persistence & Email Delivery (Non-blocking)
+        (async () => {
+            try {
+                // Save to Firestore (Backup)
+                await addDoc(collection(db, "leads"), {
+                    ...currentData,
+                    type: "Contact Form",
+                    status: "new",
+                    createdAt: serverTimestamp()
+                });
+
+                // Send Email via EmailJS CDN
+                if (typeof window !== "undefined" && (window as any).emailjs) {
+                    await (window as any).emailjs.send(
+                        "service_lvzyr9e",
+                        "template_tf3oc6h",
+                        {
+                            name: currentData.name,
+                            phone: currentData.phone,
+                            email: currentData.email,
+                            service: currentData.service,
+                            message: currentData.message,
+                        }
+                    );
+                } else {
+                    console.warn("EmailJS is not loaded!");
+                }
+                
+                sendInstantNotification(\`Contact Form Lead: \${currentData.name} (\${currentData.phone}) interested in \${currentData.service}\`);
+            } catch (err) {
+                console.error("🚨 Form Submission Error (Background):", err);
+            }
+        })();
     };
 
     return (
