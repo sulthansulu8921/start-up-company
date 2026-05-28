@@ -1,5 +1,5 @@
 // Formspree Lead Engine — Professional Lead Capture for Static Hosting
-// Primary Endpoint: https://formspree.io/f/xaqkeznr
+// Primary Endpoint: https://formspree.io/f/xojbpgaa
 
 export async function sendLeadEmail(params: {
     from_name: string;
@@ -12,7 +12,7 @@ export async function sendLeadEmail(params: {
     console.log("📨 Lead Engine: Preparing submission for...", params.from_email);
 
     try {
-        const response = await fetch('https://formspree.io/f/xaqkeznr', {
+        const response = await fetch('https://formspree.io/f/xojbpgaa', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

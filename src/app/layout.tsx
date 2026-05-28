@@ -85,6 +85,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/sections/WhatsAppButton";
 import AIChatbot from "@/components/AIChatbot";
+import OfferPopup from "@/components/OfferPopup";
+import Script from "next/script";
+
 
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 
@@ -139,6 +142,15 @@ export default function RootLayout({
       <body
         className={`${sora.variable} ${inter.variable} antialiased bg-background text-foreground selection:bg-neon/30 selection:text-white`}
       >
+        <Script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" strategy="beforeInteractive" />
+        <Script id="emailjs-init" strategy="beforeInteractive">
+          {`
+            (function(){
+              emailjs.init("glxZW9ru7wOejsxd-z0Oi");
+            })();
+          `}
+        </Script>
+        
         <Preloader />
         <SmoothScroll>
           <BackgroundAnimation />
@@ -146,6 +158,7 @@ export default function RootLayout({
           <Navbar />
           {children}
           <AIChatbot />
+          <OfferPopup />
           <WhatsAppButton />
           <Footer />
         </SmoothScroll>

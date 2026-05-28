@@ -71,37 +71,61 @@ export default function ContactSection() {
         e.preventDefault();
         setLoading(true);
 
-        const msg = `Hello NanoRays! 👋\n\n*Name:* ${formData.name}\n*Phone:* ${formData.phone}\n*Email:* ${formData.email}\n*Service Needed:* ${formData.service || "Not specified"}\n*Message:* ${formData.message}`;
-        // 1. INSTANT UI TRANSITION
-        setLoading(false);
-        setSubmitted(true);
+        try {
+            // Save to Firestore (Backup)
+            await addDoc(collection(db, "leads"), {
+                ...formData,
+                type: "Contact Form",
+                status: "new",
+                createdAt: serverTimestamp()
+            });
 
-        // 2. Background Persistence & Lead Delivery (Non-blocking)
-        (async () => {
-            try {
-                // Save to Firestore
-                await addDoc(collection(db, "leads"), {
-                    ...formData,
-                    type: "Contact Form",
-                    status: "new",
-                    createdAt: serverTimestamp()
-                });
-
-                // Send Email via Lead Engine
-                await sendLeadEmail({
-                    from_name: formData.name,
-                    from_email: formData.email,
-                    from_phone: formData.phone,
-                    message: formData.message,
-                    plan: formData.service || "Direct Enquiry",
-                    subject: `🚀 New Lead: ${formData.name} — NanoRays Contact Form`,
-                });
-            } catch (err) {
-                console.error("🚨 Lead Engine Error (Background):", err);
+            // Send Email via EmailJS CDN
+            if (typeof window !== "undefined" && (window as any).emailjs) {
+                await (window as any).emailjs.send(
+                    "service_lvzyr9e",
+                    "template_tf3oc6h",
+                    {
+                        name: formData.name,
+                        phone: formData.phone,
+                        email: formData.email,
+                        service: formData.service,
+                        message: formData.message,
+                    }
+                );
+            } else {
+                console.warn("EmailJS is not loaded!");
             }
-        })();
 
-        sendInstantNotification(`Contact Form Lead: ${formData.name} (${formData.phone}) interested in ${formData.service}`);
+            // WhatsApp Redirect
+            const waMessage = `Hi NanoRays,
+I submitted an enquiry from your website.
+
+Name: ${formData.name}
+Phone: ${formData.phone}
+Service: ${formData.service}`;
+            const encodedMessage = encodeURIComponent(waMessage);
+            const waUrl = `https://wa.me/918921624007?text=${encodedMessage}`;
+            
+            // UI Transition
+            setLoading(false);
+            setSubmitted(true);
+            window.open(waUrl, "_blank");
+
+            // Reset Form Data
+            setFormData({
+                name: "",
+                phone: "",
+                email: "",
+                service: "",
+                message: "",
+            });
+
+            sendInstantNotification(`Contact Form Lead: ${formData.name} (${formData.phone}) interested in ${formData.service}`);
+        } catch (err) {
+            console.error("🚨 Form Submission Error:", err);
+            setLoading(false);
+        }
     };
 
     return (
