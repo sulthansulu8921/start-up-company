@@ -72,14 +72,14 @@ export default function ContactSection() {
         setLoading(true);
 
         // 1. WhatsApp Redirect Prep
-        const waMessage = \`Hi NanoRays,
+        const waMessage = `Hi NanoRays,
 I submitted an enquiry from your website.
 
 Name: ${formData.name}
 Phone: ${formData.phone}
-Service: ${formData.service}\`;
+Service: ${formData.service}`;
         const encodedMessage = encodeURIComponent(waMessage);
-        const waUrl = \`https://wa.me/918921624007?text=\${encodedMessage}\`;
+        const waUrl = `https://wa.me/918921624007?text=${encodedMessage}`;
         
         // 2. INSTANT UI Transition
         setLoading(false);
@@ -126,7 +126,7 @@ Service: ${formData.service}\`;
                     console.warn("EmailJS is not loaded!");
                 }
                 
-                sendInstantNotification(\`Contact Form Lead: \${currentData.name} (\${currentData.phone}) interested in \${currentData.service}\`);
+                sendInstantNotification(`Contact Form Lead: ${currentData.name} (${currentData.phone}) interested in ${currentData.service}`);
             } catch (err) {
                 console.error("🚨 Form Submission Error (Background):", err);
             }
