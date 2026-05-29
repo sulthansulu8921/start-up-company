@@ -121,7 +121,7 @@ ${currentData.message || "No additional message provided."}`;
                         service: currentData.service,
                         message: fullMessage,
                     },
-                    "glxZW9ru7wOejsxd-z0Oi" // Pass public key as 4th parameter for self-contained robustness
+                    "XYtwGU4t93z7pm8Oc" // Pass public key as 4th parameter for self-contained robustness
                 );
                 
                 sendInstantNotification(`Contact Form Lead: ${currentData.name} (${currentData.phone}) interested in ${currentData.service}`);

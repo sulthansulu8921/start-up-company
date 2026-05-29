@@ -146,7 +146,7 @@ export default function RootLayout({
         <Script id="emailjs-init" strategy="beforeInteractive">
           {`
             (function(){
-              emailjs.init("glxZW9ru7wOejsxd-z0Oi");
+              emailjs.init("XYtwGU4t93z7pm8Oc");
             })();
           `}
         </Script>
