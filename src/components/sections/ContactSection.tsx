@@ -334,7 +334,7 @@ ${currentData.message || "No additional message provided."}`;
                                         {loading ? (
                                             <><span className="w-5 h-5 rounded-full border-2 border-black/40 border-t-black animate-spin" /> Sending...</>
                                         ) : (
-                                            <><Send size={18} /> Send Message via WhatsApp</>
+                                            <><Send size={18} /> Send Message</>
                                         )}
                                     </button>
                                     <p className="text-white/30 text-xs text-center font-bold">
