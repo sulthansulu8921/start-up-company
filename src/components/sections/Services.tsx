@@ -1,3 +1,5 @@
+"use client";
+
 import { services } from "@/data/serviceData";
 import Link from "next/link";
 import { motion } from "framer-motion";

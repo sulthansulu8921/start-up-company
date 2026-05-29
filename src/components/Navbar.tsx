@@ -12,7 +12,7 @@ const navLinks = [
     { name: "Home", href: "/" },
     {
         name: "Services",
-        href: "/#services",
+        href: "/services",
         dropdown: [
             { name: "Web Development", href: "/services/website-development" },
             { name: "Ecommerce Stores", href: "/services/ecommerce-development" },
