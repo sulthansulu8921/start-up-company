@@ -170,11 +170,11 @@ export default function AdminPage() {
         setLoginLoading(true);
         setAuthError("");
 
+        let correctPassword = "NanoRays2026!";
         try {
             // Fetch settings from Firestore to check against custom credentials
             const docRef = doc(db, "settings", "global");
             const docSnap = await getDoc(docRef);
-            let correctPassword = "NanoRays2026!";
             
             if (docSnap.exists()) {
                 const data = docSnap.data();
@@ -182,21 +182,25 @@ export default function AdminPage() {
                     correctPassword = data.adminPassword;
                 }
             }
+        } catch (err: any) {
+            console.warn("⚠️ Firestore settings fetch failed (offline or uninitialized). Falling back to default credentials.", err);
+        }
 
-            if (email === "admin@nanorayssolution.com" && password === correctPassword) {
-                setUser({ email: "admin@nanorayssolution.com" });
-                sessionStorage.setItem("nanorays_admin_session", "active");
+        if (email === "admin@nanorayssolution.com" && password === correctPassword) {
+            setUser({ email: "admin@nanorayssolution.com" });
+            sessionStorage.setItem("nanorays_admin_session", "active");
+            
+            // Fetch leads and configuration silently
+            try {
                 fetchLeads();
                 fetchSettings();
-            } else {
-                setAuthError("Invalid username or password. Please try again.");
+            } catch (fetchErr) {
+                console.error("Failed to sync remote records on load:", fetchErr);
             }
-        } catch (err: any) {
-            console.error("Login verification failed:", err);
-            setAuthError("Failed to verify credentials. Please try again.");
-        } finally {
-            setLoginLoading(false);
+        } else {
+            setAuthError("Invalid username or password. Please try again.");
         }
+        setLoginLoading(false);
     };
 
     const handleLogout = () => {
