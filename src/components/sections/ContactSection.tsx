@@ -68,38 +68,17 @@ export default function ContactSection() {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
+        setErrorMessage(null);
 
-        // 1. INSTANT UI Transition
-        setLoading(false);
-        setSubmitted(true);
-
-        // Cache form data before resetting for the background tasks
         const currentData = { ...formData };
 
-        // 3. Reset Form Data instantly
-        setFormData({
-            name: "",
-            phone: "",
-            email: "",
-            service: "",
-            message: "",
-        });
-
-        // 4. Background Persistence & Email Delivery (Non-blocking)
-        (async () => {
-            try {
-                // Save to Firestore (Backup)
-                await addDoc(collection(db, "leads"), {
-                    ...currentData,
-                    type: "Contact Form",
-                    status: "new",
-                    createdAt: serverTimestamp()
-                });
-
-                const fullMessage = `Hi NanoRays,
+        try {
+            const fullMessage = `Hi NanoRays,
 I submitted an enquiry from your website.
 
 Name: ${currentData.name}
@@ -110,25 +89,50 @@ Service: ${currentData.service}
 Message: 
 ${currentData.message || "No additional message provided."}`;
 
-                // Send Email via native direct import (bypassing CDN/window issues)
-                await emailjs.send(
-                    "service_lvzyr9e",
-                    "template_tf3oc6h",
-                    {
-                        name: currentData.name,
-                        phone: currentData.phone,
-                        email: currentData.email,
-                        service: currentData.service,
-                        message: fullMessage,
-                    },
-                    "XYtwGU4t93z7pm8Oc" // Pass public key as 4th parameter for self-contained robustness
-                );
-                
-                sendInstantNotification(`Contact Form Lead: ${currentData.name} (${currentData.phone}) interested in ${currentData.service}`);
-            } catch (err) {
-                console.error("🚨 Form Submission Error (Background):", err);
-            }
-        })();
+            // 1. Send Email via EmailJS
+            await emailjs.send(
+                "service_lvzyr9e",
+                "template_tf3oc6h",
+                {
+                    name: currentData.name,
+                    phone: currentData.phone,
+                    email: currentData.email,
+                    service: currentData.service,
+                    message: fullMessage,
+                },
+                "XYtwGU4t93z7pm8Oc"
+            );
+
+            // 2. Async save to Firestore in background (so it doesn't block UI if Firestore fails)
+            (async () => {
+                try {
+                    await addDoc(collection(db, "leads"), {
+                        ...currentData,
+                        type: "Contact Form",
+                        status: "new",
+                        createdAt: serverTimestamp()
+                    });
+                } catch (dbErr) {
+                    console.error("🚨 Firestore backup failed:", dbErr);
+                }
+            })();
+
+            // 3. UI Updates
+            setLoading(false);
+            setSubmitted(true);
+            setFormData({
+                name: "",
+                phone: "",
+                email: "",
+                service: "",
+                message: "",
+            });
+            sendInstantNotification(`Contact Form Lead: ${currentData.name} (${currentData.phone}) interested in ${currentData.service}`);
+        } catch (err: any) {
+            console.error("🚨 EmailJS Form Submission Error:", err);
+            setLoading(false);
+            setErrorMessage(err?.text || err?.message || "Failed to send message. Please try again or call us.");
+        }
     };
 
     return (
@@ -243,6 +247,12 @@ ${currentData.message || "No additional message provided."}`;
                             ) : (
                                 <form onSubmit={handleSubmit} className="space-y-6">
                                     <h3 className="text-xl font-black text-white font-sora mb-6">Send Us a Message</h3>
+
+                                    {errorMessage && (
+                                        <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl text-red-400 text-sm font-bold">
+                                            ⚠️ {errorMessage}
+                                        </div>
+                                    )}
 
                                     {/* Row 1 */}
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
