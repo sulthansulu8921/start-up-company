@@ -10,27 +10,27 @@ const recentPosts = [
         title: "Why Kerala Businesses Need a Website in 2025",
         category: "Web Development",
         readTime: "4 min",
-        color: "text-neon",
-        bg: "bg-neon/10",
-        border: "border-neon/20",
+        color: "text-emerald-700",
+        bg: "bg-emerald-50",
+        border: "border-emerald-200",
     },
     {
         slug: "local-seo-kerala",
         title: "How to Rank #1 on Google (Local SEO Guide)",
         category: "SEO Tips",
         readTime: "6 min",
-        color: "text-sky-400",
-        bg: "bg-sky-400/10",
-        border: "border-sky-400/20",
+        color: "text-sky-700",
+        bg: "bg-sky-50",
+        border: "border-sky-200",
     },
     {
         slug: "digital-marketing-india",
         title: "Top 5 Marketing Strategies in India",
         category: "Marketing",
         readTime: "5 min",
-        color: "text-rose-400",
-        bg: "bg-rose-400/10",
-        border: "border-rose-400/20",
+        color: "text-rose-700",
+        bg: "bg-rose-50",
+        border: "border-rose-200",
     },
 ];
 
@@ -40,7 +40,7 @@ export default function BlogPreview() {
             <div className="container mx-auto px-6 relative z-10">
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
                     <div className="max-w-2xl">
-                        <span className="inline-block px-4 py-1.5 rounded-full bg-neon/10 border border-neon/20 text-neon text-xs font-bold uppercase tracking-widest mb-4">
+                        <span className="inline-block px-4 py-1.5 rounded-full bg-royal/10 border border-royal/20 text-royal text-xs font-bold uppercase tracking-widest mb-4">
                             Latest Insights
                         </span>
                         <h2 className="text-4xl md:text-5xl font-sora font-bold text-gray-900 leading-tight">
