@@ -10,7 +10,7 @@ import { sendInstantNotification } from "@/lib/notifications";
 import { sendLeadEmail } from "@/lib/lead-engine";
 
 // --- Configuration Panel ---
-const SHOW_POSTER = true;
+const SHOW_POSTER = false;
 const POSTER_IMAGE = "/images/special-offer.png";
 
 const services = [
