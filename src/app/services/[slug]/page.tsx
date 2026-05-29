@@ -9,20 +9,20 @@ interface PageProps {
 
 // Unique, keyword-targeted SEO metadata per service page
 const serviceMetadata: Record<string, { title: string; description: string; keywords: string[] }> = {
-    "website-development": {
-        title: "Professional Website Development & Design | NanoRays Solution",
-        description: "High-performance, mobile-friendly business websites and custom web solutions starting from ₹5,000. NanoRays builds modern responsive web systems.",
-        keywords: ["website design India", "business web design", "responsive web design", "custom website builder"],
+    "website-services": {
+        title: "Professional Website Design for Startups in India | NanoRays Solution",
+        description: "Get a high-performance, mobile-friendly business website starting from ₹5,000. NanoRays Solution builds conversion-focused websites for startups and SMEs across India. Free consultation: +91 89216 24007.",
+        keywords: ["website design India", "startup website design", "business website Kerala", "affordable website India", "web development startup India", "mobile responsive website India"],
     },
-    "ecommerce-development": {
-        title: "E-Commerce Website Development Services | NanoRays Solution",
-        description: "Scale your online sales with custom e-commerce web applications, Shopify, and WooCommerce integration by NanoRays Solution.",
-        keywords: ["ecommerce website builder", "WooCommerce developer Kerala", "Shopify developer India", "online store builder"],
+    "seo-optimization": {
+        title: "Affordable SEO Services in Kerala & India | NanoRays Solution",
+        description: "Rank #1 on Google with NanoRays Solution's affordable SEO services in Kerala and India. We offer technical SEO, local SEO, keyword research, and monthly rank tracking. Call: +91 89216 24007.",
+        keywords: ["affordable SEO services Kerala", "SEO agency Kerala", "local SEO India", "Google ranking Kerala", "technical SEO India", "SEO services India"],
     },
-    "seo-services": {
-        title: "SEO, GEO & AEO Strategy Services | AI Search Optimization | NanoRays",
-        description: "Rank #1 on Google and optimize your site to be recommended by AI assistants (ChatGPT, Gemini, Perplexity) with NanoRays SEO/GEO/AEO services.",
-        keywords: ["SEO services Kerala", "Generative Engine Optimization Kochi", "GEO optimization India", "Answer Engine Optimization Kerala", "AEO voice search optimization"],
+    "aeo-geo-optimization": {
+        title: "AEO & GEO Optimization Services | ChatGPT & Gemini Search SEO | NanoRays",
+        description: "Get found in the AI era. Optimize your brand for AI search engines like ChatGPT, Google Gemini, Perplexity, and voice search with NanoRays Solution's AEO & GEO services.",
+        keywords: ["AEO services India", "GEO optimization Kerala", "Generative Engine Optimization", "Answer Engine Optimization Kochi", "ChatGPT search optimization", "Gemini search ranking", "Perplexity AI optimization", "voice search SEO Kerala"],
     },
     "google-ranking": {
         title: "Google First Page Ranking Services India | NanoRays Solution",
@@ -59,7 +59,7 @@ const serviceMetadata: Record<string, { title: string; description: string; keyw
         description: "Automate your sales funnel and scale your revenue with NanoRays Solution. We implement WhatsApp Business automation, CRM integration, and conversion-optimized growth strategies.",
         keywords: ["business growth India", "sales automation India", "WhatsApp business automation", "lead generation India", "CRM integration India", "startup growth Kerala"],
     },
-    "google-business-setup": {
+    "google-business": {
         title: "Google Business Profile Setup & Local SEO India | NanoRays Solution",
         description: "Appear in Google Maps and local search results with NanoRays Solution's Google Business Profile optimization. We help businesses across India attract local customers online.",
         keywords: ["Google Business Profile India", "local SEO Kerala", "Google Maps listing India", "Google My Business setup Kerala", "local business SEO India"],

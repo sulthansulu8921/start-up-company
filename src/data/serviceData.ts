@@ -1,4 +1,4 @@
-import { Globe, Target, Megaphone, Palette, BarChart3, Layout, Share2, TrendingUp, MapPin, Wrench, LucideIcon } from "lucide-react";
+import { Globe, Target, Megaphone, Palette, BarChart3, Layout, Share2, TrendingUp, MapPin, Wrench, Brain, LucideIcon } from "lucide-react";
 
 export interface RoadmapStep {
     day: string;
@@ -47,12 +47,12 @@ export const services: Service[] = [
         icon: Target,
         accent: "text-sky-400",
         bg: "rgba(56, 189, 248, 0.05)",
-        fullDesc: "Scale your organic presence with cutting-edge AI-era search strategies. We provide data-driven Technical SEO, Generative Engine Optimization (GEO) for AI search recommendations, Answer Engine Optimization (AEO) for voice search, and advanced speed enhancements to win search engine authority.",
+        fullDesc: "Scale your organic presence with data-driven Technical SEO, Local Search optimization, and advanced speed enhancements designed to win search engine authority.",
         benefits: [
-            "GEO (AI Engine Optimization) Setup",
-            "AEO & Voice Search Optimization",
             "Advanced Technical SEO Audit",
-            "Local Search Domination"
+            "Core Web Vitals Optimization",
+            "Local Search Domination",
+            "In-depth Keyword Research"
         ],
         roadmap: [
             { day: "STEP 01", topic: "Technical Audit", details: "Evaluating current performance and indexing errors." },
@@ -227,6 +227,27 @@ export const services: Service[] = [
             { day: "STEP 02", topic: "Profile Engineering", details: "Integrating precise data, locations, and assets." },
             { day: "STEP 03", topic: "Verification Shield", details: "Managing successful platform verification." },
             { day: "Ongoing", topic: "Review Stewardship", details: "Nurturing customer sentiment for 5-star authority." }
+        ]
+    },
+    {
+        slug: "aeo-geo-optimization",
+        title: "AEO & GEO Optimization",
+        desc: "Optimize your brand to be cited and recommended by ChatGPT, Gemini, and Siri.",
+        icon: Brain,
+        accent: "text-purple-400",
+        bg: "rgba(168, 85, 247, 0.05)",
+        fullDesc: "Generative Engine Optimization (GEO) and Answer Engine Optimization (AEO) are the future of digital visibility. We optimize your website so that AI search engines (like ChatGPT Search, Google Gemini, and Perplexity AI) and answer engines (like voice search, Siri, and Alexa) recommend and cite your business.",
+        benefits: [
+            "Generative Engine Citations (ChatGPT/Gemini)",
+            "Voice Search & Smart Assistant Optimization",
+            "Structured Schema & JSON-LD Injection",
+            "AI-Friendly Content Architecture"
+        ],
+        roadmap: [
+            { day: "STEP 01", topic: "AI Visibility Audit", details: "Analyzing how current AI engines and LLMs perceive and cite your brand." },
+            { day: "STEP 02", topic: "Content Restructuring", details: "Rewriting pages to match natural question-and-answer patterns." },
+            { day: "STEP 03", topic: "Technical Schema Setup", details: "Deploying deep semantic JSON-LD metadata for AI scrapers." },
+            { day: "STEP 04", topic: "Authority Building", details: "Securing references in high-authority AI training sources." }
         ]
     }
 ];
