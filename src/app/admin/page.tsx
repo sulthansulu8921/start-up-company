@@ -125,6 +125,7 @@ export default function AdminPage() {
     const [user, setUser] = useState<any>(null);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [newPassword, setNewPassword] = useState("");
     const [loginLoading, setLoginLoading] = useState(false);
     const [authError, setAuthError] = useState("");
 
@@ -153,14 +154,15 @@ export default function AdminPage() {
     const [dbMessage, setDbMessage] = useState("");
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser);
-            if (currentUser) {
+        const checkSession = () => {
+            const activeSession = sessionStorage.getItem("nanorays_admin_session");
+            if (activeSession === "active") {
+                setUser({ email: "admin@nanorayssolution.com" });
                 fetchLeads();
                 fetchSettings();
             }
-        });
-        return () => unsubscribe();
+        };
+        checkSession();
     }, []);
 
     const handleLogin = async (e: React.FormEvent) => {
@@ -169,30 +171,53 @@ export default function AdminPage() {
         setAuthError("");
 
         try {
-            await signInWithEmailAndPassword(auth, email, password);
-        } catch (err: any) {
-            console.error("Login failed, checking auto-setup conditions...", err.code);
-            // Auto-setup primary admin account if it doesn't exist yet in Auth database
-            if (
-                (err.code === "auth/user-not-found" || err.code === "auth/invalid-credential") &&
-                email === "admin@nanorayssolution.com" &&
-                password === "NanoRays2026!"
-            ) {
-                try {
-                    await createUserWithEmailAndPassword(auth, email, password);
-                } catch (signUpErr: any) {
-                    setAuthError("Failed to initialize administrator account. Please check Firebase Auth permissions.");
+            // Fetch settings from Firestore to check against custom credentials
+            const docRef = doc(db, "settings", "global");
+            const docSnap = await getDoc(docRef);
+            let correctPassword = "NanoRays2026!";
+            
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+                if (data.adminPassword) {
+                    correctPassword = data.adminPassword;
                 }
+            }
+
+            if (email === "admin@nanorayssolution.com" && password === correctPassword) {
+                setUser({ email: "admin@nanorayssolution.com" });
+                sessionStorage.setItem("nanorays_admin_session", "active");
+                fetchLeads();
+                fetchSettings();
             } else {
                 setAuthError("Invalid username or password. Please try again.");
             }
+        } catch (err: any) {
+            console.error("Login verification failed:", err);
+            setAuthError("Failed to verify credentials. Please try again.");
         } finally {
             setLoginLoading(false);
         }
     };
 
-    const handleLogout = async () => {
-        await signOut(auth);
+    const handleLogout = () => {
+        setUser(null);
+        sessionStorage.removeItem("nanorays_admin_session");
+    };
+
+    const handleChangePassword = async () => {
+        if (!newPassword || newPassword.trim().length < 6) {
+            alert("Password must be at least 6 characters long.");
+            return;
+        }
+        try {
+            const docRef = doc(db, "settings", "global");
+            await setDoc(docRef, { adminPassword: newPassword }, { merge: true });
+            alert("Admin password updated successfully! Please use your new password next time.");
+            setNewPassword("");
+        } catch (err: any) {
+            console.error("Failed to update password:", err);
+            alert(`Failed to update password: ${err.message}`);
+        }
     };
 
     // Fetch settings/global from Firestore
@@ -917,6 +942,30 @@ export default function AdminPage() {
                                         {dbMessage}
                                     </div>
                                 )}
+                            </div>
+
+                            {/* Password Changer */}
+                            <div className="space-y-4 pt-6 border-t border-white/5">
+                                <div>
+                                    <span className="text-sm font-bold text-white block">Change Admin Password</span>
+                                    <span className="text-[10px] font-bold text-white/40 block mt-1">Set a new password for dashboard login access</span>
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-xs font-bold text-white/60 uppercase tracking-wider block">New Password</label>
+                                    <input
+                                        type="password"
+                                        value={newPassword}
+                                        onChange={(e) => setNewPassword(e.target.value)}
+                                        className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-3 text-white text-sm focus:border-purple-500/50 outline-none transition-all placeholder:text-white/20"
+                                        placeholder="••••••••••••"
+                                    />
+                                </div>
+                                <button
+                                    onClick={handleChangePassword}
+                                    className="w-full py-3.5 bg-purple-600 hover:bg-purple-500 text-white rounded-2xl font-black uppercase tracking-widest text-xs transition-all flex items-center justify-center gap-2"
+                                >
+                                    Update Password
+                                </button>
                             </div>
                         </div>
                     </div>
