@@ -72,20 +72,9 @@ export default function ContactSection() {
         e.preventDefault();
         setLoading(true);
 
-        // 1. WhatsApp Redirect Prep
-        const waMessage = `Hi NanoRays,
-I submitted an enquiry from your website.
-
-Name: ${formData.name}
-Phone: ${formData.phone}
-Service: ${formData.service}`;
-        const encodedMessage = encodeURIComponent(waMessage);
-        const waUrl = `https://wa.me/918921624007?text=${encodedMessage}`;
-        
-        // 2. INSTANT UI Transition
+        // 1. INSTANT UI Transition
         setLoading(false);
         setSubmitted(true);
-        window.open(waUrl, "_blank");
 
         // Cache form data before resetting for the background tasks
         const currentData = { ...formData };
@@ -232,7 +221,7 @@ Service: ${formData.service}`;
                                         <CheckCircle size={40} className="text-neon" />
                                     </motion.div>
                                     <h3 className="text-2xl font-black text-white font-sora">Message Sent!</h3>
-                                    <p className="text-white/60 font-bold max-w-sm">WhatsApp opened with your message. We&apos;ll reply within 1 hour.</p>
+                                    <p className="text-white/60 font-bold max-w-sm">We have received your enquiry. Our team will contact you shortly.</p>
                                     <button
                                         onClick={() => setSubmitted(false)}
                                         className="btn-neon px-8 py-3 text-sm"
