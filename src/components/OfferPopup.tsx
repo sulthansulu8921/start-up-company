@@ -58,8 +58,8 @@ export default function OfferPopup() {
                         setMode(newConfig.showPoster ? "poster" : "form");
                     }
                 }
-            } catch (err) {
-                console.error("🚨 Failed to fetch popup settings:", err);
+            } catch (err: any) {
+                console.warn("⚠️ Failed to fetch popup settings (offline or unconfigured):", err.message || err);
             }
         };
         fetchConfig();

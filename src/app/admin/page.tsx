@@ -242,8 +242,8 @@ export default function AdminPage() {
                     setPricingPlans(data.plans);
                 }
             }
-        } catch (err) {
-            console.error("Failed to fetch settings doc:", err);
+        } catch (err: any) {
+            console.warn("⚠️ Failed to fetch settings doc (offline or unconfigured):", err.message || err);
         }
     };
 
@@ -263,8 +263,8 @@ export default function AdminPage() {
                 } as Lead);
             });
             setLeads(list);
-        } catch (err) {
-            console.error("Failed to fetch leads list:", err);
+        } catch (err: any) {
+            console.warn("⚠️ Failed to fetch leads list (offline or unconfigured):", err.message || err);
         } finally {
             setLeadsLoading(false);
         }

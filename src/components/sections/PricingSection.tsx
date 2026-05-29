@@ -93,8 +93,8 @@ export default function PricingSection() {
                         setDynamicPlans(data.plans);
                     }
                 }
-            } catch (err) {
-                console.error("🚨 Failed to fetch pricing data:", err);
+            } catch (err: any) {
+                console.warn("⚠️ Failed to fetch pricing data (offline or unconfigured):", err.message || err);
             }
         };
         fetchSettings();
