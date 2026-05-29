@@ -67,6 +67,12 @@ export default function Hero() {
                 img.onload = () => {
                     loadedCount++;
                     setImagesLoaded(loadedCount);
+                    
+                    // Render frame 1 immediately when it is loaded to prevent black screen during loading
+                    if (i === 1 && canvasRef.current) {
+                        drawFrame(1);
+                    }
+                    
                     if (loadedCount === FRAME_COUNT && canvasRef.current) {
                         drawFrame(1);
                     }
@@ -165,8 +171,14 @@ export default function Hero() {
                 <div className="relative z-30 max-w-7xl mx-auto px-6 w-full h-full flex flex-col justify-center pt-24 md:pt-32">
                     {features.map((feat, i) => {
                         // Create fading animation based on scroll range
-                        const opacity = useTransform(scrollYProgress, feat.range, [0, 1, 1, 0]);
-                        const y = useTransform(scrollYProgress, feat.range, [50, 0, 0, -50]);
+                        // Phase 1 (i === 0) should be fully visible and centered on load
+                        const opacity = i === 0
+                            ? useTransform(scrollYProgress, [0, 0.2, 0.25], [1, 1, 0])
+                            : useTransform(scrollYProgress, feat.range, [0, 1, 1, 0]);
+                            
+                        const y = i === 0
+                            ? useTransform(scrollYProgress, [0, 0.2, 0.25], [0, 0, -50])
+                            : useTransform(scrollYProgress, feat.range, [50, 0, 0, -50]);
 
                         return (
                             <motion.div
