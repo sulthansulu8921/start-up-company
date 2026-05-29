@@ -1,8 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle2, Zap, ArrowRight, Star, X, Calculator, Mail, Send } from "lucide-react";
+import { db } from "@/lib/firebase";
+import { doc, getDoc } from "firebase/firestore";
 
 const plans = [
     {
@@ -73,11 +75,30 @@ const plans = [
 ];
 
 export default function PricingSection() {
+    const [dynamicPlans, setDynamicPlans] = useState(plans);
     const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
     const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
     const [step, setStep] = useState(1);
     const [isGenerating, setIsGenerating] = useState(false);
     const [quoteFinished, setQuoteFinished] = useState(false);
+
+    useEffect(() => {
+        const fetchSettings = async () => {
+            try {
+                const docRef = doc(db, "settings", "global");
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    if (data.plans && Array.isArray(data.plans) && data.plans.length > 0) {
+                        setDynamicPlans(data.plans);
+                    }
+                }
+            } catch (err) {
+                console.error("🚨 Failed to fetch pricing data:", err);
+            }
+        };
+        fetchSettings();
+    }, []);
 
     const [formData, setFormData] = useState({
         name: "",
@@ -143,7 +164,7 @@ export default function PricingSection() {
 
                 {/* Pricing Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
-                    {plans.map((plan, i) => (
+                    {dynamicPlans.map((plan, i) => (
                         <motion.div
                             key={i}
                             initial={{ opacity: 0, y: 30 }}

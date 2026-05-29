@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, Send, CheckCircle2, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { db } from "@/lib/firebase";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp, doc, getDoc } from "firebase/firestore";
 import { sendInstantNotification } from "@/lib/notifications";
 import { sendLeadEmail } from "@/lib/lead-engine";
 
@@ -26,7 +26,12 @@ const services = [
 
 export default function OfferPopup() {
     const [isOpen, setIsOpen] = useState(false);
-    const [mode, setMode] = useState<"poster" | "form" | "success">(SHOW_POSTER ? "poster" : "form");
+    const [popupConfig, setPopupConfig] = useState({
+        enabled: true,
+        showPoster: false,
+        posterImage: "/images/special-offer.png"
+    });
+    const [mode, setMode] = useState<"poster" | "form" | "success">("form");
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         name: "",
@@ -37,16 +42,40 @@ export default function OfferPopup() {
     });
 
     useEffect(() => {
+        const fetchConfig = async () => {
+            try {
+                const docRef = doc(db, "settings", "global");
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    if (data.popup) {
+                        const newConfig = {
+                            enabled: data.popup.enabled !== undefined ? data.popup.enabled : true,
+                            showPoster: data.popup.showPoster !== undefined ? data.popup.showPoster : false,
+                            posterImage: data.popup.posterImage || "/images/special-offer.png"
+                        };
+                        setPopupConfig(newConfig);
+                        setMode(newConfig.showPoster ? "poster" : "form");
+                    }
+                }
+            } catch (err) {
+                console.error("🚨 Failed to fetch popup settings:", err);
+            }
+        };
+        fetchConfig();
+    }, []);
+
+    useEffect(() => {
         // Wait for preloader to finish (Preloader takes 2.5s, we wait 2.8s)
         const timer = setTimeout(() => {
             const hasSeen = sessionStorage.getItem("offer_popup_seen");
-            if (!hasSeen) {
+            if (!hasSeen && popupConfig.enabled) {
                 setIsOpen(true);
             }
         }, 2800);
 
         return () => clearTimeout(timer);
-    }, []);
+    }, [popupConfig.enabled]);
 
     const closeHandler = () => {
         setIsOpen(false);
@@ -139,7 +168,7 @@ export default function OfferPopup() {
                                 >
                                     <div className="relative w-full bg-black">
                                         <Image
-                                            src={POSTER_IMAGE}
+                                            src={popupConfig.posterImage}
                                             alt="Special Offer"
                                             width={800}
                                             height={800}
