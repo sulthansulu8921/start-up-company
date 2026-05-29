@@ -99,6 +99,17 @@ export default function ContactSection() {
                     createdAt: serverTimestamp()
                 });
 
+                const fullMessage = `Hi NanoRays,
+I submitted an enquiry from your website.
+
+Name: ${currentData.name}
+Phone: ${currentData.phone}
+Email: ${currentData.email}
+Service: ${currentData.service}
+
+Message: 
+${currentData.message || "No additional message provided."}`;
+
                 // Send Email via native direct import (bypassing CDN/window issues)
                 await emailjs.send(
                     "service_lvzyr9e",
@@ -108,7 +119,7 @@ export default function ContactSection() {
                         phone: currentData.phone,
                         email: currentData.email,
                         service: currentData.service,
-                        message: currentData.message,
+                        message: fullMessage,
                     },
                     "glxZW9ru7wOejsxd-z0Oi" // Pass public key as 4th parameter for self-contained robustness
                 );
