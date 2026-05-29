@@ -47,12 +47,12 @@ export const services: Service[] = [
         icon: Target,
         accent: "text-sky-400",
         bg: "rgba(56, 189, 248, 0.05)",
-        fullDesc: "Scale your organic presence with data-driven Technical SEO, Local Search optimization, and advanced speed enhancements designed to win search engine authority.",
+        fullDesc: "Scale your organic presence with cutting-edge AI-era search strategies. We provide data-driven Technical SEO, Generative Engine Optimization (GEO) for AI search recommendations, Answer Engine Optimization (AEO) for voice search, and advanced speed enhancements to win search engine authority.",
         benefits: [
+            "GEO (AI Engine Optimization) Setup",
+            "AEO & Voice Search Optimization",
             "Advanced Technical SEO Audit",
-            "Core Web Vitals Optimization",
-            "Local Search Domination",
-            "In-depth Keyword Research"
+            "Local Search Domination"
         ],
         roadmap: [
             { day: "STEP 01", topic: "Technical Audit", details: "Evaluating current performance and indexing errors." },
