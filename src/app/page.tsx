@@ -9,6 +9,7 @@ import WhyChooseUs from "@/components/sections/WhyChooseUs";
 import ProcessTimeline from "@/components/sections/ProcessTimeline";
 import Testimonials from "@/components/sections/Testimonials";
 import BlogPreview from "@/components/sections/BlogPreview";
+import AIEngineAuditWidget from "@/components/sections/AIEngineAuditWidget";
 import FAQSection from "@/components/sections/FAQSection";
 import ContactSection from "@/components/sections/ContactSection";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
@@ -77,6 +78,7 @@ export default function Home() {
         <ProcessTimeline />
         <Testimonials />
         <BlogPreview />
+        <AIEngineAuditWidget />
         <FAQSection />
         <ContactSection />
       </div>

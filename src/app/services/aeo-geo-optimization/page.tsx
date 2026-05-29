@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { CheckCircle, Bot, Cpu, Key, Database, Sparkles, ArrowRight, Brain, Milestone } from "lucide-react";
 import Link from "next/link";
+import AIEngineAuditWidget from "@/components/sections/AIEngineAuditWidget";
 
 export const metadata: Metadata = {
     title: "AEO & GEO Optimization Services | ChatGPT & Gemini Search SEO | NanoRays",
@@ -95,6 +96,9 @@ export default function AEOGEOMasterPage() {
                             </Link>
                         </div>
                     </div>
+                </div>
+                <div className="mt-12">
+                    <AIEngineAuditWidget />
                 </div>
             </div>
         </main>
