@@ -10,7 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ];
     const servicesList = [
         'website-development', 'digital-marketing', 'graphic-design-posters', 'seo-services',
-        'ecommerce-development', 'google-business-setup', 'website-maintenance'
+        'ecommerce-development', 'google-business-setup', 'website-maintenance', 'aeo-geo-optimization'
     ];
     const blogs = [
         'website-development-kerala', 'local-seo-kerala', 'digital-marketing-india', 'affordable-website-packages'
