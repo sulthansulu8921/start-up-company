@@ -54,7 +54,7 @@ export default function MalappuramPage() {
                         <p className="text-gray-300 mb-8 leading-relaxed">
                             From Tirur to Manjeri, we understand the Malappuram market. Our locally-aware digital strategies ensure your business shows up when nearby customers search for your services in Malayalam and English.
                         </p>
-                        <Link href="/#contact" className="flex items-center justify-center gap-2 w-full bg-purple-400 text-black px-6 py-4 rounded-full font-bold hover:bg-purple-300 transition-all transform hover:scale-105">
+                        <Link href="/contact" className="flex items-center justify-center gap-2 w-full bg-purple-400 text-black px-6 py-4 rounded-full font-bold hover:bg-purple-300 transition-all transform hover:scale-105">
                             Get Malappuram Quote <ArrowRight className="w-5 h-5" />
                         </Link>
                     </div>

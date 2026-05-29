@@ -12,7 +12,7 @@ const navLinks = [
     { name: "Home", href: "/" },
     {
         name: "Services",
-        href: "/#services",
+        href: "/services",
         dropdown: [
             { name: "Web Development", href: "/services/website-development" },
             { name: "Ecommerce Stores", href: "/services/ecommerce-development" },
@@ -24,7 +24,7 @@ const navLinks = [
     },
     { name: "Pricing", href: "/pricing" },
     { name: "Blog", href: "/blog" },
-    { name: "Contact", href: "/#contact" },
+    { name: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
@@ -172,9 +172,8 @@ export default function Navbar() {
 
                 <div className="flex items-center gap-3 md:gap-6">
                     <Link
-                        href="/#contact"
+                        href="/contact"
                         className="hidden md:block"
-                        onClick={(e) => scrollToSection(e, "/#contact")}
                     >
                         <motion.div
                             initial={{ opacity: 0, scale: 0.9 }}
@@ -270,9 +269,9 @@ export default function Navbar() {
                                 </div>
                             ))}
                             <Link
-                                href="/#contact"
+                                href="/contact"
                                 className="w-full"
-                                onClick={(e) => scrollToSection(e, "/#contact")}
+                                onClick={() => setIsMobileMenuOpen(false)}
                             >
                                 <button className="w-full py-4 bg-neon text-black rounded-2xl font-black uppercase tracking-widest flex items-center justify-center gap-2 shadow-lg hover:shadow-neon/30 transition-all font-sora">
                                     Launch Project <Zap size={18} fill="black" />

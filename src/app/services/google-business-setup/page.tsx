@@ -59,7 +59,7 @@ export default function GMBPage() {
                     <div className="bg-gradient-to-br from-orange-400/10 to-transparent border border-orange-400/20 rounded-[32px] p-10 flex flex-col justify-center text-center">
                         <h3 className="text-2xl font-bold text-white mb-4">Claim Your Spot on Google</h3>
                         <p className="text-gray-400 mb-8">Professional setup and optimization starting from just ₹2,500. Get verified and start ranking now.</p>
-                        <Link href="/#contact" className="bg-orange-400 text-black px-10 py-5 rounded-full font-bold hover:bg-orange-300 transition-all transform hover:scale-105 inline-flex items-center justify-center gap-2">
+                        <Link href="/contact" className="bg-orange-400 text-black px-10 py-5 rounded-full font-bold hover:bg-orange-300 transition-all transform hover:scale-105 inline-flex items-center justify-center gap-2">
                             Setup My Profile <ArrowRight className="w-4 h-4" />
                         </Link>
                     </div>

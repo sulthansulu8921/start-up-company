@@ -53,7 +53,7 @@ export default function KochiPage() {
                         <p className="text-gray-300 mb-8 leading-relaxed">
                             From Ernakulam startups to established businesses in Kochi, we understand the local market. Our websites are built to rank on Google for Kerala-specific searches and convert local visitors into paying clients.
                         </p>
-                        <Link href="/#contact" className="flex items-center justify-center gap-2 w-full bg-neon text-black px-6 py-4 rounded-full font-bold hover:bg-[#b3ff00] transition-all transform hover:scale-105">
+                        <Link href="/contact" className="flex items-center justify-center gap-2 w-full bg-neon text-black px-6 py-4 rounded-full font-bold hover:bg-[#b3ff00] transition-all transform hover:scale-105">
                             Get Free Kochi Consultation <ArrowRight className="w-5 h-5" />
                         </Link>
                     </div>

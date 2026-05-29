@@ -28,7 +28,7 @@ export default function KasaragodPage() {
                     <p className="max-w-2xl text-white/60 text-lg md:text-xl font-bold leading-relaxed mb-10">
                         Specialized digital solutions for Kasaragod&apos;s cross-border trade, agriculture, and heritage tourism.
                     </p>
-                    <Link href="/#contact">
+                    <Link href="/contact">
                         <button className="px-10 py-5 bg-neon text-black rounded-2xl font-black uppercase tracking-widest text-sm hover:scale-105 active:scale-95 transition-all shadow-xl shadow-neon/20">
                             Start Your Project
                         </button>

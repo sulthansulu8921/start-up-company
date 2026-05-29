@@ -7,6 +7,7 @@ import { db } from "@/lib/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { sendInstantNotification } from "@/lib/notifications";
 import { sendLeadEmail } from "@/lib/lead-engine";
+import emailjs from "@emailjs/browser";
 
 const services = [
     "Website Design & Development",
@@ -109,22 +110,19 @@ Service: ${formData.service}`;
                     createdAt: serverTimestamp()
                 });
 
-                // Send Email via EmailJS CDN
-                if (typeof window !== "undefined" && (window as any).emailjs) {
-                    await (window as any).emailjs.send(
-                        "service_lvzyr9e",
-                        "template_tf3oc6h",
-                        {
-                            name: currentData.name,
-                            phone: currentData.phone,
-                            email: currentData.email,
-                            service: currentData.service,
-                            message: currentData.message,
-                        }
-                    );
-                } else {
-                    console.warn("EmailJS is not loaded!");
-                }
+                // Send Email via native direct import (bypassing CDN/window issues)
+                await emailjs.send(
+                    "service_lvzyr9e",
+                    "template_tf3oc6h",
+                    {
+                        name: currentData.name,
+                        phone: currentData.phone,
+                        email: currentData.email,
+                        service: currentData.service,
+                        message: currentData.message,
+                    },
+                    "glxZW9ru7wOejsxd-z0Oi" // Pass public key as 4th parameter for self-contained robustness
+                );
                 
                 sendInstantNotification(`Contact Form Lead: ${currentData.name} (${currentData.phone}) interested in ${currentData.service}`);
             } catch (err) {

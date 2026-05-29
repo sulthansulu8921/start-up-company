@@ -134,7 +134,7 @@ export default function FAQSection() {
                     className="text-center mt-12"
                 >
                     <p className="text-white/60 text-xs font-black uppercase tracking-[0.2em]">
-                        Still have inquiries? <a href="#contact" className="text-neon hover:underline decoration-neon/40 underline-offset-4">Talk to an Architect →</a>
+                        Still have inquiries? <a href="/contact" className="text-neon hover:underline decoration-neon/40 underline-offset-4">Talk to an Architect →</a>
                     </p>
                 </motion.div>
             </div>

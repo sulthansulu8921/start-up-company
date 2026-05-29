@@ -66,7 +66,7 @@ export default function GraphicDesign() {
                 </div>
 
                 <div className="text-center">
-                    <Link href="#contact" className="inline-flex items-center gap-3 bg-white text-black px-8 py-4 rounded-full text-lg font-bold hover:bg-gray-200 transition-all transform hover:scale-105 shadow-lg shadow-white/20">
+                    <Link href="/contact" className="inline-flex items-center gap-3 bg-white text-black px-8 py-4 rounded-full text-lg font-bold hover:bg-gray-200 transition-all transform hover:scale-105 shadow-lg shadow-white/20">
                         Request a Design Quote <Palette className="w-6 h-6" />
                     </Link>
                 </div>

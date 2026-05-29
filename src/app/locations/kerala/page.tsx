@@ -21,13 +21,13 @@ const districts = [
     { name: "Thiruvananthapuram", href: "/locations/thiruvananthapuram" },
     { name: "Thrissur", href: "/locations/thrissur" },
     { name: "Kannur", href: "/locations/kannur" },
-    { name: "Kottayam", href: "/#contact" },
-    { name: "Kollam", href: "/#contact" },
-    { name: "Alappuzha", href: "/#contact" },
-    { name: "Idukki", href: "/#contact" },
-    { name: "Pathanamthitta", href: "/#contact" },
-    { name: "Wayanad", href: "/#contact" },
-    { name: "Kasaragod", href: "/#contact" },
+    { name: "Kottayam", href: "/contact" },
+    { name: "Kollam", href: "/contact" },
+    { name: "Alappuzha", href: "/contact" },
+    { name: "Idukki", href: "/contact" },
+    { name: "Pathanamthitta", href: "/contact" },
+    { name: "Wayanad", href: "/contact" },
+    { name: "Kasaragod", href: "/contact" },
 ];
 
 export default function KeralaPage() {
@@ -89,7 +89,7 @@ export default function KeralaPage() {
                             <p className="text-gray-400 mb-8 leading-relaxed">
                                 Whether you are in Trivandrum or Kasaragod, we provide personalized digital strategies for your business.
                             </p>
-                            <Link href="/#contact" className="flex items-center justify-center gap-2 w-full bg-white text-black px-6 py-4 rounded-full font-bold hover:bg-gray-200 transition-all">
+                            <Link href="/contact" className="flex items-center justify-center gap-2 w-full bg-white text-black px-6 py-4 rounded-full font-bold hover:bg-gray-200 transition-all">
                                 Book a Kerala Expert <ArrowRight className="w-5 h-5" />
                             </Link>
                         </div>

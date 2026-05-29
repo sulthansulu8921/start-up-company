@@ -66,7 +66,7 @@ export default function DigitalMarketing() {
                 </div>
 
                 <div className="text-center">
-                    <Link href="#contact" className="inline-flex items-center gap-3 bg-rose-400 text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-rose-500 transition-all transform hover:scale-105 shadow-lg shadow-rose-400/20">
+                    <Link href="/contact" className="inline-flex items-center gap-3 bg-rose-400 text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-rose-500 transition-all transform hover:scale-105 shadow-lg shadow-rose-400/20">
                         Start Growing Today <TrendingUp className="w-6 h-6" />
                     </Link>
                 </div>

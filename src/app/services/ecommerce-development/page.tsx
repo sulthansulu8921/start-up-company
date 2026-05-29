@@ -63,7 +63,7 @@ export default function EcommercePage() {
                         Our ecommerce packages include free domain, hosting, and professional training on how to manage your store.
                     </p>
                     <div className="flex flex-col md:flex-row items-center justify-center gap-4">
-                        <Link href="/#contact" className="bg-sky-400 text-black px-8 py-4 rounded-full font-bold hover:bg-sky-300 transition-all w-full md:w-auto">
+                        <Link href="/contact" className="bg-sky-400 text-black px-8 py-4 rounded-full font-bold hover:bg-sky-300 transition-all w-full md:w-auto">
                             Start Your Online Store
                         </Link>
                         <Link href="https://wa.me/918921624007" className="bg-white/5 border border-white/20 text-white px-8 py-4 rounded-full font-bold hover:bg-white/10 transition-all w-full md:w-auto">

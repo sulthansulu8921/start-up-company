@@ -105,7 +105,7 @@ export default async function BlogPostPage({ params }: Props) {
                 <div className="mt-16 bg-gradient-to-br from-neon/10 to-transparent border border-neon/20 rounded-2xl p-8 text-center">
                     <h3 className="text-2xl font-sora font-bold text-white mb-3">Ready to grow your business?</h3>
                     <p className="text-gray-400 mb-6">Talk to NanoRays Solution for a free consultation. Call: +91 89216 24007</p>
-                    <Link href="/#contact" className="inline-flex items-center gap-2 bg-neon text-black px-8 py-3 rounded-full font-bold hover:bg-[#b3ff00] transition-all">
+                    <Link href="/contact" className="inline-flex items-center gap-2 bg-neon text-black px-8 py-3 rounded-full font-bold hover:bg-[#b3ff00] transition-all">
                         Get Free Consultation
                     </Link>
                 </div>

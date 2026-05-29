@@ -53,7 +53,7 @@ export default function TrivandrumPage() {
                         <p className="text-gray-300 mb-8 leading-relaxed">
                             With Technopark as its heart, Thiruvananthapuram is a technology leader. We provide the web infrastructure that helps local tech firms and retail businesses stand out on the global stage.
                         </p>
-                        <Link href="/#contact" className="flex items-center justify-center gap-2 w-full bg-rose-400 text-black px-6 py-4 rounded-full font-bold hover:bg-rose-300 transition-all transform hover:scale-105">
+                        <Link href="/contact" className="flex items-center justify-center gap-2 w-full bg-rose-400 text-black px-6 py-4 rounded-full font-bold hover:bg-rose-300 transition-all transform hover:scale-105">
                             Get Trivandrum Quote <ArrowRight className="w-5 h-5" />
                         </Link>
                     </div>

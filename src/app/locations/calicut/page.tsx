@@ -53,7 +53,7 @@ export default function CalicutPage() {
                         <p className="text-gray-300 mb-8 leading-relaxed">
                             We understand the Calicut (Kozhikode) market deeply — from textiles to restaurants, we have helped local businesses appear at the top of Google Maps and search results for their exact service area.
                         </p>
-                        <Link href="/#contact" className="flex items-center justify-center gap-2 w-full bg-sky-400 text-black px-6 py-4 rounded-full font-bold hover:bg-sky-300 transition-all transform hover:scale-105">
+                        <Link href="/contact" className="flex items-center justify-center gap-2 w-full bg-sky-400 text-black px-6 py-4 rounded-full font-bold hover:bg-sky-300 transition-all transform hover:scale-105">
                             Contact Us in Calicut <ArrowRight className="w-5 h-5" />
                         </Link>
                     </div>

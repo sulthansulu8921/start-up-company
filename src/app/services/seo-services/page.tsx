@@ -60,7 +60,7 @@ export default function SEOServicesPage() {
                         <div className="bg-neon/10 border border-neon/20 rounded-3xl p-8 flex flex-col justify-center">
                             <h3 className="text-2xl font-bold text-white mb-4">Rank Higher Today</h3>
                             <p className="text-gray-400 mb-6 text-sm">Don't let your competitors take your customers. Start your SEO journey with NanoRays Solution.</p>
-                            <Link href="/#contact" className="inline-flex items-center justify-center gap-2 bg-neon text-black px-6 py-3 rounded-full font-bold hover:bg-[#b3ff00] transition-all">
+                            <Link href="/contact" className="inline-flex items-center justify-center gap-2 bg-neon text-black px-6 py-3 rounded-full font-bold hover:bg-[#b3ff00] transition-all">
                                 Get Free SEO Audit <ArrowRight className="w-4 h-4" />
                             </Link>
                         </div>

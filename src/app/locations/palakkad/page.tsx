@@ -54,7 +54,7 @@ export default function PalakkadPage() {
                         <p className="text-gray-300 mb-8 leading-relaxed">
                             Palakkad is a hub of growing industries and retail. We build websites that don't just look good but are technically optimized to appear at the top when people search for your services in the Palakkad district.
                         </p>
-                        <Link href="/#contact" className="flex items-center justify-center gap-2 w-full bg-emerald-400 text-black px-6 py-4 rounded-full font-bold hover:bg-emerald-300 transition-all transform hover:scale-105">
+                        <Link href="/contact" className="flex items-center justify-center gap-2 w-full bg-emerald-400 text-black px-6 py-4 rounded-full font-bold hover:bg-emerald-300 transition-all transform hover:scale-105">
                             Get Free Palakkad Consultation <ArrowRight className="w-5 h-5" />
                         </Link>
                     </div>

@@ -38,7 +38,7 @@ export default function WebsiteMaintenancePage() {
                     </p>
 
                     <div className="flex justify-center gap-4 mb-32">
-                        <Link href="/#contact">
+                        <Link href="/contact">
                             <button className="px-10 py-5 bg-neon text-black rounded-2xl font-black uppercase tracking-widest text-sm hover:scale-105 active:scale-95 transition-all shadow-xl shadow-neon/20 border border-neon">
                                 Secure Your Site <Zap size={18} fill="black" className="inline ml-1" />
                             </button>
@@ -76,7 +76,7 @@ export default function WebsiteMaintenancePage() {
                         <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-5 transition-opacity" />
                         <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter mb-6">Ready for Absolute Uptime?</h2>
                         <p className="text-black/80 text-lg font-black max-w-xl mx-auto mb-10">We handle the technical complexity so you can focus on building your business. No downtime. No stress.</p>
-                        <Link href="/#contact">
+                        <Link href="/contact">
                             <button className="px-12 py-5 bg-black text-neon rounded-2xl font-black uppercase tracking-widest text-sm hover:scale-105 transition-all shadow-2xl">
                                 Start Maintenance Now
                             </button>

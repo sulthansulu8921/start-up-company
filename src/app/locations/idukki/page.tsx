@@ -17,7 +17,7 @@ export default function IdukkiPage() {
                     </motion.div>
                     <h1 className="text-6xl md:text-8xl font-black tracking-tighter mb-8 leading-[0.9]">Idukki <br /><span className="text-neon">Global Reach</span></h1>
                     <p className="max-w-2xl text-white/60 text-lg md:text-xl font-bold leading-relaxed mb-10 mx-auto">Scaling Idukki&apos;s world-class tourism, plantation, and energy sectors through strategic digital engineering.</p>
-                    <Link href="/#contact"><button className="px-10 py-5 bg-neon text-black rounded-2xl font-black uppercase tracking-widest text-sm hover:scale-105 active:scale-95 transition-all shadow-xl shadow-neon/20">Start Your Project</button></Link>
+                    <Link href="/contact"><button className="px-10 py-5 bg-neon text-black rounded-2xl font-black uppercase tracking-widest text-sm hover:scale-105 active:scale-95 transition-all shadow-xl shadow-neon/20">Start Your Project</button></Link>
                 </div>
             </section>
             

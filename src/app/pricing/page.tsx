@@ -37,7 +37,7 @@ export default function PricingPage() {
                             <li className="flex items-start gap-4"><Check className="w-5 h-5 text-neon shrink-0 mt-0.5" /> WhatsApp Integration</li>
                             <li className="flex items-start gap-4"><Check className="w-5 h-5 text-neon shrink-0 mt-0.5" /> 1 Month Free Support</li>
                         </ul>
-                        <Link href="/#contact" className="block w-full text-center bg-white/10 text-white font-bold px-6 py-4 rounded-full hover:bg-white/20 transition-all">Select Basic</Link>
+                        <Link href="/contact" className="block w-full text-center bg-white/10 text-white font-bold px-6 py-4 rounded-full hover:bg-white/20 transition-all">Select Basic</Link>
                     </div>
 
                     {/* Pro */}
@@ -54,7 +54,7 @@ export default function PricingPage() {
                             <li className="flex items-start gap-4"><Check className="w-5 h-5 text-neon shrink-0 mt-0.5" /> High-speed Premium Hosting</li>
                             <li className="flex items-start gap-4"><Check className="w-5 h-5 text-neon shrink-0 mt-0.5" /> Google My Business Setup</li>
                         </ul>
-                        <Link href="/#contact" className="block w-full text-center bg-neon text-black font-bold px-6 py-4 rounded-full hover:bg-[#b3ff00] transition-all transform hover:scale-105">Get Custom Quote</Link>
+                        <Link href="/contact" className="block w-full text-center bg-neon text-black font-bold px-6 py-4 rounded-full hover:bg-[#b3ff00] transition-all transform hover:scale-105">Get Custom Quote</Link>
                     </div>
 
                     {/* Maintenance */}
@@ -70,7 +70,7 @@ export default function PricingPage() {
                             <li className="flex items-start gap-4"><Check className="w-5 h-5 text-sky-400 shrink-0 mt-0.5" /> Site Speed Optimization</li>
                             <li className="flex items-start gap-4"><Check className="w-5 h-5 text-sky-400 shrink-0 mt-0.5" /> priority Technical Support</li>
                         </ul>
-                        <Link href="/#contact" className="block w-full text-center bg-white/10 text-white font-bold px-6 py-4 rounded-full hover:bg-white/20 transition-all">Start Maintenance</Link>
+                        <Link href="/contact" className="block w-full text-center bg-white/10 text-white font-bold px-6 py-4 rounded-full hover:bg-white/20 transition-all">Start Maintenance</Link>
 
                     </div>
                 </div>

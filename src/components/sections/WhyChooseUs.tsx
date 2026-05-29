@@ -91,7 +91,7 @@ export default function WhyChooseUs() {
                         </ul>
 
                         <Link
-                            href="/#contact"
+                            href="/contact"
                             className="btn-neon px-10 py-5"
                         >
                             Start Your Project <ArrowRight size={18} className="ml-2" />
