@@ -247,7 +247,7 @@
 /* ── Premium Light Mode Custom Overrides ──────────────────────── */
 .light {
   /* Premium Slate palette with soft gradients */
-  --background: #FFFFFF; 
+  --background: #FFFFFF;
   --foreground: #0F172A;
   --neon: #CCFF00;
   --neon-dim: rgba(204, 255, 0, 0.35);
@@ -257,7 +257,7 @@
   --neon-glow: 0 0 25px rgba(204, 255, 0, 0.2);
   --royal: #2563EB;
   --navy: #F1F5F9;
-  
+
   color-scheme: light;
 }
 
@@ -311,8 +311,8 @@
 .light .glass-dark {
   background: rgba(255, 255, 255, 0.75) !important;
   border-color: rgba(15, 23, 42, 0.07) !important;
-  box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.05), 
-              0 1px 3px rgba(15, 23, 42, 0.02) !important;
+  box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.05),
+    0 1px 3px rgba(15, 23, 42, 0.02) !important;
   backdrop-filter: blur(20px) !important;
 }
 
@@ -569,7 +569,8 @@
   background: linear-gradient(135deg, #059669 0%, #16a34a 100%) !important;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
-  color: #059669 !important; /* Fallback */
+  color: #059669 !important;
+  /* Fallback */
   background-clip: text !important;
   display: inline-block !important;
   padding: 0 !important;
@@ -580,5 +581,5 @@
 
 /* General neon text elements (like icons, ratings, or initials) in light mode should receive a crisp high-contrast green without overriding background/layout rules */
 .light :not(.dark) .text-neon:not(span):not(strong):not(a):not(b):not(h1):not(h2):not(h3):not(h4) {
-  color: #16a34a !important;
+  color: #7cd319 !important;
 }

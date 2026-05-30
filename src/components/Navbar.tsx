@@ -7,7 +7,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowRight, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Logo from "./Logo";
-import ThemeToggle from "./ThemeToggle";
 
 const navLinks = [
     { name: "Home", href: "/" },
@@ -172,7 +171,6 @@ export default function Navbar() {
                 </div>
 
                 <div className="flex items-center gap-3 md:gap-6">
-                    <ThemeToggle />
 
                     <Link
                         href="/contact"
