@@ -66,7 +66,7 @@ export default function EcommercePage() {
                         <Link href="/contact" className="bg-sky-400 text-black px-8 py-4 rounded-full font-bold hover:bg-sky-300 transition-all w-full md:w-auto">
                             Start Your Online Store
                         </Link>
-                        <Link href="https://wa.me/918921624007" className="bg-white/5 border border-white/20 text-white px-8 py-4 rounded-full font-bold hover:bg-white/10 transition-all w-full md:w-auto">
+                        <Link href="https://wa.me/919497669317" className="bg-white/5 border border-white/20 text-white px-8 py-4 rounded-full font-bold hover:bg-white/10 transition-all w-full md:w-auto">
                             WhatsApp for Demo
                         </Link>
                     </div>

@@ -109,7 +109,7 @@ export default function RootLayout({
         "logo": "https://nanorayssolution.com/logo-main.jpg",
         "contactPoint": {
           "@type": "ContactPoint",
-          "telephone": "+91-89216-24007",
+          "telephone": "+91-94976-69317", "contactPoint": { "@type": "ContactPoint", "telephone": "+91-89216-24007", "contactType": "customer service" },
           "contactType": "customer service",
           "areaServed": ["IN", "AE"],
           "availableLanguage": ["en", "ml"]

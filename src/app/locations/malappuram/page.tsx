@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
     title: "Website Development Company in Malappuram | NanoRays Solution",
-    description: "Best website development, digital marketing, and SEO services in Malappuram, Kerala. NanoRays Solution helps Malappuram businesses rank #1 on Google. Call: +91 89216 24007.",
+    description: "Best website development, digital marketing, and SEO services in Malappuram, Kerala. NanoRays Solution helps Malappuram businesses rank #1 on Google. Call: +91 94976 69317.",
     keywords: [
         "Website Development Malappuram", "Web Design Agency Malappuram", "Digital Marketing Malappuram",
         "SEO Services Malappuram", "Web Designer Malappuram", "Business Website Malappuram",

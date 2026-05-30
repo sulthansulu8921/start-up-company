@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
     title: "Website Development Company in Kannur | NanoRays Solution",
-    description: "Best web design and digital marketing services in Kannur, Kerala. NanoRays Solution helps Kannur businesses grow with affordable websites and local SEO. Call: +91 89216 24007.",
+    description: "Best web design and digital marketing services in Kannur, Kerala. NanoRays Solution helps Kannur businesses grow with affordable websites and local SEO. Call: +91 94976 69317.",
     keywords: [
         "Website Development Kannur", "Web Design Agency Kannur", "Digital Marketing Kannur",
         "SEO Services Kannur", "Best Web Developer Kannur", "Business Website Kannur",

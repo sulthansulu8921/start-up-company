@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
     title: "Website Development Company in Kochi | NanoRays Solution",
-    description: "Looking for a top website development company in Kochi? NanoRays Solution builds affordable, mobile-responsive websites and SEO services for Kochi businesses. Call: +91 89216 24007.",
+    description: "Looking for a top website development company in Kochi? NanoRays Solution builds affordable, mobile-responsive websites and SEO services for Kochi businesses. Call: +91 94976 69317.",
     keywords: [
         "Website Development Company Kochi", "Web Design Agency Kochi", "Affordable Website Design Kochi",
         "Digital Marketing Kochi", "SEO Services Kochi", "Best Web Developer Kochi", "Website Company Kochi",

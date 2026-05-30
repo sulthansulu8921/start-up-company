@@ -73,7 +73,7 @@ export default function DubaiPage() {
                         <p className="text-gray-300 mb-8 leading-relaxed">
                             Contact us via WhatsApp for instant communication. We work across UAE time zones and provide projects with fast turnaround — typically 7-14 business days from design to launch.
                         </p>
-                        <Link href="https://wa.me/918921624007?text=Hello%20NanoRays!%20I%20need%20a%20website%20for%20my%20Dubai%20business." target="_blank" className="flex items-center justify-center gap-2 w-full bg-amber-400 text-black px-6 py-4 rounded-full font-bold hover:bg-amber-300 transition-all transform hover:scale-105">
+                        <Link href="https://wa.me/919497669317?text=Hello%20NanoRays!%20I%20need%20a%20website%20for%20my%20Dubai%20business." target="_blank" className="flex items-center justify-center gap-2 w-full bg-amber-400 text-black px-6 py-4 rounded-full font-bold hover:bg-amber-300 transition-all transform hover:scale-105">
                             WhatsApp for Dubai Quote <ArrowRight className="w-5 h-5" />
                         </Link>
                     </div>

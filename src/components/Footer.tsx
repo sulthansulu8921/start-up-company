@@ -56,7 +56,7 @@ const LinkedinIcon = () => (
 );
 
 const socials = [
-    { icon: MessageCircle, href: "https://wa.me/918921624007", label: "WhatsApp", custom: false },
+    { icon: MessageCircle, href: "https://wa.me/919497669317", label: "WhatsApp", custom: false },
     { icon: null, href: "https://www.instagram.com/nanorays_/", label: "Instagram", custom: true, CustomIcon: InstagramIcon },
     { icon: null, href: "https://www.linkedin.com/company/nanorayssolution", label: "LinkedIn", custom: true, CustomIcon: LinkedinIcon },
     { icon: Mail, href: "mailto:nanorayssolution@gmail.com", label: "Email", custom: false },
@@ -116,7 +116,7 @@ export default function Footer() {
                         <div className="space-y-3 mb-8">
                             {[
                                 { icon: Mail, text: "nanorayssolution@gmail.com" },
-                                { icon: Phone, text: "+91 89216 24007" },
+                                { icon: Phone, text: "+91 94976 69317 / +91 89216 24007" },
                                 { icon: MapPin, text: "India" },
                             ].map((item, i) => (
                                 <div key={i} className="flex items-center gap-3 text-white/50 text-sm font-bold">

@@ -18,7 +18,7 @@ const posts: Record<string, {
             { heading: "The Reality of Business in Kerala Today", body: "Over 85% of Kerala's consumers now search online before making a purchase decision — whether they are looking for a restaurant in Kochi, a carpenter in Calicut, or a startup service provider in Malappuram. If your business does not have a website, you are effectively invisible to all of these potential clients." },
             { heading: "Why a Social Media Page Is Not Enough", body: "Many Mallu business owners think a Facebook page or an Instagram profile is enough. It is not. Social media pages are rented land — the platform can change its algorithm or ban your account any day. Your own website is a permanent, 24/7 sales representative that you own entirely. Google also cannot rank your Instagram posts in its search results, but it can rank your website's pages." },
             { heading: "What a Professional Business Website Does For You", body: "A proper website builds instant trust, captures client enquiries at 3 AM while you sleep, and ranks on Google for searches like \"Best electrician in Thrissur\" or \"Cheap tiffin service Kozhikode.\" This is 24/7 automated lead generation." },
-            { heading: "Affordable Website Packages for Kerala Businesses", body: "NanoRays Solution builds professional, mobile-responsive business websites starting from just ₹5,000 — including your domain, hosting, WhatsApp integration, and Google-ready SEO setup. Ready to get started? Call us at +91 89216 24007." },
+            { heading: "Affordable Website Packages for Kerala Businesses", body: "NanoRays Solution builds professional, mobile-responsive business websites starting from just ₹5,000 — including your domain, hosting, WhatsApp integration, and Google-ready SEO setup. Ready to get started? Call us at +91 94976 69317." },
         ],
     },
     "local-seo-kerala": {
@@ -27,7 +27,7 @@ const posts: Record<string, {
         content: [
             { heading: "What Is Local SEO and Why It Matters for Kerala", body: "Local SEO is the process of optimizing your online presence so your business appears when someone nearby searches for your service. When someone in Ernakulam types \"restaurants near me\" or \"web designer Kochi,\" Google uses its local ranking signals to show the most relevant, nearby businesses. Without local SEO, you will never appear in these searches." },
             { heading: "Step 1: Claim Your Google Business Profile", body: "This is the single most impactful thing you can do. Go to business.google.com, claim your listing, fill every section completely, add your exact NAP (Name, Address, Phone), upload at least 10 photos, and link it directly to your website. This costs nothing and directly impacts your placement on Google Maps." },
-            { heading: "Step 2: NAP Consistency", body: "Your business Name, Address, and Phone number must be 100% identical across your website footer, your Google Business Profile, and every other directory listing. Even small differences like '89216 24007' vs '+91 89216 24007' confuse Google's algorithm and hurt your local ranking." },
+            { heading: "Step 2: NAP Consistency", body: "Your business Name, Address, and Phone number must be 100% identical across your website footer, your Google Business Profile, and every other directory listing. Even small differences like '94976 69317' vs '+91 94976 69317' confuse Google's algorithm and hurt your local ranking." },
             { heading: "Step 3: Collect 5-Star Reviews with Keywords", body: "Google ranks local businesses heavily based on reviews. Ask every satisfied client to leave a Google review that naturally mentions your service and location. For example: \"NanoRays Solution made an amazing website for my startup in Kochi. Highly recommended digital agency in Kerala!\" Each keyword-rich review is powerful free SEO." },
         ],
     },
@@ -104,7 +104,7 @@ export default async function BlogPostPage({ params }: Props) {
 
                 <div className="mt-16 bg-gradient-to-br from-neon/10 to-transparent border border-neon/20 rounded-2xl p-8 text-center">
                     <h3 className="text-2xl font-sora font-bold text-white mb-3">Ready to grow your business?</h3>
-                    <p className="text-gray-400 mb-6">Talk to NanoRays Solution for a free consultation. Call: +91 89216 24007</p>
+                    <p className="text-gray-400 mb-6">Talk to NanoRays Solution for a free consultation. Call: +91 94976 69317</p>
                     <Link href="/contact" className="inline-flex items-center gap-2 bg-neon text-black px-8 py-3 rounded-full font-bold hover:bg-[#b3ff00] transition-all">
                         Get Free Consultation
                     </Link>

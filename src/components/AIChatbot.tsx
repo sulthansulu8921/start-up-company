@@ -81,16 +81,16 @@ export default function AIChatbot() {
         } else if (option.includes("Contact Details")) {
             saveLead("Bot Option: Contact Details");
             addAIMessage(
-                "Here are our official contact channels:\n\n📞 Phone/Call: +91 89216 24007\n💬 WhatsApp: +91 89216 24007\n📧 Email: nanorayssolution@gmail.com\n📍 Office: Kochi, Kerala, India\n\nHow would you like to connect with us?",
+                "Here are our official contact channels:\n\n📞 Phone/Call: +91 94976 69317 (Primary)\n📞 Sec. Phone: +91 89216 24007\n💬 WhatsApp: +91 94976 69317\n📧 Email: nanorayssolution@gmail.com\n📍 Office: Kochi, Kerala, India\n\nHow would you like to connect with us?",
                 ["Open WhatsApp Chat", "Call Us Directly", "Send Email", "Back to Menu"]
             );
         } else if (option.includes("Open WhatsApp Chat")) {
             addAIMessage("Opening WhatsApp chat... 💬");
             setTimeout(() => {
-                window.open("https://wa.me/918921624007", "_blank");
+                window.open("https://wa.me/919497669317", "_blank");
             }, 1000);
         } else if (option.includes("Call Us Directly")) {
-            window.open("tel:+918921624007", "_self");
+            window.open("tel:+919497669317", "_self");
         } else if (option.includes("Send Email")) {
             window.open("mailto:nanorayssolution@gmail.com", "_self");
         } else if (option.includes("Share Website")) {
@@ -116,7 +116,7 @@ export default function AIChatbot() {
         } else if (option.includes("Team") || option.includes("Talk") || option.includes("Human")) {
             addAIMessage("Connecting you to our team on WhatsApp right now! 🚀");
             setTimeout(() => {
-                window.open("https://wa.me/918921624007?text=Hi+NanoRays!+I+need+more+information.", "_blank");
+                window.open("https://wa.me/919497669317?text=Hi+NanoRays!+I+need+more+information.", "_blank");
             }, 1500);
         } else if (option.includes("Website")) {
             addAIMessage(
@@ -142,7 +142,7 @@ export default function AIChatbot() {
         } else if (option.includes("Start Paid Ads Campaign")) {
             addAIMessage("Opening WhatsApp to set up your ad campaign budget... 🚀");
             setTimeout(() => {
-                window.open("https://wa.me/918921624007?text=Hi+NanoRays!+I+want+to+start+a+Google/Meta+Paid+Ads+campaign.", "_blank");
+                window.open("https://wa.me/919497669317?text=Hi+NanoRays!+I+want+to+start+a+Google/Meta+Paid+Ads+campaign.", "_blank");
             }, 1000);
         } else if (option.includes("Lead Generation Funnels")) {
             addAIMessage(
@@ -152,7 +152,7 @@ export default function AIChatbot() {
         } else if (option.includes("Start Lead Funnel")) {
             addAIMessage("Opening WhatsApp to configure your new lead capture funnel... 🎯");
             setTimeout(() => {
-                window.open("https://wa.me/918921624007?text=Hi+NanoRays!+I+want+to+setup+a+Lead+Generation+Funnel.", "_blank");
+                window.open("https://wa.me/919497669317?text=Hi+NanoRays!+I+want+to+setup+a+Lead+Generation+Funnel.", "_blank");
             }, 1000);
         } else if (option.includes("Social Media Care")) {
             addAIMessage(
@@ -162,7 +162,7 @@ export default function AIChatbot() {
         } else if (option.includes("Start Social Media Care")) {
             addAIMessage("Opening WhatsApp to start your Social Media Care plan... 📱");
             setTimeout(() => {
-                window.open("https://wa.me/918921624007?text=Hi+NanoRays!+I+want+to+start+Social+Media+Care.", "_blank");
+                window.open("https://wa.me/919497669317?text=Hi+NanoRays!+I+want+to+start+Social+Media+Care.", "_blank");
             }, 1000);
         } else if (option.includes("Branding") || option.includes("Logo")) {
             addAIMessage(
@@ -182,7 +182,7 @@ export default function AIChatbot() {
         } else if (option.includes("Contact Team") || option.includes("Yes,")) {
             addAIMessage("Perfect! Opening WhatsApp to connect you with our team. We'll respond within 1 hour! 🎉");
             setTimeout(() => {
-                window.open("https://wa.me/918921624007?text=Hi+NanoRays!+I+am+interested+in+your+services.", "_blank");
+                window.open("https://wa.me/919497669317?text=Hi+NanoRays!+I+am+interested+in+your+services.", "_blank");
             }, 1500);
         } else if (option.includes("Back") || option.includes("Menu")) {
             addAIMessage(

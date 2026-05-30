@@ -120,7 +120,7 @@ export default function Services() {
                                 Talk to our team directly. We will help you choose the right service for your business — for free!
                             </p>
                             <a
-                                href="https://wa.me/918921624007?text=Hi+NanoRays!+I+need+help+choosing+a+service."
+                                href="https://wa.me/919497669317?text=Hi+NanoRays!+I+need+help+choosing+a+service."
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="w-full py-4 bg-black text-white rounded-xl font-black text-xs uppercase tracking-widest hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2"

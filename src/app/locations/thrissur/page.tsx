@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
     title: "Website Development Company in Thrissur | NanoRays Solution",
-    description: "Best web design and digital marketing agency in Thrissur, Kerala. NanoRays Solution helps Thrissur businesses and retailers grow with affordable websites. Call: +91 89216 24007.",
+    description: "Best web design and digital marketing agency in Thrissur, Kerala. NanoRays Solution helps Thrissur businesses and retailers grow with affordable websites. Call: +91 94976 69317.",
     keywords: [
         "Website Development Thrissur", "Web Design Agency Thrissur", "Digital Marketing Thrissur",
         "SEO Services Thrissur", "Best Web Developer Thrissur", "Business Website Thrissur",

@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
     title: "Website Development Company in Thiruvananthapuram | NanoRays",
-    description: "Best web development and digital marketing services in Thiruvananthapuram (Trivandrum), Kerala. NanoRays Solution builds premium, affordable websites. Call: +91 89216 24007.",
+    description: "Best web development and digital marketing services in Thiruvananthapuram (Trivandrum), Kerala. NanoRays Solution builds premium, affordable websites. Call: +91 94976 69317.",
     keywords: [
         "Website Development Thiruvananthapuram", "Web Design Agency Trivandrum", "Digital Marketing Trivandrum",
         "SEO Services Thiruvananthapuram", "Best Web Developer Trivandrum", "Business Website Trivandrum",

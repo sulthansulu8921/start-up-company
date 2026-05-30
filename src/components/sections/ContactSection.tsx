@@ -24,8 +24,8 @@ const quickContacts = [
     {
         icon: MessageCircle,
         label: "WhatsApp",
-        sublabel: "Chat with us instantly",
-        href: "https://wa.me/918921624007",
+        sublabel: "+91 94976 69317 / +91 89216 24007",
+        href: "https://wa.me/919497669317",
         color: "text-green-400",
         bg: "bg-green-400/10",
         border: "border-green-400/30",
@@ -34,8 +34,8 @@ const quickContacts = [
     {
         icon: Phone,
         label: "Call Us",
-        sublabel: "+91 89216 24007",
-        href: "tel:+918921624007",
+        sublabel: "+91 94976 69317 / +91 89216 24007",
+        href: "tel:+919497669317",
         color: "text-sky-400",
         bg: "bg-sky-400/10",
         border: "border-sky-400/30",
@@ -274,7 +274,7 @@ ${currentData.message || "No additional message provided."}`;
                                                 type="tel"
                                                 name="phone"
                                                 required
-                                                placeholder="Ex: +91 8921624007"
+                                                placeholder="Ex: +91 9497669317"
                                                 value={formData.phone}
                                                 onChange={handleChange}
                                                 className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder:text-white/20 font-bold text-sm focus:outline-none focus:border-neon/50 transition-all"

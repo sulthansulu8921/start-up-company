@@ -326,7 +326,7 @@ export default function PricingSection() {
                                                 setStep(2);
 
                                                 const msg = `🚀 *NEW QUOTE REQUEST* 🚀\n\n*Plan:* ${selectedPlan}\n*Name:* ${formData.name}\n*Email:* ${formData.email}\n*Phone:* ${formData.phone}\n*Requirements:* ${formData.requirements || "N/A"}`;
-                                                const waUrl = `https://wa.me/918921624007?text=${encodeURIComponent(msg)}`;
+                                                const waUrl = `https://wa.me/919497669317?text=${encodeURIComponent(msg)}`;
 
                                                 // Background Process (Non-blocking)
                                                 (async () => {

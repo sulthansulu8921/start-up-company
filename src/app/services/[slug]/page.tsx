@@ -11,12 +11,12 @@ interface PageProps {
 const serviceMetadata: Record<string, { title: string; description: string; keywords: string[] }> = {
     "website-services": {
         title: "Professional Website Design for Startups in India | NanoRays Solution",
-        description: "Get a high-performance, mobile-friendly business website starting from ₹5,000. NanoRays Solution builds conversion-focused websites for startups and SMEs across India. Free consultation: +91 89216 24007.",
+        description: "Get a high-performance, mobile-friendly business website starting from ₹5,000. NanoRays Solution builds conversion-focused websites for startups and SMEs across India. Free consultation: +91 94976 69317.",
         keywords: ["website design India", "startup website design", "business website Kerala", "affordable website India", "web development startup India", "mobile responsive website India"],
     },
     "seo-optimization": {
         title: "Affordable SEO Services in Kerala & India | NanoRays Solution",
-        description: "Rank #1 on Google with NanoRays Solution's affordable SEO services in Kerala and India. We offer technical SEO, local SEO, keyword research, and monthly rank tracking. Call: +91 89216 24007.",
+        description: "Rank #1 on Google with NanoRays Solution's affordable SEO services in Kerala and India. We offer technical SEO, local SEO, keyword research, and monthly rank tracking. Call: +91 94976 69317.",
         keywords: ["affordable SEO services Kerala", "SEO agency Kerala", "local SEO India", "Google ranking Kerala", "technical SEO India", "SEO services India"],
     },
     "aeo-geo-optimization": {

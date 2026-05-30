@@ -3,7 +3,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
     title: "Contact NanoRays Solution | Professional Website Development & SEO",
-    description: "Get in touch with NanoRays Solution. Start your complimetary consultation for high-performance websites, local SEO, and digital marketing. Call or WhatsApp +91 89216 24007.",
+    description: "Get in touch with NanoRays Solution. Start your complimetary consultation for high-performance websites, local SEO, and digital marketing. Call or WhatsApp +91 94976 69317.",
     keywords: [
         "Contact NanoRays", "Hire Web Developer Kerala", "Web Agency Consultation", "Website Enquiries India"
     ],

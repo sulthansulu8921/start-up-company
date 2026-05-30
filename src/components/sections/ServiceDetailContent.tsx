@@ -152,7 +152,7 @@ export default function ServiceDetailContent({ slug }: ServiceDetailContentProps
                         We are ready to build the perfect digital solution for your business.
                     </p>
                     <div className="flex flex-wrap justify-center gap-6">
-                        <Link href="https://wa.me/918921624007" target="_blank" className="btn-neon px-12 py-5 flex items-center gap-3">
+                        <Link href="https://wa.me/919497669317" target="_blank" className="btn-neon px-12 py-5 flex items-center gap-3">
                             <Zap size={20} fill="black" />
                             Start Your Project
                         </Link>

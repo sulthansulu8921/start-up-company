@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
     title: "Website Development Company in Palakkad | NanoRays Solution",
-    description: "Best website development, digital marketing, and SEO services in Palakkad, Kerala. NanoRays Solution helps Palakkad businesses grow online with affordable websites. Call: +91 89216 24007.",
+    description: "Best website development, digital marketing, and SEO services in Palakkad, Kerala. NanoRays Solution helps Palakkad businesses grow online with affordable websites. Call: +91 94976 69317.",
     keywords: [
         "Website Development Palakkad", "Web Design Agency Palakkad", "Digital Marketing Palakkad",
         "SEO Services Palakkad", "Best Web Developer Palakkad", "Business Website Palakkad",
