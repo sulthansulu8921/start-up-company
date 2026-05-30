@@ -22,7 +22,7 @@ export default function AIChatbot() {
             text: "Hi! 👋 Welcome to NanoRays. I'm here to help you. What are you looking for today?",
             sender: "ai",
             timestamp: new Date(),
-            options: ["View Our Services", "Get a Free Quote", "Talk to Our Team"]
+            options: ["View Our Services", "Contact Details", "Share Website", "Talk to Our Team"]
         }
     ]);
     const [isTyping, setIsTyping] = useState(false);
@@ -78,6 +78,35 @@ export default function AIChatbot() {
                 "We offer a full range of digital services! Which one interests you?",
                 ["Website Design", "SEO & Google Ranking", "Digital Marketing", "Logo & Branding", "Poster Design", "Website Maintenance"]
             );
+        } else if (option.includes("Contact Details")) {
+            saveLead("Bot Option: Contact Details");
+            addAIMessage(
+                "Here are our official contact channels:\n\n📞 Phone/Call: +91 89216 24007\n💬 WhatsApp: +91 89216 24007\n📧 Email: nanorayssolution@gmail.com\n📍 Office: Kochi, Kerala, India\n\nHow would you like to connect with us?",
+                ["Open WhatsApp Chat", "Call Us Directly", "Send Email", "Back to Menu"]
+            );
+        } else if (option.includes("Open WhatsApp Chat")) {
+            addAIMessage("Opening WhatsApp chat... 💬");
+            setTimeout(() => {
+                window.open("https://wa.me/918921624007", "_blank");
+            }, 1000);
+        } else if (option.includes("Call Us Directly")) {
+            window.open("tel:+918921624007", "_self");
+        } else if (option.includes("Send Email")) {
+            window.open("mailto:nanorayssolution@gmail.com", "_self");
+        } else if (option.includes("Share Website")) {
+            saveLead("Bot Option: Share Website");
+            addAIMessage(
+                "We would love for you to share NanoRays with your colleagues, friends, or network! You can share directly on WhatsApp or copy our link below:\n\n🔗 Website: https://nanorays.com",
+                ["Share on WhatsApp", "Copy Website Link", "Back to Menu"]
+            );
+        } else if (option.includes("Share on WhatsApp")) {
+            addAIMessage("Opening WhatsApp to share our website... Thank you for your support! 🚀");
+            setTimeout(() => {
+                window.open("https://api.whatsapp.com/send?text=Check%20out%20NanoRays%20Solution%20for%20premium%20website%20development%20and%20SEO:%20https://nanorays.com", "_blank");
+            }, 1000);
+        } else if (option.includes("Copy Website Link")) {
+            navigator.clipboard.writeText("https://nanorays.com");
+            addAIMessage("Link copied to clipboard! 📋 Share it anywhere you like. What can I help you with next?", ["View Our Services", "Contact Details", "Talk to Our Team"]);
         } else if (option.includes("Quote") || option.includes("Free")) {
             saveLead("High Interest: Free Quote");
             addAIMessage(
@@ -100,10 +129,41 @@ export default function AIChatbot() {
                 ["Yes, Contact Team", "See More Services", "Back to Menu"]
             );
         } else if (option.includes("Marketing")) {
+            saveLead("Bot Option: Marketing");
             addAIMessage(
-                "We manage Instagram, Facebook, and Google Ads to get you real leads. Packages from ₹3,999/month. Want to know more?",
-                ["Yes, Contact Team", "See More Services", "Back to Menu"]
+                "We handle end-to-end digital marketing and campaigns to scale your business:\n\n📈 Paid Campaigns: Google Ads, Meta Ads (Instagram/FB)\n🎯 Lead Engines: Funnel creation & landing pages\n📱 Social Media: Daily posting & page care\n\nWhat marketing work would you like to discuss?",
+                ["Paid Ads (Google/Meta)", "Lead Generation Funnels", "Social Media Care", "Back to Menu"]
             );
+        } else if (option.includes("Paid Ads (Google/Meta)")) {
+            addAIMessage(
+                "Our Paid Ads management starts at ₹5,000/month. We write ad copies, build custom landing pages, and double your conversions. Ready to run ads?",
+                ["Start Paid Ads Campaign", "Back to Menu"]
+            );
+        } else if (option.includes("Start Paid Ads Campaign")) {
+            addAIMessage("Opening WhatsApp to set up your ad campaign budget... 🚀");
+            setTimeout(() => {
+                window.open("https://wa.me/918921624007?text=Hi+NanoRays!+I+want+to+start+a+Google/Meta+Paid+Ads+campaign.", "_blank");
+            }, 1000);
+        } else if (option.includes("Lead Generation Funnels")) {
+            addAIMessage(
+                "We design custom lead captures, setup CRM databases, and write automated follow-up sequences. Shall we design your funnel?",
+                ["Start Lead Funnel", "Back to Menu"]
+            );
+        } else if (option.includes("Start Lead Funnel")) {
+            addAIMessage("Opening WhatsApp to configure your new lead capture funnel... 🎯");
+            setTimeout(() => {
+                window.open("https://wa.me/918921624007?text=Hi+NanoRays!+I+want+to+setup+a+Lead+Generation+Funnel.", "_blank");
+            }, 1000);
+        } else if (option.includes("Social Media Care")) {
+            addAIMessage(
+                "Daily graphics, captions, posting, and reels editing to keep your Instagram/FB pages active. Packages start from ₹3,999/month.",
+                ["Start Social Media Care", "Back to Menu"]
+            );
+        } else if (option.includes("Start Social Media Care")) {
+            addAIMessage("Opening WhatsApp to start your Social Media Care plan... 📱");
+            setTimeout(() => {
+                window.open("https://wa.me/918921624007?text=Hi+NanoRays!+I+want+to+start+Social+Media+Care.", "_blank");
+            }, 1000);
         } else if (option.includes("Branding") || option.includes("Logo")) {
             addAIMessage(
                 "We design professional logos and full brand identities. Logo packages from ₹999. Shall we get started?",
@@ -127,7 +187,7 @@ export default function AIChatbot() {
         } else if (option.includes("Back") || option.includes("Menu")) {
             addAIMessage(
                 "Sure! What would you like to do next?",
-                ["View Our Services", "Get a Free Quote", "Talk to Our Team"]
+                ["View Our Services", "Contact Details", "Share Website", "Talk to Our Team"]
             );
         } else {
             addAIMessage(
