@@ -549,7 +549,7 @@
   box-shadow: 0 6px 30px rgba(204, 255, 0, 0.5) !important;
 }
 
-/* Highlight neon green text in light mode with a premium high-contrast dark backing badge only on specific inline text tags */
+/* Highlight neon green text in light mode with a professional high-contrast emerald/green gradient (no background box) */
 .light :not(.dark) span.text-neon,
 .light :not(.dark) strong.text-neon,
 .light :not(.dark) b.text-neon,
@@ -558,14 +558,16 @@
 .light :not(.dark) h2.text-neon,
 .light :not(.dark) h3.text-neon,
 .light :not(.dark) h4.text-neon {
-  color: #CCFF00 !important;
-  background-color: #0F172A !important;
-  padding: 0.05em 0.35em !important;
-  margin: 0 0.05em !important;
-  border-radius: 0.25em !important;
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08) !important;
+  background: linear-gradient(135deg, #059669 0%, #16a34a 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: #059669 !important; /* Fallback */
+  background-clip: text !important;
   display: inline-block !important;
-  vertical-align: baseline !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
 }
 
 /* General neon text elements (like icons, ratings, or initials) in light mode should receive a crisp high-contrast green */
