@@ -8,7 +8,7 @@ export default function robots(): MetadataRoute.Robots {
             {
                 userAgent: "*",
                 allow: "/",
-                disallow: ["/private/", "/api/", "/admin/"],
+                disallow: ["/private/", "/api/"],
             },
         ],
         sitemap: "https://nanorayssolution.com/sitemap.xml",
