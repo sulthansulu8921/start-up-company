@@ -91,6 +91,8 @@ import Script from "next/script";
 
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 
+import { ThemeProvider } from "@/components/ThemeProvider";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -131,7 +133,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <head>
         <GoogleAnalytics GA_MEASUREMENT_ID="G-TBFYS7QYSM" />
         <script
@@ -140,7 +142,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${sora.variable} ${inter.variable} antialiased bg-background text-foreground selection:bg-neon/30 selection:text-white`}
+        className={`${sora.variable} ${inter.variable} antialiased bg-background text-foreground selection:bg-neon/30 selection:text-white transition-colors duration-500`}
       >
         <Script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" strategy="beforeInteractive" />
         <Script id="emailjs-init" strategy="beforeInteractive">
@@ -151,17 +153,19 @@ export default function RootLayout({
           `}
         </Script>
         
-        <Preloader />
-        <SmoothScroll>
-          <BackgroundAnimation />
-          <MouseGlow />
-          <Navbar />
-          {children}
-          <AIChatbot />
-          <OfferPopup />
-          <WhatsAppButton />
-          <Footer />
-        </SmoothScroll>
+        <ThemeProvider>
+          <Preloader />
+          <SmoothScroll>
+            <BackgroundAnimation />
+            <MouseGlow />
+            <Navbar />
+            {children}
+            <AIChatbot />
+            <OfferPopup />
+            <WhatsAppButton />
+            <Footer />
+          </SmoothScroll>
+        </ThemeProvider>
       </body>
     </html>
   );

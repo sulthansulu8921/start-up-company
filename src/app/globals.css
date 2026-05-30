@@ -15,9 +15,11 @@
   --color-card-bg: var(--card-bg);
   --color-royal: var(--royal);
   --color-navy: var(--navy);
+  --color-glass-border: var(--glass-border);
 }
 
 :root {
+  /* Default is Dark Theme */
   --background: #050505;
   --foreground: #FFFFFF;
   --neon: #CCFF00;
@@ -26,8 +28,26 @@
   --card-bg: rgba(15, 17, 21, 0.6);
   --glass-border: rgba(255, 255, 255, 0.08);
   --neon-glow: 0 0 20px rgba(204, 255, 0, 0.3);
-  --royal: #002366;
+  --royal: #3b82f6;
   --navy: #0A0F1E;
+
+  color-scheme: dark;
+}
+
+.light {
+  /* Light Theme Values Override */
+  --background: #FAFAFA;
+  --foreground: #0A0A0A;
+  --neon: #CCFF00;
+  --neon-dim: rgba(204, 255, 0, 0.25);
+  --dark-gray: #E5E7EB;
+  --card-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(0, 0, 0, 0.06);
+  --neon-glow: 0 0 15px rgba(204, 255, 0, 0.25);
+  --royal: #2563EB;
+  --navy: #F3F4F6;
+
+  color-scheme: light;
 }
 
 @layer base {
@@ -37,7 +57,7 @@
   }
 
   body {
-    @apply bg-black text-white antialiased overflow-x-hidden;
+    @apply bg-background text-foreground antialiased overflow-x-hidden transition-colors duration-500;
   }
 
   /* Mobile Font Scaling */
@@ -207,7 +227,7 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #050505;
+  background: var(--background);
 }
 
 ::-webkit-scrollbar-thumb {

@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowRight, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Logo from "./Logo";
+import ThemeToggle from "./ThemeToggle";
 
 const navLinks = [
     { name: "Home", href: "/" },
@@ -91,10 +92,10 @@ export default function Navbar() {
     return (
         <nav
             className={cn(
-                "fixed top-0 left-0 right-0 z-[100] transition-all duration-500 will-change-transform",
+                "fixed top-0 left-0 right-0 z-[100] transition-all duration-500 will-change-transform border-b",
                 isScrolled
-                    ? "py-2 bg-white/90 backdrop-blur-md border-b border-gray-100 px-8 shadow-sm"
-                    : "py-3 bg-white border-b border-gray-50 px-6"
+                    ? "py-2 bg-background/80 backdrop-blur-md border-glass-border px-8 shadow-sm"
+                    : "py-3 bg-background/50 backdrop-blur-sm border-transparent px-6"
             )}
         >
             <div className="max-w-7xl mx-auto flex items-center justify-between font-sora">
@@ -121,12 +122,12 @@ export default function Navbar() {
                             >
                                 <span className={cn(
                                     "text-xs font-black uppercase tracking-widest transition-all duration-300",
-                                    activeLink === link.name ? "text-royal" : "text-gray-500 group-hover:text-black"
+                                    activeLink === link.name ? "text-royal" : "text-foreground/60 hover:text-foreground"
                                 )}>
                                     {link.name}
                                 </span>
                                 {link.dropdown && (
-                                    <svg className={cn("w-3 h-3 transition-transform duration-300", hoveredLink === link.name ? "rotate-180 text-neon" : "text-gray-400")} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <svg className={cn("w-3 h-3 transition-transform duration-300", hoveredLink === link.name ? "rotate-180 text-neon" : "text-foreground/40")} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M19 9l-7 7-7-7" />
                                     </svg>
                                 )}
@@ -148,17 +149,17 @@ export default function Navbar() {
                                         animate={{ opacity: 1, y: 0, scale: 1 }}
                                         exit={{ opacity: 0, y: 10, scale: 0.95 }}
                                         transition={{ duration: 0.2 }}
-                                        className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-white border border-gray-100 rounded-2xl shadow-xl p-2 z-50 overflow-hidden"
+                                        className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-card-bg backdrop-blur-xl border border-glass-border rounded-2xl shadow-xl p-2 z-50 overflow-hidden"
                                     >
                                         <div className="flex flex-col gap-1">
                                             {link.dropdown.map((item) => (
                                                 <Link
                                                     key={item.href}
                                                     href={item.href}
-                                                    className="flex items-center justify-between px-4 py-3 rounded-xl hover:bg-gray-50 group/item transition-colors"
+                                                    className="flex items-center justify-between px-4 py-3 rounded-xl hover:bg-white/5 dark:hover:bg-white/5 light:hover:bg-black/5 group/item transition-colors"
                                                     onClick={() => setHoveredLink(null)}
                                                 >
-                                                    <span className="text-xs font-bold text-gray-700 group-hover/item:text-black">{item.name}</span>
+                                                    <span className="text-xs font-bold text-foreground/80 group-hover/item:text-foreground">{item.name}</span>
                                                     <ArrowRight size={14} className="text-neon opacity-0 group-hover/item:opacity-100 -translate-x-2 group-hover/item:translate-x-0 transition-all" />
                                                 </Link>
                                             ))}
@@ -171,6 +172,8 @@ export default function Navbar() {
                 </div>
 
                 <div className="flex items-center gap-3 md:gap-6">
+                    <ThemeToggle />
+
                     <Link
                         href="/contact"
                         className="hidden md:block"
@@ -189,7 +192,7 @@ export default function Navbar() {
                     <button
                         className={cn(
                             "md:hidden p-2 transition-colors",
-                            "text-gray-900 hover:text-royal"
+                            "text-foreground hover:text-royal"
                         )}
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                     >
@@ -205,7 +208,7 @@ export default function Navbar() {
                         initial={{ opacity: 0, scale: 0.95, y: -10 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.95, y: -10 }}
-                        className="absolute top-full left-0 right-0 mx-6 mt-4 p-8 bg-white/98 backdrop-blur-xl rounded-3xl md:hidden overflow-hidden border border-gray-100 shadow-2xl"
+                        className="absolute top-full left-0 right-0 mx-6 mt-4 p-8 bg-card-bg/95 backdrop-blur-xl rounded-3xl md:hidden overflow-hidden border border-glass-border shadow-2xl"
                     >
                         <div className="flex flex-col gap-6">
                             {navLinks.map((link) => (
@@ -213,7 +216,7 @@ export default function Navbar() {
                                     <div
                                         className={cn(
                                             "text-xl font-bold transition-colors flex flex-row items-center justify-between group cursor-pointer",
-                                            activeLink === link.name ? "text-royal" : "text-gray-900 hover:text-royal"
+                                            activeLink === link.name ? "text-royal" : "text-foreground hover:text-royal"
                                         )}
                                         onClick={(e) => {
                                             if (!link.dropdown) {
@@ -235,7 +238,7 @@ export default function Navbar() {
                                         </Link>
                                         {link.dropdown ? (
                                             <div className="p-2">
-                                                <svg className={cn("w-5 h-5 transition-transform duration-300", hoveredLink === link.name ? "rotate-180 text-neon" : "text-gray-400")} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <svg className={cn("w-5 h-5 transition-transform duration-300", hoveredLink === link.name ? "rotate-180 text-neon" : "text-foreground/40")} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                                                 </svg>
                                             </div>
@@ -251,13 +254,13 @@ export default function Navbar() {
                                                 initial={{ height: 0, opacity: 0 }}
                                                 animate={{ height: "auto", opacity: 1 }}
                                                 exit={{ height: 0, opacity: 0 }}
-                                                className="flex flex-col gap-4 pl-4 border-l-2 border-gray-100 ml-1"
+                                                className="flex flex-col gap-4 pl-4 border-l-2 border-glass-border ml-1"
                                             >
                                                 {link.dropdown.map((item) => (
                                                     <Link
                                                         key={item.href}
                                                         href={item.href}
-                                                        className="text-sm font-bold text-gray-500 hover:text-black transition-colors py-1"
+                                                        className="text-xs font-bold text-foreground/60 hover:text-foreground transition-colors py-1"
                                                         onClick={() => setIsMobileMenuOpen(false)}
                                                     >
                                                         {item.name}
