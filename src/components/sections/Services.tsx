@@ -89,7 +89,7 @@ export default function Services() {
 
                                 {/* Action */}
                                 <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-white/80 group-hover:text-neon transition-colors">
-                                    Start Your Project
+                                    More Details
                                     <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                                 </div>
 
