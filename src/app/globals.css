@@ -335,6 +335,14 @@
   color: rgba(15, 23, 42, 0.75) !important;
 }
 
+.light .text-white\/75 {
+  color: rgba(15, 23, 42, 0.72) !important;
+}
+
+.light .text-white\/70 {
+  color: rgba(15, 23, 42, 0.68) !important;
+}
+
 .light .text-white\/60 {
   color: rgba(15, 23, 42, 0.6) !important;
 }
@@ -570,13 +578,7 @@
   box-shadow: none !important;
 }
 
-/* General neon text elements (like icons, ratings, or initials) in light mode should receive a crisp high-contrast green */
+/* General neon text elements (like icons, ratings, or initials) in light mode should receive a crisp high-contrast green without overriding background/layout rules */
 .light :not(.dark) .text-neon:not(span):not(strong):not(a):not(b):not(h1):not(h2):not(h3):not(h4) {
   color: #16a34a !important;
-  background: none !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  display: inline !important;
 }
