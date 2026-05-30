@@ -524,3 +524,15 @@
 .light .btn-neon:hover {
   box-shadow: 0 6px 30px rgba(204, 255, 0, 0.5) !important;
 }
+
+/* Highlight neon green text in light mode with a premium high-contrast dark backing badge */
+.light :not(.dark) .text-neon {
+  color: #CCFF00 !important;
+  background-color: #0F172A !important;
+  padding: 0.05em 0.3em !important;
+  margin: 0 0.05em !important;
+  border-radius: 0.25em !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08) !important;
+  display: inline-block !important;
+  vertical-align: baseline !important;
+}
