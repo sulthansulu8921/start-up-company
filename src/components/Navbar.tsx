@@ -33,6 +33,7 @@ export default function Navbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [activeLink, setActiveLink] = useState("Home");
     const [hoveredLink, setHoveredLink] = useState<string | null>(null);
+    const [menuHoveredLink, setMenuHoveredLink] = useState<string | null>(null);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -40,7 +41,7 @@ export default function Navbar() {
 
             // Dynamically update active tab based on scroll position
             const sections = document.querySelectorAll("section[id]");
-            let current = "Home"; // Default to Home
+            let current = "Home";
 
             if (window.scrollY < 200) {
                 current = "Home";
@@ -48,7 +49,6 @@ export default function Navbar() {
                 sections.forEach((section) => {
                     const sectionTop = (section as HTMLElement).offsetTop;
                     const sectionHeight = section.clientHeight;
-                    // Trigger section change slightly before it hits the top of the viewport
                     if (window.scrollY >= sectionTop - 300 && window.scrollY < sectionTop + sectionHeight - 300) {
                         const id = section.getAttribute("id");
                         if (id === "services") current = "Services";
@@ -62,9 +62,7 @@ export default function Navbar() {
         };
 
         window.addEventListener("scroll", handleScroll);
-        // Initial setup on mount
         handleScroll();
-
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
@@ -75,7 +73,7 @@ export default function Navbar() {
                 const id = href.split("#")[1];
                 const element = document.getElementById(id);
                 if (element) {
-                    const offset = 80;
+                    const offset = 90;
                     const elementPosition = element.getBoundingClientRect().top;
                     const offsetPosition = elementPosition + window.pageYOffset - offset;
                     window.scrollTo({
@@ -89,76 +87,94 @@ export default function Navbar() {
     };
 
     return (
-        <nav
-            className={cn(
-                "fixed top-0 left-0 right-0 z-[100] transition-all duration-500 will-change-transform border-b",
-                isScrolled
-                    ? "py-2 bg-background/80 backdrop-blur-md border-glass-border px-8 shadow-sm"
-                    : "py-3 bg-background/50 backdrop-blur-sm border-transparent px-6"
-            )}
-        >
-            <div className="max-w-7xl mx-auto flex items-center justify-between font-sora">
-                <Link href="/" className="group flex items-center gap-2">
-                    <Logo width={140} height={40} />
+        <div className="fixed top-0 left-0 right-0 z-[100] flex justify-center p-4 pointer-events-none">
+            <motion.nav
+                initial={{ y: -50, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ type: "spring", stiffness: 120, damping: 20 }}
+                className={cn(
+                    "w-full max-w-6xl rounded-full border transition-all duration-500 pointer-events-auto flex items-center justify-between px-6 md:px-8",
+                    isScrolled
+                        ? "py-2.5 bg-black/75 backdrop-blur-xl border-neon/20 shadow-[0_10px_40px_rgba(0,0,0,0.5),_0_0_30px_rgba(204,255,0,0.03)]"
+                        : "py-4 bg-black/40 backdrop-blur-md border-white/5"
+                )}
+            >
+                {/* Logo */}
+                <Link href="/" className="flex items-center">
+                    <Logo width={120} height={35} className="hover:scale-[1.02] transition-transform duration-300" />
                 </Link>
 
-                {/* Desktop Navigation */}
-                <div className="hidden md:flex items-center gap-8">
-                    {navLinks.map((link, i) => (
+                {/* Desktop Navigation Links */}
+                <div 
+                    className="hidden md:flex items-center gap-1 bg-white/[0.03] border border-white/5 rounded-full p-1 relative"
+                    onMouseLeave={() => setMenuHoveredLink(null)}
+                >
+                    {navLinks.map((link) => (
                         <div
                             key={link.name}
-                            className="relative group py-4"
-                            onMouseEnter={() => setHoveredLink(link.name)}
+                            className="relative"
+                            onMouseEnter={() => {
+                                setHoveredLink(link.name);
+                                setMenuHoveredLink(link.name);
+                            }}
                             onMouseLeave={() => setHoveredLink(null)}
                         >
                             <Link
                                 href={link.href}
-                                className="relative flex items-center gap-1.5"
+                                className={cn(
+                                    "relative px-4 py-2 rounded-full text-xs font-black uppercase tracking-widest transition-all duration-300 flex items-center gap-1.5 z-10",
+                                    activeLink === link.name ? "text-neon" : "text-white/60 hover:text-white"
+                                )}
                                 onClick={(e) => {
                                     scrollToSection(e, link.href);
                                     setActiveLink(link.name);
                                 }}
                             >
-                                <span className={cn(
-                                    "text-xs font-black uppercase tracking-widest transition-all duration-300",
-                                    activeLink === link.name ? "text-royal" : "text-foreground/60 hover:text-foreground"
-                                )}>
-                                    {link.name}
-                                </span>
+                                <span>{link.name}</span>
                                 {link.dropdown && (
-                                    <svg className={cn("w-3 h-3 transition-transform duration-300", hoveredLink === link.name ? "rotate-180 text-neon" : "text-foreground/40")} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <svg className={cn("w-3 h-3 transition-transform duration-300", hoveredLink === link.name ? "rotate-180 text-neon" : "text-white/40")} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M19 9l-7 7-7-7" />
                                     </svg>
                                 )}
-
-                                {/* Animated Underline */}
-                                {activeLink === link.name && (
-                                    <motion.div
-                                        layoutId="nav-underline"
-                                        className="absolute -bottom-1 left-0 w-full h-0.5 bg-neon rounded-full"
-                                    />
-                                )}
                             </Link>
+
+                            {/* Hover Pill Background */}
+                            {menuHoveredLink === link.name && (
+                                <motion.div
+                                    layoutId="nav-hover-pill"
+                                    className="absolute inset-0 bg-white/5 rounded-full z-0"
+                                    transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                                />
+                            )}
+
+                            {/* Active Tab Underline dot */}
+                            {activeLink === link.name && (
+                                <motion.div
+                                    layoutId="nav-active-dot"
+                                    className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-neon rounded-full"
+                                    transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                                />
+                            )}
 
                             {/* Dropdown Menu */}
                             <AnimatePresence>
                                 {link.dropdown && hoveredLink === link.name && (
                                     <motion.div
-                                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                                        initial={{ opacity: 0, y: 15, scale: 0.95 }}
                                         animate={{ opacity: 1, y: 0, scale: 1 }}
-                                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                                        exit={{ opacity: 0, y: 15, scale: 0.95 }}
                                         transition={{ duration: 0.2 }}
-                                        className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-card-bg backdrop-blur-xl border border-glass-border rounded-2xl shadow-xl p-2 z-50 overflow-hidden"
+                                        className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-64 bg-black/95 backdrop-blur-2xl border border-neon/20 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.8)] p-2 z-50 overflow-hidden"
                                     >
                                         <div className="flex flex-col gap-1">
                                             {link.dropdown.map((item) => (
                                                 <Link
                                                     key={item.href}
                                                     href={item.href}
-                                                    className="flex items-center justify-between px-4 py-3 rounded-xl hover:bg-white/5 dark:hover:bg-white/5 light:hover:bg-black/5 group/item transition-colors"
+                                                    className="flex items-center justify-between px-4 py-3 rounded-xl hover:bg-neon/10 group/item transition-colors"
                                                     onClick={() => setHoveredLink(null)}
                                                 >
-                                                    <span className="text-xs font-bold text-foreground/80 group-hover/item:text-foreground">{item.name}</span>
+                                                    <span className="text-xs font-bold text-white/80 group-hover/item:text-neon transition-colors">{item.name}</span>
                                                     <ArrowRight size={14} className="text-neon opacity-0 group-hover/item:opacity-100 -translate-x-2 group-hover/item:translate-x-0 transition-all" />
                                                 </Link>
                                             ))}
@@ -170,51 +186,46 @@ export default function Navbar() {
                     ))}
                 </div>
 
-                <div className="flex items-center gap-3 md:gap-6">
-
-                    <Link
-                        href="/contact"
-                        className="hidden md:block"
-                    >
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: 1.2 }}
-                            className="flex items-center gap-2 px-4 md:px-6 py-2 md:py-2.5 bg-neon text-black rounded-xl font-black text-[10px] md:text-[11px] uppercase tracking-tighter hover:bg-black hover:text-neon transition-all shadow-lg hover:shadow-neon/20 whitespace-nowrap cursor-pointer border border-neon"
+                {/* Right Side Controls & CTA */}
+                <div className="flex items-center gap-3">
+                    <Link href="/contact" className="hidden md:block">
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="relative flex items-center gap-2 px-5 py-2.5 bg-neon text-black rounded-full font-black text-[11px] uppercase tracking-wider hover:shadow-[0_0_25px_rgba(204,255,0,0.4)] transition-all duration-300 border border-neon"
                         >
-                            <Zap size={12} className="fill-current hidden sm:block" />
+                            <Zap size={12} className="fill-current" />
                             Start Project
-                        </motion.div>
+                        </motion.button>
                     </Link>
 
+                    {/* Mobile Menu Toggle */}
                     <button
-                        className={cn(
-                            "md:hidden p-2 transition-colors",
-                            "text-foreground hover:text-royal"
-                        )}
+                        className="md:hidden p-2 text-white hover:text-neon transition-colors"
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                     >
-                        {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+                        {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
                     </button>
                 </div>
-            </div>
+            </motion.nav>
 
-            {/* Mobile Menu */}
+            {/* Mobile Menu Overlay */}
             <AnimatePresence>
                 {isMobileMenuOpen && (
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.95, y: -10 }}
-                        animate={{ opacity: 1, scale: 1, y: 0 }}
-                        exit={{ opacity: 0, scale: 0.95, y: -10 }}
-                        className="absolute top-full left-0 right-0 mx-6 mt-4 p-8 bg-card-bg/95 backdrop-blur-xl rounded-3xl md:hidden overflow-hidden border border-glass-border shadow-2xl"
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.3 }}
+                        className="fixed inset-x-4 top-24 bg-black/95 backdrop-blur-2xl rounded-3xl p-6 md:hidden border border-neon/20 shadow-[0_30px_60px_rgba(0,0,0,0.8)] pointer-events-auto"
                     >
                         <div className="flex flex-col gap-6">
                             {navLinks.map((link) => (
-                                <div key={link.name} className="flex flex-col gap-4">
+                                <div key={link.name} className="flex flex-col gap-3">
                                     <div
                                         className={cn(
-                                            "text-xl font-bold transition-colors flex flex-row items-center justify-between group cursor-pointer",
-                                            activeLink === link.name ? "text-royal" : "text-foreground hover:text-royal"
+                                            "text-lg font-bold transition-colors flex items-center justify-between group cursor-pointer",
+                                            activeLink === link.name ? "text-neon" : "text-white/70 hover:text-white"
                                         )}
                                         onClick={(e) => {
                                             if (!link.dropdown) {
@@ -227,7 +238,7 @@ export default function Navbar() {
                                     >
                                         <Link
                                             href={link.href}
-                                            className="flex-grow"
+                                            className="flex-grow font-sora font-extrabold uppercase tracking-widest text-sm"
                                             onClick={(e) => {
                                                 if (link.dropdown) e.preventDefault();
                                             }}
@@ -235,30 +246,30 @@ export default function Navbar() {
                                             {link.name}
                                         </Link>
                                         {link.dropdown ? (
-                                            <div className="p-2">
-                                                <svg className={cn("w-5 h-5 transition-transform duration-300", hoveredLink === link.name ? "rotate-180 text-neon" : "text-foreground/40")} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <div className="p-1">
+                                                <svg className={cn("w-4 h-4 transition-transform duration-300", hoveredLink === link.name ? "rotate-180 text-neon" : "text-white/40")} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                                                 </svg>
                                             </div>
                                         ) : (
-                                            <ArrowRight size={18} className="opacity-40 group-hover:opacity-100 transition-all -translate-x-4 group-hover:translate-x-0 text-neon" />
+                                            <ArrowRight size={16} className="opacity-40 group-hover:opacity-100 transition-all text-neon" />
                                         )}
                                     </div>
 
-                                    {/* Mobile Dropdown Items */}
+                                    {/* Mobile Dropdown */}
                                     <AnimatePresence>
                                         {link.dropdown && hoveredLink === link.name && (
                                             <motion.div
                                                 initial={{ height: 0, opacity: 0 }}
                                                 animate={{ height: "auto", opacity: 1 }}
                                                 exit={{ height: 0, opacity: 0 }}
-                                                className="flex flex-col gap-4 pl-4 border-l-2 border-glass-border ml-1"
+                                                className="flex flex-col gap-3 pl-4 border-l border-neon/20 ml-1"
                                             >
                                                 {link.dropdown.map((item) => (
                                                     <Link
                                                         key={item.href}
                                                         href={item.href}
-                                                        className="text-xs font-bold text-foreground/60 hover:text-foreground transition-colors py-1"
+                                                        className="text-xs font-black uppercase tracking-wider text-white/50 hover:text-neon transition-colors py-1"
                                                         onClick={() => setIsMobileMenuOpen(false)}
                                                     >
                                                         {item.name}
@@ -271,17 +282,17 @@ export default function Navbar() {
                             ))}
                             <Link
                                 href="/contact"
-                                className="w-full"
+                                className="w-full mt-4"
                                 onClick={() => setIsMobileMenuOpen(false)}
                             >
-                                <button className="w-full py-4 bg-neon text-black rounded-2xl font-black uppercase tracking-widest flex items-center justify-center gap-2 shadow-lg hover:shadow-neon/30 transition-all font-sora">
-                                    Launch Project <Zap size={18} fill="black" />
+                                <button className="w-full py-4 bg-neon text-black rounded-full font-black uppercase tracking-widest flex items-center justify-center gap-2 shadow-lg hover:shadow-neon/30 transition-all text-xs font-sora">
+                                    Start Project <Zap size={14} fill="black" />
                                 </button>
                             </Link>
                         </div>
                     </motion.div>
                 )}
             </AnimatePresence>
-        </nav>
+        </div>
     );
 }
