@@ -267,28 +267,28 @@
   color: var(--foreground);
 }
 
-.light .bg-black {
+.light :not(.dark) .bg-black {
   background-color: var(--background) !important;
 }
 
-.light .bg-black\/40 {
+.light :not(.dark) .bg-black\/40 {
   background-color: rgba(255, 255, 255, 0.45) !important;
 }
 
-.light .bg-black\/20 {
+.light :not(.dark) .bg-black\/20 {
   background-color: rgba(15, 23, 42, 0.04) !important;
 }
 
-.light .bg-white\/5 {
+.light :not(.dark) .bg-white\/5 {
   background-color: rgba(15, 23, 42, 0.04) !important;
 }
 
-.light .bg-white\/10 {
+.light :not(.dark) .bg-white\/10 {
   background-color: rgba(15, 23, 42, 0.08) !important;
 }
 
 /* Translucent Glass Card Overrides in Light Mode */
-.light .glass-dark {
+.light :not(.dark) .glass-dark {
   background: rgba(255, 255, 255, 0.75) !important;
   border-color: rgba(15, 23, 42, 0.07) !important;
   box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.05), 
@@ -296,85 +296,85 @@
   backdrop-filter: blur(20px) !important;
 }
 
-.light .glass-neon {
+.light :not(.dark) .glass-neon {
   background: rgba(255, 255, 255, 0.8) !important;
   border-color: rgba(204, 255, 0, 0.4) !important;
   box-shadow: 0 15px 35px -10px rgba(204, 255, 0, 0.15) !important;
 }
 
 /* Text color transformations in Light Mode */
-.light .text-white {
+.light :not(.dark) .text-white {
   color: var(--foreground) !important;
 }
 
-.light .text-white\/90 {
+.light :not(.dark) .text-white\/90 {
   color: rgba(15, 23, 42, 0.9) !important;
 }
 
-.light .text-white\/80 {
+.light :not(.dark) .text-white\/80 {
   color: rgba(15, 23, 42, 0.75) !important;
 }
 
-.light .text-white\/60 {
+.light :not(.dark) .text-white\/60 {
   color: rgba(15, 23, 42, 0.6) !important;
 }
 
-.light .text-white\/40 {
+.light :not(.dark) .text-white\/40 {
   color: rgba(15, 23, 42, 0.45) !important;
 }
 
-.light .text-white\/25 {
+.light :not(.dark) .text-white\/25 {
   color: rgba(15, 23, 42, 0.3) !important;
 }
 
-.light .text-white\/20 {
+.light :not(.dark) .text-white\/20 {
   color: rgba(15, 23, 42, 0.25) !important;
 }
 
-.light .text-gray-300 {
+.light :not(.dark) .text-gray-300 {
   color: rgba(15, 23, 42, 0.8) !important;
 }
 
-.light .text-gray-400 {
+.light :not(.dark) .text-gray-400 {
   color: rgba(15, 23, 42, 0.65) !important;
 }
 
-.light .text-gray-500 {
+.light :not(.dark) .text-gray-500 {
   color: rgba(15, 23, 42, 0.5) !important;
 }
 
-.light .border-white\/10 {
+.light :not(.dark) .border-white\/10 {
   border-color: rgba(15, 23, 42, 0.08) !important;
 }
 
-.light .border-white\/5 {
+.light :not(.dark) .border-white\/5 {
   border-color: rgba(15, 23, 42, 0.05) !important;
 }
 
-.light .border-white\/20 {
+.light :not(.dark) .border-white\/20 {
   border-color: rgba(15, 23, 42, 0.15) !important;
 }
 
-.light .bg-dark-gray {
+.light :not(.dark) .bg-dark-gray {
   background-color: var(--navy) !important;
 }
 
-.light .bg-dark-gray\/30 {
+.light :not(.dark) .bg-dark-gray\/30 {
   background-color: rgba(15, 23, 42, 0.02) !important;
 }
 
 /* Gradient Transformations to match Light theme background */
-.light .from-black {
+.light :not(.dark) .from-black {
   --tw-gradient-from: var(--background) !important;
   --tw-gradient-to: rgba(248, 250, 252, 0) !important;
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
 }
 
-.light .via-black\/70 {
+.light :not(.dark) .via-black\/70 {
   --tw-gradient-stops: var(--tw-gradient-from), rgba(248, 250, 252, 0.7) 50%, var(--tw-gradient-to) !important;
 }
 
-.light .to-black {
+.light :not(.dark) .to-black {
   --tw-gradient-to: var(--background) !important;
 }
 

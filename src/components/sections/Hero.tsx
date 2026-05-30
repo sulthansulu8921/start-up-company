@@ -155,7 +155,7 @@ export default function Hero() {
     return (
         <section ref={containerRef} className="relative h-[200vh] bg-transparent">
             {/* Sticky Container */}
-            <div className="sticky top-0 h-screen w-full overflow-hidden bg-black flex items-center justify-center z-20">
+            <div className="sticky top-0 h-screen w-full overflow-hidden bg-black flex items-center justify-center z-20 dark">
 
                 {/* The 3D Sequence Canvas */}
                 <canvas
