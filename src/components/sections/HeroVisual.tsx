@@ -40,7 +40,7 @@ export default function HeroVisual() {
             {/* 3D Dashboard Mockup Container */}
             <motion.div
                 style={{ rotateX, rotateY }}
-                className="relative w-full h-[450px] bg-white/40 backdrop-blur-2xl border border-white rounded-[3rem] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.1)] p-8 overflow-hidden transform-gpu"
+                className="relative w-full h-[450px] bg-card-bg backdrop-blur-2xl border border-glass-border rounded-[3rem] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] p-8 overflow-hidden transform-gpu"
             >
                 {/* Mockup Header */}
                 <div className="flex items-center justify-between mb-8">
@@ -55,9 +55,9 @@ export default function HeroVisual() {
                 {/* Dashboard Grid Content */}
                 <div className="grid grid-cols-2 gap-4 h-[280px]">
                     {/* Main Chart Area */}
-                    <div className="col-span-2 bg-white/80 rounded-3xl p-6 shadow-sm border border-navy/5">
+                    <div className="col-span-2 bg-card-bg rounded-3xl p-6 shadow-sm border border-glass-border">
                         <div className="flex items-center justify-between mb-6">
-                            <span className="text-xs font-bold text-navy uppercase tracking-wider">Conversion Analytics</span>
+                            <span className="text-xs font-bold text-foreground uppercase tracking-wider">Conversion Analytics</span>
                             <Activity size={16} className="text-royal" />
                         </div>
                         <div className="flex items-end gap-3 h-24">
@@ -74,53 +74,53 @@ export default function HeroVisual() {
                     </div>
 
                     {/* Small Stats */}
-                    <div className="bg-white/80 rounded-3xl p-5 shadow-sm border border-navy/5 flex flex-col justify-between">
+                    <div className="bg-card-bg rounded-3xl p-5 shadow-sm border border-glass-border flex flex-col justify-between">
                         <PieChart size={20} className="text-purple-500" />
                         <div>
-                            <p className="text-[10px] uppercase font-bold text-navy/30">Growth</p>
-                            <p className="text-2xl font-black text-navy">+124%</p>
+                            <p className="text-[10px] uppercase font-bold text-foreground/45">Growth</p>
+                            <p className="text-2xl font-black text-foreground">+124%</p>
                         </div>
                     </div>
 
-                    <div className="bg-white/80 rounded-3xl p-5 shadow-sm border border-navy/5 flex flex-col justify-between">
+                    <div className="bg-card-bg rounded-3xl p-5 shadow-sm border border-glass-border flex flex-col justify-between">
                         <BarChart3 size={20} className="text-royal" />
                         <div>
-                            <p className="text-[10px] uppercase font-bold text-navy/30">Active Users</p>
-                            <p className="text-2xl font-black text-navy">5.8k</p>
+                            <p className="text-[10px] uppercase font-bold text-foreground/45">Active Users</p>
+                            <p className="text-2xl font-black text-foreground">5.8k</p>
                         </div>
                     </div>
                 </div>
 
                 {/* Reflection Highlight */}
-                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/40 to-transparent pointer-events-none" />
+                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/20 to-transparent pointer-events-none" />
             </motion.div>
 
             {/* Floating Glassmorphism Cards (Peripheral) */}
             <motion.div
                 animate={{ y: [0, -20, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -top-4 -right-4 w-48 p-4 glass rounded-3xl shadow-xl z-20 flex items-center gap-3 border-white animate-float"
+                className="absolute -top-4 -right-4 w-48 p-4 glass rounded-3xl shadow-xl z-20 flex items-center gap-3 border-glass-border animate-float"
             >
-                <div className="w-10 h-10 bg-green-100 rounded-2xl flex items-center justify-center text-green-600">
+                <div className="w-10 h-10 bg-green-100 dark:bg-green-950/20 rounded-2xl flex items-center justify-center text-green-600">
                     <ShieldCheck size={20} />
                 </div>
                 <div className="flex flex-col">
-                    <span className="text-[10px] font-bold text-navy uppercase">Secure</span>
-                    <span className="text-xs font-black text-navy">Verified Identity</span>
+                    <span className="text-[10px] font-bold text-foreground/60 uppercase">Secure</span>
+                    <span className="text-xs font-black text-foreground">Verified Identity</span>
                 </div>
             </motion.div>
 
             <motion.div
                 animate={{ y: [0, 20, 0] }}
                 transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -bottom-8 -left-8 w-56 p-5 bg-white rounded-[2rem] shadow-2xl z-20 border border-navy/5 flex items-center gap-4"
+                className="absolute -bottom-8 -left-8 w-56 p-5 bg-card-bg rounded-[2rem] shadow-2xl z-20 border border-glass-border flex items-center gap-4"
             >
-                <div className="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-royal">
+                <div className="w-12 h-12 bg-blue-50 dark:bg-blue-950/20 rounded-2xl flex items-center justify-center text-royal">
                     <Zap size={24} className="fill-royal/10" />
                 </div>
                 <div className="flex flex-col">
-                    <span className="text-[10px] font-bold text-navy/40 uppercase">Performance</span>
-                    <span className="text-sm font-black text-navy">Turbo Speed</span>
+                    <span className="text-[10px] font-bold text-foreground/40 uppercase">Performance</span>
+                    <span className="text-sm font-black text-foreground">Turbo Speed</span>
                 </div>
             </motion.div>
 

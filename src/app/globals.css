@@ -247,16 +247,16 @@
 /* ── Premium Light Mode Custom Overrides ──────────────────────── */
 .light {
   /* Premium Slate palette with soft gradients */
-  --background: #F8FAFC; 
+  --background: #FFFFFF; 
   --foreground: #0F172A;
   --neon: #CCFF00;
   --neon-dim: rgba(204, 255, 0, 0.35);
-  --dark-gray: #F1F5F9;
-  --card-bg: rgba(255, 255, 255, 0.75);
+  --dark-gray: #F8FAFC;
+  --card-bg: rgba(255, 255, 255, 0.85);
   --glass-border: rgba(15, 23, 42, 0.08);
   --neon-glow: 0 0 25px rgba(204, 255, 0, 0.2);
   --royal: #2563EB;
-  --navy: #E2E8F0;
+  --navy: #F1F5F9;
   
   color-scheme: light;
 }
@@ -280,11 +280,31 @@
 }
 
 .light .bg-white\/5 {
-  background-color: rgba(15, 23, 42, 0.04) !important;
+  background-color: rgba(15, 23, 42, 0.03) !important;
 }
 
-.light .bg-white\/10 {
-  background-color: rgba(15, 23, 42, 0.08) !important;
+.light .bg-white\/8,
+.light .bg-white\/\[0\.08\] {
+  background-color: rgba(15, 23, 42, 0.05) !important;
+}
+
+.light .bg-white\/10,
+.light .bg-white\/\[0\.1\] {
+  background-color: rgba(15, 23, 42, 0.06) !important;
+}
+
+.light .bg-white\/\[0\.04\] {
+  background-color: rgba(15, 23, 42, 0.02) !important;
+}
+
+.light .bg-white\/20,
+.light .bg-white\/\[0\.2\] {
+  background-color: rgba(15, 23, 42, 0.12) !important;
+}
+
+.light .bg-white\/40,
+.light .bg-white\/\[0\.4\] {
+  background-color: rgba(15, 23, 42, 0.25) !important;
 }
 
 /* Translucent Glass Card Overrides in Light Mode */
