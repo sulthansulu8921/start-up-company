@@ -36,20 +36,20 @@ const recentPosts = [
 
 export default function BlogPreview() {
     return (
-        <section className="py-24 relative overflow-hidden bg-white">
+        <section className="py-24 relative overflow-hidden bg-background">
             <div className="container mx-auto px-6 relative z-10">
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
                     <div className="max-w-2xl">
                         <span className="inline-block px-4 py-1.5 rounded-full bg-royal/10 border border-royal/20 text-royal text-xs font-bold uppercase tracking-widest mb-4">
                             Latest Insights
                         </span>
-                        <h2 className="text-4xl md:text-5xl font-sora font-bold text-gray-900 leading-tight">
+                        <h2 className="text-4xl md:text-5xl font-sora font-bold text-foreground leading-tight">
                             Grow Your Business with <br />Our <span className="text-royal">Expert Tips</span>
                         </h2>
                     </div>
                     <Link
                         href="/blog"
-                        className="group flex items-center gap-2 text-royal font-bold hover:text-black transition-colors"
+                        className="group flex items-center gap-2 text-royal font-bold hover:text-foreground transition-colors"
                     >
                         View All Posts <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </Link>
@@ -66,23 +66,23 @@ export default function BlogPreview() {
                         >
                             <Link
                                 href={`/blog/${post.slug}`}
-                                className="group flex flex-col h-full p-8 bg-gray-50 rounded-3xl border border-gray-100 hover:border-neon hover:shadow-xl hover:shadow-neon/5 transition-all"
+                                className="group flex flex-col h-full p-8 bg-card-bg rounded-3xl border border-glass-border hover:border-neon hover:shadow-xl hover:shadow-neon/5 transition-all"
                             >
                                 <div className={`inline-flex items-center gap-2 ${post.bg} ${post.border} border rounded-full px-3 py-1 mb-6 w-fit`}>
                                     <Tag className={`w-3 h-3 ${post.color}`} />
                                     <span className={`text-[10px] font-bold uppercase tracking-wider ${post.color}`}>{post.category}</span>
                                 </div>
 
-                                <h3 className="text-xl font-sora font-bold text-gray-900 mb-4 group-hover:text-royal transition-colors leading-snug">
+                                <h3 className="text-xl font-sora font-bold text-foreground mb-4 group-hover:text-royal transition-colors leading-snug">
                                     {post.title}
                                 </h3>
 
-                                <div className="mt-auto flex items-center justify-between pt-6 border-t border-gray-200">
-                                    <div className="flex items-center gap-3 text-gray-500 text-[11px] font-inter uppercase tracking-wider">
+                                <div className="mt-auto flex items-center justify-between pt-6 border-t border-glass-border">
+                                    <div className="flex items-center gap-3 text-foreground/60 text-[11px] font-inter uppercase tracking-wider">
                                         <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> {post.readTime}</span>
                                     </div>
-                                    <div className="w-8 h-8 rounded-full bg-white border border-gray-100 flex items-center justify-center group-hover:bg-neon group-hover:border-neon transition-all">
-                                        <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-black transition-colors" />
+                                    <div className="w-8 h-8 rounded-full bg-background border border-glass-border flex items-center justify-center group-hover:bg-neon group-hover:border-neon transition-all">
+                                        <ArrowRight className="w-4 h-4 text-foreground/40 group-hover:text-black transition-colors" />
                                     </div>
                                 </div>
                             </Link>

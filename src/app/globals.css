@@ -381,13 +381,14 @@
 /* Extra premium styling details */
 .light .cyber-grid {
   background-image:
-    linear-gradient(rgba(15, 23, 42, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(15, 23, 42, 0.03) 1px, transparent 1px) !important;
+    linear-gradient(rgba(15, 23, 42, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.06) 1px, transparent 1px) !important;
   background-size: 50px 50px !important;
+  opacity: 0.5 !important;
 }
 
 .light .noise-overlay::after {
-  opacity: 0.015 !important;
+  opacity: 0.04 !important;
 }
 
 /* Ambient glow colors in light mode */
