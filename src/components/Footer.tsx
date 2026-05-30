@@ -16,14 +16,6 @@ const nav = {
         { name: "Digital Marketing", href: "/services/digital-marketing" },
         { name: "Branding & Posters", href: "/services/graphic-design-posters" },
     ],
-    Locations: [
-        { name: "All Kerala (Master)", href: "/locations/kerala" },
-        { name: "Dubai (Global Hub)", href: "/locations/dubai" },
-        { name: "Kochi (Ernakulam)", href: "/locations/kochi" },
-        { name: "Calicut (Kozhikode)", href: "/locations/calicut" },
-        { name: "Trivandrum (Capital)", href: "/locations/thiruvananthapuram" },
-        { name: "Thrissur & Palakkad", href: "/locations/thrissur" },
-    ],
     Company: [
         { name: "About Us", href: "/#about" },
         { name: "Pricing", href: "/pricing" },
@@ -35,7 +27,6 @@ const nav = {
         { name: "Privacy Policy", href: "/privacy-policy" },
         { name: "Terms of Service", href: "/terms-of-service" },
         { name: "Cookie Policy", href: "/cookie-policy" },
-        { name: "Refund Policy", href: "/refund-policy" },
     ],
 };
 
