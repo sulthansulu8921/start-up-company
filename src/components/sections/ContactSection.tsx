@@ -7,7 +7,6 @@ import { db } from "@/lib/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { sendInstantNotification } from "@/lib/notifications";
 import { sendLeadEmail } from "@/lib/lead-engine";
-import emailjs from "@emailjs/browser";
 
 const services = [
     "Website Design & Development",
@@ -89,19 +88,15 @@ Service: ${currentData.service}
 Message: 
 ${currentData.message || "No additional message provided."}`;
 
-            // 1. Send Email via EmailJS
-            await emailjs.send(
-                "service_lvzyr9e",
-                "template_tf3oc6h",
-                {
-                    name: currentData.name,
-                    phone: currentData.phone,
-                    email: currentData.email,
-                    service: currentData.service,
-                    message: fullMessage,
-                },
-                "XYtwGU4t93z7pm8Oc"
-            );
+            // 1. Send Email via Lead Engine (Gmail SMTP API)
+            await sendLeadEmail({
+                from_name: currentData.name,
+                from_email: currentData.email,
+                from_phone: currentData.phone,
+                message: currentData.message || "No additional message provided.",
+                plan: currentData.service || "Direct Contact",
+                subject: `📞 New Contact Lead: ${currentData.name} — NanoRays Contact Form`,
+            });
 
             // 2. Async save to Firestore in background (so it doesn't block UI if Firestore fails)
             (async () => {
@@ -129,9 +124,9 @@ ${currentData.message || "No additional message provided."}`;
             });
             sendInstantNotification(`Contact Form Lead: ${currentData.name} (${currentData.phone}) interested in ${currentData.service}`);
         } catch (err: any) {
-            console.error("🚨 EmailJS Form Submission Error:", err);
+            console.error("🚨 Form Submission Error:", err);
             setLoading(false);
-            setErrorMessage(err?.text || err?.message || "Failed to send message. Please try again or call us.");
+            setErrorMessage(err?.message || "Failed to send message. Please try again or call us.");
         }
     };
 

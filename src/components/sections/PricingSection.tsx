@@ -330,18 +330,8 @@ export default function PricingSection() {
 
                                                 // Background Process (Non-blocking)
                                                 (async () => {
+                                                    // 1. Send Email first
                                                     try {
-                                                        // 1. Save to Firebase
-                                                        const { db } = await import("@/lib/firebase");
-                                                        const { collection, addDoc, serverTimestamp } = await import("firebase/firestore");
-                                                        await addDoc(collection(db, "leads"), {
-                                                            ...formData,
-                                                            plan: selectedPlan,
-                                                            type: "Pricing Quote",
-                                                            createdAt: serverTimestamp()
-                                                        });
-
-                                                        // 2. Send Email
                                                         const { sendLeadEmail } = await import("@/lib/lead-engine");
                                                         await sendLeadEmail({
                                                             from_name: formData.name,
@@ -351,8 +341,22 @@ export default function PricingSection() {
                                                             plan: selectedPlan || "Custom",
                                                             subject: `🚀 New Quote Request: ${selectedPlan} — ${formData.name}`,
                                                         });
-                                                    } catch (e) {
-                                                        console.error("📦 Lead Engine Error (Background):", e);
+                                                    } catch (emailErr) {
+                                                        console.error("🚨 Quote Email sending failed:", emailErr);
+                                                    }
+
+                                                    // 2. Save to Firebase in the background
+                                                    try {
+                                                        const { db } = await import("@/lib/firebase");
+                                                        const { collection, addDoc, serverTimestamp } = await import("firebase/firestore");
+                                                        await addDoc(collection(db, "leads"), {
+                                                            ...formData,
+                                                            plan: selectedPlan,
+                                                            type: "Pricing Quote",
+                                                            createdAt: serverTimestamp()
+                                                        });
+                                                    } catch (dbErr) {
+                                                        console.error("🚨 Quote Firestore backup failed:", dbErr);
                                                     }
                                                 })();
 

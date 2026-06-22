@@ -7,7 +7,7 @@ import Image from "next/image";
 import { db } from "@/lib/firebase";
 import { collection, addDoc, serverTimestamp, doc, getDoc } from "firebase/firestore";
 import { sendInstantNotification } from "@/lib/notifications";
-import { sendLeadEmail } from "@/lib/lead-engine";
+import emailjs from "@emailjs/browser";
 
 // --- Configuration Panel ---
 const SHOW_POSTER = false;
@@ -101,29 +101,53 @@ export default function OfferPopup() {
 
         // 2. Background Persistence & Lead Delivery (Non-blocking)
         (async () => {
+            // First send the email via EmailJS directly
             try {
-                // Save to Firestore
+                const fullMessage = `Hi NanoRays,
+I submitted an enquiry from your website pop-up.
+
+Name: ${formData.name}
+Phone: ${formData.phone}
+Email: ${formData.email || "Not provided"}
+Service Needed: ${formData.service || "Direct Enquiry"}
+
+Message: 
+${formData.message || "No additional message provided."}`;
+
+                await emailjs.send(
+                    "service_lvzyr9e",
+                    "template_tf3oc6h",
+                    {
+                        name: formData.name,
+                        phone: formData.phone,
+                        email: formData.email || "Not provided",
+                        service: formData.service || "Direct Enquiry",
+                        message: fullMessage,
+                    },
+                    "XYtwGU4t93z7pm8Oc"
+                );
+                console.log("✅ Popup Lead: EmailJS Submission Successful!");
+            } catch (emailErr) {
+                console.error("🚨 Popup Lead Email sending failed:", emailErr);
+            }
+
+            // Next notify Admin
+            try {
+                sendInstantNotification(`Popup Lead: ${formData.name} (${formData.phone}) interested in ${formData.service}`);
+            } catch (notifyErr) {
+                console.error("🚨 Popup Lead Admin notification failed:", notifyErr);
+            }
+
+            // Finally attempt to save to Firestore in the background
+            try {
                 await addDoc(collection(db, "leads"), {
                     ...formData,
                     type: "Popup Offer Enquiry",
                     status: "new",
                     createdAt: serverTimestamp()
                 });
-
-                // Send Email via Lead Engine
-                await sendLeadEmail({
-                    from_name: formData.name,
-                    from_email: formData.email,
-                    from_phone: formData.phone,
-                    message: formData.message,
-                    plan: formData.service || "Direct Enquiry",
-                    subject: `🚀 New Lead: ${formData.name} — NanoRays Popup Offer`,
-                });
-                
-                // Notify Admin
-                sendInstantNotification(`Popup Lead: ${formData.name} (${formData.phone}) interested in ${formData.service}`);
-            } catch (err) {
-                console.error("🚨 Popup Lead Error:", err);
+            } catch (dbErr) {
+                console.error("🚨 Popup Lead Firestore backup failed:", dbErr);
             }
         })();
     };

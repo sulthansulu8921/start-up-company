@@ -1,5 +1,5 @@
-// Formspree Lead Engine — Professional Lead Capture for Static Hosting
-// Primary Endpoint: https://formspree.io/f/xojbpgaa
+// Local Lead Engine — Client-Side Lead Capture using EmailJS (Static Hosting Compatible)
+import emailjs from "@emailjs/browser";
 
 export async function sendLeadEmail(params: {
     from_name: string;
@@ -9,42 +9,36 @@ export async function sendLeadEmail(params: {
     plan?: string;
     subject: string;
 }) {
-    console.log("📨 Lead Engine: Preparing submission for...", params.from_email);
+    console.log("📨 Lead Engine: Preparing client-side EmailJS submission for...", params.from_email);
 
     try {
-        const response = await fetch('https://formspree.io/f/xojbpgaa', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                _subject: params.subject,
+        const fullMessage = `Hi NanoRays,
+I submitted an enquiry from your website.
+
+Name: ${params.from_name}
+Phone: ${params.from_phone}
+Email: ${params.from_email || "Not provided"}
+Service/Plan: ${params.plan || "Direct Contact"}
+
+Message: 
+${params.message}`;
+
+        await emailjs.send(
+            "service_lvzyr9e",
+            "template_tf3oc6h",
+            {
                 name: params.from_name,
-                email: params.from_email,
                 phone: params.from_phone,
-                service_requested: params.plan || "Direct Contact",
-                message: params.message,
-            }),
-        });
+                email: params.from_email || "Not provided",
+                service: params.plan || "Direct Contact",
+                message: fullMessage,
+            },
+            "XYtwGU4t93z7pm8Oc"
+        );
 
-        const data = await response.json();
-
-        if (response.ok) {
-            console.log("✅ Lead Engine: Submission Successful!", data);
-        } else {
-            console.error("❌ Lead Engine: Formspree Error", {
-                status: response.status,
-                text: response.statusText,
-                data: data
-            });
-
-            // Helpful alert for the user during debugging
-            if (typeof window !== 'undefined' && data.errors) {
-                console.warn("Formspree says:", data.errors.map((e: any) => e.message).join(", "));
-            }
-        }
+        console.log("✅ Lead Engine: EmailJS Submission Successful!");
     } catch (error) {
-        console.error("🚨 Lead Engine: Critical Network/System Error", error);
+        console.error("🚨 Lead Engine: EmailJS Submission Failed", error);
+        throw error;
     }
 }
