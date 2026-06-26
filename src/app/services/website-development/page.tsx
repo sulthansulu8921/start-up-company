@@ -5,6 +5,10 @@ import Link from "next/link";
 export const metadata: Metadata = {
     title: "Affordable Website Design Packages for Startups in Kerala | NanoRays",
     description: "Get affordable website design services in Kerala. Premium, mobile-responsive startups packages starting low. NanoRays Solution is the best digital agency.",
+    keywords: [
+        "website design India", "startup website design", "business website Kerala", "affordable website India",
+        "web development startup India", "mobile responsive website India", "website design packages Kerala"
+    ],
     alternates: {
         canonical: "https://nanorayssolution.com/services/website-development",
     }
@@ -66,7 +70,7 @@ export default function WebsiteDevelopment() {
                             <Link href="/pricing" className="flex items-center justify-center gap-2 w-full bg-white text-black px-6 py-4 rounded-full font-bold hover:bg-gray-200 transition-all transform hover:scale-105">
                                 View Pricing Packages <ArrowRight className="w-5 h-5" />
                             </Link>
-                            <Link href="/services/seo-optimization" className="flex items-center justify-center gap-2 w-full bg-transparent border-2 border-white/20 text-white px-6 py-4 rounded-full font-bold hover:bg-white/5 transition-all">
+                            <Link href="/services/seo-services" className="flex items-center justify-center gap-2 w-full bg-transparent border-2 border-white/20 text-white px-6 py-4 rounded-full font-bold hover:bg-white/5 transition-all">
                                 See SEO Services
                             </Link>
                         </div>

@@ -169,7 +169,7 @@ ${formData.message || "No additional message provided."}`;
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.95, y: 10 }}
                         transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                        className={`relative w-full overflow-hidden bg-gray-900 border border-white/10 rounded-3xl shadow-2xl ${
+                        className={`relative w-full max-h-[90vh] overflow-y-auto scrollbar-hide bg-gray-900 border border-white/10 rounded-3xl shadow-2xl ${
                             mode === "poster" ? "max-w-3xl" : "max-w-xl"
                         }`}
                     >

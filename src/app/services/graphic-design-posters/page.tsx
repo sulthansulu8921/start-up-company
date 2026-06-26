@@ -5,6 +5,10 @@ import Link from "next/link";
 export const metadata: Metadata = {
     title: "Custom Branding & Festival Poster Design Kerala | NanoRays",
     description: "Get premium graphic design, festival posters, and custom branding services in India. Elevate your startup's visual identity with NanoRays.",
+    keywords: [
+        "logo design India", "brand identity India", "startup logo design Kerala", "professional logo design India",
+        "branding agency India", "festival poster design Kerala", "graphic design Kochi", "social media poster design"
+    ],
     alternates: {
         canonical: "https://nanorayssolution.com/services/graphic-design-posters",
     }

@@ -1,4 +1,4 @@
-import { Globe, Target, Megaphone, Palette, BarChart3, Layout, Share2, TrendingUp, MapPin, Wrench, Brain, LucideIcon } from "lucide-react";
+import { Globe, Target, Megaphone, Palette, BarChart3, Layout, Share2, TrendingUp, MapPin, Wrench, Brain, Code2, LucideIcon } from "lucide-react";
 
 export interface RoadmapStep {
     day: string;
@@ -20,12 +20,33 @@ export interface Service {
 
 export const services: Service[] = [
     {
+        slug: "website-development",
+        title: "Website Development",
+        desc: "Custom business websites, landing pages, and fast corporate platforms.",
+        icon: Code2,
+        accent: "text-neon",
+        bg: "rgba(204, 255, 0, 0.05)",
+        fullDesc: "We design and build high-performance, mobile-responsive websites that are fast, secure, and designed to rank on Google. From startups to established enterprises, we create digital solutions that convert.",
+        benefits: [
+            "Mobile Responsive Design",
+            "Built-in SEO Foundation",
+            "Speed & Security Optimization",
+            "Modern UI/UX Architecture"
+        ],
+        roadmap: [
+            { day: "STEP 01", topic: "Strategic Planning", details: "Defining site structure, goals, and content hierarchy." },
+            { day: "STEP 02", topic: "Design & Prototyping", details: "Creating modern, interactive layouts using visual hierarchy." },
+            { day: "STEP 03", topic: "Next-gen Coding", details: "Building your website with fast frameworks like Next.js." },
+            { day: "STEP 04", topic: "SEO & Launch", details: "Testing performance, speed, and launching your site." }
+        ]
+    },
+    {
         slug: "ecommerce-development",
         title: "Ecommerce Development",
         desc: "Custom business platforms, high-conversion online stores, and digital shops.",
         icon: Globe,
-        accent: "text-neon",
-        bg: "rgba(204, 255, 0, 0.05)",
+        accent: "text-sky-400",
+        bg: "rgba(56, 189, 248, 0.05)",
         fullDesc: "We develop sophisticated web ecosystems including enterprise-level business sites, seamless E-commerce platforms, and high-performance landing pages optimized for every device.",
         benefits: [
             "Conversion-Focused UI/UX Design",
@@ -104,45 +125,24 @@ export const services: Service[] = [
         ]
     },
     {
-        slug: "branding-logo-design",
-        title: "Brand Identity Design",
-        desc: "Crafting iconic logos and cohesive visual languages.",
+        slug: "graphic-design-posters",
+        title: "Branding & Posters",
+        desc: "Custom branding, visual identity, logos, and high-impact festival posters.",
         icon: Palette,
-        accent: "text-neon",
-        bg: "rgba(204, 255, 0, 0.05)",
-        fullDesc: "Elevate your market perception with a premium brand voice. We provide comprehensive Logo Design, Visual Style Guides, and professional collateral.",
+        accent: "text-purple-400",
+        bg: "rgba(168, 85, 247, 0.05)",
+        fullDesc: "Your brand is how clients perceive your value. We design premium logos, visual identities, and striking social media collateral to make your business unforgettable.",
         benefits: [
-            "Custom Icon & Logo Design",
-            "Comprehensive Visual Systems",
-            "Multi-Platform Asset Kits",
-            "Professional Brand Guidelines"
+            "Corporate Identity & Logos",
+            "Social Media & Festival Posters",
+            "UI/UX Interface Design",
+            "Marketing Collateral"
         ],
         roadmap: [
-            { day: "STEP 01", topic: "Concept Blueprinting", details: "Exploring visual directions aligned with your mission." },
-            { day: "STEP 02", topic: "Design Iterations", details: "Reviewing premium concepts for final selection." },
-            { day: "STEP 03", topic: "System Expansion", details: "Extending the brand to cards, headers, and social kits." },
-            { day: "STEP 04", topic: "Final Delivery", details: "Providing high-resolution source and production files." }
-        ]
-    },
-    {
-        slug: "poster-design",
-        title: "Strategic Design",
-        desc: "High-impact visual communication for modern brands.",
-        icon: Layout,
-        accent: "text-sky-400",
-        bg: "rgba(56, 189, 248, 0.05)",
-        fullDesc: "Drive engagement with masterful graphic communication. We design high-conversion social assets, professional brochures, and corporate event materials.",
-        benefits: [
-            "High-Conversion Social Graphics",
-            "Corporate Brochure Design",
-            "Event & Promotional Collateral",
-            "Modern Aesthetic Standards"
-        ],
-        roadmap: [
-            { day: "STEP 01", topic: "Visual Objectives", details: "Defining the core message and target audience." },
-            { day: "STEP 02", topic: "Structure & Layout", details: "Drafting the primary visual hierarchy." },
-            { day: "STEP 03", topic: "Refinement", details: "Polishing details for final brand alignment." },
-            { day: "STEP 04", topic: "Production Handoff", details: "Delivering print-ready and digital-optimized files." }
+            { day: "STEP 01", topic: "Discovery", details: "Understanding brand values and visual style preferences." },
+            { day: "STEP 02", topic: "Concept Design", details: "Developing distinct logo and branding directions." },
+            { day: "STEP 03", topic: "Collateral Development", details: "Designing social assets, templates, and brochures." },
+            { day: "STEP 04", topic: "Brand Launch", details: "Providing all files and style guides for marketing." }
         ]
     },
     {
