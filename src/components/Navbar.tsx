@@ -100,8 +100,8 @@ export default function Navbar() {
                 className={cn(
                     "w-full max-w-6xl rounded-full border transition-all duration-500 pointer-events-auto flex items-center justify-between px-6 md:px-8",
                     isScrolled
-                        ? "py-2.5 bg-black/75 backdrop-blur-xl border-neon/20 shadow-[0_10px_40px_rgba(0,0,0,0.5),_0_0_30px_rgba(204,255,0,0.03)]"
-                        : "py-4 bg-black/40 backdrop-blur-md border-white/5"
+                        ? "py-2.5 bg-white/80 dark:bg-black/75 backdrop-blur-xl border-black/5 dark:border-neon/20 shadow-[0_10px_40px_rgba(0,0,0,0.05),_0_0_30px_rgba(0,0,0,0.01)] dark:shadow-[0_10px_40px_rgba(0,0,0,0.5),_0_0_30px_rgba(204,255,0,0.03)]"
+                        : "py-4 bg-white/40 dark:bg-black/40 backdrop-blur-md border-black/5 dark:border-white/5"
                 )}
             >
                 {/* Logo */}
@@ -111,7 +111,7 @@ export default function Navbar() {
 
                 {/* Desktop Navigation Links */}
                 <div 
-                    className="hidden md:flex items-center gap-1 bg-white/[0.03] border border-white/5 rounded-full p-1 relative"
+                    className="hidden md:flex items-center gap-1 bg-black/[0.03] dark:bg-white/[0.03] border border-black/5 dark:border-white/5 rounded-full p-1 relative"
                     onMouseLeave={() => setMenuHoveredLink(null)}
                 >
                     {navLinks.map((link) => (
@@ -128,7 +128,9 @@ export default function Navbar() {
                                 href={link.href}
                                 className={cn(
                                     "relative px-4 py-2 rounded-full text-xs font-black uppercase tracking-widest transition-all duration-300 flex items-center gap-1.5 z-10",
-                                    activeLink === link.name ? "text-neon" : "text-white/60 hover:text-white"
+                                    activeLink === link.name 
+                                        ? "text-purple-600 dark:text-neon" 
+                                        : "text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white"
                                 )}
                                 onClick={(e) => {
                                     scrollToSection(e, link.href);
@@ -137,7 +139,7 @@ export default function Navbar() {
                             >
                                 <span>{link.name}</span>
                                 {link.dropdown && (
-                                    <svg className={cn("w-3 h-3 transition-transform duration-300", hoveredLink === link.name ? "rotate-180 text-neon" : "text-white/40")} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <svg className={cn("w-3 h-3 transition-transform duration-300", hoveredLink === link.name ? "rotate-180 text-purple-600 dark:text-neon" : "text-black/40 dark:text-white/40")} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M19 9l-7 7-7-7" />
                                     </svg>
                                 )}
@@ -147,7 +149,7 @@ export default function Navbar() {
                             {menuHoveredLink === link.name && (
                                 <motion.div
                                     layoutId="nav-hover-pill"
-                                    className="absolute inset-0 bg-white/5 rounded-full z-0"
+                                    className="absolute inset-0 bg-black/5 dark:bg-white/5 rounded-full z-0"
                                     transition={{ type: "spring", stiffness: 350, damping: 30 }}
                                 />
                             )}
@@ -156,7 +158,7 @@ export default function Navbar() {
                             {activeLink === link.name && (
                                 <motion.div
                                     layoutId="nav-active-dot"
-                                    className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-neon rounded-full"
+                                    className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-purple-600 dark:bg-neon rounded-full"
                                     transition={{ type: "spring", stiffness: 300, damping: 25 }}
                                 />
                             )}
@@ -169,18 +171,18 @@ export default function Navbar() {
                                         animate={{ opacity: 1, y: 0, scale: 1 }}
                                         exit={{ opacity: 0, y: 15, scale: 0.95 }}
                                         transition={{ duration: 0.2 }}
-                                        className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-64 bg-black/95 backdrop-blur-2xl border border-neon/20 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.8)] p-2 z-50 overflow-hidden"
+                                        className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-64 bg-white/95 dark:bg-black/95 backdrop-blur-2xl border border-black/5 dark:border-neon/20 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.8)] p-2 z-50 overflow-hidden"
                                     >
                                         <div className="flex flex-col gap-1">
                                             {link.dropdown.map((item) => (
                                                 <Link
                                                     key={item.href}
                                                     href={item.href}
-                                                    className="flex items-center justify-between px-4 py-3 rounded-xl hover:bg-neon/10 group/item transition-colors"
+                                                    className="flex items-center justify-between px-4 py-3 rounded-xl hover:bg-purple-50 dark:hover:bg-neon/10 group/item transition-colors"
                                                     onClick={() => setHoveredLink(null)}
                                                 >
-                                                    <span className="text-xs font-bold text-white/80 group-hover/item:text-neon transition-colors">{item.name}</span>
-                                                    <ArrowRight size={14} className="text-neon opacity-0 group-hover/item:opacity-100 -translate-x-2 group-hover/item:translate-x-0 transition-all" />
+                                                    <span className="text-xs font-bold text-black/80 dark:text-white/80 group-hover/item:text-purple-600 group-hover/item:dark:text-neon transition-colors">{item.name}</span>
+                                                    <ArrowRight size={14} className="text-purple-600 dark:text-neon opacity-0 group-hover/item:opacity-100 -translate-x-2 group-hover/item:translate-x-0 transition-all" />
                                                 </Link>
                                             ))}
                                         </div>
@@ -206,7 +208,7 @@ export default function Navbar() {
 
                     {/* Mobile Menu Toggle */}
                     <button
-                        className="md:hidden p-2 text-white hover:text-neon transition-colors"
+                        className="md:hidden p-2 text-black dark:text-white hover:text-purple-600 dark:hover:text-neon transition-colors"
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                         aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
                     >
@@ -223,7 +225,7 @@ export default function Navbar() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
                         transition={{ duration: 0.3 }}
-                        className="fixed inset-x-4 top-24 bg-black/95 backdrop-blur-2xl rounded-3xl p-6 md:hidden border border-neon/20 shadow-[0_30px_60px_rgba(0,0,0,0.8)] pointer-events-auto"
+                        className="fixed inset-x-4 top-24 bg-white/95 dark:bg-black/95 backdrop-blur-2xl rounded-3xl p-6 md:hidden border border-black/5 dark:border-neon/20 shadow-[0_30px_60px_rgba(0,0,0,0.1)] dark:shadow-[0_30px_60px_rgba(0,0,0,0.8)] pointer-events-auto"
                     >
                         <div className="flex flex-col gap-6">
                             {navLinks.map((link) => (
@@ -231,7 +233,7 @@ export default function Navbar() {
                                     <div
                                         className={cn(
                                             "text-lg font-bold transition-colors flex items-center justify-between group cursor-pointer",
-                                            activeLink === link.name ? "text-neon" : "text-white/70 hover:text-white"
+                                            activeLink === link.name ? "text-purple-600 dark:text-neon" : "text-black/70 dark:text-white/70 hover:text-black dark:hover:text-white"
                                         )}
                                         onClick={(e) => {
                                             if (!link.dropdown) {
@@ -253,12 +255,12 @@ export default function Navbar() {
                                         </Link>
                                         {link.dropdown ? (
                                             <div className="p-1">
-                                                <svg className={cn("w-4 h-4 transition-transform duration-300", hoveredLink === link.name ? "rotate-180 text-neon" : "text-white/40")} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <svg className={cn("w-4 h-4 transition-transform duration-300", hoveredLink === link.name ? "rotate-180 text-purple-600 dark:text-neon" : "text-black/40 dark:text-white/40")} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                                                 </svg>
                                             </div>
                                         ) : (
-                                            <ArrowRight size={16} className="opacity-40 group-hover:opacity-100 transition-all text-neon" />
+                                            <ArrowRight size={16} className="opacity-40 group-hover:opacity-100 transition-all text-purple-600 dark:text-neon" />
                                         )}
                                     </div>
 
@@ -269,13 +271,13 @@ export default function Navbar() {
                                                 initial={{ height: 0, opacity: 0 }}
                                                 animate={{ height: "auto", opacity: 1 }}
                                                 exit={{ height: 0, opacity: 0 }}
-                                                className="flex flex-col gap-3 pl-4 border-l border-neon/20 ml-1"
+                                                className="flex flex-col gap-3 pl-4 border-l border-black/10 dark:border-neon/20 ml-1"
                                             >
                                                 {link.dropdown.map((item) => (
                                                     <Link
                                                         key={item.href}
                                                         href={item.href}
-                                                        className="text-xs font-black uppercase tracking-wider text-white/50 hover:text-neon transition-colors py-1"
+                                                        className="text-xs font-black uppercase tracking-wider text-black/50 dark:text-white/50 hover:text-purple-600 dark:hover:text-neon transition-colors py-1"
                                                         onClick={() => setIsMobileMenuOpen(false)}
                                                     >
                                                         {item.name}
