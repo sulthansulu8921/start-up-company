@@ -15,31 +15,31 @@ interface ScrollRevealProps {
 
 const revealVariants: Record<string, Variants> = {
     "fade-up": {
-        hidden: { opacity: 0, y: 40 },
+        hidden: { opacity: 0, y: 24 },
         visible: { opacity: 1, y: 0 }
     },
     "fade-down": {
-        hidden: { opacity: 0, y: -40 },
+        hidden: { opacity: 0, y: -24 },
         visible: { opacity: 1, y: 0 }
     },
     "fade-left": {
-        hidden: { opacity: 0, x: 45 },
+        hidden: { opacity: 0, x: 28 },
         visible: { opacity: 1, x: 0 }
     },
     "fade-right": {
-        hidden: { opacity: 0, x: -45 },
+        hidden: { opacity: 0, x: -28 },
         visible: { opacity: 1, x: 0 }
     },
     "zoom-in": {
-        hidden: { opacity: 0, scale: 0.9 },
+        hidden: { opacity: 0, scale: 0.94 },
         visible: { opacity: 1, scale: 1 }
     },
     "scale-up": {
-        hidden: { opacity: 0, scale: 0.8 },
+        hidden: { opacity: 0, scale: 0.88 },
         visible: { opacity: 1, scale: 1 }
     },
     "blur-in": {
-        hidden: { opacity: 0, filter: "blur(12px)", y: 20 },
+        hidden: { opacity: 0, filter: "blur(8px)", y: 12 },
         visible: { opacity: 1, filter: "blur(0px)", y: 0 }
     }
 };
@@ -47,10 +47,10 @@ const revealVariants: Record<string, Variants> = {
 export default function ScrollReveal({
     children,
     variant = "fade-up",
-    duration = 0.8,
+    duration = 0.45,
     delay = 0,
     className = "",
-    threshold = 0.15,
+    threshold = 0.12,
     once = true
 }: ScrollRevealProps) {
     return (
@@ -127,7 +127,7 @@ export function StaggerItem({
         <motion.div
             variants={revealVariants[variant]}
             transition={{
-                duration: 0.8,
+                duration: 0.45,
                 ease: [0.16, 1, 0.3, 1]
             }}
             className={className}

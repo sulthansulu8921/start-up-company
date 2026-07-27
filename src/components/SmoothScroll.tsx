@@ -7,13 +7,13 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
     useEffect(() => {
         // Initialize Lenis smooth scroll
         const lenis = new Lenis({
-            duration: 1.2,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Premium exponential easing
+            duration: 0.6,                                             // was 1.2 — halved for instant feel
+            easing: (t) => 1 - Math.pow(1 - t, 3),                    // cubic ease-out: snappy start, smooth finish
             orientation: "vertical",
             gestureOrientation: "vertical",
             smoothWheel: true,
-            wheelMultiplier: 1.0,
-            touchMultiplier: 1.2,
+            wheelMultiplier: 1.4,                                      // faster wheel response
+            touchMultiplier: 1.8,                                      // faster touch response
         });
 
         // Set Lenis globally on window so GSAP or other components can access it if needed

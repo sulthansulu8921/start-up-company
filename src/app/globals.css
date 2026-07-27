@@ -200,6 +200,48 @@
   }
 }
 
+/* ── Background blob drift (CSS-only, composited on GPU) ── */
+@keyframes blob-drift-1 {
+  0%, 100% { transform: translate(0px, 0px); }
+  33%       { transform: translate(55px, -70px); }
+  66%       { transform: translate(-30px, 40px); }
+}
+@keyframes blob-drift-2 {
+  0%, 100% { transform: translate(0px, 0px); }
+  33%       { transform: translate(-80px, 55px); }
+  66%       { transform: translate(50px, -35px); }
+}
+@keyframes blob-drift-3 {
+  0%, 100% { transform: translate(0px, 0px); }
+  33%       { transform: translate(40px, 45px); }
+  66%       { transform: translate(-50px, -40px); }
+}
+@keyframes blob-drift-4 {
+  0%, 100% { transform: translate(0px, 0px); }
+  33%       { transform: translate(-35px, 55px); }
+  66%       { transform: translate(35px, -55px); }
+}
+@keyframes ring-spin-cw  { to { transform: rotate(360deg); } }
+@keyframes ring-spin-ccw { to { transform: rotate(-360deg); } }
+@keyframes shimmer-sweep {
+  0%   { transform: scaleX(0); opacity: 0; transform-origin: left; }
+  40%  { transform: scaleX(1); opacity: 1; transform-origin: left; }
+  60%  { transform: scaleX(1); opacity: 1; transform-origin: right; }
+  100% { transform: scaleX(0); opacity: 0; transform-origin: right; }
+}
+
+.blob-1 { animation: blob-drift-1 22s ease-in-out infinite; }
+.blob-2 { animation: blob-drift-2 28s ease-in-out infinite; }
+.blob-3 { animation: blob-drift-3 32s ease-in-out infinite; }
+.blob-4 { animation: blob-drift-4 26s ease-in-out infinite; }
+
+.ring-spin-slow    { animation: ring-spin-cw  60s linear infinite; }
+.ring-spin-reverse { animation: ring-spin-ccw 50s linear infinite; }
+
+.shimmer-1 { animation: shimmer-sweep 8s  ease-in-out infinite; }
+.shimmer-2 { animation: shimmer-sweep 10s ease-in-out infinite 2.5s; }
+.shimmer-3 { animation: shimmer-sweep 12s ease-in-out infinite 5s; }
+
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
