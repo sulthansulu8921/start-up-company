@@ -46,6 +46,7 @@ export default function Hero() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const imagesRef = useRef<HTMLImageElement[]>([]);
     const requestRef = useRef<number | undefined>(undefined);
+    const lastDrawnRef = useRef<number>(1);
 
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -75,23 +76,36 @@ export default function Hero() {
 
         let img = imagesRef.current[frameIndex - 1];
         if (!img || !img.complete) {
-            // Find the nearest loaded frame to draw
-            let nearestDist = Infinity;
-            let nearestImg = null;
-            for (let j = 0; j < FRAME_COUNT; j++) {
-                const currentImg = imagesRef.current[j];
-                if (currentImg && currentImg.complete) {
-                    const dist = Math.abs(j - (frameIndex - 1));
-                    if (dist < nearestDist) {
-                        nearestDist = dist;
-                        nearestImg = currentImg;
+            // 1. Try the last drawn image first (O(1) constant time)
+            const lastIdx = lastDrawnRef.current;
+            const fallbackImg = imagesRef.current[lastIdx - 1];
+            if (fallbackImg && fallbackImg.complete) {
+                img = fallbackImg;
+            } else {
+                // 2. Fall back to search loop only if the cache is invalid
+                let nearestDist = Infinity;
+                let nearestImg = null;
+                for (let j = 0; j < FRAME_COUNT; j++) {
+                    const currentImg = imagesRef.current[j];
+                    if (currentImg && currentImg.complete) {
+                        const dist = Math.abs(j - (frameIndex - 1));
+                        if (dist < nearestDist) {
+                            nearestDist = dist;
+                            nearestImg = currentImg;
+                        }
                     }
                 }
+                img = nearestImg || img;
             }
-            img = nearestImg || img;
         }
 
         if (img && img.complete) {
+            // Update cache pointer
+            const idx = imagesRef.current.indexOf(img);
+            if (idx !== -1) {
+                lastDrawnRef.current = idx + 1;
+            }
+
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             const canvasRatio = canvas.width / canvas.height;

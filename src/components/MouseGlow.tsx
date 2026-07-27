@@ -28,8 +28,9 @@ export default function MouseGlow() {
             cursorY.set(e.clientY);
 
             if (!isVisible) setIsVisible(true);
+        };
 
-            // Check if the hovered element is interactive
+        const handleMouseOver = (e: MouseEvent) => {
             const target = e.target as HTMLElement;
             if (target) {
                 const isInteractive = 
@@ -48,10 +49,12 @@ export default function MouseGlow() {
             setIsVisible(false);
         };
 
-        window.addEventListener("mousemove", handleMouseMove);
-        document.addEventListener("mouseleave", handleMouseLeave);
+        window.addEventListener("mousemove", handleMouseMove, { passive: true });
+        document.addEventListener("mouseover", handleMouseOver, { passive: true });
+        document.addEventListener("mouseleave", handleMouseLeave, { passive: true });
         return () => {
             window.removeEventListener("mousemove", handleMouseMove);
+            document.removeEventListener("mouseover", handleMouseOver);
             document.removeEventListener("mouseleave", handleMouseLeave);
         };
     }, [mouseX, mouseY, cursorX, cursorY, isVisible]);
