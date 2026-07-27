@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Sora, Inter } from "next/font/google";
 import "./globals.css";
-import MouseGlow from "@/components/MouseGlow";
+
 import GridBackground from "@/components/GridBackground";
 
 const sora = Sora({
@@ -149,7 +149,7 @@ export default function RootLayout({
           <Preloader />
           <SmoothScroll>
             <GridBackground />
-            <MouseGlow />
+
             <Navbar />
             {children}
             <ClientComponents />
