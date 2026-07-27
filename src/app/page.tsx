@@ -44,32 +44,6 @@ export default function Home() {
 
       <Hero />
 
-      {/* ── Persistent Content Background ─────────────────────── */}
-      <motion.div
-        initial={{ scale: 1, x: 0, y: 0 }}
-        animate={{
-          scale: [1, 1.1, 1],
-          x: [0, 10, -10, 0],
-          y: [0, -10, 10, 0]
-        }}
-        transition={{
-          duration: 30,
-          repeat: Infinity,
-          ease: "linear"
-        }}
-        className="fixed inset-0 z-0 pointer-events-none bg-cover bg-center will-change-transform"
-        style={{
-          backgroundImage: 'url("/background-content.png")',
-          transform: 'translateZ(0)', // GPU acceleration
-          opacity: useTransform(scrollY, [1000, 1500], [0, 0.6]) // Reveal as Hero finishes
-        }}
-      />
-      {/* Global Dark Overlay */}
-      <motion.div
-        className="fixed inset-0 z-0 pointer-events-none bg-gradient-to-b from-black via-black/70 to-black opacity-80"
-        style={{ opacity: useTransform(scrollY, [1000, 1500], [0, 0.8]) }}
-      />
-
       {/* ── Content Sections ─────────────────────── */}
       <div className="relative z-30">
         <BusinessStats />
