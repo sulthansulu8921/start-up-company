@@ -6,6 +6,7 @@ import BusinessStats from "@/components/sections/BusinessStats";
 import Services from "@/components/sections/Services";
 import PricingSection from "@/components/sections/PricingSection";
 import WhyChooseUs from "@/components/sections/WhyChooseUs";
+import ShowcaseSection from "@/components/sections/ShowcaseSection";
 import ProcessTimeline from "@/components/sections/ProcessTimeline";
 import Testimonials from "@/components/sections/Testimonials";
 import BlogPreview from "@/components/sections/BlogPreview";
@@ -75,6 +76,7 @@ export default function Home() {
         <Services />
         <PricingSection />
         <WhyChooseUs />
+        <ShowcaseSection />
         <ProcessTimeline />
         <Testimonials />
         <BlogPreview />

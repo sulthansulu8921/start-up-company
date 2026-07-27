@@ -3,6 +3,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { ArrowUpRight, TrendingUp, Cpu, Globe, Target } from "lucide-react";
+import ScrollReveal from "@/components/ScrollReveal";
+import TiltCard from "@/components/TiltCard";
 
 const categories = ["All", "Web Dev", "SEO", "Design", "Automation"];
 
@@ -75,33 +77,23 @@ export default function Portfolio() {
             <div className="max-w-7xl mx-auto px-6 relative z-10">
                 {/* Header */}
                 <div className="text-center max-w-3xl mx-auto mb-16">
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        className="inline-flex px-3 py-1.5 rounded-lg bg-white/5 border border-white/20 text-white/80 text-[10px] font-black uppercase tracking-[0.2em] mb-6"
-                    >
-                        Our Portfolio
-                    </motion.div>
+                    <ScrollReveal variant="fade-up">
+                        <span className="inline-flex px-3 py-1.5 rounded-lg bg-white/5 border border-white/20 text-white/80 text-[10px] font-black uppercase tracking-[0.2em] mb-6">
+                            Our Portfolio
+                        </span>
+                    </ScrollReveal>
 
-                    <motion.h2
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.1 }}
-                        className="text-5xl md:text-6xl font-black font-sora text-white mb-6 tracking-tighter"
-                    >
-                        Recent <span className="text-neon">Projects</span>
-                    </motion.h2>
-                    <motion.p
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.2 }}
-                        className="text-white/80 text-lg font-bold"
-                    >
-                        High-quality websites and digital solutions built for our amazing clients.
-                    </motion.p>
+                    <ScrollReveal variant="fade-up" delay={0.1}>
+                        <h2 className="text-5xl md:text-6xl font-black font-sora text-white mb-6 tracking-tighter">
+                            Recent <span className="text-neon">Projects</span>
+                        </h2>
+                    </ScrollReveal>
+
+                    <ScrollReveal variant="fade-up" delay={0.2}>
+                        <p className="text-white/80 text-lg font-bold">
+                            High-quality websites and digital solutions built for our amazing clients.
+                        </p>
+                    </ScrollReveal>
                 </div>
 
                 {/* Filter Tabs */}
@@ -130,78 +122,79 @@ export default function Portfolio() {
                                 animate={{ opacity: 1, y: 0, scale: 1 }}
                                 exit={{ opacity: 0, scale: 0.95 }}
                                 transition={{ delay: i * 0.05, duration: 0.5 }}
-                                whileHover={{ y: -8 }}
-                                className={`group relative p-8 rounded-3xl glass-dark ${p.border.replace('20', '40')} hover:border-white/30 transition-all duration-500 overflow-hidden cursor-pointer`}
+                                className="h-full"
                             >
-                                {/* Visual Header */}
-                                <div className="relative h-44 rounded-2xl bg-black border border-white/10 mb-8 overflow-hidden">
-                                    <div className={`absolute inset-0 ${p.glow} opacity-30 group-hover:opacity-60 transition-opacity`} />
-                                    <div className="absolute inset-0 cyber-grid opacity-20" />
+                                <TiltCard className="h-full">
+                                    <div className={`group relative p-8 rounded-3xl glass-dark ${p.border.replace('20', '40')} hover:border-white/30 transition-all duration-500 overflow-hidden cursor-pointer h-full flex flex-col justify-between`}>
+                                        
+                                        <div>
+                                            {/* Visual Header */}
+                                            <div className="relative h-44 rounded-2xl bg-black border border-white/10 mb-8 overflow-hidden">
+                                                <div className={`absolute inset-0 ${p.glow} opacity-30 group-hover:opacity-60 transition-opacity`} />
+                                                <div className="absolute inset-0 cyber-grid opacity-20" />
 
-                                    {/* Floating elements inside Project card */}
-                                    <div className="absolute inset-4 flex flex-col justify-between">
-                                        <div className="flex justify-between items-start">
-                                            <div className="flex gap-1.5">
-                                                <div className="w-1.5 h-1.5 rounded-full bg-white/40" />
-                                                <div className="w-1.5 h-1.5 rounded-full bg-white/40" />
-                                                <div className="w-1.5 h-1.5 rounded-full bg-white/40" />
+                                                {/* Floating elements inside Project card */}
+                                                <div className="absolute inset-4 flex flex-col justify-between">
+                                                    <div className="flex justify-between items-start">
+                                                        <div className="flex gap-1.5">
+                                                            <div className="w-1.5 h-1.5 rounded-full bg-white/40" />
+                                                            <div className="w-1.5 h-1.5 rounded-full bg-white/40" />
+                                                            <div className="w-1.5 h-1.5 rounded-full bg-white/40" />
+                                                        </div>
+                                                        <ArrowUpRight size={18} className="text-white/40 group-hover:text-neon group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
+                                                    </div>
+
+                                                    <div className="glass-neon py-2 px-3 rounded-xl border-white/20 inline-flex items-center gap-2 self-start shadow-xl">
+                                                        <TrendingUp size={14} className={p.accent} />
+                                                        <div>
+                                                            <p className="text-[8px] text-white/60 font-black uppercase leading-none mb-1">{p.stat.label}</p>
+                                                            <p className="text-xs font-black text-white leading-none">{p.stat.value}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <ArrowUpRight size={18} className="text-white/40 group-hover:text-neon group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
+
+                                            {/* Content */}
+                                            <div className="flex items-center gap-3 mb-4">
+                                                <span className={`text-[10px] font-black uppercase tracking-widest ${p.accent}`}>
+                                                    {p.category}
+                                                </span>
+                                                <div className="h-px flex-1 bg-white/10" />
+                                            </div>
+
+                                            <h3 className="text-xl font-black text-white font-sora mb-3 group-hover:text-neon transition-colors">
+                                                {p.title}
+                                            </h3>
+                                            <p className="text-white/80 text-sm leading-relaxed mb-8 font-bold">
+                                                {p.desc}
+                                            </p>
                                         </div>
 
-                                        <div className=" glass-neon py-2 px-3 rounded-xl border-white/20 inline-flex items-center gap-2 self-start shadow-xl">
-                                            <TrendingUp size={14} className={p.accent} />
-                                            <div>
-                                                <p className="text-[8px] text-white/60 font-black uppercase leading-none mb-1">{p.stat.label}</p>
-                                                <p className="text-xs font-black text-white leading-none">{p.stat.value}</p>
+                                        {/* Action */}
+                                        <div className="pt-6 border-t border-white/10 flex items-center justify-between mt-auto">
+                                            <div className="flex items-center gap-5">
+                                                <Globe size={16} className="text-white/40" />
+                                                <Target size={16} className="text-white/40" />
+                                                <Cpu size={16} className="text-white/40" />
                                             </div>
+                                            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white/80 group-hover:text-neon transition-colors">
+                                                View Case Study
+                                            </span>
                                         </div>
                                     </div>
-                                </div>
-
-                                {/* Content */}
-                                <div className="flex items-center gap-3 mb-4">
-                                    <span className={`text-[10px] font-black uppercase tracking-widest ${p.accent}`}>
-                                        {p.category}
-                                    </span>
-                                    <div className="h-px flex-1 bg-white/10" />
-                                </div>
-
-                                <h3 className="text-xl font-black text-white font-sora mb-3 group-hover:text-neon transition-colors">
-                                    {p.title}
-                                </h3>
-                                <p className="text-white/80 text-sm leading-relaxed mb-8 font-bold">
-                                    {p.desc}
-                                </p>
-
-                                {/* Action */}
-                                <div className="pt-6 border-t border-white/10 flex items-center justify-between">
-                                    <div className="flex items-center gap-5">
-                                        <Globe size={16} className="text-white/40" />
-                                        <Target size={16} className="text-white/40" />
-                                        <Cpu size={16} className="text-white/40" />
-                                    </div>
-                                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white/80 group-hover:text-neon transition-colors">
-                                        View Case Study
-                                    </span>
-                                </div>
+                                </TiltCard>
                             </motion.div>
                         ))}
                     </AnimatePresence>
                 </div>
 
                 {/* CTA */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="text-center mt-20"
-                >
+                <ScrollReveal variant="fade-up" className="text-center mt-20">
                     <button className="btn-outline-glow border-white/5 group">
                         Start Your Own Project
                         <ArrowUpRight size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                     </button>
-                </motion.div>
+                </ScrollReveal>
             </div>
         </section>
     );

@@ -1,33 +1,88 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion, useSpring, useMotionValue } from "framer-motion";
 
 export default function MouseGlow() {
-    const mouseX = useMotionValue(0);
-    const mouseY = useMotionValue(0);
+    const mouseX = useMotionValue(-200);
+    const mouseY = useMotionValue(-200);
+    const cursorX = useMotionValue(-200);
+    const cursorY = useMotionValue(-200);
 
-    const springConfig = { damping: 30, stiffness: 200 };
-    const springX = useSpring(mouseX, springConfig);
-    const springY = useSpring(mouseY, springConfig);
+    const [isHovered, setIsHovered] = useState(false);
+    const [isVisible, setIsVisible] = useState(false);
+
+    const glowSpring = { damping: 40, stiffness: 100 };
+    const cursorSpring = { damping: 25, stiffness: 220 };
+
+    const springGlowX = useSpring(mouseX, glowSpring);
+    const springGlowY = useSpring(mouseY, glowSpring);
+    const springCursorX = useSpring(cursorX, cursorSpring);
+    const springCursorY = useSpring(cursorY, cursorSpring);
 
     useEffect(() => {
         const handleMouseMove = (e: MouseEvent) => {
             mouseX.set(e.clientX);
             mouseY.set(e.clientY);
+            cursorX.set(e.clientX);
+            cursorY.set(e.clientY);
+
+            if (!isVisible) setIsVisible(true);
+
+            // Check if the hovered element is interactive
+            const target = e.target as HTMLElement;
+            if (target) {
+                const isInteractive = 
+                    target.closest("button") || 
+                    target.closest("a") || 
+                    target.closest("select") || 
+                    target.closest("input") || 
+                    target.closest("textarea") ||
+                    target.closest(".cursor-pointer") ||
+                    window.getComputedStyle(target).cursor === "pointer";
+                setIsHovered(!!isInteractive);
+            }
+        };
+
+        const handleMouseLeave = () => {
+            setIsVisible(false);
         };
 
         window.addEventListener("mousemove", handleMouseMove);
-        return () => window.removeEventListener("mousemove", handleMouseMove);
-    }, [mouseX, mouseY]);
+        document.addEventListener("mouseleave", handleMouseLeave);
+        return () => {
+            window.removeEventListener("mousemove", handleMouseMove);
+            document.removeEventListener("mouseleave", handleMouseLeave);
+        };
+    }, [mouseX, mouseY, cursorX, cursorY, isVisible]);
 
     return (
-        <motion.div
-            style={{
-                left: springX,
-                top: springY,
-            }}
-            className="fixed w-[500px] h-[500px] -translate-x-1/2 -translate-y-1/2 pointer-events-none z-30 opacity-30 bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.15)_0%,transparent_70%)] will-change-transform"
-        />
+        <>
+            {/* Ambient Background Glow (GPU Accelerated) */}
+            <motion.div
+                style={{
+                    left: springGlowX,
+                    top: springGlowY,
+                }}
+                className="fixed w-[600px] h-[600px] -translate-x-1/2 -translate-y-1/2 pointer-events-none z-10 opacity-30 bg-[radial-gradient(circle_at_center,rgba(204,255,0,0.06)_0%,rgba(59,130,246,0.03)_40%,transparent_70%)] will-change-transform"
+            />
+
+            {/* Interactive Trailing Cursor */}
+            {isVisible && (
+                <motion.div
+                    style={{
+                        left: springCursorX,
+                        top: springCursorY,
+                    }}
+                    animate={{
+                        scale: isHovered ? 1.6 : 1,
+                        borderColor: isHovered ? "var(--neon)" : "rgba(255, 255, 255, 0.4)",
+                        backgroundColor: isHovered ? "rgba(204, 255, 0, 0.08)" : "rgba(255, 255, 255, 0)",
+                    }}
+                    transition={{ type: "tween", ease: "backOut", duration: 0.2 }}
+                    className="fixed w-6 h-6 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 pointer-events-none z-[9999] will-change-transform mix-blend-difference hidden md:block"
+                />
+            )}
+        </>
     );
 }

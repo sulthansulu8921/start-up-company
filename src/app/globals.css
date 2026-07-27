@@ -580,3 +580,24 @@
 .light :not(.dark) .text-neon:not(span):not(strong):not(a):not(b):not(h1):not(h2):not(h3):not(h4) {
   color: #7cd319 !important;
 }
+
+/* Lenis Smooth Scroll Core Rules */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis-scrolling iframe {
+  pointer-events: none;
+}
