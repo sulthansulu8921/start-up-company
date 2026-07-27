@@ -12,6 +12,7 @@ import Testimonials from "@/components/sections/Testimonials";
 import BlogPreview from "@/components/sections/BlogPreview";
 import FAQSection from "@/components/sections/FAQSection";
 import ContactSection from "@/components/sections/ContactSection";
+import StorytellingContainer from "@/components/StorytellingContainer";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { Zap, ArrowRight } from "lucide-react";
 import Link from "next/link";
@@ -45,7 +46,7 @@ export default function Home() {
       <Hero />
 
       {/* ── Content Sections ─────────────────────── */}
-      <div className="relative z-30">
+      <StorytellingContainer>
         <BusinessStats />
         <Services />
         <PricingSection />
@@ -71,7 +72,7 @@ export default function Home() {
 
         <FAQSection />
         <ContactSection />
-      </div>
+      </StorytellingContainer>
 
       {/* Global Modals & Lead Gen */}
     </main>
