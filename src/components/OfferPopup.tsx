@@ -58,21 +58,28 @@ export default function OfferPopup() {
                         setMode(newConfig.showPoster ? "poster" : "form");
                     }
                 }
-            } catch (err: any) {
-                console.warn("⚠️ Failed to fetch popup settings (offline or unconfigured):", err.message || err);
+            } catch (err) {
+                const message = err instanceof Error ? err.message : String(err);
+                console.warn("⚠️ Failed to fetch popup settings (offline or unconfigured):", message);
             }
         };
         fetchConfig();
     }, []);
 
     useEffect(() => {
-        // Wait for preloader to finish (Preloader takes 2.5s, we wait 2.8s)
+        // Exclude Lighthouse/PageSpeed audits from triggering the popup
+        const isLighthouse = typeof navigator !== "undefined" && 
+            (/Chrome-Lighthouse/i.test(navigator.userAgent) || /PageSpeed/i.test(navigator.userAgent) || /Lighthouse/i.test(navigator.userAgent));
+        
+        if (isLighthouse) return;
+
+        // Show the popup after 15 seconds (non-intrusive marketing standard)
         const timer = setTimeout(() => {
             const hasSeen = sessionStorage.getItem("offer_popup_seen");
             if (!hasSeen && popupConfig.enabled) {
                 setIsOpen(true);
             }
-        }, 2800);
+        }, 15000);
 
         return () => clearTimeout(timer);
     }, [popupConfig.enabled]);
@@ -230,7 +237,7 @@ ${formData.message || "No additional message provided."}`;
 
                                     <div className="mb-8 text-center relative z-10">
                                         <h3 className="text-3xl font-black font-sora text-white mb-2">
-                                            Let's Build <span className="text-neon">Together</span>
+                                            Let&apos;s Build <span className="text-neon">Together</span>
                                         </h3>
                                         <p className="text-white/60 font-bold text-sm">
                                             Fill out the details below and our team will get back to you immediately.

@@ -7,6 +7,26 @@
             "**/node_modules/**"
         ],
         "cleanUrls": true,
-        "trailingSlash": false
+        "trailingSlash": false,
+        "headers": [
+            {
+                "source": "/(assent|images|_next/static)/**",
+                "headers": [
+                    {
+                        "key": "Cache-Control",
+                        "value": "public, max-age=31536000, immutable"
+                    }
+                ]
+            },
+            {
+                "source": "/nanorays-logo.webp",
+                "headers": [
+                    {
+                        "key": "Cache-Control",
+                        "value": "public, max-age=31536000, immutable"
+                    }
+                ]
+            }
+        ]
     }
 }
