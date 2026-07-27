@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { Code2, BarChart3, Megaphone, Palette, ChevronDown } from "lucide-react";
 
 const FRAME_COUNT = 192;
@@ -44,7 +44,6 @@ const features = [
 export default function Hero() {
     const containerRef = useRef<HTMLDivElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
-    const [imagesLoaded, setImagesLoaded] = useState(0);
     const imagesRef = useRef<HTMLImageElement[]>([]);
     const requestRef = useRef<number | undefined>(undefined);
 
@@ -53,72 +52,46 @@ export default function Hero() {
         offset: ["start start", "end end"]
     });
 
-    // Preload images
-    useEffect(() => {
-        const loadImages = () => {
-            const loadedImages: HTMLImageElement[] = [];
-            let loadedCount = 0;
+    // Feature animations (complying with Rules of Hooks)
+    const opacities = [
+        useTransform(scrollYProgress, [0, 0.2, 0.25], [1, 1, 0]),
+        useTransform(scrollYProgress, features[1].range, [0, 1, 1, 0]),
+        useTransform(scrollYProgress, features[2].range, [0, 1, 1, 0]),
+        useTransform(scrollYProgress, features[3].range, [0, 1, 1, 0]),
+    ];
 
-            for (let i = 1; i <= FRAME_COUNT; i++) {
-                const img = new Image();
-                const seq = i.toString().padStart(3, "0");
-                img.src = `/assent/frame_${seq}.gif`;
+    const ys = [
+        useTransform(scrollYProgress, [0, 0.2, 0.25], [0, 0, -50]),
+        useTransform(scrollYProgress, features[1].range, [50, 0, 0, -50]),
+        useTransform(scrollYProgress, features[2].range, [50, 0, 0, -50]),
+        useTransform(scrollYProgress, features[3].range, [50, 0, 0, -50]),
+    ];
 
-                img.onload = () => {
-                    loadedCount++;
-                    setImagesLoaded(loadedCount);
-                    
-                    // Render frame 1 immediately when it is loaded to prevent black screen during loading
-                    if (i === 1 && canvasRef.current) {
-                        drawFrame(1);
-                    }
-                    
-                    if (loadedCount === FRAME_COUNT && canvasRef.current) {
-                        drawFrame(1);
-                    }
-                };
-
-                loadedImages.push(img);
-            }
-            imagesRef.current = loadedImages;
-        };
-
-        loadImages();
-
-        return () => {
-            if (requestRef.current) {
-                cancelAnimationFrame(requestRef.current);
-            }
-        };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
-    // Resize canvas to match window
-    useEffect(() => {
-        const handleResize = () => {
-            if (canvasRef.current) {
-                const { innerWidth, innerHeight } = window;
-                canvasRef.current.width = innerWidth;
-                canvasRef.current.height = innerHeight;
-                // Re-draw current frame
-                const currentFrame = Math.max(1, Math.min(FRAME_COUNT, Math.floor(scrollYProgress.get() * FRAME_COUNT) + 1));
-                drawFrame(currentFrame);
-            }
-        };
-
-        handleResize();
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
-    // Draw frame on canvas with object-fit: cover logic
+    // Draw frame on canvas with object-fit: cover logic, falling back to nearest loaded frame
     const drawFrame = (frameIndex: number) => {
         const canvas = canvasRef.current;
         const ctx = canvas?.getContext('2d');
-        const img = imagesRef.current[frameIndex - 1];
+        if (!canvas || !ctx) return;
 
-        if (canvas && ctx && img && img.complete) {
+        let img = imagesRef.current[frameIndex - 1];
+        if (!img || !img.complete) {
+            // Find the nearest loaded frame to draw
+            let nearestDist = Infinity;
+            let nearestImg = null;
+            for (let j = 0; j < FRAME_COUNT; j++) {
+                const currentImg = imagesRef.current[j];
+                if (currentImg && currentImg.complete) {
+                    const dist = Math.abs(j - (frameIndex - 1));
+                    if (dist < nearestDist) {
+                        nearestDist = dist;
+                        nearestImg = currentImg;
+                    }
+                }
+            }
+            img = nearestImg || img;
+        }
+
+        if (img && img.complete) {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             const canvasRatio = canvas.width / canvas.height;
@@ -141,6 +114,81 @@ export default function Hero() {
             ctx.drawImage(img, xOffset, yOffset, renderWidth, renderHeight);
         }
     };
+
+    // Preload images progressively
+    useEffect(() => {
+        let active = true;
+        const loadedImages: HTMLImageElement[] = [];
+
+        // 1. Load frame 1 first for immediate LCP/FCP
+        const firstImg = new Image();
+        firstImg.src = "/assent/frame_001.webp";
+        firstImg.onload = () => {
+            if (!active) return;
+            loadedImages[0] = firstImg;
+            if (canvasRef.current) {
+                drawFrame(1);
+            }
+
+            // 2. Once frame 1 is loaded, load remaining frames progressively to not block the network/thread
+            let i = 2;
+            const loadNext = () => {
+                if (!active || i > FRAME_COUNT) return;
+                const img = new Image();
+                const seq = i.toString().padStart(3, "0");
+                img.src = `/assent/frame_${seq}.webp`;
+                img.onload = () => {
+                    if (!active) return;
+                    loadedImages[i - 1] = img;
+                    i++;
+                    if (window.requestIdleCallback) {
+                        window.requestIdleCallback(() => loadNext());
+                    } else {
+                        setTimeout(loadNext, 10);
+                    }
+                };
+                img.onerror = () => {
+                    if (!active) return;
+                    i++;
+                    loadNext();
+                };
+            };
+
+            if (window.requestIdleCallback) {
+                window.requestIdleCallback(() => loadNext());
+            } else {
+                setTimeout(loadNext, 50);
+            }
+        };
+
+        imagesRef.current = loadedImages;
+
+        return () => {
+            active = false;
+            if (requestRef.current) {
+                cancelAnimationFrame(requestRef.current);
+            }
+        };
+    }, []);
+
+    // Resize canvas to match window
+    useEffect(() => {
+        const handleResize = () => {
+            if (canvasRef.current) {
+                const { innerWidth, innerHeight } = window;
+                canvasRef.current.width = innerWidth;
+                canvasRef.current.height = innerHeight;
+                // Re-draw current frame
+                const currentFrame = Math.max(1, Math.min(FRAME_COUNT, Math.floor(scrollYProgress.get() * FRAME_COUNT) + 1));
+                drawFrame(currentFrame);
+            }
+        };
+
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     // Listen to scroll to update frame
     useMotionValueEvent(scrollYProgress, "change", (latest) => {
@@ -170,15 +218,8 @@ export default function Hero() {
                 {/* Subtitle / Overlay Features */}
                 <div className="relative z-30 max-w-7xl mx-auto px-6 w-full h-full flex flex-col justify-center pt-24 md:pt-32">
                     {features.map((feat, i) => {
-                        // Create fading animation based on scroll range
-                        // Phase 1 (i === 0) should be fully visible and centered on load
-                        const opacity = i === 0
-                            ? useTransform(scrollYProgress, [0, 0.2, 0.25], [1, 1, 0])
-                            : useTransform(scrollYProgress, feat.range, [0, 1, 1, 0]);
-                            
-                        const y = i === 0
-                            ? useTransform(scrollYProgress, [0, 0.2, 0.25], [0, 0, -50])
-                            : useTransform(scrollYProgress, feat.range, [50, 0, 0, -50]);
+                        const opacity = opacities[i];
+                        const y = ys[i];
 
                         return (
                             <motion.div

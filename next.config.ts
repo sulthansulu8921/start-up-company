@@ -1,13 +1,13 @@
 import type { NextConfig } from "next";
+import path from "path";
 
-const nextConfig: any = {
+const nextConfig: NextConfig & { turbopack?: { root?: string } } = {
   output: 'export',
   images: {
     unoptimized: true,
   },
-  // @ts-ignore
   turbopack: {
-    root: "./",
+    root: path.resolve(__dirname),
   },
 };
 

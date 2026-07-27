@@ -17,24 +17,24 @@ export default function Preloader() {
         document.body.style.overflow = "hidden";
         window.scrollTo(0, 0);
 
-        // Animate percentage manually over 2.2 seconds
+        // Animate percentage manually over 600ms
         const interval = setInterval(() => {
             setProgress((prev) => {
                 if (prev >= 100) {
                     clearInterval(interval);
                     return 100;
                 }
-                return prev + 1;
+                return prev + 2;
             });
-        }, 22);
+        }, 12);
 
-        // Hide preloader after 2.5 seconds
+        // Hide preloader after 800ms
         const timer = setTimeout(() => {
             setIsLoading(false);
             document.body.style.overflow = "auto";
             // Final absolute scroll reset on exit
             window.scrollTo(0, 0);
-        }, 2500);
+        }, 800);
 
         return () => {
             clearInterval(interval);

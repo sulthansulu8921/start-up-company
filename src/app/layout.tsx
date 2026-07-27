@@ -83,10 +83,7 @@ import SmoothScroll from "@/components/SmoothScroll";
 import Preloader from "@/components/Preloader";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/sections/WhatsAppButton";
-import AIChatbot from "@/components/AIChatbot";
-import OfferPopup from "@/components/OfferPopup";
-import Script from "next/script";
+import ClientComponents from "@/components/ClientComponents";
 
 
 import GoogleAnalytics from "@/components/GoogleAnalytics";
@@ -135,6 +132,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <head>
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://www.google-analytics.com" />
+        <link rel="preconnect" href="https://firestore.googleapis.com" />
         <GoogleAnalytics GA_MEASUREMENT_ID="G-TBFYS7QYSM" />
         <script
           type="application/ld+json"
@@ -144,15 +144,6 @@ export default function RootLayout({
       <body
         className={`${sora.variable} ${inter.variable} antialiased bg-background text-foreground selection:bg-neon/30 selection:text-white transition-colors duration-500`}
       >
-        <Script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" strategy="beforeInteractive" />
-        <Script id="emailjs-init" strategy="beforeInteractive">
-          {`
-            (function(){
-              emailjs.init("XYtwGU4t93z7pm8Oc");
-            })();
-          `}
-        </Script>
-        
         <ThemeProvider>
           <Preloader />
           <SmoothScroll>
@@ -160,9 +151,7 @@ export default function RootLayout({
             <MouseGlow />
             <Navbar />
             {children}
-            <AIChatbot />
-            <OfferPopup />
-            <WhatsAppButton />
+            <ClientComponents />
             <Footer />
           </SmoothScroll>
         </ThemeProvider>
