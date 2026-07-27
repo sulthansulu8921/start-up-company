@@ -243,17 +243,17 @@
 
 /* ── Premium Light Mode Custom Overrides ──────────────────────── */
 .light {
-  /* Premium Slate palette with soft gradients */
-  --background: #FFFFFF;
+  /* Premium iridescent soft-blue-white canvas */
+  --background: #FAFBFF;
   --foreground: #0F172A;
   --neon: #CCFF00;
   --neon-dim: rgba(204, 255, 0, 0.35);
-  --dark-gray: #F8FAFC;
-  --card-bg: rgba(255, 255, 255, 0.85);
-  --glass-border: rgba(15, 23, 42, 0.08);
+  --dark-gray: #F1F5FB;
+  --card-bg: rgba(255, 255, 255, 0.80);
+  --glass-border: rgba(99, 102, 241, 0.10);
   --neon-glow: 0 0 25px rgba(204, 255, 0, 0.2);
-  --royal: #2563EB;
-  --navy: #F1F5F9;
+  --royal: #7C3AED;
+  --navy: #EEF2FF;
 
   color-scheme: light;
 }
@@ -513,10 +513,10 @@
 /* Extra premium styling details */
 .light .cyber-grid {
   background-image:
-    linear-gradient(rgba(15, 23, 42, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(15, 23, 42, 0.08) 1px, transparent 1px) !important;
+    linear-gradient(rgba(99, 102, 241, 0.10) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99, 102, 241, 0.10) 1px, transparent 1px) !important;
   background-size: 60px 60px !important;
-  opacity: 0.85 !important;
+  opacity: 0.90 !important;
 }
 
 .light .noise-overlay::after {
