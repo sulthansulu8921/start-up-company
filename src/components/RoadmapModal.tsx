@@ -77,6 +77,7 @@ export default function RoadmapModal() {
                         <button
                             onClick={closeHandler}
                             className="absolute top-6 right-6 p-2 text-white/40 hover:text-white transition-colors"
+                            aria-label="Close roadmap modal"
                         >
                             <X size={24} />
                         </button>

@@ -111,7 +111,7 @@ export default function WhyChooseUs() {
                                 <div className="flex justify-between items-start mb-12">
                                     <div>
                                         <p className="text-[10px] font-black uppercase tracking-[0.3em] text-white/70 mb-2">Network Average</p>
-                                        <h4 className="text-5xl font-black text-white font-sora">+287% ROI</h4>
+                                        <p className="text-5xl font-black text-white font-sora">+287% ROI</p>
                                     </div>
                                     <div className="w-14 h-14 rounded-2xl bg-neon flex items-center justify-center shadow-[0_0_20px_rgba(204,255,0,0.4)]">
                                         <Zap size={24} fill="black" />

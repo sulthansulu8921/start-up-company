@@ -38,32 +38,37 @@ export default function Navbar() {
     useEffect(() => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 20);
-
-            // Dynamically update active tab based on scroll position
-            const sections = document.querySelectorAll("section[id]");
-            let current = "Home";
-
-            if (window.scrollY < 200) {
-                current = "Home";
-            } else {
-                sections.forEach((section) => {
-                    const sectionTop = (section as HTMLElement).offsetTop;
-                    const sectionHeight = section.clientHeight;
-                    if (window.scrollY >= sectionTop - 300 && window.scrollY < sectionTop + sectionHeight - 300) {
-                        const id = section.getAttribute("id");
-                        if (id === "services") current = "Services";
-                        if (id === "pricing") current = "Pricing";
-                        if (id === "about") current = "About";
-                        if (id === "contact") current = "Contact";
-                    }
-                });
-            }
-            setActiveLink(prev => prev !== current ? current : prev);
         };
 
-        window.addEventListener("scroll", handleScroll);
+        window.addEventListener("scroll", handleScroll, { passive: true });
         handleScroll();
-        return () => window.removeEventListener("scroll", handleScroll);
+
+        // High-performance IntersectionObserver to track the active section
+        const sections = document.querySelectorAll("section[id]");
+        const observerOptions = {
+            root: null,
+            rootMargin: "-30% 0px -60% 0px", // Triggers active link when section is near top/center
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute("id");
+                    if (id === "services") setActiveLink("Services");
+                    else if (id === "pricing") setActiveLink("Pricing");
+                    else if (id === "contact") setActiveLink("Contact");
+                    else if (id === "hero") setActiveLink("Home");
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach((section) => observer.observe(section));
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+            sections.forEach((section) => observer.unobserve(section));
+        };
     }, []);
 
     const scrollToSection = (e: React.MouseEvent, href: string) => {
@@ -203,6 +208,7 @@ export default function Navbar() {
                     <button
                         className="md:hidden p-2 text-white hover:text-neon transition-colors"
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                        aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
                     >
                         {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
                     </button>

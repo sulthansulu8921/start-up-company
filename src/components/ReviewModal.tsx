@@ -75,6 +75,7 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
                         <button
                             onClick={onClose}
                             className="absolute top-6 right-6 p-2 text-white/40 hover:text-white transition-colors"
+                            aria-label="Close review modal"
                         >
                             <X size={24} />
                         </button>
@@ -100,6 +101,7 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
                                                 type="button"
                                                 onClick={() => setRating(s)}
                                                 className="transition-transform hover:scale-110"
+                                                aria-label={`Rate ${s} stars`}
                                             >
                                                 <Star
                                                     size={32}

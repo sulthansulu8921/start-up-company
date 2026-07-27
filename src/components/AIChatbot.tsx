@@ -230,6 +230,7 @@ export default function AIChatbot() {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 className="fixed bottom-8 right-8 z-[100] w-14 h-14 bg-black border border-neon/50 text-neon rounded-2xl flex items-center justify-center shadow-[0_0_30px_rgba(204,255,0,0.2)] hover:shadow-neon/40 transition-all cursor-pointer overflow-hidden group"
+                aria-label="Toggle AI Chatbot"
             >
                 <div className="absolute inset-0 bg-neon/5 animate-pulse" />
                 {isOpen ? <X size={24} /> : <Bot size={24} className="group-hover:rotate-12 transition-transform" />}
@@ -258,7 +259,11 @@ export default function AIChatbot() {
                                     </div>
                                 </div>
                             </div>
-                            <button onClick={() => setIsOpen(false)} className="text-white/20 hover:text-white transition-colors">
+                            <button 
+                                onClick={() => setIsOpen(false)} 
+                                className="text-white/20 hover:text-white transition-colors"
+                                aria-label="Close chat window"
+                            >
                                 <X size={20} />
                             </button>
                         </div>
@@ -315,6 +320,7 @@ export default function AIChatbot() {
                             <button
                                 onClick={handleSend}
                                 className="w-12 h-12 rounded-2xl bg-neon text-black flex items-center justify-center hover:scale-105 active:scale-95 transition-all shadow-lg shadow-neon/20"
+                                aria-label="Send message"
                             >
                                 <Send size={18} />
                             </button>

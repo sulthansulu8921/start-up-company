@@ -9,6 +9,7 @@ export default function WhatsAppButton() {
             href="https://wa.me/919497669317"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Chat on WhatsApp"
             initial={{ scale: 0, opacity: 0, y: 0 }}
             animate={{ scale: 1, opacity: 1, y: [0, -12, 0] }}
             transition={{

@@ -184,6 +184,7 @@ ${formData.message || "No additional message provided."}`;
                         <button
                             onClick={closeHandler}
                             className="absolute top-4 right-4 z-50 p-2 text-white/50 hover:text-white bg-black/40 hover:bg-black/60 backdrop-blur-sm rounded-full transition-all"
+                            aria-label="Close offer popup"
                         >
                             <X size={20} />
                         </button>
@@ -285,8 +286,9 @@ ${formData.message || "No additional message provided."}`;
                                         </div>
 
                                         <div>
-                                            <label className="text-white/50 text-[10px] font-black uppercase tracking-widest ml-1 mb-1 block">Service Needed *</label>
+                                            <label htmlFor="popup-service-select" className="text-white/50 text-[10px] font-black uppercase tracking-widest ml-1 mb-1 block">Service Needed *</label>
                                             <select
+                                                id="popup-service-select"
                                                 name="service"
                                                 required
                                                 value={formData.service}

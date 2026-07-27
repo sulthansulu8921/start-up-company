@@ -166,9 +166,9 @@ export default function Testimonials() {
                                         </div>
                                     </div>
                                     <div>
-                                        <h4 className="text-sm font-black text-white font-sora group-hover:text-neon transition-colors">
+                                        <h3 className="text-sm font-black text-white font-sora group-hover:text-neon transition-colors">
                                             {t.name}
-                                        </h4>
+                                        </h3>
                                         <p className="text-[10px] text-white/70 font-black uppercase tracking-widest">
                                             {t.role}
                                         </p>

@@ -132,6 +132,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <head>
+        <link rel="preload" href="/assent/frame_001.webp" as="image" type="image/webp" fetchPriority="high" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://www.google-analytics.com" />
         <link rel="preconnect" href="https://firestore.googleapis.com" />

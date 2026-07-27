@@ -292,8 +292,9 @@ ${currentData.message || "No additional message provided."}`;
 
                                     {/* Row 3 — Service Dropdown */}
                                     <div className="space-y-2">
-                                        <label className="text-white/50 text-[11px] font-black uppercase tracking-widest">Service You Need *</label>
+                                        <label htmlFor="contact-service-select" className="text-white/50 text-[11px] font-black uppercase tracking-widest">Service You Need *</label>
                                         <select
+                                            id="contact-service-select"
                                             name="service"
                                             required
                                             value={formData.service}
