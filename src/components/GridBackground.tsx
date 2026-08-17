@@ -56,28 +56,16 @@ export default function GridBackground() {
                 />
             </div>
 
-            {/* ── Parallax Dot + Line Grid (single motion.div, no blur) ── */}
+            {/* ── Parallax Dot Grid (single layer, lightweight) ── */}
             <motion.div
                 style={{ y }}
                 className="absolute inset-x-0 -top-60 -bottom-60 will-change-transform"
             >
-                {/* Dot grid */}
                 <div
                     className="absolute inset-0"
                     style={{
-                        backgroundImage: "radial-gradient(circle, rgba(99,102,241,0.18) 1px, transparent 1px)",
-                        backgroundSize: "32px 32px",
-                    }}
-                />
-                {/* Coarser line overlay */}
-                <div
-                    className="absolute inset-0 opacity-40"
-                    style={{
-                        backgroundImage: `
-                          linear-gradient(rgba(139,92,246,0.07) 1px, transparent 1px),
-                          linear-gradient(90deg, rgba(139,92,246,0.07) 1px, transparent 1px)
-                        `,
-                        backgroundSize: "96px 96px",
+                        backgroundImage: "radial-gradient(circle, rgba(99,102,241,0.15) 1px, transparent 1px)",
+                        backgroundSize: "36px 36px",
                     }}
                 />
             </motion.div>

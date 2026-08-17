@@ -1,4 +1,4 @@
-import { services } from "@/data/serviceData";
+import { services, slugAliases } from "@/data/serviceData";
 import { notFound } from "next/navigation";
 import ServiceDetailContent from "@/components/sections/ServiceDetailContent";
 import { Metadata } from "next";
@@ -7,68 +7,79 @@ interface PageProps {
     params: Promise<{ slug: string }>;
 }
 
-// Unique, keyword-targeted SEO metadata per service page
+// Unique, keyword-targeted SEO metadata per service page (India, Kerala, Dubai/UAE, USA)
 const serviceMetadata: Record<string, { title: string; description: string; keywords: string[] }> = {
     "website-development": {
-        title: "Professional Website Design for Startups in India | NanoRays Solution",
-        description: "Get a high-performance, mobile-friendly business website starting from ₹5,000. NanoRays Solution builds conversion-focused websites for startups and SMEs across India. Free consultation: +91 94976 69317.",
-        keywords: ["website design India", "startup website design", "business website Kerala", "affordable website India", "web development startup India", "mobile responsive website India"],
+        title: "Websites & Ecommerce Development Services | NanoRays Solution",
+        description: "Custom, high-performance websites and online store development for businesses in Kerala, India, Dubai/UAE, and the USA. Built with Next.js for speed, security, and search visibility.",
+        keywords: ["website development", "ecommerce development", "custom web applications", "online store design", "Next.js development", "responsive website development", "global digital agency"],
     },
-    "seo-services": {
-        title: "Affordable SEO Services in Kerala & India | NanoRays Solution",
-        description: "Rank #1 on Google with NanoRays Solution's affordable SEO services in Kerala and India. We offer technical SEO, local SEO, keyword research, and monthly rank tracking. Call: +91 94976 69317.",
-        keywords: ["affordable SEO services Kerala", "SEO agency Kerala", "local SEO India", "Google ranking Kerala", "technical SEO India", "SEO services India"],
+    "ecommerce-development": {
+        title: "Ecommerce Store Development & Commerce Solutions | NanoRays Solution",
+        description: "High-conversion online stores and digital commerce platforms with payment gateway integrations, catalog management, and fast checkout flows.",
+        keywords: ["ecommerce development", "online store development", "custom shopping cart", "payment gateway integration", "digital commerce India", "UAE ecommerce agency"],
     },
-    "aeo-geo-optimization": {
-        title: "AEO & GEO Optimization Services | ChatGPT & Gemini Search SEO | NanoRays",
-        description: "Get found in the AI era. Optimize your brand for AI search engines like ChatGPT, Google Gemini, Perplexity, and voice search with NanoRays Solution's AEO & GEO services.",
-        keywords: ["AEO services India", "GEO optimization Kerala", "Generative Engine Optimization", "Answer Engine Optimization Kochi", "ChatGPT search optimization", "Gemini search ranking", "Perplexity AI optimization", "voice search SEO Kerala"],
+    "mobile-app-development": {
+        title: "Mobile App Development (iOS & Android) | NanoRays Solution",
+        description: "Native and cross-platform mobile app development for iPhone, iPad, and Android. Engineered with React Native and Flutter for speed and scalability.",
+        keywords: ["mobile app development", "iOS app development", "Android app development", "React Native agency", "Flutter mobile app", "mobile UI UX design"],
     },
-    "google-ranking": {
-        title: "Google First Page Ranking Services India | NanoRays Solution",
-        description: "Dominate Google search results with NanoRays Solution. We specialize in first-page Google rankings for businesses in India through data-driven SEO strategies and competitive analysis.",
-        keywords: ["Google ranking India", "rank first page Google India", "Google SEO services India", "search engine optimization India", "Google rank #1 India"],
+    "ai-platform-development": {
+        title: "AI Platforms & Intelligent Autonomous Agents | NanoRays Solution",
+        description: "Turn your AI concept into a real digital product. We build custom AI platforms, SaaS applications, autonomous AI agents, and 24/7 chatbots.",
+        keywords: ["AI platform development", "custom AI SaaS", "AI chatbots", "autonomous AI agents", "LLM application development", "AI dashboard design", "WhatsApp AI bot"],
+    },
+    "business-software": {
+        title: "Business Software & Custom Management Systems | NanoRays Solution",
+        description: "Bespoke web applications, internal operational tools, CRM software, and administrative dashboards tailored directly to your business processes.",
+        keywords: ["custom business software", "internal tools development", "B2B SaaS development", "web portal development", "operational software systems"],
+    },
+    "ai-chatbots-agents": {
+        title: "Custom AI Chatbots & Autonomous AI Agents | NanoRays Solution",
+        description: "Deploy 24/7 AI chatbots and autonomous agents trained on your business data to handle support, lead qualification, and customer enquiries.",
+        keywords: ["AI chatbots", "AI support agents", "WhatsApp AI bot", "custom knowledge base bot", "lead qualification bot", "conversational AI"],
+    },
+    "business-automation": {
+        title: "Business Process & Workflow Automation Services | NanoRays Solution",
+        description: "Eliminate repetitive manual admin tasks. We build automated workflow pipelines connecting your website, CRM, messaging channels, and payment systems.",
+        keywords: ["business automation", "workflow automation", "webhook integration", "API automation", "CRM automation", "lead capture automation"],
     },
     "digital-marketing": {
-        title: "Digital Marketing Agency for Startups in India | NanoRays Solution",
-        description: "Scale your business with performance-driven digital marketing. NanoRays Solution runs high-ROI Instagram, Facebook, and Google Ads campaigns for startups and businesses across India.",
-        keywords: ["digital marketing agency India", "Instagram marketing India", "Facebook ads India", "Google Ads India startup", "performance marketing Kerala", "social media ads India"],
+        title: "Digital Marketing & Performance Advertising | NanoRays Solution",
+        description: "Targeted Google Search Ads and Meta ad campaigns engineered to generate high-intent business leads and optimize customer acquisition costs.",
+        keywords: ["digital marketing agency", "Google Ads management", "Meta ad campaigns", "lead generation ads", "performance marketing", "retargeting campaigns"],
     },
-    "branding-logo-design": {
-        title: "Professional Logo & Brand Identity Design India | NanoRays Solution",
-        description: "Create a stunning brand identity with NanoRays Solution. We design premium logos, visual systems, and brand guidelines for startups and businesses in India starting from ₹2,000.",
-        keywords: ["logo design India", "brand identity India", "startup logo design Kerala", "professional logo design India", "branding agency India", "logo design Kerala"],
+    "seo-services": {
+        title: "SEO, AEO & Search Visibility Optimization | NanoRays Solution",
+        description: "Improve search engine visibility and Generative AI search citations (ChatGPT, Gemini, Perplexity) with technical, local, and semantic schema SEO.",
+        keywords: ["SEO services", "AEO services", "Generative Engine Optimization", "ChatGPT search ranking", "Google Gemini SEO", "technical SEO audit", "search visibility"],
     },
-    "poster-design": {
-        title: "Social Media Graphic Design Services India | NanoRays Solution",
-        description: "High-impact social media graphics, festival posters, and promotional materials for businesses in India. NanoRays Solution delivers modern, conversion-focused visual designs.",
-        keywords: ["social media design India", "poster design India", "festival poster design Kerala", "graphic design agency India", "promotional poster India", "Instagram post design India"],
-    },
-    "website-maintenance": {
-        title: "Website Maintenance & Support Services India | NanoRays Solution",
-        description: "Keep your website secure and performing at its peak. NanoRays Solution offers proactive monthly maintenance, security monitoring, updates, and 24/7 technical support in India.",
-        keywords: ["website maintenance India", "website support India", "web maintenance Kerala", "website security India", "monthly website maintenance", "website update services India"],
+    "aeo-geo-optimization": {
+        title: "AEO & GEO Optimization Services | ChatGPT & Gemini Search | NanoRays",
+        description: "Generative & Answer Engine Optimization. Structure your business data so AI search engines like ChatGPT, Google Gemini, and Perplexity cite your brand.",
+        keywords: ["AEO services", "GEO optimization", "Generative Engine Optimization", "ChatGPT search optimization", "Gemini search ranking", "structured data schema"],
     },
     "social-media-management": {
-        title: "Social Media Management Services India | NanoRays Solution",
-        description: "Build a powerful social media presence for your business. NanoRays Solution manages your Instagram, Facebook, and LinkedIn with strategic content calendars and audience engagement.",
-        keywords: ["social media management India", "Instagram management Kerala", "Facebook page management India", "social media agency India", "content creation India"],
+        title: "Social Media Management & Brand Content Strategy | NanoRays Solution",
+        description: "Build a stronger digital presence with strategic social media calendars, custom visual content, reel assets, and proactive community engagement.",
+        keywords: ["social media management", "brand content strategy", "Instagram growth agency", "social media content calendar", "corporate branding"],
     },
-    "business-growth": {
-        title: "Business Growth & Sales Automation India | NanoRays Solution",
-        description: "Automate your sales funnel and scale your revenue with NanoRays Solution. We implement WhatsApp Business automation, CRM integration, and conversion-optimized growth strategies.",
-        keywords: ["business growth India", "sales automation India", "WhatsApp business automation", "lead generation India", "CRM integration India", "startup growth Kerala"],
+    "branding-creative-design": {
+        title: "Branding, Creative Design & Social Media | NanoRays Solution",
+        description: "Custom visual identity systems, corporate logos, social media management, typography guidelines, and marketing collateral.",
+        keywords: ["branding agency", "logo design services", "visual identity design", "brand style guide", "social media management", "marketing collateral design"],
     },
-    "google-business-setup": {
-        title: "Google Business Profile Setup & Local SEO India | NanoRays Solution",
-        description: "Appear in Google Maps and local search results with NanoRays Solution's Google Business Profile optimization. We help businesses across India attract local customers online.",
-        keywords: ["Google Business Profile India", "local SEO Kerala", "Google Maps listing India", "Google My Business setup Kerala", "local business SEO India"],
+    "website-maintenance": {
+        title: "Proactive Website Maintenance & Technical Support | NanoRays Solution",
+        description: "Keep your business website fast, secure, and up to date with continuous security surveillance, regular backups, speed checks, and technical support.",
+        keywords: ["website maintenance services", "web security monitoring", "website update support", "Core Web Vitals maintenance", "cloud backup service"],
     },
 };
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     const { slug } = await params;
-    const meta = serviceMetadata[slug];
+    const resolvedSlug = slugAliases[slug] || slug;
+    const meta = serviceMetadata[slug] || serviceMetadata[resolvedSlug];
 
     if (!meta) {
         return {
@@ -82,7 +93,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         description: meta.description,
         keywords: meta.keywords,
         alternates: {
-            canonical: `https://nanorayssolution.com/services/${slug}`,
+            canonical: `https://nanorayssolution.com/services/${resolvedSlug}`,
         },
         openGraph: {
             title: meta.title,
@@ -96,18 +107,19 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export async function generateStaticParams() {
-    return services.map((service) => ({
-        slug: service.slug,
-    }));
+    const primarySlugs = services.map((s) => ({ slug: s.slug }));
+    const aliasSlugs = Object.keys(slugAliases).map((alias) => ({ slug: alias }));
+    return [...primarySlugs, ...aliasSlugs];
 }
 
 export default async function ServiceDetailPage({ params }: PageProps) {
     const { slug } = await params;
-    const service = services.find(s => s.slug === slug);
+    const targetSlug = slugAliases[slug] || slug;
+    const service = services.find(s => s.slug === targetSlug);
 
     if (!service) {
         notFound();
     }
 
-    return <ServiceDetailContent slug={slug} />;
+    return <ServiceDetailContent slug={targetSlug} />;
 }

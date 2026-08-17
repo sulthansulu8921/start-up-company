@@ -9,75 +9,82 @@ import {
 const steps = [
     {
         num: "01",
-        title: "Planning & Strategy",
-        desc: "We discuss your ideas and business goals to plan a complete roadmap for success.",
+        title: "Discover",
+        desc: "We analyze your business goals, target market requirements, and technical prerequisites to define a clear project scope.",
         icon: MessageSquare,
-        accent: "text-amber-400",
-        bg: "bg-amber-400/5",
+        accent: "text-blue-600",
+        bg: "bg-blue-50",
+        border: "border-blue-100",
     },
     {
         num: "02",
-        title: "Branding & Posters",
-        desc: "We create your business logo, brand identity, and stunning festival or promotional posters.",
+        title: "Plan",
+        desc: "We structure wireframes, system architecture, database design, visual guidelines, and product milestones.",
         icon: Palette,
-        accent: "text-neon",
-        bg: "bg-neon/5",
+        accent: "text-purple-600",
+        bg: "bg-purple-50",
+        border: "border-purple-100",
     },
     {
         num: "03",
-        title: "Website Building & Deployment",
-        desc: "We design, develop, and deploy a high-quality, mobile-responsive website for your business.",
+        title: "Build",
+        desc: "Our engineering team develops your custom website, software, or AI platform with clean, high-performance code.",
         icon: Code2,
-        accent: "text-sky-400",
-        bg: "bg-sky-400/5",
+        accent: "text-indigo-600",
+        bg: "bg-indigo-50",
+        border: "border-indigo-100",
     },
     {
         num: "04",
-        title: "SEO Optimization",
-        desc: "We optimize your website to rank on the first page of Google to attract more visitors.",
-        icon: Target,
-        accent: "text-purple-400",
-        bg: "bg-purple-400/5",
+        title: "Launch",
+        desc: "We conduct quality assurance tests, security audits, and Core Web Vitals checks before deploying to live production servers.",
+        icon: Rocket,
+        accent: "text-sky-600",
+        bg: "bg-sky-50",
+        border: "border-sky-100",
     },
     {
         num: "05",
-        title: "Digital Marketing",
-        desc: "We launch targeted social media campaigns and online ads to generate consistent leads.",
+        title: "Grow",
+        desc: "We implement SEO strategy, performance marketing campaigns, and workflow automation to drive qualified business traffic.",
         icon: Megaphone,
-        accent: "text-neon",
-        bg: "bg-neon/5",
+        accent: "text-cyan-600",
+        bg: "bg-cyan-50",
+        border: "border-cyan-100",
     },
     {
         num: "06",
-        title: "Website Maintenance",
-        desc: "We provide monthly maintenance, security updates, and full-time support so you never worry.",
+        title: "Support",
+        desc: "We provide proactive maintenance, security monitoring, server updates, and continuous optimization support.",
         icon: HeartHandshake,
-        accent: "text-emerald-400",
-        bg: "bg-emerald-400/5",
-    },
-    {
-        num: "07",
-        title: "Support & Payment",
-        desc: "We provide ongoing technical assistance and manage flexible, secure payment structures for our services.",
-        icon: CreditCard,
-        accent: "text-sky-400",
-        bg: "bg-sky-400/5",
+        accent: "text-emerald-600",
+        bg: "bg-emerald-50",
+        border: "border-emerald-100",
     },
 ];
 
 export default function ProcessTimeline() {
     return (
-        <section id="process" className="py-32 relative bg-transparent overflow-hidden">
-            <div className="absolute inset-0 bg-dark-gray/30 cyber-grid opacity-[0.02]" />
-
+        <motion.section
+            initial={{ opacity: 0.9, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            id="process"
+            className="py-20 relative overflow-hidden bg-[#F0FDF4] text-slate-900 rounded-t-[3rem] md:rounded-t-[4rem] shadow-[0_-25px_60px_rgba(0,0,0,0.06)] border-t border-emerald-200/90 z-45"
+        >
+            {/* Dedicated High-Res Creative Strategy Workshop Photo Background */}
+            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center opacity-10 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#F0FDF4]/96 via-[#DCFCE7]/90 to-[#F0FDF4]/96 pointer-events-none" />
+            
             <div className="max-w-5xl mx-auto px-6 relative z-10">
                 {/* Header */}
-                <div className="text-center mb-24">
+                <div className="text-center mb-16">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
-                        className="inline-flex px-3 py-1.5 rounded-lg bg-white/5 border border-white/20 text-white/80 text-[10px] font-black uppercase tracking-[0.2em] mb-6"
+                        className="inline-flex px-3.5 py-1.5 rounded-full bg-violet-50 border border-violet-200/80 text-violet-700 text-[10px] font-black uppercase tracking-[0.25em] mb-4 shadow-sm"
                     >
                         Step-by-Step Guide
                     </motion.div>
@@ -87,16 +94,16 @@ export default function ProcessTimeline() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
-                        className="text-5xl md:text-6xl font-black font-sora text-white mb-6 tracking-tighter"
+                        className="text-4xl md:text-5xl lg:text-6xl font-black font-sora text-slate-900 mb-4 tracking-tight"
                     >
-                        Our <span className="text-neon">Process</span>
+                        Our <span className="bg-gradient-to-r from-[#2563EB] via-[#4F46E5] to-[#7C3AED] bg-clip-text text-transparent">Process</span>
                     </motion.h2>
                     <motion.p
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.2 }}
-                        className="text-white/80 text-lg font-bold max-w-2xl mx-auto"
+                        className="text-slate-600 text-base md:text-lg font-medium max-w-2xl mx-auto leading-relaxed"
                     >
                         A clear and simple framework designed to launch and grow your business online.
                     </motion.p>
@@ -104,41 +111,41 @@ export default function ProcessTimeline() {
 
                 {/* Timeline */}
                 <div className="relative">
-                    {/* Vertical line with gradient */}
-                    <div className="absolute left-8 top-10 bottom-10 w-px bg-gradient-to-b from-neon/60 via-white/20 to-transparent hidden md:block px-[0.5px]" />
+                    {/* Vertical line */}
+                    <div className="absolute left-8 top-10 bottom-10 w-px bg-gradient-to-b from-[#2563EB] via-[#4F46E5] to-transparent hidden md:block" />
 
-                    <div className="space-y-12">
+                    <div className="space-y-8">
                         {steps.map((step, i) => (
                             <motion.div
                                 key={i}
                                 initial={{ opacity: 0, x: -20 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ delay: i * 0.1, duration: 0.6 }}
-                                className="group relative flex gap-8 md:gap-12 items-start"
+                                transition={{ delay: i * 0.08, duration: 0.5 }}
+                                className="group relative flex gap-6 md:gap-10 items-start"
                             >
                                 {/* Step Marker */}
-                                <div className={`relative flex-shrink-0 w-16 h-16 rounded-2xl ${step.bg} border border-white/10 flex items-center justify-center z-10 group-hover:border-neon/50 transition-all duration-500 shadow-lg group-hover:shadow-neon/20`}>
-                                    <step.icon size={24} className={`${step.accent} group-hover:scale-110 transition-transform`} />
+                                <div className={`relative flex-shrink-0 w-16 h-16 rounded-2xl ${step.bg} border ${step.border} flex items-center justify-center z-10 group-hover:scale-105 transition-all duration-300 shadow-sm`}>
+                                    <step.icon size={24} className={`${step.accent}`} />
 
                                     {/* Number Badge */}
-                                    <div className="absolute -top-3 -right-3 px-2 py-0.5 rounded bg-black border border-white/20">
-                                        <span className="text-[10px] font-black text-white/90">{step.num}</span>
+                                    <div className="absolute -top-2.5 -right-2.5 px-2 py-0.5 rounded-full bg-slate-900 text-white shadow-sm">
+                                        <span className="text-[10px] font-black">{step.num}</span>
                                     </div>
                                 </div>
 
                                 {/* Content Card */}
-                                <div className="flex-1 p-8 rounded-3xl glass-dark border border-white/10 hover:border-white/20 transition-all duration-500 group-hover:bg-white/[0.04]">
-                                    <div className="flex flex-wrap justify-between items-center gap-4 mb-4">
-                                        <h3 className="text-xl font-black text-white font-sora tracking-tight group-hover:text-neon transition-colors">
+                                <div className="flex-1 p-6 md:p-8 rounded-3xl bg-white border border-slate-200/90 hover:border-blue-300 shadow-md shadow-blue-500/5 hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300">
+                                    <div className="flex flex-wrap justify-between items-center gap-3 mb-3">
+                                        <h3 className="text-xl font-black text-slate-900 font-sora tracking-tight group-hover:text-[#2563EB] transition-colors">
                                             {step.title}
                                         </h3>
-                                        <div className="px-3 py-1 rounded bg-neon/10 border border-neon/30 flex items-center gap-2">
-                                            <Zap size={10} className="text-neon fill-neon" />
-                                            <span className="text-[10px] font-black text-neon uppercase tracking-widest">Active Phase</span>
+                                        <div className="px-3 py-1 rounded-full bg-blue-50 border border-blue-100 flex items-center gap-1.5">
+                                            <Zap size={11} className="text-[#2563EB] fill-current" />
+                                            <span className="text-[10px] font-extrabold text-blue-700 uppercase tracking-wider">Active Phase</span>
                                         </div>
                                     </div>
-                                    <p className="text-white/90 text-base leading-relaxed font-bold">
+                                    <p className="text-slate-600 text-sm md:text-base leading-relaxed font-medium">
                                         {step.desc}
                                     </p>
                                 </div>
@@ -152,13 +159,17 @@ export default function ProcessTimeline() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-center mt-20"
+                    className="text-center mt-16"
                 >
-                    <button className="btn-neon px-12 py-5 shadow-neon">
-                        Get Started <ArrowRight size={18} className="ml-2" />
-                    </button>
+                    <a
+                        href="/contact"
+                        className="inline-flex items-center gap-3 px-10 py-4.5 bg-gradient-to-r from-[#2563EB] via-[#4F46E5] to-[#7C3AED] hover:from-[#1d4ed8] hover:to-[#6d28d9] text-white rounded-xl font-extrabold text-xs uppercase tracking-widest shadow-md shadow-blue-500/20 hover:shadow-lg transition-all"
+                    >
+                        <span>Get Started</span>
+                        <ArrowRight size={16} />
+                    </a>
                 </motion.div>
             </div>
-        </section>
+        </motion.section>
     );
 }

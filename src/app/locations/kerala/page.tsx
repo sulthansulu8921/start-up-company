@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { CheckCircle, ArrowRight, MapPin } from "lucide-react";
 import Link from "next/link";
+import BackButton from "@/components/BackButton";
 
 export const metadata: Metadata = {
     title: "Website Development Company in Kerala | Best Digital Agency Kerala",
@@ -34,6 +35,9 @@ export default function KeralaPage() {
     return (
         <main className="min-h-screen pt-32 pb-16 relative">
             <div className="container mx-auto px-4 max-w-6xl relative z-10">
+                <div className="mb-8">
+                    <BackButton fallbackUrl="/locations" label="Back to Locations" />
+                </div>
                 <div className="mb-16 text-center">
                     <span className="inline-block bg-neon/10 text-neon text-sm font-bold px-4 py-1.5 rounded-full mb-6 border border-neon/20 uppercase tracking-wider">
                         🤝 Serving All 14 Districts

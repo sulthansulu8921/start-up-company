@@ -27,7 +27,7 @@ const services = [
 export default function OfferPopup() {
     const [isOpen, setIsOpen] = useState(false);
     const [popupConfig, setPopupConfig] = useState({
-        enabled: true,
+        enabled: false,
         showPoster: false,
         posterImage: "/images/special-offer.png"
     });

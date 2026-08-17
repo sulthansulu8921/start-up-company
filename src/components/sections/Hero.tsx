@@ -1,326 +1,107 @@
 "use client";
 
-import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
-import { useEffect, useRef } from "react";
-import { Code2, BarChart3, Megaphone, Palette, ChevronDown } from "lucide-react";
-
-const FRAME_COUNT = 192;
-
-const features = [
-    {
-        title: <>HIGH-PERFORMANCE <br className="hidden md:block" /> DIGITAL <span className="text-neon">SOLUTIONS</span></>,
-        subtitle: "Web Design • Development • SEO • Digital Growth",
-        desc: <>We engineer <span className="text-white font-bold">high-performance websites</span> and <span className="text-white font-bold">strategic digital solutions</span> that empower businesses to <span className="text-neon font-black">scale</span>, build authority, and dominate their market.</>,
-        icon: Code2,
-        color: "text-neon",
-        range: [0, 0.05, 0.2, 0.25]
-    },
-    {
-        title: <>DOMINATE <br className="hidden md:block" /> GOOGLE <span className="text-sky-400">SEARCH</span></>,
-        subtitle: "SEO Strategy & Google Ranking Mastery",
-        desc: <>We secure <span className="text-sky-400 font-bold">first-page rankings</span> for your business, ensuring your target audience discovers you before they find your competitors.</>,
-        icon: BarChart3,
-        color: "text-sky-400",
-        range: [0.25, 0.3, 0.45, 0.5]
-    },
-    {
-        title: <>ACCELERATE <span className="text-purple-400">LEAD</span> <br className="hidden md:block" /> <span className="text-purple-400">GENERATION</span></>,
-        subtitle: "Performance Marketing & Social Media",
-        desc: <>We execute <span className="text-purple-400 font-bold">high-conversion campaigns</span> across Instagram, Facebook, and Google to drive qualified leads directly to your sales funnel.</>,
-        icon: Megaphone,
-        color: "text-purple-400",
-        range: [0.5, 0.55, 0.7, 0.75]
-    },
-    {
-        title: <>CRAFTING <br className="hidden md:block" /> <span className="text-amber-400">ICONIC BRANDS</span></>,
-        subtitle: "Brand Identity & Visual Storytelling",
-        desc: <>We design <span className="text-amber-400 font-bold">premium logos</span> and comprehensive brand identities that command attention and earn instant trust from your audience.</>,
-        icon: Palette,
-        color: "text-amber-400",
-        range: [0.75, 0.8, 0.95, 1]
-    }
-];
+import { motion } from "framer-motion";
+import { Code2, ChevronDown, CheckCircle2, TrendingUp, Star, Zap } from "lucide-react";
+import Link from "next/link";
+import HeroCarousel from "@/components/sections/HeroCarousel";
 
 export default function Hero() {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const canvasRef = useRef<HTMLCanvasElement>(null);
-    const imagesRef = useRef<HTMLImageElement[]>([]);
-    const requestRef = useRef<number | undefined>(undefined);
-    const lastDrawnRef = useRef<number>(1);
-
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start start", "end end"]
-    });
-
-    // Feature animations (complying with Rules of Hooks)
-    const opacities = [
-        useTransform(scrollYProgress, [0, 0.2, 0.25], [1, 1, 0]),
-        useTransform(scrollYProgress, features[1].range, [0, 1, 1, 0]),
-        useTransform(scrollYProgress, features[2].range, [0, 1, 1, 0]),
-        useTransform(scrollYProgress, features[3].range, [0, 1, 1, 0]),
-    ];
-
-    const ys = [
-        useTransform(scrollYProgress, [0, 0.2, 0.25], [0, 0, -50]),
-        useTransform(scrollYProgress, features[1].range, [50, 0, 0, -50]),
-        useTransform(scrollYProgress, features[2].range, [50, 0, 0, -50]),
-        useTransform(scrollYProgress, features[3].range, [50, 0, 0, -50]),
-    ];
-
-    // Draw frame on canvas with object-fit: cover logic, falling back to nearest loaded frame
-    const drawFrame = (frameIndex: number) => {
-        const canvas = canvasRef.current;
-        const ctx = canvas?.getContext('2d');
-        if (!canvas || !ctx) return;
-
-        let img = imagesRef.current[frameIndex - 1];
-        if (!img || !img.complete) {
-            // 1. Try the last drawn image first (O(1) constant time)
-            const lastIdx = lastDrawnRef.current;
-            const fallbackImg = imagesRef.current[lastIdx - 1];
-            if (fallbackImg && fallbackImg.complete) {
-                img = fallbackImg;
-            } else {
-                // 2. Fall back to search loop only if the cache is invalid
-                let nearestDist = Infinity;
-                let nearestImg = null;
-                for (let j = 0; j < FRAME_COUNT; j++) {
-                    const currentImg = imagesRef.current[j];
-                    if (currentImg && currentImg.complete) {
-                        const dist = Math.abs(j - (frameIndex - 1));
-                        if (dist < nearestDist) {
-                            nearestDist = dist;
-                            nearestImg = currentImg;
-                        }
-                    }
-                }
-                img = nearestImg || img;
-            }
-        }
-
-        if (img && img.complete) {
-            // Update cache pointer
-            const idx = imagesRef.current.indexOf(img);
-            if (idx !== -1) {
-                lastDrawnRef.current = idx + 1;
-            }
-
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            const canvasRatio = canvas.width / canvas.height;
-            const imgRatio = img.width / img.height;
-
-            let renderWidth, renderHeight, xOffset, yOffset;
-
-            if (canvasRatio > imgRatio) {
-                renderWidth = canvas.width;
-                renderHeight = canvas.width / imgRatio;
-                xOffset = 0;
-                yOffset = (canvas.height - renderHeight) / 2;
-            } else {
-                renderWidth = canvas.height * imgRatio;
-                renderHeight = canvas.height;
-                xOffset = (canvas.width - renderWidth) / 2;
-                yOffset = 0;
-            }
-
-            ctx.drawImage(img, xOffset, yOffset, renderWidth, renderHeight);
-        }
-    };
-
-    // Preload images progressively
-    useEffect(() => {
-        let active = true;
-        const loadedImages: HTMLImageElement[] = [];
-
-        // 1. Load frame 1 first for immediate LCP/FCP
-        const firstImg = new Image();
-        firstImg.src = "/assent/frame_001.webp";
-        firstImg.onload = () => {
-            if (!active) return;
-            loadedImages[0] = firstImg;
-            if (canvasRef.current) {
-                drawFrame(1);
-            }
-
-            // 2. Once frame 1 is loaded, load remaining frames progressively to not block the network/thread
-            let i = 2;
-            const loadNext = () => {
-                if (!active || i > FRAME_COUNT) return;
-                const img = new Image();
-                const seq = i.toString().padStart(3, "0");
-                img.src = `/assent/frame_${seq}.webp`;
-                img.onload = () => {
-                    if (!active) return;
-                    loadedImages[i - 1] = img;
-                    i++;
-                    if (window.requestIdleCallback) {
-                        window.requestIdleCallback(() => loadNext());
-                    } else {
-                        setTimeout(loadNext, 10);
-                    }
-                };
-                img.onerror = () => {
-                    if (!active) return;
-                    i++;
-                    loadNext();
-                };
-            };
-
-            if (window.requestIdleCallback) {
-                window.requestIdleCallback(() => loadNext());
-            } else {
-                setTimeout(loadNext, 50);
-            }
-        };
-
-        imagesRef.current = loadedImages;
-
-        return () => {
-            active = false;
-            if (requestRef.current) {
-                cancelAnimationFrame(requestRef.current);
-            }
-        };
-    }, []);
-
-    // Resize canvas to match window
-    useEffect(() => {
-        const handleResize = () => {
-            if (canvasRef.current) {
-                const { innerWidth, innerHeight } = window;
-                canvasRef.current.width = innerWidth;
-                canvasRef.current.height = innerHeight;
-                // Re-draw current frame
-                const currentFrame = Math.max(1, Math.min(FRAME_COUNT, Math.floor(scrollYProgress.get() * FRAME_COUNT) + 1));
-                drawFrame(currentFrame);
-            }
-        };
-
-        handleResize();
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
-    // Listen to scroll to update frame
-    useMotionValueEvent(scrollYProgress, "change", (latest) => {
-        // Map 0-1 to 1-192
-        const frameIndex = Math.max(1, Math.min(FRAME_COUNT, Math.floor(latest * FRAME_COUNT) + 1));
-        if (requestRef.current) {
-            cancelAnimationFrame(requestRef.current);
-        }
-        requestRef.current = requestAnimationFrame(() => drawFrame(frameIndex));
-    });
-
     return (
-        <section ref={containerRef} className="relative h-[200vh] bg-transparent">
-            {/* Sticky Container */}
-            <div className="sticky top-0 h-screen w-full overflow-hidden bg-black flex items-center justify-center z-20 dark">
+        <section className="relative min-h-fit lg:min-h-[88vh] w-full bg-[#F8FAFC] flex items-center justify-center pt-24 lg:pt-28 pb-12 lg:pb-16 overflow-hidden z-10">
+            {/* Dedicated High-Res Cyber Network Background Photo */}
+            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=2070')] bg-cover bg-center opacity-10 z-0 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#F8FAFC]/95 via-[#F0F5FF]/90 to-[#F8FAFC]/95 z-0 pointer-events-none" />
 
-                {/* The 3D Sequence Canvas */}
-                <canvas
-                    ref={canvasRef}
-                    className="absolute inset-0 w-full h-full z-10"
-                />
+            {/* Ambient Subtle Tech Grid & Light Blur Spheres */}
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(37,99,235,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(37,99,235,0.05)_1px,transparent_1px)] bg-[size:4rem_4rem] z-0 pointer-events-none" />
+            <div className="absolute top-10 -left-20 w-96 h-96 bg-blue-500/10 blur-[130px] rounded-full pointer-events-none z-0" />
+            <div className="absolute bottom-10 -right-20 w-96 h-96 bg-cyan-500/10 blur-[130px] rounded-full pointer-events-none z-0" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-sky-500/8 blur-[160px] rounded-full pointer-events-none z-0" />
 
-                {/* Dark Gradient Overlays for better text contrast */}
-                <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent z-20" />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/60 z-20" />
+            {/* Main Hero Container */}
+            <div className="relative z-30 max-w-7xl mx-auto px-6 w-full flex flex-col lg:flex-row items-center justify-between gap-8 pt-2">
 
-                {/* Subtitle / Overlay Features */}
-                <div className="relative z-30 max-w-7xl mx-auto px-6 w-full h-full flex flex-col justify-center pt-24 md:pt-32">
-                    {features.map((feat, i) => {
-                        const opacity = opacities[i];
-                        const y = ys[i];
+                {/* Left Column: Primary Headline & Hero Copy */}
+                <div className="w-full lg:w-6/12 relative flex flex-col justify-center">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6 }}
+                        className="inline-flex flex-col items-start"
+                    >
+                        <h1 className="text-4xl sm:text-6xl lg:text-6xl xl:text-7xl font-black font-sora text-slate-900 leading-[1.05] tracking-tight uppercase mb-3 max-w-3xl">
+                          BUILD DIGITAL PRODUCTS <br className="hidden md:block" /> THAT ACCELERATE YOUR <span className="bg-gradient-to-r from-[#2563EB] via-[#0284C7] to-[#06B6D4] bg-clip-text text-transparent">BUSINESS</span>
+                        </h1>
 
-                        return (
-                            <motion.div
-                                key={i}
-                                style={{ opacity, y }}
-                                className="absolute left-6 md:left-12 max-w-xl pointer-events-none"
+                        <h2 className="text-xs sm:text-sm md:text-base font-bold text-slate-800 mb-2.5 flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                          <span className="w-2.5 h-2.5 rounded-full bg-[#2563EB] inline-block animate-ping shrink-0" />
+                          <span>Websites</span> • <span>Mobile Apps (iOS & Android)</span> • <span>AI Platforms</span> • <span>Business Software</span> • <span>Automation</span>
+                        </h2>
+
+                        <p className="text-slate-600 text-xs sm:text-sm md:text-base font-medium leading-relaxed max-w-xl mb-4">
+                          We design and develop modern websites, iOS & Android mobile applications, custom AI platforms, business software, workflow automation, and digital growth solutions.
+                        </p>
+
+                        {/* Action Buttons */}
+                        <div className="flex flex-wrap items-center gap-3">
+                            <Link
+                                href="/contact"
+                                className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#2563EB] via-[#0284C7] to-[#06B6D4] hover:from-[#1d4ed8] hover:to-[#0891b2] text-white font-extrabold text-xs uppercase tracking-widest shadow-lg shadow-blue-500/25 hover:shadow-cyan-500/40 hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2"
                             >
-                                <div className={`inline-flex flex-col items-start`}>
-                                    <div className="flex items-center gap-3 mb-4">
-                                        <div className={`p-3 rounded-xl bg-white/5 border border-white/10 backdrop-blur-md`}>
-                                            <feat.icon size={24} className={feat.color} />
-                                        </div>
-                                        <div className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/80 text-[10px] font-black uppercase tracking-[0.3em] backdrop-blur-sm shadow-xl">
-                                            Phase 0{i + 1}
-                                        </div>
-                                    </div>
-
-                                    {i === 0 ? (
-                                        <h1 className="text-4xl md:text-5xl lg:text-7xl font-black font-sora text-white leading-[1.1] tracking-tighter uppercase mb-4 drop-shadow-2xl max-w-4xl">
-                                            {feat.title}
-                                        </h1>
-                                    ) : (
-                                        <h2 className="text-4xl md:text-5xl lg:text-7xl font-black font-sora text-white leading-[1.1] tracking-tighter uppercase mb-4 drop-shadow-2xl max-w-4xl">
-                                            {feat.title}
-                                        </h2>
-                                    )}
-
-                                    <h3 className="text-xl md:text-2xl font-bold text-white mb-4 drop-shadow-lg">
-                                        {feat.subtitle}
-                                    </h3>
-
-                                    <p className="text-white/80 text-base md:text-lg font-medium leading-relaxed drop-shadow-md">
-                                        {feat.desc}
-                                    </p>
-                                </div>
-                            </motion.div>
-                        );
-                    })}
+                                <Zap size={14} className="fill-current text-white" /> Start Your Project
+                            </Link>
+                            <Link
+                                href="/services"
+                                className="px-5 py-3 rounded-xl bg-white/80 hover:bg-white text-slate-700 font-bold text-xs uppercase tracking-wider border border-slate-200 shadow-sm hover:shadow transition-all duration-300"
+                            >
+                                Explore Services
+                            </Link>
+                        </div>
+                    </motion.div>
                 </div>
 
-                {/* High-Impact Scroll Indicator */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1, duration: 1 }}
-                    style={{ opacity: useTransform(scrollYProgress, [0, 0.05], [1, 0]) }}
-                    className="absolute bottom-10 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-4 group cursor-pointer"
-                    onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
-                >
-                    <div className="relative">
-                        {/* Glowing Background Halo */}
-                        <div className="absolute inset-0 bg-neon/20 blur-2xl rounded-full scale-150 animate-pulse" />
-
-                        <div className="relative flex flex-col items-center gap-1">
-                            {/* Larger Mouse Icon */}
-                            <div className="w-8 h-12 border-2 border-neon/50 rounded-full flex justify-center p-1.5 relative bg-black/20 backdrop-blur-sm shadow-[0_0_20px_rgba(204,255,0,0.2)]">
-                                <motion.div
-                                    animate={{
-                                        y: [0, 20, 0],
-                                        opacity: [1, 0.5, 1]
-                                    }}
-                                    transition={{
-                                        duration: 2,
-                                        repeat: Infinity,
-                                        ease: "easeInOut"
-                                    }}
-                                    className="w-1.5 h-2.5 bg-neon rounded-full"
-                                />
-                            </div>
-
-                            {/* Bouncing Triple Chevron */}
-                            <motion.div
-                                animate={{ y: [0, 8, 0] }}
-                                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                                className="flex flex-col items-center -mt-1"
-                            >
-                                <ChevronDown size={24} className="text-neon animate-pulse" strokeWidth={3} />
-                            </motion.div>
-                        </div>
-                    </div>
-
-                    <span className="text-[11px] font-black text-neon uppercase tracking-[0.4em] drop-shadow-[0_0_10px_rgba(204,255,0,0.5)] bg-black/40 px-4 py-1.5 rounded-full border border-neon/30 backdrop-blur-md">
-                        Explore Platform
-                    </span>
-                </motion.div>
+                {/* Right Column: Hero Showcase Carousel */}
+                <div className="w-full lg:w-6/12 relative z-30 pointer-events-auto">
+                    <HeroCarousel />
+                </div>
 
             </div>
+
+            {/* High-Impact Animated Scroll Indicator */}
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1, duration: 1 }}
+                className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2.5 group cursor-pointer"
+                onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+            >
+                <div className="relative flex flex-col items-center gap-1">
+                    <div className="w-7 h-11 border-2 border-blue-300 rounded-full flex justify-center p-1.5 bg-white/60 backdrop-blur-md shadow-md shadow-blue-500/10">
+                        <motion.div
+                            animate={{
+                                y: [0, 16, 0],
+                                opacity: [1, 0.4, 1]
+                            }}
+                            transition={{
+                                duration: 2,
+                                repeat: Infinity,
+                                ease: "easeInOut"
+                            }}
+                            className="w-1.5 h-2.5 bg-[#2563EB] rounded-full"
+                        />
+                    </div>
+                    <motion.div
+                        animate={{ y: [0, 6, 0] }}
+                        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                    >
+                        <ChevronDown size={20} className="text-[#2563EB]" strokeWidth={2.5} />
+                    </motion.div>
+                </div>
+
+                <span className="text-[10px] font-black text-[#2563EB] uppercase tracking-[0.35em] bg-white/90 px-4 py-1 rounded-full border border-blue-100 shadow-sm backdrop-blur-md">
+                    Explore Platform
+                </span>
+            </motion.div>
         </section>
     );
 }

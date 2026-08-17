@@ -9,7 +9,6 @@ export default function Preloader() {
     const [progress, setProgress] = useState(0);
 
     useEffect(() => {
-        // Disable browser's automatic scroll restoration to fix refresh behavior
         if (typeof window !== "undefined" && window.history.scrollRestoration !== 'manual') {
             window.history.scrollRestoration = 'manual';
         }
@@ -17,24 +16,22 @@ export default function Preloader() {
         document.body.style.overflow = "hidden";
         window.scrollTo(0, 0);
 
-        // Animate percentage manually over 600ms
+        // Smooth percentage counter
         const interval = setInterval(() => {
             setProgress((prev) => {
                 if (prev >= 100) {
                     clearInterval(interval);
                     return 100;
                 }
-                return prev + 2;
+                return prev + 10;  // faster fill
             });
-        }, 12);
+        }, 10);
 
-        // Hide preloader after 800ms
+        // Hide preloader fast — 200ms max
         const timer = setTimeout(() => {
             setIsLoading(false);
             document.body.style.overflow = "auto";
-            // Final absolute scroll reset on exit
-            window.scrollTo(0, 0);
-        }, 800);
+        }, 200);
 
         return () => {
             clearInterval(interval);
@@ -48,60 +45,56 @@ export default function Preloader() {
             {isLoading && (
                 <motion.div
                     key="preloader"
-                    initial={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: "-100%", transition: { duration: 0.8, ease: "easeInOut" } }}
-                    className="fixed inset-0 z-[9999] bg-black flex flex-col items-center justify-center pointer-events-none"
+                    initial={{ opacity: 1 }}
+                    exit={{ opacity: 0, scale: 0.99, transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] } }}
+                    className="fixed inset-0 z-[9999] bg-[#030712] flex flex-col items-center justify-center pointer-events-none overflow-hidden"
                 >
-                    {/* Background Visuals */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent pointer-events-none" />
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-neon/10 blur-[180px] rounded-full pointer-events-none" />
+                    {/* Atmospheric Ambient Glow */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-gradient-to-br from-[#2563EB]/20 via-[#0284C7]/15 to-[#06B6D4]/20 blur-[180px] rounded-full pointer-events-none" />
+                    <div className="absolute inset-0 cyber-grid opacity-[0.04] pointer-events-none" />
 
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.8 }}
+                        initial={{ opacity: 0, scale: 0.9, y: 10 }}
                         animate={{
                             opacity: 1,
-                            scale: [0.8, 1.05, 1],
+                            scale: 1,
+                            y: 0,
                             filter: [
-                                "drop-shadow(0 0 0px rgba(204,255,0,0))",
-                                "drop-shadow(0 0 20px rgba(204,255,0,0.2))",
-                                "drop-shadow(0 0 10px rgba(204,255,0,0.1))"
+                                "drop-shadow(0 0 15px rgba(37,99,235,0.2))",
+                                "drop-shadow(0 0 35px rgba(6,182,212,0.45))",
+                                "drop-shadow(0 0 15px rgba(37,99,235,0.2))"
                             ]
                         }}
                         transition={{
-                            duration: 1.2,
+                            duration: 0.5,
                             ease: "easeOut",
-                            filter: {
-                                duration: 2,
-                                repeat: Infinity,
-                                repeatType: "reverse"
-                            }
+                            filter: { duration: 2, repeat: Infinity }
                         }}
-                        className="flex flex-col items-center relative z-10"
+                        className="flex flex-col items-center relative z-10 px-6 text-center"
                     >
-                        <Logo width={400} height={110} className="mb-12" />
+                        <Logo width={320} height={90} className="mb-10 max-w-[280px] sm:max-w-[340px] h-auto" />
 
-                        {/* Loading Bar Container */}
-                        <div className="w-80 h-1 bg-white/10 rounded-full overflow-hidden relative">
+                        {/* Executive Dual-Tone Loading Bar */}
+                        <div className="w-64 sm:w-80 h-1.5 bg-white/10 rounded-full overflow-hidden relative border border-white/5 backdrop-blur-sm">
                             <motion.div
                                 initial={{ width: "0%" }}
                                 animate={{ width: `${progress}%` }}
-                                transition={{ duration: 0.1 }}
-                                className="absolute top-0 left-0 h-full bg-neon shadow-[0_0_20px_rgba(204,255,0,0.4)] rounded-full"
+                                transition={{ duration: 0.05 }}
+                                className="absolute top-0 left-0 h-full bg-gradient-to-r from-[#2563EB] via-[#0284C7] to-[#06B6D4] shadow-[0_0_20px_rgba(6,182,212,0.6)] rounded-full"
                             />
                         </div>
 
-                        {/* Percentage & Loading Text */}
-                        <div className="mt-8 flex flex-col items-center gap-2">
-                            <span className="text-4xl font-black font-sora text-white leading-none">
-                                {progress}<span className="text-neon">%</span>
+                        {/* Progress Percentage & Status */}
+                        <div className="mt-6 flex flex-col items-center gap-1.5">
+                            <span className="text-3xl font-black font-sora text-white tracking-tight">
+                                {progress}<span className="bg-gradient-to-r from-[#2563EB] to-[#06B6D4] bg-clip-text text-transparent">%</span>
                             </span>
                             <motion.div
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: [0, 1, 0.5, 1] }}
-                                transition={{ duration: 1.5, repeat: Infinity }}
-                                className="text-white/40 text-[10px] font-black uppercase tracking-[0.4em]"
+                                animate={{ opacity: [0.4, 1, 0.4] }}
+                                transition={{ duration: 1.2, repeat: Infinity }}
+                                className="text-cyan-400/90 text-[10px] font-black uppercase tracking-[0.4em]"
                             >
-                                Loading System...
+                                Executive System Ready
                             </motion.div>
                         </div>
                     </motion.div>

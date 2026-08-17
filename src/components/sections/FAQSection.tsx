@@ -46,7 +46,17 @@ export default function FAQSection() {
     const [open, setOpen] = useState<number | null>(0);
 
     return (
-        <section id="faq" className="py-32 relative bg-transparent overflow-hidden">
+        <motion.section
+            initial={{ opacity: 0.9, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            id="faq"
+            className="py-20 relative overflow-hidden bg-white text-slate-900 rounded-t-[3rem] md:rounded-t-[4rem] shadow-[0_-25px_60px_rgba(0,0,0,0.06)] border-t border-slate-200/90 z-60"
+        >
+            {/* Dedicated High-Res Geometric Architectural Photo Background */}
+            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center opacity-10 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#FAFBFF] via-[#F1F5F9] to-[#FAFBFF] pointer-events-none" />
             <Script
                 id="faq-schema"
                 type="application/ld+json"
@@ -56,14 +66,14 @@ export default function FAQSection() {
 
             <div className="max-w-4xl mx-auto px-6 relative z-10">
                 {/* Header */}
-                <div className="text-center mb-20">
+                <div className="text-center mb-16">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
-                        className="inline-flex px-3 py-1.5 rounded-lg bg-white/5 border border-white/20 text-white/80 text-[10px] font-black uppercase tracking-[0.2em] mb-6"
+                        className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-violet-50 border border-violet-200/80 text-violet-700 text-[10px] font-black uppercase tracking-[0.25em] mb-4 shadow-sm"
                     >
-                        System Info
+                        <Zap size={12} className="text-[#7619FF]" /> System Info
                     </motion.div>
 
                     <motion.h2
@@ -71,9 +81,9 @@ export default function FAQSection() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
-                        className="text-5xl md:text-6xl font-black font-sora text-white mb-6 tracking-tighter"
+                        className="text-4xl md:text-5xl lg:text-6xl font-black font-sora text-slate-900 mb-4 tracking-tight"
                     >
-                        Frequent <span className="text-neon">Queries</span>
+                        Frequently Asked <span className="bg-gradient-to-r from-[#7619FF] via-[#9333EA] to-[#3B82F6] bg-clip-text text-transparent">Questions</span>
                     </motion.h2>
                 </div>
 
@@ -86,19 +96,19 @@ export default function FAQSection() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: i * 0.1 }}
-                            className={`rounded-2xl border transition-all duration-500 overflow-hidden ${open === i
-                                ? "bg-white/10 border-neon/50 shadow-[0_0_20px_rgba(204,255,0,0.15)]"
-                                : "bg-white/[0.04] border-white/10 hover:border-white/20"
+                            className={`rounded-3xl border transition-all duration-300 overflow-hidden ${open === i
+                                ? "bg-white border-violet-300 shadow-xl shadow-[#7619FF]/10 ring-2 ring-[#7619FF]/10"
+                                : "bg-white/90 border-slate-200/90 hover:border-violet-200 shadow-sm"
                                 }`}
                         >
                             <button
                                 onClick={() => setOpen(open === i ? null : i)}
-                                className="w-full flex items-center justify-between gap-6 p-8 text-left"
+                                className="w-full flex items-center justify-between gap-6 p-7 md:p-8 text-left"
                             >
-                                <span className={`font-black text-base lg:text-lg transition-colors ${open === i ? "text-neon" : "text-white/90"}`}>
+                                <span className={`font-black text-base lg:text-lg transition-colors font-sora ${open === i ? "text-[#7619FF]" : "text-slate-900"}`}>
                                     {faq.q}
                                 </span>
-                                <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all ${open === i ? "bg-neon text-black rotate-0" : "bg-white/10 text-white/60"
+                                <div className={`flex-shrink-0 w-9 h-9 rounded-xl flex items-center justify-center transition-all ${open === i ? "bg-[#7619FF] text-white rotate-0 shadow-md shadow-[#7619FF]/25" : "bg-violet-50 text-[#7619FF] border border-violet-100"
                                     }`}>
                                     {open === i ? <Minus size={16} strokeWidth={3} /> : <Plus size={16} strokeWidth={3} />}
                                 </div>
@@ -111,12 +121,12 @@ export default function FAQSection() {
                                         initial={{ height: 0, opacity: 0 }}
                                         animate={{ height: "auto", opacity: 1 }}
                                         exit={{ height: 0, opacity: 0 }}
-                                        transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+                                        transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
                                         className="overflow-hidden"
                                     >
-                                        <div className="px-8 pb-8 pt-0">
-                                            <div className="h-px bg-white/10 mb-6" />
-                                            <p className="text-white/90 leading-relaxed font-bold text-sm lg:text-base">
+                                        <div className="px-7 md:px-8 pb-8 pt-0">
+                                            <div className="h-px bg-slate-100 mb-6" />
+                                            <p className="text-slate-600 leading-relaxed font-semibold text-sm lg:text-base">
                                                 {faq.a}
                                             </p>
                                         </div>
@@ -133,11 +143,11 @@ export default function FAQSection() {
                     viewport={{ once: true }}
                     className="text-center mt-12"
                 >
-                    <p className="text-white/60 text-xs font-black uppercase tracking-[0.2em]">
-                        Still have inquiries? <a href="/contact" className="text-neon hover:underline decoration-neon/40 underline-offset-4">Talk to an Architect →</a>
+                    <p className="text-slate-500 text-xs font-black uppercase tracking-[0.2em]">
+                        Still have inquiries? <a href="/contact" className="text-[#7619FF] hover:underline decoration-violet-300 underline-offset-4 font-bold">Talk to an Architect →</a>
                     </p>
                 </motion.div>
             </div>
-        </section>
+        </motion.section>
     );
 }

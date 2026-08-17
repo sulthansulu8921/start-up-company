@@ -25,19 +25,19 @@ const quickContacts = [
         label: "WhatsApp",
         sublabel: "+91 94976 69317 / +91 89216 24007",
         href: "https://wa.me/919497669317",
-        color: "text-green-400",
-        bg: "bg-green-400/10",
-        border: "border-green-400/30",
-        hoverBorder: "hover:border-green-400",
+        color: "text-emerald-600",
+        bg: "bg-emerald-50",
+        border: "border-emerald-200/80",
+        hoverBorder: "hover:border-emerald-400",
     },
     {
         icon: Phone,
         label: "Call Us",
         sublabel: "+91 94976 69317 / +91 89216 24007",
         href: "tel:+919497669317",
-        color: "text-sky-400",
-        bg: "bg-sky-400/10",
-        border: "border-sky-400/30",
+        color: "text-sky-600",
+        bg: "bg-sky-50",
+        border: "border-sky-200/80",
         hoverBorder: "hover:border-sky-400",
     },
     {
@@ -45,10 +45,10 @@ const quickContacts = [
         label: "Email Us",
         sublabel: "nanorayssolution@gmail.com",
         href: "mailto:nanorayssolution@gmail.com",
-        color: "text-neon",
-        bg: "bg-neon/10",
-        border: "border-neon/30",
-        hoverBorder: "hover:border-neon",
+        color: "text-indigo-600",
+        bg: "bg-indigo-50",
+        border: "border-indigo-200/80",
+        hoverBorder: "hover:border-indigo-400",
     },
 ];
 
@@ -77,18 +77,6 @@ export default function ContactSection() {
         const currentData = { ...formData };
 
         try {
-            const fullMessage = `Hi NanoRays,
-I submitted an enquiry from your website.
-
-Name: ${currentData.name}
-Phone: ${currentData.phone}
-Email: ${currentData.email}
-Service: ${currentData.service}
-
-Message: 
-${currentData.message || "No additional message provided."}`;
-
-            // 1. Send Email via Lead Engine (Gmail SMTP API)
             await sendLeadEmail({
                 from_name: currentData.name,
                 from_email: currentData.email,
@@ -98,7 +86,6 @@ ${currentData.message || "No additional message provided."}`;
                 subject: `📞 New Contact Lead: ${currentData.name} — NanoRays Contact Form`,
             });
 
-            // 2. Async save to Firestore in background (so it doesn't block UI if Firestore fails)
             (async () => {
                 try {
                     await addDoc(collection(db, "leads"), {
@@ -112,7 +99,6 @@ ${currentData.message || "No additional message provided."}`;
                 }
             })();
 
-            // 3. UI Updates
             setLoading(false);
             setSubmitted(true);
             setFormData({
@@ -131,18 +117,28 @@ ${currentData.message || "No additional message provided."}`;
     };
 
     return (
-        <section id="contact" className="py-32 relative bg-transparent overflow-hidden">
-            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
-            <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-neon/5 blur-[150px] rounded-full pointer-events-none" />
+        <motion.section
+            initial={{ opacity: 0.9, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            id="contact"
+            className="py-20 relative overflow-hidden bg-[#F8FAFC] text-slate-900 rounded-t-[3rem] md:rounded-t-[4rem] shadow-[0_-25px_60px_rgba(0,0,0,0.06)] border-t border-slate-200/90 z-65"
+        >
+            {/* Dedicated High-Res Global Telecommunications Network Photo Background */}
+            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center opacity-10 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#F8FAFC]/96 via-[#F0F5FF]/90 to-[#F8FAFC]/96 pointer-events-none" />
+            
+            <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-blue-500/5 blur-[150px] rounded-full pointer-events-none" />
 
             <div className="max-w-7xl mx-auto px-6 relative z-10">
                 {/* Header */}
-                <div className="text-center mb-20">
+                <div className="text-center mb-16">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
-                        className="inline-flex px-3 py-1.5 rounded-lg bg-white/5 border border-white/20 text-white/80 text-[10px] font-black uppercase tracking-[0.2em] mb-6"
+                        className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-50 border border-cyan-200/80 text-cyan-700 text-[10px] font-black uppercase tracking-[0.25em] mb-4 shadow-sm"
                     >
                         Initiate Consultation
                     </motion.div>
@@ -151,19 +147,19 @@ ${currentData.message || "No additional message provided."}`;
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
-                        className="text-5xl md:text-6xl font-black font-sora text-white mb-6 tracking-tighter"
+                        className="text-4xl md:text-5xl lg:text-6xl font-black font-sora text-slate-900 mb-4 tracking-tight"
                     >
-                        Engineer Your <span className="text-neon">Digital Future</span>
+                        Engineer Your <span className="bg-gradient-to-r from-[#2563EB] via-[#0284C7] to-[#06B6D4] bg-clip-text text-transparent">Digital Future</span>
                     </motion.h2>
                     <motion.p
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.2 }}
-                        className="text-white/70 text-lg font-bold max-w-2xl mx-auto"
+                        className="text-slate-600 text-base md:text-lg font-medium max-w-2xl mx-auto leading-relaxed"
                     >
                         Communicate your requirements and our strategic team will respond within 60 minutes. <br className="hidden md:block" />
-                        Your first high-level consultation is completely <span className="text-neon">complimentary</span>.
+                        Your first high-level consultation is completely <span className="text-[#2563EB] font-bold">complimentary</span>.
                     </motion.p>
                 </div>
 
@@ -173,10 +169,10 @@ ${currentData.message || "No additional message provided."}`;
                         initial={{ opacity: 0, x: -30 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        className="lg:col-span-2 space-y-6"
+                        className="lg:col-span-2 space-y-5"
                     >
-                        <h3 className="text-xl font-black text-white font-sora mb-2">Contact Us Directly</h3>
-                        <p className="text-white/50 text-sm font-bold mb-6">Choose whatever is easiest for you.</p>
+                        <h3 className="text-xl font-black text-slate-900 font-sora mb-1">Contact Us Directly</h3>
+                        <p className="text-slate-500 text-sm font-medium mb-6">Choose whatever channel is easiest for you.</p>
 
                         {quickContacts.map((c, i) => (
                             <motion.a
@@ -189,25 +185,25 @@ ${currentData.message || "No additional message provided."}`;
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.1 }}
                                 whileHover={{ x: 6 }}
-                                className={`flex items-center gap-5 p-5 rounded-2xl glass-dark border ${c.border} ${c.hoverBorder} transition-all duration-300 group`}
+                                className={`flex items-center gap-5 p-5 rounded-2xl bg-white border ${c.border} ${c.hoverBorder} shadow-sm transition-all duration-300 group`}
                             >
                                 <div className={`w-12 h-12 rounded-xl ${c.bg} flex items-center justify-center flex-shrink-0 border ${c.border}`}>
                                     <c.icon size={22} className={c.color} />
                                 </div>
                                 <div className="flex-1">
-                                    <p className={`font-black text-base ${c.color}`}>{c.label}</p>
-                                    <p className="text-white/50 text-sm font-bold truncate">{c.sublabel}</p>
+                                    <p className={`font-extrabold text-base ${c.color}`}>{c.label}</p>
+                                    <p className="text-slate-600 text-sm font-semibold truncate">{c.sublabel}</p>
                                 </div>
-                                <ArrowRight size={16} className="text-white/20 group-hover:text-white/60 group-hover:translate-x-1 transition-all" />
+                                <ArrowRight size={16} className="text-slate-300 group-hover:text-[#2563EB] group-hover:translate-x-1 transition-all" />
                             </motion.a>
                         ))}
 
                         {/* Response time badge */}
-                        <div className="flex items-center gap-3 p-4 rounded-2xl bg-neon/5 border border-neon/20 mt-4">
-                            <Clock size={18} className="text-neon flex-shrink-0" />
+                        <div className="flex items-center gap-3 p-4 rounded-2xl bg-blue-50/80 border border-blue-200/80 mt-4">
+                            <Clock size={18} className="text-[#2563EB] flex-shrink-0" />
                             <div>
-                                <p className="text-white font-black text-sm">Average reply time: <span className="text-neon">Under 1 Hour</span></p>
-                                <p className="text-white/40 text-xs font-bold">Monday to Saturday, 9 AM – 9 PM IST</p>
+                                <p className="text-slate-900 font-extrabold text-sm">Average reply time: <span className="text-[#2563EB]">Under 1 Hour</span></p>
+                                <p className="text-slate-500 text-xs font-medium">Monday to Saturday, 9 AM – 9 PM IST</p>
                             </div>
                         </div>
                     </motion.div>
@@ -219,32 +215,32 @@ ${currentData.message || "No additional message provided."}`;
                         viewport={{ once: true }}
                         className="lg:col-span-3"
                     >
-                        <div className="glass-dark border border-white/10 rounded-3xl p-8 md:p-10 hover:border-white/20 transition-all duration-500">
+                        <div className="bg-white border border-blue-100 rounded-3xl p-8 md:p-10 shadow-xl shadow-blue-500/5 hover:border-blue-200 transition-all duration-300">
                             {submitted ? (
                                 <div className="flex flex-col items-center justify-center py-16 text-center gap-6">
                                     <motion.div
                                         initial={{ scale: 0 }}
                                         animate={{ scale: 1 }}
                                         transition={{ type: "spring", stiffness: 200 }}
-                                        className="w-20 h-20 rounded-full bg-neon/10 border border-neon/30 flex items-center justify-center"
+                                        className="w-20 h-20 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center"
                                     >
-                                        <CheckCircle size={40} className="text-neon" />
+                                        <CheckCircle size={40} className="text-emerald-600" />
                                     </motion.div>
-                                    <h3 className="text-2xl font-black text-white font-sora">Message Sent!</h3>
-                                    <p className="text-white/60 font-bold max-w-sm">We have received your enquiry. Our team will contact you shortly.</p>
+                                    <h3 className="text-2xl font-black text-slate-900 font-sora">Message Sent!</h3>
+                                    <p className="text-slate-600 font-medium max-w-sm">We have received your enquiry. Our team will contact you shortly.</p>
                                     <button
                                         onClick={() => setSubmitted(false)}
-                                        className="btn-neon px-8 py-3 text-sm"
+                                        className="bg-gradient-to-r from-[#2563EB] to-[#7C3AED] hover:from-[#1d4ed8] hover:to-[#6d28d9] text-white font-extrabold px-8 py-3.5 rounded-xl text-xs uppercase tracking-widest transition-all shadow-md"
                                     >
                                         Send Another Message
                                     </button>
                                 </div>
                             ) : (
                                 <form onSubmit={handleSubmit} className="space-y-6">
-                                    <h3 className="text-xl font-black text-white font-sora mb-6">Send Us a Message</h3>
+                                    <h3 className="text-xl font-black text-slate-900 font-sora mb-6">Send Us a Message</h3>
 
                                     {errorMessage && (
-                                        <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl text-red-400 text-sm font-bold">
+                                        <div className="p-4 bg-rose-50 border border-rose-200 rounded-xl text-rose-700 text-sm font-semibold">
                                             ⚠️ {errorMessage}
                                         </div>
                                     )}
@@ -252,7 +248,7 @@ ${currentData.message || "No additional message provided."}`;
                                     {/* Row 1 */}
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div className="space-y-2">
-                                            <label className="text-white/50 text-[11px] font-black uppercase tracking-widest">Your Name *</label>
+                                            <label className="text-slate-700 text-[11px] font-black uppercase tracking-widest">Your Name *</label>
                                             <input
                                                 type="text"
                                                 name="name"
@@ -260,11 +256,11 @@ ${currentData.message || "No additional message provided."}`;
                                                 placeholder="Ex: Nanorays solution"
                                                 value={formData.name}
                                                 onChange={handleChange}
-                                                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder:text-white/20 font-bold text-sm focus:outline-none focus:border-neon/50 transition-all"
+                                                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-slate-900 placeholder:text-slate-400 font-semibold text-sm focus:outline-none focus:border-[#2563EB] focus:bg-white transition-all"
                                             />
                                         </div>
                                         <div className="space-y-2">
-                                            <label className="text-white/50 text-[11px] font-black uppercase tracking-widest">Phone Number *</label>
+                                            <label className="text-slate-700 text-[11px] font-black uppercase tracking-widest">Phone Number *</label>
                                             <input
                                                 type="tel"
                                                 name="phone"
@@ -272,52 +268,52 @@ ${currentData.message || "No additional message provided."}`;
                                                 placeholder="Ex: +91 9497669317"
                                                 value={formData.phone}
                                                 onChange={handleChange}
-                                                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder:text-white/20 font-bold text-sm focus:outline-none focus:border-neon/50 transition-all"
+                                                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-slate-900 placeholder:text-slate-400 font-semibold text-sm focus:outline-none focus:border-[#2563EB] focus:bg-white transition-all"
                                             />
                                         </div>
                                     </div>
 
                                     {/* Row 2 */}
                                     <div className="space-y-2">
-                                        <label className="text-white/50 text-[11px] font-black uppercase tracking-widest">Email Address</label>
+                                        <label className="text-slate-700 text-[11px] font-black uppercase tracking-widest">Email Address</label>
                                         <input
                                             type="email"
                                             name="email"
                                             placeholder="Ex: nanorayssolution@gmail.com"
                                             value={formData.email}
                                             onChange={handleChange}
-                                            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder:text-white/20 font-bold text-sm focus:outline-none focus:border-neon/50 transition-all"
+                                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-slate-900 placeholder:text-slate-400 font-semibold text-sm focus:outline-none focus:border-[#2563EB] focus:bg-white transition-all"
                                         />
                                     </div>
 
                                     {/* Row 3 — Service Dropdown */}
                                     <div className="space-y-2">
-                                        <label htmlFor="contact-service-select" className="text-white/50 text-[11px] font-black uppercase tracking-widest">Service You Need *</label>
+                                        <label htmlFor="contact-service-select" className="text-slate-700 text-[11px] font-black uppercase tracking-widest">Service You Need *</label>
                                         <select
                                             id="contact-service-select"
                                             name="service"
                                             required
                                             value={formData.service}
                                             onChange={handleChange}
-                                            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white font-bold text-sm focus:outline-none focus:border-neon/50 transition-all appearance-none cursor-pointer"
+                                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-slate-900 font-semibold text-sm focus:outline-none focus:border-[#2563EB] focus:bg-white transition-all appearance-none cursor-pointer"
                                         >
-                                            <option value="" className="bg-black">— Select a service —</option>
+                                            <option value="" className="bg-white text-slate-900">— Select a service —</option>
                                             {services.map((s, i) => (
-                                                <option key={i} value={s} className="bg-black">{s}</option>
+                                                <option key={i} value={s} className="bg-white text-slate-900">{s}</option>
                                             ))}
                                         </select>
                                     </div>
 
                                     {/* Row 4 — Message */}
                                     <div className="space-y-2">
-                                        <label className="text-white/50 text-[11px] font-black uppercase tracking-widest">Your Message</label>
+                                        <label className="text-slate-700 text-[11px] font-black uppercase tracking-widest">Your Message</label>
                                         <textarea
                                             name="message"
                                             rows={4}
                                             placeholder="Tell us about your project or business..."
                                             value={formData.message}
                                             onChange={handleChange}
-                                            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder:text-white/20 font-bold text-sm focus:outline-none focus:border-neon/50 transition-all resize-none"
+                                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-slate-900 placeholder:text-slate-400 font-semibold text-sm focus:outline-none focus:border-[#2563EB] focus:bg-white transition-all resize-none"
                                         />
                                     </div>
 
@@ -325,15 +321,15 @@ ${currentData.message || "No additional message provided."}`;
                                     <button
                                         type="submit"
                                         disabled={loading}
-                                        className="btn-neon w-full py-4 flex items-center justify-center gap-3 text-base disabled:opacity-60 disabled:cursor-not-allowed"
+                                        className="w-full py-4 bg-gradient-to-r from-[#2563EB] via-[#4F46E5] to-[#7C3AED] hover:from-[#1d4ed8] hover:to-[#6d28d9] text-white rounded-xl font-extrabold text-sm uppercase tracking-widest shadow-md shadow-blue-500/20 flex items-center justify-center gap-3 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
                                     >
                                         {loading ? (
-                                            <><span className="w-5 h-5 rounded-full border-2 border-black/40 border-t-black animate-spin" /> Sending...</>
+                                            <><span className="w-5 h-5 rounded-full border-2 border-white/40 border-t-white animate-spin" /> Sending...</>
                                         ) : (
                                             <><Send size={18} /> Send Message</>
                                         )}
                                     </button>
-                                    <p className="text-white/30 text-xs text-center font-bold">
+                                    <p className="text-slate-400 text-xs text-center font-medium">
                                         Your information is private and will never be shared.
                                     </p>
                                 </form>
@@ -342,6 +338,6 @@ ${currentData.message || "No additional message provided."}`;
                     </motion.div>
                 </div>
             </div>
-        </section>
+        </motion.section>
     );
 }

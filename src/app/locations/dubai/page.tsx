@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { Globe, CheckCircle, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import BackButton from "@/components/BackButton";
 
 export const metadata: Metadata = {
     title: "Website Development Company Dubai | NanoRays Solution India",
@@ -17,6 +18,9 @@ export default function DubaiPage() {
     return (
         <main className="min-h-screen pt-32 pb-16 relative">
             <div className="container mx-auto px-4 max-w-5xl relative z-10">
+                <div className="mb-8">
+                    <BackButton fallbackUrl="/locations" label="Back to Locations" />
+                </div>
                 <div className="mb-12 text-center">
                     <span className="inline-block bg-amber-400/10 text-amber-400 text-sm font-bold px-4 py-1.5 rounded-full mb-6 border border-amber-400/20 uppercase tracking-wider">
                         🌍 Serving Dubai & UAE Clients

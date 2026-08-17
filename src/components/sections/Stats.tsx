@@ -5,10 +5,10 @@ import { useRef, useState, useEffect } from "react";
 import { Award, Globe2, Users, Zap, TrendingUp } from "lucide-react";
 
 const stats = [
-    { value: 200, suffix: "+", label: "Projects Delivered", icon: Globe2, color: "text-neon" },
-    { value: 50, suffix: "+", label: "Happy Clients", icon: Users, color: "text-sky-400" },
-    { value: 99, suffix: "%", label: "Satisfaction", icon: Award, color: "text-purple-400" },
-    { value: 300, suffix: "%", label: "Avg. ROI Growth", icon: TrendingUp, color: "text-neon" },
+    { value: 200, suffix: "+", label: "Projects Delivered", icon: Globe2, color: "text-indigo-600", bg: "bg-indigo-50", border: "border-indigo-100" },
+    { value: 50, suffix: "+", label: "Happy Clients", icon: Users, color: "text-sky-600", bg: "bg-sky-50", border: "border-sky-100" },
+    { value: 99, suffix: "%", label: "Satisfaction", icon: Award, color: "text-purple-600", bg: "bg-purple-50", border: "border-purple-100" },
+    { value: 300, suffix: "%", label: "Avg. ROI Growth", icon: TrendingUp, color: "text-emerald-600", bg: "bg-emerald-50", border: "border-emerald-100" },
 ];
 
 const brands = [
@@ -41,58 +41,48 @@ function AnimatedCounter({ target, suffix }: { target: number; suffix: string })
 
 export default function Stats() {
     return (
-        <section className="py-24 relative overflow-hidden bg-transparent">
-            {/* Decorative neon lines */}
-            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon/20 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-neon/10 to-transparent" />
-
+        <section className="py-20 relative overflow-hidden bg-transparent">
             <div className="max-w-7xl mx-auto px-6">
                 {/* Stats Grid */}
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-24">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
                     {stats.map((s, i) => (
                         <motion.div
                             key={i}
                             initial={{ opacity: 0, scale: 0.9 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
-                            transition={{ delay: i * 0.1, duration: 0.6 }}
-                            className="relative group p-8 rounded-3xl glass-dark border-white/5 hover:border-neon/20 transition-all duration-500 text-center"
+                            transition={{ delay: i * 0.1, duration: 0.5 }}
+                            className="relative group p-8 rounded-3xl bg-white border border-slate-200/90 hover:border-indigo-300 shadow-md shadow-indigo-500/5 hover:shadow-xl hover:shadow-indigo-500/10 transition-all duration-300 text-center"
                         >
-                            <div className={`w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center mb-6 mx-auto group-hover:bg-neon/10 transition-colors`}>
+                            <div className={`w-12 h-12 rounded-2xl ${s.bg} border ${s.border} flex items-center justify-center mb-5 mx-auto group-hover:scale-110 transition-transform`}>
                                 <s.icon size={22} className={s.color} />
                             </div>
 
-                            <div className="text-4xl font-black text-white font-sora mb-2 tracking-tighter">
+                            <div className="text-3xl md:text-4xl font-black text-slate-900 font-sora mb-2 tracking-tight">
                                 <AnimatedCounter target={s.value} suffix={s.suffix} />
                             </div>
-                            <p className="text-[10px] text-white/80 font-black uppercase tracking-[0.2em]">{s.label}</p>
-
-                            {/* Corner glow */}
-                            <div className="absolute -top-1 -right-1 w-8 h-8 border-t-2 border-r-2 border-neon/0 group-hover:border-neon/20 transition-all rounded-tr-xl" />
+                            <p className="text-[11px] text-slate-600 font-black uppercase tracking-[0.2em]">{s.label}</p>
                         </motion.div>
                     ))}
                 </div>
 
                 {/* Brand Ticker */}
                 <div className="relative">
-                    <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10" />
-                    <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10" />
-
-                    <div className="flex items-center gap-6 mb-10">
-                        <div className="h-px flex-1 bg-white/5" />
-                        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-white/60 whitespace-nowrap">
+                    <div className="flex items-center gap-6 mb-8">
+                        <div className="h-px flex-1 bg-slate-200" />
+                        <p className="text-[10px] font-black uppercase tracking-[0.35em] text-slate-500 whitespace-nowrap">
                             Strategic Growth Partners
                         </p>
-                        <div className="h-px flex-1 bg-white/5" />
+                        <div className="h-px flex-1 bg-slate-200" />
                     </div>
 
-                    <div className="flex animate-ticker whitespace-nowrap opacity-30 group hover:opacity-100 transition-opacity">
+                    <div className="flex animate-ticker whitespace-nowrap opacity-60 hover:opacity-100 transition-opacity">
                         {brands.map((brand, i) => (
                             <span
                                 key={i}
-                                className="inline-flex items-center gap-4 mx-10 text-xs font-black text-white uppercase tracking-[0.3em]"
+                                className="inline-flex items-center gap-3 mx-8 text-xs font-extrabold text-slate-700 uppercase tracking-[0.25em]"
                             >
-                                <Zap size={10} className="text-neon fill-neon" />
+                                <Zap size={11} className="text-indigo-600 fill-current" />
                                 {brand}
                             </span>
                         ))}

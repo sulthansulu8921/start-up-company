@@ -32,13 +32,11 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
             createdAt: serverTimestamp()
         };
 
-        // INSTANT TRANSITION (Optimistic UI)
         setTimeout(() => {
             setIsSubmitting(false);
             setIsSubmitted(true);
         }, 150);
 
-        // Background persistence (Non-blocking)
         try {
             const firestorePromise = addDoc(collection(db, "reviews"), reviewData);
 
@@ -60,41 +58,41 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={onClose}
-                        className="absolute inset-0 bg-black/80 backdrop-blur-xl"
+                        className="absolute inset-0 bg-slate-900/40 backdrop-blur-md"
                     />
 
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9, y: 20 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                        className="relative w-full max-w-lg bg-gray-900 border border-white/10 rounded-[32px] p-8 md:p-12 overflow-hidden shadow-2xl"
+                        className="relative w-full max-w-lg bg-white border border-slate-200 rounded-3xl p-8 md:p-10 overflow-hidden shadow-2xl"
                     >
                         {/* Background Glow */}
-                        <div className="absolute -top-24 -right-24 w-48 h-48 bg-neon/10 blur-[80px] rounded-full pointer-events-none" />
+                        <div className="absolute -top-24 -right-24 w-48 h-48 bg-indigo-500/10 blur-[80px] rounded-full pointer-events-none" />
 
                         <button
                             onClick={onClose}
-                            className="absolute top-6 right-6 p-2 text-white/40 hover:text-white transition-colors"
+                            className="absolute top-6 right-6 p-2 text-slate-400 hover:text-slate-700 transition-colors"
                             aria-label="Close review modal"
                         >
-                            <X size={24} />
+                            <X size={20} />
                         </button>
 
                         {!isSubmitted ? (
                             <>
-                                <div className="mb-10 text-center">
-                                    <h3 className="text-3xl font-black font-sora text-white mb-3">Share Your <span className="text-neon">Success</span></h3>
-                                    <p className="text-white/60 text-sm font-bold">Your feedback helps us architect better digital futures.</p>
+                                <div className="mb-8 text-center">
+                                    <h3 className="text-2xl font-black font-sora text-slate-900 mb-2">Share Your <span className="bg-gradient-to-r from-[#2563EB] to-[#7C3AED] bg-clip-text text-transparent">Success</span></h3>
+                                    <p className="text-slate-600 text-xs font-semibold">Your feedback helps us architect better digital futures.</p>
                                 </div>
 
                                 <form
                                     onSubmit={handleSubmit}
-                                    className="space-y-6"
+                                    className="space-y-5"
                                 >
                                     <input type="hidden" name="_subject" value="New Client Review - NanoRays Solution" />
                                     <input type="hidden" name="_template" value="table" />
 
-                                    <div className="flex justify-center gap-2 mb-8">
+                                    <div className="flex justify-center gap-2 mb-6">
                                         {[1, 2, 3, 4, 5].map((s) => (
                                             <button
                                                 key={s}
@@ -104,9 +102,9 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
                                                 aria-label={`Rate ${s} stars`}
                                             >
                                                 <Star
-                                                    size={32}
-                                                    fill={s <= rating ? "#CCFF00" : "transparent"}
-                                                    className={s <= rating ? "text-neon" : "text-white/20"}
+                                                    size={28}
+                                                    fill={s <= rating ? "#F59E0B" : "transparent"}
+                                                    className={s <= rating ? "text-amber-500" : "text-slate-300"}
                                                 />
                                             </button>
                                         ))}
@@ -118,13 +116,13 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
                                             required
                                             name="Client Name"
                                             placeholder="Your Full Name"
-                                            className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:border-neon/40 transition-all font-bold text-sm"
+                                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#2563EB] focus:bg-white transition-all font-semibold text-xs md:text-sm"
                                         />
                                         <input
                                             required
                                             name="Company/Role"
                                             placeholder="Company or Role"
-                                            className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:border-neon/40 transition-all font-bold text-sm"
+                                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#2563EB] focus:bg-white transition-all font-semibold text-xs md:text-sm"
                                         />
                                     </div>
 
@@ -133,15 +131,15 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
                                         name="Review Message"
                                         placeholder="How was your experience working with NanoRays?"
                                         rows={4}
-                                        className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:border-neon/40 transition-all font-bold text-sm resize-none"
+                                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#2563EB] focus:bg-white transition-all font-semibold text-xs md:text-sm resize-none"
                                     />
 
                                     <button
                                         type="submit"
                                         disabled={isSubmitting}
-                                        className="w-full py-5 bg-neon text-black rounded-2xl font-black text-xs uppercase tracking-[0.2em] flex items-center justify-center gap-3 hover:shadow-[0_0_30px_rgba(204,255,0,0.3)] transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="w-full py-4 bg-gradient-to-r from-[#2563EB] via-[#4F46E5] to-[#7C3AED] hover:from-[#1d4ed8] hover:to-[#6d28d9] text-white rounded-xl font-extrabold text-xs uppercase tracking-widest flex items-center justify-center gap-3 shadow-md transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
-                                        {isSubmitting ? "Sending..." : "Submit Review"} <Send size={16} className={isSubmitting ? "animate-pulse" : ""} />
+                                        {isSubmitting ? "Sending..." : "Submit Review"} <Send size={15} className={isSubmitting ? "animate-pulse" : ""} />
                                     </button>
                                 </form>
                             </>
@@ -149,13 +147,13 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                className="text-center py-12"
+                                className="text-center py-10"
                             >
-                                <div className="w-20 h-20 bg-neon/20 rounded-full flex items-center justify-center mx-auto mb-8">
-                                    <Heart className="text-neon animate-pulse" size={40} fill="#CCFF00" />
+                                <div className="w-16 h-16 bg-rose-50 border border-rose-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                                    <Heart className="text-rose-500 animate-pulse" size={32} fill="#F43F5E" />
                                 </div>
-                                <h3 className="text-3xl font-black font-sora text-white mb-4">You&apos;re Awesome!</h3>
-                                <p className="text-white/60 font-bold leading-relaxed max-w-xs mx-auto">
+                                <h3 className="text-2xl font-black font-sora text-slate-900 mb-3">You&apos;re Awesome!</h3>
+                                <p className="text-slate-600 font-medium leading-relaxed max-w-xs mx-auto text-sm">
                                     Thank you for your review. We truly value our partnership and can&apos;t wait to build more together.
                                 </p>
                             </motion.div>

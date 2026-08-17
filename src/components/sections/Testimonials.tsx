@@ -48,12 +48,10 @@ export default function Testimonials() {
     useEffect(() => {
         setLoading(true);
 
-        // Fail-fast fallback: If Firestore takes > 2s, stop loading to show empty state/CTA
         const timeoutId = setTimeout(() => {
             setLoading(false);
         }, 2000);
 
-        // Fetch real testimonials from Firestore
         const q = query(
             collection(db, "reviews"),
             where("status", "==", "approved"),
@@ -81,19 +79,29 @@ export default function Testimonials() {
     }, []);
 
     return (
-        <section id="testimonials" className="py-32 relative bg-transparent overflow-hidden">
+        <motion.section
+            initial={{ opacity: 0.9, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            id="testimonials"
+            className="py-20 relative overflow-hidden bg-[#EFF6FF] text-slate-900 rounded-t-[3rem] md:rounded-t-[4rem] shadow-[0_-25px_60px_rgba(0,0,0,0.06)] border-t border-sky-200/90 z-50"
+        >
+            {/* Dedicated High-Res Executive Global Leadership Photo Background */}
+            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center opacity-10 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#EFF6FF]/96 via-[#DBEAFE]/90 to-[#EFF6FF]/96 pointer-events-none" />
+
             <ReviewModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
-            <div className="absolute w-[600px] h-[600px] bg-neon/5 blur-[150px] rounded-full -bottom-48 -left-48 pointer-events-none" />
+            <div className="absolute w-[600px] h-[600px] bg-blue-500/10 blur-[150px] rounded-full -bottom-48 -left-48 pointer-events-none" />
 
             <div className="max-w-7xl mx-auto px-6 relative z-10">
                 {/* Header */}
-                <div className="text-center mb-24">
+                <div className="text-center mb-16">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
-                        className="inline-flex px-3 py-1.5 rounded-lg bg-white/5 border border-white/20 text-white/80 text-[10px] font-black uppercase tracking-[0.2em] mb-6"
+                        className="inline-flex px-3.5 py-1.5 rounded-full bg-violet-50 border border-violet-200/80 text-violet-700 text-[10px] font-black uppercase tracking-[0.25em] mb-4 shadow-sm"
                     >
                         Proof of Work
                     </motion.div>
@@ -103,16 +111,16 @@ export default function Testimonials() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
-                        className="text-5xl md:text-6xl font-black font-sora text-white mb-6 tracking-tighter"
+                        className="text-4xl md:text-5xl lg:text-6xl font-black font-sora text-slate-900 mb-4 tracking-tight"
                     >
-                        Global <span className="text-neon">Testimonials</span>
+                        Global <span className="bg-gradient-to-r from-[#7619FF] via-[#9333EA] to-[#3B82F6] bg-clip-text text-transparent">Testimonials</span>
                     </motion.h2>
                     <motion.p
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.2 }}
-                        className="text-white/80 text-lg font-bold max-w-2xl mx-auto"
+                        className="text-slate-600 text-base md:text-lg font-medium max-w-2xl mx-auto leading-relaxed"
                     >
                         Listen to the architects of industry-leading growth cycles.
                     </motion.p>
@@ -122,19 +130,19 @@ export default function Testimonials() {
                 {loading ? (
                     <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
                         {[...Array(3)].map((_, i) => (
-                            <div key={i} className="break-inside-avoid p-8 rounded-[32px] bg-white/5 border border-white/10 animate-pulse">
+                            <div key={i} className="break-inside-avoid p-8 rounded-3xl bg-white border border-slate-200 animate-pulse shadow-sm">
                                 <div className="flex gap-1 mb-6">
                                     {[...Array(5)].map((_, s) => (
-                                        <div key={s} className="w-3 h-3 rounded-full bg-white/10" />
+                                        <div key={s} className="w-3.5 h-3.5 rounded-full bg-slate-200" />
                                     ))}
                                 </div>
-                                <div className="h-4 bg-white/10 rounded-full w-full mb-3" />
-                                <div className="h-4 bg-white/10 rounded-full w-4/5 mb-8" />
-                                <div className="flex items-center gap-4 pt-6 border-t border-white/5">
-                                    <div className="w-12 h-12 rounded-full bg-white/10" />
+                                <div className="h-4 bg-slate-200 rounded-full w-full mb-3" />
+                                <div className="h-4 bg-slate-200 rounded-full w-4/5 mb-8" />
+                                <div className="flex items-center gap-4 pt-6 border-t border-slate-100">
+                                    <div className="w-12 h-12 rounded-full bg-slate-200" />
                                     <div className="space-y-2">
-                                        <div className="h-3 bg-white/10 rounded-full w-24" />
-                                        <div className="h-2 bg-white/10 rounded-full w-16" />
+                                        <div className="h-3 bg-slate-200 rounded-full w-24" />
+                                        <div className="h-2 bg-slate-200 rounded-full w-16" />
                                     </div>
                                 </div>
                             </div>
@@ -149,27 +157,27 @@ export default function Testimonials() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.1 }}
-                                className="break-inside-avoid p-8 rounded-[32px] glass-dark border border-white/20 hover:border-white/40 transition-all duration-500 group"
+                                className="break-inside-avoid p-8 rounded-3xl bg-white/90 border border-slate-200/90 hover:border-violet-300 shadow-md shadow-[#7619FF]/5 hover:shadow-xl hover:shadow-[#7619FF]/15 transition-all duration-300 group"
                             >
                                 <div className="flex gap-1 mb-6">
                                     {[...Array(5)].map((_, starI) => (
-                                        <Star key={starI} size={14} fill={starI < t.rating ? "#CCFF00" : "transparent"} className={starI < t.rating ? "text-neon" : "text-white/20"} />
+                                        <Star key={starI} size={15} fill={starI < t.rating ? "#F59E0B" : "transparent"} className={starI < t.rating ? "text-amber-500" : "text-slate-300"} />
                                     ))}
                                 </div>
-                                <p className="text-white/90 text-base leading-relaxed font-bold mb-8 italic">
+                                <p className="text-slate-700 text-sm md:text-base leading-relaxed font-semibold mb-8 italic">
                                     &quot;{t.content}&quot;
                                 </p>
-                                <div className="flex items-center gap-4 pt-6 border-t border-white/10">
-                                    <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center overflow-hidden">
-                                        <div className="w-full h-full bg-neon/10 flex items-center justify-center text-neon font-black text-xs">
+                                <div className="flex items-center gap-4 pt-6 border-t border-slate-100">
+                                    <div className="w-11 h-11 rounded-full bg-violet-50 border border-violet-100 flex items-center justify-center overflow-hidden flex-shrink-0">
+                                        <span className="text-[#7619FF] font-extrabold text-sm font-sora">
                                             {t.name.charAt(0)}
-                                        </div>
+                                        </span>
                                     </div>
                                     <div>
-                                        <h3 className="text-sm font-black text-white font-sora group-hover:text-neon transition-colors">
+                                        <h3 className="text-sm font-black text-slate-900 font-sora group-hover:text-[#7619FF] transition-colors">
                                             {t.name}
                                         </h3>
-                                        <p className="text-[10px] text-white/70 font-black uppercase tracking-widest">
+                                        <p className="text-[10px] text-slate-500 font-extrabold uppercase tracking-wider">
                                             {t.role}
                                         </p>
                                     </div>
@@ -178,47 +186,49 @@ export default function Testimonials() {
                         ))}
                     </div>
                 ) : (
-                    <div className="text-center py-24 bg-white/5 rounded-[40px] border border-dashed border-white/10">
-                        <MessageSquarePlus className="text-neon/20 mx-auto mb-6" size={48} />
-                        <h3 className="text-2xl font-black text-white mb-3">Your Success Story Starts Here</h3>
-                        <p className="text-white/40 font-bold max-w-sm mx-auto mb-10">
+                    <div className="text-center py-20 bg-white rounded-3xl border border-dashed border-slate-200 shadow-sm">
+                        <MessageSquarePlus className="text-violet-400 mx-auto mb-6" size={48} />
+                        <h3 className="text-2xl font-black text-slate-900 mb-3 font-sora">Your Success Story Starts Here</h3>
+                        <p className="text-slate-500 font-medium max-w-sm mx-auto mb-8">
                             Be the first to architect our global legacy with your unique insight.
                         </p>
                         <button
                             onClick={() => setIsModalOpen(true)}
-                            className="group relative inline-flex items-center gap-4 px-10 py-5 bg-neon text-black rounded-2xl font-black text-xs uppercase tracking-[0.3em] hover:shadow-[0_0_40px_rgba(204,255,0,0.3)] transition-all duration-500"
+                            className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[#7619FF] via-[#9333EA] to-[#3B82F6] hover:from-[#6610E0] hover:to-[#2563EB] text-white rounded-xl font-extrabold text-xs uppercase tracking-widest shadow-md shadow-[#7619FF]/20 transition-all"
                         >
                             <span>Launch Your Review</span>
                         </button>
                     </div>
                 )}
 
-                {/* Submit Review CTA - Only show if we have reviews (since it's inside the empty state too) */}
-                {testimonials.length > 0 && (
+                {/* Submit Review CTA */}
+                {(testimonials.length > 0 || SEED_REVIEWS.length > 0) && (
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
-                        className="mt-20 flex flex-col items-center"
+                        className="mt-16 flex flex-col items-center"
                     >
                         <button
                             onClick={() => setIsModalOpen(true)}
-                            className="group relative flex items-center gap-4 px-10 py-5 bg-white/5 border border-white/20 rounded-2xl font-black text-xs uppercase tracking-[0.3em] text-white hover:text-neon hover:border-neon/40 hover:bg-neon/5 transition-all duration-500 overflow-hidden"
+                            className="group relative flex items-center gap-3 px-8 py-4 bg-white border border-slate-200 hover:border-violet-300 rounded-2xl font-extrabold text-xs uppercase tracking-widest text-slate-800 hover:text-[#7619FF] shadow-sm hover:shadow-md transition-all duration-300"
                         >
-                            <div className="absolute inset-0 bg-neon/5 -translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
-                            <MessageSquarePlus size={18} className="relative z-10" />
-                            <span className="relative z-10">Submit a Review</span>
+                            <MessageSquarePlus size={18} className="text-[#7619FF]" />
+                            <span>Submit a Review</span>
                         </button>
                     </motion.div>
                 )}
 
-                {/* Trusted By */}
-                <div className="mt-24 pt-12 border-t border-white/5 flex flex-wrap justify-center gap-10 md:gap-20 opacity-30">
-                    {["FORBES", "TECHCRUNCH", "WIRED", "VERGE", "FAST COMPANY"].map(b => (
-                        <span key={b} className="text-white font-black text-sm tracking-[0.4em]">{b}</span>
-                    ))}
+                {/* Trusted By Businesses */}
+                <div className="mt-20 pt-10 border-t border-slate-200 text-center">
+                    <span className="text-xs font-black text-slate-400 uppercase tracking-[0.25em] mb-4 block">Trusted by Businesses & Startups</span>
+                    <div className="flex flex-wrap justify-center items-center gap-6 md:gap-10">
+                        {["RETAIL & ECOMMERCE", "HEALTHCARE & CLINICS", "EDUCATION & ACADEMIES", "REAL ESTATE GROUPS", "TECHNOLOGY STARTUPS"].map(b => (
+                            <span key={b} className="text-slate-600 font-bold text-xs tracking-widest bg-white/80 px-4 py-2 rounded-xl border border-slate-200/90 shadow-sm">{b}</span>
+                        ))}
+                    </div>
                 </div>
             </div>
-        </section>
+        </motion.section>
     );
 }

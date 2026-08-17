@@ -10,8 +10,9 @@ export default function ClientComponents() {
   return (
     <>
       <AIChatbot />
-      <OfferPopup />
       <WhatsAppButton />
+      <OfferPopup />
     </>
   );
 }
+
