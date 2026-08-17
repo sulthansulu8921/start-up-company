@@ -72,7 +72,12 @@ export default function AIChatbot() {
         };
         setMessages(prev => [...prev, userMsg]);
 
-        if (option.includes("Services")) {
+        // Helper to handle instant redirects safely to avoid popup blocker
+        const openLink = (url: string) => {
+            window.open(url, "_blank");
+        };
+
+        if (option.includes("Services") || option === "Back to Menu") {
             saveLead("General Interest: Services");
             addAIMessage(
                 "We offer a full range of digital services! Which one interests you?",
@@ -81,113 +86,85 @@ export default function AIChatbot() {
         } else if (option.includes("Contact Details")) {
             saveLead("Bot Option: Contact Details");
             addAIMessage(
-                "Here are our official contact channels:\n\n📞 Phone/Call: +91 94976 69317 (Primary)\n📞 Sec. Phone: +91 89216 24007\n💬 WhatsApp: +91 94976 69317\n📧 Email: nanorayssolution@gmail.com\n📍 Office: Kochi, Kerala, India\n\nHow would you like to connect with us?",
+                "Here are our official contact channels:\n\n📞 Call: +91 94976 69317\n💬 WhatsApp: +91 94976 69317\n📧 Email: nanorayssolution@gmail.com\n\nHow would you like to connect with us?",
                 ["Open WhatsApp Chat", "Call Us Directly", "Send Email", "Back to Menu"]
             );
-        } else if (option.includes("Open WhatsApp Chat")) {
+        } else if (option === "Open WhatsApp Chat" || option === "Open WhatsApp") {
             addAIMessage("Opening WhatsApp chat... 💬");
-            setTimeout(() => {
-                window.open("https://wa.me/919497669317", "_blank");
-            }, 1000);
-        } else if (option.includes("Call Us Directly")) {
-            window.open("tel:+919497669317", "_self");
-        } else if (option.includes("Send Email")) {
-            window.open("mailto:nanorayssolution@gmail.com", "_self");
+            openLink("https://wa.me/919497669317?text=Hi+NanoRays!+I+want+to+chat+about+your+services.");
+        } else if (option === "Call Us Directly") {
+            window.location.href = "tel:+919497669317";
+        } else if (option === "Send Email") {
+            window.location.href = "mailto:nanorayssolution@gmail.com";
         } else if (option.includes("Share Website")) {
             saveLead("Bot Option: Share Website");
             addAIMessage(
-                "We would love for you to share NanoRays with your colleagues, friends, or network! You can share directly on WhatsApp or copy our link below:\n\n🔗 Website: https://nanorays.com",
+                "We would love for you to share NanoRays! You can share directly on WhatsApp or copy our link below:\n\n🔗 Website: https://nanorays.com",
                 ["Share on WhatsApp", "Copy Website Link", "Back to Menu"]
             );
-        } else if (option.includes("Share on WhatsApp")) {
-            addAIMessage("Opening WhatsApp to share our website... Thank you for your support! 🚀");
-            setTimeout(() => {
-                window.open("https://api.whatsapp.com/send?text=Check%20out%20NanoRays%20Solution%20for%20premium%20website%20development%20and%20SEO:%20https://nanorays.com", "_blank");
-            }, 1000);
-        } else if (option.includes("Copy Website Link")) {
+        } else if (option === "Share on WhatsApp") {
+            addAIMessage("Opening WhatsApp to share... Thank you! 🚀");
+            openLink("https://api.whatsapp.com/send?text=Check%20out%20NanoRays%20Solution%20for%20premium%20website%20development%20and%20SEO:%20https://nanorays.com");
+        } else if (option === "Copy Website Link") {
             navigator.clipboard.writeText("https://nanorays.com");
             addAIMessage("Link copied to clipboard! 📋 Share it anywhere you like. What can I help you with next?", ["View Our Services", "Contact Details", "Talk to Our Team"]);
-        } else if (option.includes("Quote") || option.includes("Free")) {
-            saveLead("High Interest: Free Quote");
+        } else if (option.includes("Talk to Our Team") || option.includes("Contact Team") || option.includes("Yes, Contact Team")) {
+            addAIMessage("Opening WhatsApp to connect you with our team right now! 🚀");
+            openLink("https://wa.me/919497669317?text=Hi+NanoRays!+I+need+to+talk+to+your+team.");
+        } else if (option === "Website Design" || option === "Website") {
             addAIMessage(
-                "Great! To give you the best quote, could you tell us what service you need?",
-                ["Website", "SEO", "Marketing", "Branding / Logo", "Poster Design", "Other"]
-            );
-        } else if (option.includes("Team") || option.includes("Talk") || option.includes("Human")) {
-            addAIMessage("Connecting you to our team on WhatsApp right now! 🚀");
-            setTimeout(() => {
-                window.open("https://wa.me/919497669317?text=Hi+NanoRays!+I+need+more+information.", "_blank");
-            }, 1500);
-        } else if (option.includes("Website")) {
-            addAIMessage(
-                "We build professional, fast, mobile-ready websites starting from ₹4,999. Would you like to talk to our team?",
+                "We build professional, fast, mobile-ready websites starting from ₹4,999. This includes custom landing pages, portfolios, and e-commerce stores. Would you like to talk to our team?",
                 ["Yes, Contact Team", "See More Services", "Back to Menu"]
             );
-        } else if (option.includes("SEO")) {
+        } else if (option === "SEO & Google Ranking" || option === "SEO") {
             addAIMessage(
                 "Our SEO service helps your business rank on the first page of Google. Packages start from ₹2,999/month. Interested?",
                 ["Yes, Contact Team", "See More Services", "Back to Menu"]
             );
-        } else if (option.includes("Marketing")) {
+        } else if (option === "Digital Marketing" || option === "Marketing") {
             saveLead("Bot Option: Marketing");
             addAIMessage(
                 "We handle end-to-end digital marketing and campaigns to scale your business:\n\n📈 Paid Campaigns: Google Ads, Meta Ads (Instagram/FB)\n🎯 Lead Engines: Funnel creation & landing pages\n📱 Social Media: Daily posting & page care\n\nWhat marketing work would you like to discuss?",
                 ["Paid Ads (Google/Meta)", "Lead Generation Funnels", "Social Media Care", "Back to Menu"]
             );
-        } else if (option.includes("Paid Ads (Google/Meta)")) {
+        } else if (option === "Paid Ads (Google/Meta)") {
             addAIMessage(
                 "Our Paid Ads management starts at ₹5,000/month. We write ad copies, build custom landing pages, and double your conversions. Ready to run ads?",
                 ["Start Paid Ads Campaign", "Back to Menu"]
             );
-        } else if (option.includes("Start Paid Ads Campaign")) {
+        } else if (option === "Start Paid Ads Campaign") {
             addAIMessage("Opening WhatsApp to set up your ad campaign budget... 🚀");
-            setTimeout(() => {
-                window.open("https://wa.me/919497669317?text=Hi+NanoRays!+I+want+to+start+a+Google/Meta+Paid+Ads+campaign.", "_blank");
-            }, 1000);
-        } else if (option.includes("Lead Generation Funnels")) {
+            openLink("https://wa.me/919497669317?text=Hi+NanoRays!+I+want+to+start+a+Google/Meta+Paid+Ads+campaign.");
+        } else if (option === "Lead Generation Funnels") {
             addAIMessage(
                 "We design custom lead captures, setup CRM databases, and write automated follow-up sequences. Shall we design your funnel?",
                 ["Start Lead Funnel", "Back to Menu"]
             );
-        } else if (option.includes("Start Lead Funnel")) {
+        } else if (option === "Start Lead Funnel") {
             addAIMessage("Opening WhatsApp to configure your new lead capture funnel... 🎯");
-            setTimeout(() => {
-                window.open("https://wa.me/919497669317?text=Hi+NanoRays!+I+want+to+setup+a+Lead+Generation+Funnel.", "_blank");
-            }, 1000);
-        } else if (option.includes("Social Media Care")) {
+            openLink("https://wa.me/919497669317?text=Hi+NanoRays!+I+want+to+setup+a+Lead+Generation+Funnel.");
+        } else if (option === "Social Media Care") {
             addAIMessage(
                 "Daily graphics, captions, posting, and reels editing to keep your Instagram/FB pages active. Packages start from ₹3,999/month.",
                 ["Start Social Media Care", "Back to Menu"]
             );
-        } else if (option.includes("Start Social Media Care")) {
+        } else if (option === "Start Social Media Care") {
             addAIMessage("Opening WhatsApp to start your Social Media Care plan... 📱");
-            setTimeout(() => {
-                window.open("https://wa.me/919497669317?text=Hi+NanoRays!+I+want+to+start+Social+Media+Care.", "_blank");
-            }, 1000);
-        } else if (option.includes("Branding") || option.includes("Logo")) {
+            openLink("https://wa.me/919497669317?text=Hi+NanoRays!+I+want+to+start+Social+Media+Care.");
+        } else if (option === "Logo & Branding" || option === "Branding / Logo") {
             addAIMessage(
                 "We design professional logos and full brand identities. Logo packages from ₹999. Shall we get started?",
                 ["Yes, Contact Team", "See More Services", "Back to Menu"]
             );
-        } else if (option.includes("Poster")) {
+        } else if (option === "Poster Design" || option === "Poster") {
             addAIMessage(
                 "We design stunning festival, promotional, and social media posters. Starting from ₹299 per poster. Interested?",
                 ["Yes, Contact Team", "See More Services", "Back to Menu"]
             );
-        } else if (option.includes("Maintenance")) {
+        } else if (option === "Website Maintenance" || option === "Maintenance") {
             addAIMessage(
                 "We provide monthly website care — updates, backups, and support. Plans from ₹999/month. Want details?",
                 ["Yes, Contact Team", "Back to Menu"]
-            );
-        } else if (option.includes("Contact Team") || option.includes("Yes,")) {
-            addAIMessage("Perfect! Opening WhatsApp to connect you with our team. We'll respond within 1 hour! 🎉");
-            setTimeout(() => {
-                window.open("https://wa.me/919497669317?text=Hi+NanoRays!+I+am+interested+in+your+services.", "_blank");
-            }, 1500);
-        } else if (option.includes("Back") || option.includes("Menu")) {
-            addAIMessage(
-                "Sure! What would you like to do next?",
-                ["View Our Services", "Contact Details", "Share Website", "Talk to Our Team"]
             );
         } else {
             addAIMessage(
@@ -199,21 +176,86 @@ export default function AIChatbot() {
 
     const handleSend = () => {
         if (!inputValue.trim()) return;
+        const text = inputValue.trim();
         const userMsg: Message = {
             id: Date.now().toString(),
-            text: inputValue,
+            text,
             sender: "user",
             timestamp: new Date()
         };
         setMessages(prev => [...prev, userMsg]);
         setInputValue("");
 
-        saveLead("Custom Question", inputValue);
+        // Check if user is typing an email or phone number to submit lead details
+        const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(text);
+        const isPhone = /^\+?[0-9]{8,15}$/.test(text.replace(/[\s-]/g, ""));
 
-        addAIMessage(
-            "Thanks for your message! The best way to get a quick answer is to chat with our team directly on WhatsApp.",
-            ["Open WhatsApp", "Back to Menu"]
-        );
+        if (isEmail || isPhone) {
+            saveLead("Captured Contact Details", text);
+            addAIMessage(
+                `Thank you! I've saved your contact information (${text}). Click below to talk to us directly on WhatsApp for an instant response!`,
+                ["Open WhatsApp", "Back to Menu"]
+            );
+            return;
+        }
+
+        // Deep service keyword matching Q&A logic
+        const lowerText = text.toLowerCase();
+
+        if (lowerText.includes("website") || lowerText.includes("web") || lowerText.includes("ecom") || lowerText.includes("shopify")) {
+            saveLead("Q&A: Website Services", text);
+            addAIMessage(
+                "We build professional, fast, mobile-friendly websites starting from just ₹4,999! This includes portfolios, business sites, and fully functional e-commerce stores. Would you like a custom price quote?",
+                ["Yes, Contact Team", "Back to Menu"]
+            );
+        } else if (lowerText.includes("ai") || lowerText.includes("chatbot") || lowerText.includes("agent") || lowerText.includes("gpt")) {
+            saveLead("Q&A: AI Services", text);
+            addAIMessage(
+                "We develop intelligent AI solutions, custom trained chatbots, and autonomous agents to automate your customer support & lead generation 24/7. Shall we set up a chatbot for your business?",
+                ["Yes, Contact Team", "Back to Menu"]
+            );
+        } else if (lowerText.includes("seo") || lowerText.includes("rank") || lowerText.includes("google search") || lowerText.includes("find")) {
+            saveLead("Q&A: SEO Services", text);
+            addAIMessage(
+                "Our Search Engine Optimization (SEO) campaigns start at ₹2,999/month. We optimize keywords, page speed, and backlinks so your site ranks high on Google. Want to audit your site's SEO?",
+                ["Yes, Contact Team", "Back to Menu"]
+            );
+        } else if (lowerText.includes("marketing") || lowerText.includes("ads") || lowerText.includes("facebook") || lowerText.includes("instagram")) {
+            saveLead("Q&A: Marketing Services", text);
+            addAIMessage(
+                "We run professional ad campaigns (Google/Meta Ads) starting at ₹5,000/month. We design high-converting funnels, write ad copies, and track conversion analytics.",
+                ["Paid Ads (Google/Meta)", "Back to Menu"]
+            );
+        } else if (lowerText.includes("logo") || lowerText.includes("brand") || lowerText.includes("identity")) {
+            saveLead("Q&A: Logo Services", text);
+            addAIMessage(
+                "We create professional logos starting at ₹999 and full brand identity kits. Interested in starting your brand design?",
+                ["Yes, Contact Team", "Back to Menu"]
+            );
+        } else if (lowerText.includes("poster") || lowerText.includes("flyer") || lowerText.includes("graphic")) {
+            saveLead("Q&A: Poster Services", text);
+            addAIMessage(
+                "We design premium promotional posters and festival graphics starting at just ₹299 per poster. Ready to discuss graphic design?",
+                ["Yes, Contact Team", "Back to Menu"]
+            );
+        } else if (lowerText.includes("price") || lowerText.includes("cost") || lowerText.includes("rate") || lowerText.includes("how much")) {
+            saveLead("Q&A: Pricing", text);
+            addAIMessage(
+                "Here is our standard starting pricing:\n\n• Logo: ₹999\n• Posters: ₹299\n• Websites: ₹4,999\n• Monthly SEO: ₹2,999/mo\n\nFor a custom quote, please type your Email or Phone Number below.",
+                ["Back to Menu"]
+            );
+        } else if (lowerText.includes("contact") || lowerText.includes("phone") || lowerText.includes("number") || lowerText.includes("whatsapp")) {
+            addAIMessage(
+                "Our direct phone/WhatsApp number is +91 94976 69317, and our email is nanorayssolution@gmail.com. Would you like to open a chat on WhatsApp directly?",
+                ["Open WhatsApp Chat", "Back to Menu"]
+            );
+        } else {
+            saveLead("Q&A: Other Question", text);
+            addAIMessage(
+                "Thanks for asking! I'm capturing your inquiry. To receive a detailed custom answer, please enter your Email or Phone/WhatsApp number below so our team can contact you.",
+                ["Open WhatsApp Chat", "Back to Menu"]
+            );
+        }
     };
 
     return (
