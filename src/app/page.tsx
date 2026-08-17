@@ -13,39 +13,37 @@ import Testimonials from "@/components/sections/Testimonials";
 import BlogPreview from "@/components/sections/BlogPreview";
 import FAQSection from "@/components/sections/FAQSection";
 import ContactSection from "@/components/sections/ContactSection";
-import { Zap, ArrowRight } from "lucide-react";
+import StackSection from "@/components/StackSection";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 import { sendInstantNotification } from "@/lib/notifications";
 
 export default function Home() {
-  // Reset scroll on refresh and fire automated visitor alert
   useEffect(() => {
-    // 1. Reset scroll
     window.scrollTo(0, 0);
-
-    // 2. Automated Flash Notification for Owner
     sendInstantNotification("A new user just entered your website! 👀", "visit");
   }, []);
 
   return (
     <main className="relative bg-background">
+      {/* Hero stays normal — not stacked */}
       <Hero />
 
-      {/* ── Content Sections ─────────────────────── */}
-      <div className="relative z-30">
-        <BusinessStats />
-        <Services />
-        <AIPlatformSpotlight />
-        <WhyChooseUs />
-        <ShowcaseSection />
-        <ProcessTimeline />
-        <PricingSection />
-        <Testimonials />
-        <BlogPreview />
+      {/* ── Stacked Scroll Sections ───────────────────────────── */}
+      <StackSection index={0}><BusinessStats /></StackSection>
+      <StackSection index={1}><Services /></StackSection>
+      <StackSection index={2}><AIPlatformSpotlight /></StackSection>
+      <StackSection index={3}><WhyChooseUs /></StackSection>
+      <StackSection index={4}><ShowcaseSection /></StackSection>
+      <StackSection index={5}><ProcessTimeline /></StackSection>
+      <StackSection index={6}><PricingSection /></StackSection>
+      <StackSection index={7}><Testimonials /></StackSection>
+      <StackSection index={8}><BlogPreview /></StackSection>
 
-        {/* Sleek CTA banner for AI Visibility Check */}
-        <section className="py-16 bg-[#FAFBFF] border-t border-b border-blue-200/80 relative overflow-hidden my-12">
+      {/* CTA Banner */}
+      <StackSection index={9}>
+        <section className="py-16 bg-[#FAFBFF] border-t border-b border-blue-200/80 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-indigo-500/5 to-purple-500/10 pointer-events-none" />
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-blue-500/5 blur-[100px] rounded-full pointer-events-none" />
           <div className="max-w-5xl mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
@@ -58,12 +56,10 @@ export default function Home() {
             </Link>
           </div>
         </section>
+      </StackSection>
 
-        <FAQSection />
-        <ContactSection />
-      </div>
-
-      {/* Global Modals & Lead Gen */}
+      <StackSection index={10}><FAQSection /></StackSection>
+      <StackSection index={11}><ContactSection /></StackSection>
     </main>
   );
 }
