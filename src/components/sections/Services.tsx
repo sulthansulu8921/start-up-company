@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { services } from "@/data/serviceData";
 import Link from "next/link";
+import Image from "next/image";
 import { Zap, ArrowRight, Sparkles } from "lucide-react";
 import ScrollReveal, { StaggerContainer, StaggerItem } from "@/components/ScrollReveal";
 import TiltCard from "@/components/TiltCard";
@@ -114,8 +115,15 @@ export default function Services() {
                     <StaggerItem variant="fade-up">
                         <TiltCard className="h-full">
                             <div className="p-8 rounded-3xl bg-gradient-to-br from-[#2563EB] via-[#4F46E5] to-[#7C3AED] border border-white/20 shadow-xl shadow-blue-500/25 flex flex-col justify-between items-start group overflow-hidden relative h-full">
-                                <div className="relative z-10 w-14 h-14 rounded-2xl bg-white/10 border border-white/20 backdrop-blur-md flex items-center justify-center mb-8">
-                                    <span className="text-white font-black text-xl font-sora">N</span>
+                                <div className="relative z-10 h-12 px-5 rounded-2xl bg-white/10 border border-white/20 backdrop-blur-md flex items-center justify-center mb-8">
+                                    <Image
+                                        src="/nanorays-logo.webp"
+                                        alt="NanoRays Logo"
+                                        width={110}
+                                        height={30}
+                                        className="object-contain filter invert brightness-0"
+                                        priority
+                                    />
                                 </div>
 
                                 <div className="relative z-10">
