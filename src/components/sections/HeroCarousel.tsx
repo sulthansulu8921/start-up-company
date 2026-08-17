@@ -200,27 +200,25 @@ export default function HeroCarousel() {
             </span>
           </div>
 
-          {/* Dynamic Image Display with GPU Transition */}
-          <div className="relative w-full h-[calc(100%-33px)] overflow-hidden">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={item.id}
-                initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, scale: 0.98 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, scale: 1.02 }}
-                transition={{ duration: 0.4, ease: "easeOut" }}
-                className="relative w-full h-full"
+          {/* Dynamic Image Display with Instant GPU Transition */}
+          <div className="relative w-full h-[calc(100%-33px)] overflow-hidden bg-slate-950">
+            {showcaseProjects.map((project, idx) => (
+              <div
+                key={project.id}
+                className={`absolute inset-0 w-full h-full transition-opacity duration-200 ease-out will-change-opacity ${
+                  activeIdx === idx ? "opacity-100 z-10 pointer-events-auto" : "opacity-0 z-0 pointer-events-none"
+                }`}
               >
                 <Image
-                  src={item.image}
-                  alt={item.alt}
+                  src={project.image}
+                  alt={project.alt}
                   fill
-                  priority={activeIdx === 0}
+                  priority={idx === 0 || idx === 1}
                   sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 />
-              </motion.div>
-            </AnimatePresence>
+              </div>
+            ))}
           </div>
 
           {/* Hover Click-to-Zoom Hint */}
