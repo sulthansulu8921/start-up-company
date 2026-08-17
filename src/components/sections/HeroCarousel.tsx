@@ -25,7 +25,7 @@ export const showcaseProjects: ShowcaseProject[] = [
     badge: "DIGITAL PRODUCTS",
     title: "Websites, Ecommerce & Custom Web Apps",
     desc: "Websites, ecommerce and custom digital experiences.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200",
+    image: "/services-all-infographic.jpg",
     alt: "NanoRays custom web application and ecommerce interface",
     link: "/services/website-development",
     tags: ["Business Websites", "Ecommerce Platforms", "Dashboards"],
