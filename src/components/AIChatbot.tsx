@@ -118,7 +118,7 @@ export default function AIChatbot() {
             );
         } else if (option === "SEO & Google Ranking" || option === "SEO") {
             addAIMessage(
-                "Our SEO service helps your business rank on the first page of Google. Packages start from ₹2,999/month. Interested?",
+                "Our SEO service helps your business rank on the first page of Google. To get a customized SEO quote, let's talk on WhatsApp:",
                 ["Yes, Contact Team", "See More Services", "Back to Menu"]
             );
         } else if (option === "Digital Marketing" || option === "Marketing") {
@@ -129,11 +129,11 @@ export default function AIChatbot() {
             );
         } else if (option === "Paid Ads (Google/Meta)") {
             addAIMessage(
-                "Our Paid Ads management starts at ₹5,000/month. We write ad copies, build custom landing pages, and double your conversions. Ready to run ads?",
+                "We write high-converting ad copies, build custom landing pages, and double your conversions. Let's discuss your ad budget and setup:",
                 ["Start Paid Ads Campaign", "Back to Menu"]
             );
         } else if (option === "Start Paid Ads Campaign") {
-            addAIMessage("Opening WhatsApp to set up your ad campaign budget... 🚀");
+            addAIMessage("Opening WhatsApp to set up your ad campaign... 🚀");
             openLink("https://wa.me/919497669317?text=Hi+NanoRays!+I+want+to+start+a+Google/Meta+Paid+Ads+campaign.");
         } else if (option === "Lead Generation Funnels") {
             addAIMessage(
@@ -145,7 +145,7 @@ export default function AIChatbot() {
             openLink("https://wa.me/919497669317?text=Hi+NanoRays!+I+want+to+setup+a+Lead+Generation+Funnel.");
         } else if (option === "Social Media Care") {
             addAIMessage(
-                "Daily graphics, captions, posting, and reels editing to keep your Instagram/FB pages active. Packages start from ₹3,999/month.",
+                "We manage daily graphics, captions, posting, and reels editing to keep your Instagram/FB pages highly active. Let's discuss your custom care package:",
                 ["Start Social Media Care", "Back to Menu"]
             );
         } else if (option === "Start Social Media Care") {
@@ -153,17 +153,17 @@ export default function AIChatbot() {
             openLink("https://wa.me/919497669317?text=Hi+NanoRays!+I+want+to+start+Social+Media+Care.");
         } else if (option === "Logo & Branding" || option === "Branding / Logo") {
             addAIMessage(
-                "We design professional logos and full brand identities. Logo packages from ₹999. Shall we get started?",
+                "We design professional logos and full brand identities. Shall we get started on your custom branding?",
                 ["Yes, Contact Team", "See More Services", "Back to Menu"]
             );
         } else if (option === "Poster Design" || option === "Poster") {
             addAIMessage(
-                "We design stunning festival, promotional, and social media posters. Starting from ₹299 per poster. Interested?",
+                "We design stunning festival, promotional, and social media posters tailored to your brand. Interested?",
                 ["Yes, Contact Team", "See More Services", "Back to Menu"]
             );
         } else if (option === "Website Maintenance" || option === "Maintenance") {
             addAIMessage(
-                "We provide monthly website care — updates, backups, and support. Plans from ₹999/month. Want details?",
+                "We provide monthly website care — updates, backups, security, and developer support. Want details?",
                 ["Yes, Contact Team", "Back to Menu"]
             );
         } else {
@@ -217,32 +217,32 @@ export default function AIChatbot() {
         } else if (lowerText.includes("seo") || lowerText.includes("rank") || lowerText.includes("google search") || lowerText.includes("find")) {
             saveLead("Q&A: SEO Services", text);
             addAIMessage(
-                "Our Search Engine Optimization (SEO) campaigns start at ₹2,999/month. We optimize keywords, page speed, and backlinks so your site ranks high on Google. Want to audit your site's SEO?",
+                "Our SEO campaigns optimize your website code, keywords, page speed, and backlinks so your business ranks high on Google. For packages and custom pricing, please contact us on WhatsApp:",
                 ["Yes, Contact Team", "Back to Menu"]
             );
         } else if (lowerText.includes("marketing") || lowerText.includes("ads") || lowerText.includes("facebook") || lowerText.includes("instagram")) {
             saveLead("Q&A: Marketing Services", text);
             addAIMessage(
-                "We run professional ad campaigns (Google/Meta Ads) starting at ₹5,000/month. We design high-converting funnels, write ad copies, and track conversion analytics.",
+                "We design high-converting lead funnels and run professional paid advertising (Google & Meta Ads). For pricing details, please talk to our team on WhatsApp:",
                 ["Paid Ads (Google/Meta)", "Back to Menu"]
             );
         } else if (lowerText.includes("logo") || lowerText.includes("brand") || lowerText.includes("identity")) {
             saveLead("Q&A: Logo Services", text);
             addAIMessage(
-                "We create professional logos starting at ₹999 and full brand identity kits. Interested in starting your brand design?",
+                "We design professional logos and complete brand identity packages. To see our design options and discuss pricing, please contact us on WhatsApp:",
                 ["Yes, Contact Team", "Back to Menu"]
             );
         } else if (lowerText.includes("poster") || lowerText.includes("flyer") || lowerText.includes("graphic")) {
             saveLead("Q&A: Poster Services", text);
             addAIMessage(
-                "We design premium promotional posters and festival graphics starting at just ₹299 per poster. Ready to discuss graphic design?",
+                "We design premium promotional posters, event flyers, and daily social media graphics. For pricing and requirements, let's talk on WhatsApp:",
                 ["Yes, Contact Team", "Back to Menu"]
             );
         } else if (lowerText.includes("price") || lowerText.includes("cost") || lowerText.includes("rate") || lowerText.includes("how much")) {
             saveLead("Q&A: Pricing", text);
             addAIMessage(
-                "Here is our standard starting pricing:\n\n• Logo: ₹999\n• Posters: ₹299\n• Websites: ₹4,999\n• Monthly SEO: ₹2,999/mo\n\nFor a custom quote, please type your Email or Phone Number below.",
-                ["Back to Menu"]
+                "We build professional, fast, mobile-friendly websites starting from just ₹4,999!\n\nFor pricing regarding our other services (Logo, Posters, SEO, Marketing, Automation), please click below to chat directly with our team on WhatsApp for a custom quote:",
+                ["Yes, Contact Team", "Back to Menu"]
             );
         } else if (lowerText.includes("contact") || lowerText.includes("phone") || lowerText.includes("number") || lowerText.includes("whatsapp")) {
             addAIMessage(
