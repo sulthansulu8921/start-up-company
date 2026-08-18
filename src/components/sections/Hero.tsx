@@ -7,7 +7,7 @@ import HeroCarousel from "@/components/sections/HeroCarousel";
 
 export default function Hero() {
     return (
-        <section className="relative min-h-fit lg:min-h-[88vh] w-full bg-[#F8FAFC] flex items-center justify-center pt-24 lg:pt-28 pb-12 lg:pb-16 overflow-hidden z-10">
+        <section id="hero" className="relative min-h-fit lg:min-h-[88vh] w-full bg-[#F8FAFC] flex items-center justify-center pt-24 lg:pt-28 pb-12 lg:pb-16 overflow-hidden z-10">
             {/* Dedicated High-Res Cyber Network Background Photo */}
             <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=2070')] bg-cover bg-center opacity-10 z-0 pointer-events-none" />
             <div className="absolute inset-0 bg-gradient-to-b from-[#F8FAFC]/95 via-[#F0F5FF]/90 to-[#F8FAFC]/95 z-0 pointer-events-none" />

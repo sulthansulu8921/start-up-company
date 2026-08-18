@@ -58,6 +58,9 @@ export default function Navbar() {
     useEffect(() => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 20);
+            if (pathname === "/" && window.scrollY < 100) {
+                setActiveLink("Home");
+            }
         };
 
         window.addEventListener("scroll", handleScroll, { passive: true });
@@ -76,7 +79,12 @@ export default function Navbar() {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
                         const id = entry.target.getAttribute("id");
-                        if (id === "services") setActiveLink("Services");
+                        if (id === "services") {
+                            // Only set active to Services if scroll is down
+                            if (window.scrollY >= 100) {
+                                setActiveLink("Services");
+                            }
+                        }
                         else if (id === "pricing") setActiveLink("Pricing");
                         else if (id === "contact") setActiveLink("Contact");
                         else if (id === "hero") setActiveLink("Home");
