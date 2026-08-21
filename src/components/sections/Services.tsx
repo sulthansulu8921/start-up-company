@@ -40,7 +40,7 @@ export default function Services() {
 
                     <ScrollReveal variant="fade-left" delay={0.2} className="max-w-md">
                         <p className="text-slate-600 text-base md:text-lg font-medium leading-relaxed">
-                            Explore our 7 core digital capabilities built to automate operations, boost search visibility, and increase customer revenue.
+                            Explore our 8 core digital capabilities built to automate operations, boost search visibility, and increase customer revenue.
                         </p>
                     </ScrollReveal>
                 </div>

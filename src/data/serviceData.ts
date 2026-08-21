@@ -1,4 +1,4 @@
-import { Code2, Bot, Smartphone, Target, Workflow, Layers, MapPin, LucideIcon } from "lucide-react";
+import { Code2, Bot, Smartphone, Target, Workflow, Layers, MapPin, Brain, LucideIcon } from "lucide-react";
 
 export interface RoadmapStep {
     day: string;
@@ -296,6 +296,44 @@ export const services: Service[] = [
             { day: "STEP 03", topic: "Visuals & Products", details: "Uploading geo-tagged high-res photos, cover images, and service items." },
             { day: "STEP 04", topic: "Local SEO & Monitoring", details: "Configuring review request triggers, publishing posts, and tracking map insights." }
         ]
+    },
+    {
+        num: "08",
+        slug: "aeo-geo-optimization",
+        title: "AEO & GEO Optimization",
+        desc: "Optimize your brand, products, and content for AI-driven engines like ChatGPT, Gemini, and Perplexity to secure conversational search citations.",
+        icon: Brain,
+        accent: "text-emerald-500",
+        bg: "rgba(16, 185, 129, 0.05)",
+        image: "/service-08-aeo-geo-optimization.png",
+        fullDesc: "Generative Engine Optimization (GEO) and Answer Engine Optimization (AEO) are the future of search. We optimize your website, structured data, schema markup, and digital footprint so LLM-based answer engines cite and recommend your business to users.",
+        whatWeOffer: [
+            { title: "LLM Citation Audit", desc: "Analyze how AI platforms currently perceive your brand and identify gap areas in visibility." },
+            { title: "Generative Engine Optimization", desc: "Optimize website architecture and copy to meet conversational search evaluation criteria." },
+            { title: "AI Search Schema Markup", desc: "Deploy advanced JSON-LD schemas and structured data tailored for AI-crawlers." },
+            { title: "Topic Authority & E-E-A-T", desc: "Publish authoritative, fact-checked content that aligns with AI source preferences." },
+            { title: "Knowledge Graph Integration", desc: "Claim and sync listings across Google Knowledge Graph, Wikidata, and directories." },
+            { title: "AI Citation Monitoring", desc: "Track brand mentions and recommendations on ChatGPT, Gemini, and Perplexity over time." }
+        ],
+        benefits: [
+            "Be the Primary Citation on ChatGPT, Gemini, & Perplexity",
+            "Establish Domain Authority for Conversational Search Queries",
+            "Drive High-Intent Traffic via Direct AI Engine Referrals",
+            "Future-Proof Your Brand Against Traditional Search Decline"
+        ],
+        bottomHighlights: [
+            "Be Cited by AI",
+            "Maximize Conversational Traffic",
+            "Structured Schema Integration",
+            "Future-Proof Authority",
+            "Optimize for the Conversational Future of Search!"
+        ],
+        roadmap: [
+            { day: "STEP 01", topic: "AI Visibility Audit", details: "Benchmarking brand citations and sentiment across top large language models." },
+            { day: "STEP 02", topic: "Schema & Structured Data", details: "Integrating advanced RDFa, microdata, and JSON-LD markup for AI search spiders." },
+            { day: "STEP 03", topic: "Authority Building", details: "Optimizing content structure, lists, tables, and direct answers for LLM ingestion." },
+            { day: "STEP 04", topic: "Tracking & Expansion", details: "Continuous query performance monitoring and scaling of brand sentiment footprint." }
+        ]
     }
 ];
 
@@ -305,7 +343,6 @@ export const slugAliases: Record<string, string> = {
     "ai-platform-development": "ai-solutions-chatbots",
     "ai-chatbots-agents": "ai-solutions-chatbots",
     "seo-services": "digital-marketing",
-    "aeo-geo-optimization": "digital-marketing",
     "social-media-management": "digital-marketing",
     "branding-creative-design": "digital-marketing",
     "business-software": "software-development",

@@ -22,6 +22,7 @@ const navLinks = [
             { name: "05. Business Automation", href: "/services/business-automation" },
             { name: "06. Software Development", href: "/services/software-development" },
             { name: "07. Google Business Profile Setup", href: "/services/google-business-setup" },
+            { name: "08. AEO & GEO Optimization", href: "/services/aeo-geo-optimization" },
         ]
     },
     { name: "Pricing", href: "/pricing", sectionId: "pricing" },

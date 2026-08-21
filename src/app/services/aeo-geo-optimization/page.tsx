@@ -11,5 +11,5 @@ export const metadata: Metadata = {
 };
 
 export default function AeoGeoPage() {
-    return <ServiceDetailContent slug="digital-marketing" />;
+    return <ServiceDetailContent slug="aeo-geo-optimization" />;
 }
